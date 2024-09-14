@@ -1,0 +1,307 @@
+name: Verify Node.js
+
+on:
+  push:
+    branches: [main, staging]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  lint-backend:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [20.x]
+    name: Lint (v${{ matrix.node-version }})
+    steps:
+      - name: Checkout
+        working-directory: ./web/backend/rl-nestjs-mono
+        uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        working-directory: ./web/backend/rl-nestjs-mono
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
+          cache-dependency-path: '**/yarn.lock'
+      - run: yarn install
+        working-directory: ./web/backend/rl-nestjs-mono
+      - name: Lint (v${{ matrix.node-version }})
+        working-directory: ./web/backend/rl-nestjs-mono
+        run: yarn run lint
+
+  build-backend:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [20.x]
+    name: Build (v${{ matrix.node-version }})
+    steps:
+      - name: Checkout
+        working-directory: ./web/backend/rl-nestjs-mono
+        uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        working-directory: ./web/backend/rl-nestjs-mono
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
+          cache-dependency-path: '**/yarn.lock'
+      - run: yarn install
+        working-directory: ./web/backend/rl-nestjs-mono
+      - name: Build (v${{ matrix.node-version }})
+        working-directory: ./web/backend/rl-nestjs-mono
+        run: yarn run build
+
+  test-backend:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [20.x]
+    name: Test (v${{ matrix.node-version }})
+    steps:
+      - name: Checkout
+        working-directory: ./web/backend/rl-nestjs-mono
+        uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        working-directory: ./web/backend/rl-nestjs-mono
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
+          cache-dependency-path: '**/yarn.lock'
+      - run: yarn install
+        working-directory: ./web/backend/rl-nestjs-mono
+      - name: Test (v${{ matrix.node-version }})
+        working-directory: ./web/backend/rl-nestjs-mono
+        run: yarn run test
+
+  sonarcloud-analysis-backend:
+    name: SonarCloud (v${{ matrix.node-version }})
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - uses: actions/checkout@v4
+        working-directory: ./web/backend/rl-nestjs-mono
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        working-directory: ./web/backend/rl-nestjs-mono
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
+          cache-dependency-path: '**/yarn.lock'
+      - name: Install Dependencies
+        working-directory: ./web/backend/rl-nestjs-mono
+        run: yarn install
+      - name: Run Tests
+        working-directory: ./web/backend/rl-nestjs-mono
+        run: yarn run test:cov
+      - name: SonarCloud Scan
+        working-directory: ./web/backend/rl-nestjs-mono
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          projectBaseDir: ${{ matrix.project }}
+          args: -Dsonar.projectKey=jonathanlee-lee-devel_roomyledger-backend
+            -Dsonar.organization=jonathan-lee-devel
+            -Dsonar.sources=src
+            -Dsonar.tests=src
+            -Dsonar.inclusions=**
+            -Dsonar.exclusions=**/*.spec.ts,**.module.ts,src/main.ts
+            -Dsonar.test.inclusions=src/**/*.spec.ts
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.qualitygate.wait=true
+
+  lint-frontend:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [ 20.x ]
+    name: Lint (v${{ matrix.node-version }})
+    working-directory: ./web/frontend/rl-angular-spa
+    steps:
+      - name: Checkout
+        working-directory: ./web/frontend/rl-angular-spa
+        uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        working-directory: ./web/frontend/rl-angular-spa
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
+          cache-dependency-path: '**/yarn.lock'
+      - run: yarn install
+        working-directory: ./web/frontend/rl-angular-spa
+      - name: Lint (v${{ matrix.node-version }})
+        working-directory: ./web/frontend/rl-angular-spa
+        run: yarn run lint
+
+  build-frontend:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [ 20.x ]
+    name: Build (v${{ matrix.node-version }})
+    steps:
+      - name: Checkout
+        working-directory: ./web/frontend/rl-angular-spa
+        uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        working-directory: ./web/frontend/rl-angular-spa
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
+          cache-dependency-path: '**/yarn.lock'
+      - run: yarn install
+        working-directory: ./web/frontend/rl-angular-spa
+      - name: Build Staging (v${{ matrix.node-version }})
+        working-directory: ./web/frontend/rl-angular-spa
+        run: yarn run build:stage
+      - name: Build (v${{ matrix.node-version }})
+        working-directory: ./web/frontend/rl-angular-spa
+        run: yarn run build
+
+  test-frontend:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [ 20.x ]
+    name: Test (v${{ matrix.node-version }})
+    steps:
+      - name: Checkout
+        working-directory: ./web/frontend/rl-angular-spa
+        uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        working-directory: ./web/frontend/rl-angular-spa
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
+          cache-dependency-path: '**/yarn.lock'
+      - run: yarn install
+        working-directory: ./web/frontend/rl-angular-spa
+      - name: Test (v${{ matrix.node-version }})
+        working-directory: ./web/frontend/rl-angular-spa
+        run: yarn run test
+
+  sonarcloud-analysis-frontend:
+    name: SonarCloud (v${{ matrix.node-version }})
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [ 20.x ]
+    steps:
+      - uses: actions/checkout@v4
+        working-directory: ./web/frontend/rl-angular-spa
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        working-directory: ./web/frontend/rl-angular-spa
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
+          cache-dependency-path: '**/yarn.lock'
+      - name: Install Dependencies
+        working-directory: ./web/frontend/rl-angular-spa
+        run: yarn install
+      - name: Run Tests
+        working-directory: ./web/frontend/rl-angular-spa
+        run: yarn run test
+      - name: SonarCloud Scan
+        working-directory: ./web/frontend/rl-angular-spa
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          projectBaseDir: ${{ matrix.project }}
+          args: -Dsonar.projectKey=jonathanlee-io_roomyledger.com-ui-angular-spa
+            -Dsonar.organization=jonathanlee-io
+            -Dsonar.sources=src
+            -Dsonar.tests=src
+            -Dsonar.inclusions=**
+            -Dsonar.exclusions=**/*.spec.ts,**.module.ts,src/main.ts
+            -Dsonar.test.inclusions=src/**/*.spec.ts
+            -Dsonar.javascript.lcov.reportPaths=coverage/roomyledger-ui-spa/lcov.info
+            -Dsonar.qualitygate.wait=true
+
+  deploy-vercel-preview:
+    needs: [lint-backend, lint-frontend, build-backend, build-frontend, test-backend, test-frontend, sonarcloud-analysis-backend, sonarcloud-analysis-frontend]
+    runs-on: ubuntu-22.04
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      ENV: stage
+    steps:
+      - uses: actions/checkout@v4
+        working-directory: ./web/frontend/rl-angular-spa
+        with:
+          fetch-depth: '1'
+          ref: staging
+      - name: Install Vercel CLI
+        working-directory: ./web/frontend/rl-angular-spa
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information
+        working-directory: ./web/frontend/rl-angular-spa
+        run: vercel pull --yes --git-branch=staging --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        working-directory: ./web/frontend/rl-angular-spa
+        run: vercel build --yes --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        working-directory: ./web/frontend/rl-angular-spa
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+
+  await-vercel-deployment:
+    needs: [ deploy-vercel-preview ]
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Sleep
+        run: sleep 10s
+        shell: bash
+      - name: Await for Vercel deployment
+        uses: UnlyEd/github-action-await-vercel@v2.0
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        with:
+          deployment-url: 'staging.roomyledger.com'
+          timeout: 360
+          poll-interval: '10'
+
+  playwright-test:
+    needs: [ deploy-vercel-preview, await-vercel-deployment ]
+    timeout-minutes: 60
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        working-directory: ./web/frontend/rl-angular-spa
+      - uses: actions/setup-node@v4
+        working-directory: ./web/frontend/rl-angular-spa
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        working-directory: ./web/frontend/rl-angular-spa
+        run: npm install -g yarn && yarn
+      - name: Install Playwright Browsers
+        working-directory: ./web/frontend/rl-angular-spa
+        run: yarn playwright install --with-deps
+      - name: Run Playwright tests
+        working-directory: ./web/frontend/rl-angular-spa
+        run: yarn playwright test
+      - uses: actions/upload-artifact@v4
+        working-directory: ./web/frontend/rl-angular-spa
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+    env:
+      CI: true
+      BASE_URL: 'https://staging.roomyledger.com'
