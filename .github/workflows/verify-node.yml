@@ -214,6 +214,25 @@ jobs:
             -Dsonar.javascript.lcov.reportPaths=coverage/roomyledger-ui-spa/lcov.info
             -Dsonar.qualitygate.wait=true
 
+  deploy-railway-staging:
+    needs: [lint-backend, lint-frontend, build-backend, build-frontend, test-backend, test-frontend, sonarcloud-analysis-backend, sonarcloud-analysis-frontend]
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Use Node 20
+        uses: actions/setup-node@v1
+        with:
+          node-version: 20.x
+      - name: Install packages
+        run: yarn install --frozen-lockfile
+      - name: Install Railway
+        run: npm i -g @railway/cli
+      - name: Deploy
+        run: railway up
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_STAGING_TOKEN }}
+
   deploy-vercel-preview:
     needs: [lint-backend, lint-frontend, build-backend, build-frontend, test-backend, test-frontend, sonarcloud-analysis-backend, sonarcloud-analysis-frontend]
     runs-on: ubuntu-22.04
@@ -260,7 +279,7 @@ jobs:
           poll-interval: '10'
 
   playwright-test:
-    needs: [ deploy-vercel-preview, await-vercel-deployment ]
+    needs: [ deploy-railway-staging, deploy-vercel-preview, await-vercel-deployment ]
     timeout-minutes: 60
     runs-on: ubuntu-22.04
     steps:
