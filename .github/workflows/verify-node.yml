@@ -17,10 +17,8 @@ jobs:
     name: Lint (v${{ matrix.node-version }})
     steps:
       - name: Checkout
-        working-directory: ./web/backend/rl-nestjs-mono
         uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        working-directory: ./web/backend/rl-nestjs-mono
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
@@ -40,10 +38,8 @@ jobs:
     name: Build (v${{ matrix.node-version }})
     steps:
       - name: Checkout
-        working-directory: ./web/backend/rl-nestjs-mono
         uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        working-directory: ./web/backend/rl-nestjs-mono
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
@@ -63,10 +59,8 @@ jobs:
     name: Test (v${{ matrix.node-version }})
     steps:
       - name: Checkout
-        working-directory: ./web/backend/rl-nestjs-mono
         uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        working-directory: ./web/backend/rl-nestjs-mono
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
@@ -86,11 +80,9 @@ jobs:
         node-version: [20.x]
     steps:
       - uses: actions/checkout@v4
-        working-directory: ./web/backend/rl-nestjs-mono
         with:
           fetch-depth: 0
       - uses: actions/setup-node@v4
-        working-directory: ./web/backend/rl-nestjs-mono
         with:
           node-version: ${{ matrix.node-version }}
           cache: yarn
@@ -102,7 +94,6 @@ jobs:
         working-directory: ./web/backend/rl-nestjs-mono
         run: yarn run test:cov
       - name: SonarCloud Scan
-        working-directory: ./web/backend/rl-nestjs-mono
         uses: sonarsource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -125,13 +116,10 @@ jobs:
       matrix:
         node-version: [ 20.x ]
     name: Lint (v${{ matrix.node-version }})
-    working-directory: ./web/frontend/rl-angular-spa
     steps:
       - name: Checkout
-        working-directory: ./web/frontend/rl-angular-spa
         uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        working-directory: ./web/frontend/rl-angular-spa
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
@@ -151,10 +139,8 @@ jobs:
     name: Build (v${{ matrix.node-version }})
     steps:
       - name: Checkout
-        working-directory: ./web/frontend/rl-angular-spa
         uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        working-directory: ./web/frontend/rl-angular-spa
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
@@ -177,10 +163,8 @@ jobs:
     name: Test (v${{ matrix.node-version }})
     steps:
       - name: Checkout
-        working-directory: ./web/frontend/rl-angular-spa
         uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        working-directory: ./web/frontend/rl-angular-spa
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
@@ -200,11 +184,9 @@ jobs:
         node-version: [ 20.x ]
     steps:
       - uses: actions/checkout@v4
-        working-directory: ./web/frontend/rl-angular-spa
         with:
           fetch-depth: 0
       - uses: actions/setup-node@v4
-        working-directory: ./web/frontend/rl-angular-spa
         with:
           node-version: ${{ matrix.node-version }}
           cache: yarn
@@ -216,7 +198,6 @@ jobs:
         working-directory: ./web/frontend/rl-angular-spa
         run: yarn run test
       - name: SonarCloud Scan
-        working-directory: ./web/frontend/rl-angular-spa
         uses: sonarsource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -242,7 +223,6 @@ jobs:
       ENV: stage
     steps:
       - uses: actions/checkout@v4
-        working-directory: ./web/frontend/rl-angular-spa
         with:
           fetch-depth: '1'
           ref: staging
@@ -281,9 +261,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-        working-directory: ./web/frontend/rl-angular-spa
       - uses: actions/setup-node@v4
-        working-directory: ./web/frontend/rl-angular-spa
         with:
           node-version: lts/*
       - name: Install dependencies
@@ -296,7 +274,6 @@ jobs:
         working-directory: ./web/frontend/rl-angular-spa
         run: yarn playwright test
       - uses: actions/upload-artifact@v4
-        working-directory: ./web/frontend/rl-angular-spa
         if: always()
         with:
           name: playwright-report
