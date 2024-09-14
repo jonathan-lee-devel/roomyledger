@@ -217,6 +217,9 @@ jobs:
   deploy-vercel-preview:
     needs: [lint-backend, lint-frontend, build-backend, build-frontend, test-backend, test-frontend, sonarcloud-analysis-backend, sonarcloud-analysis-frontend]
     runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [ 20.x ]
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -226,6 +229,11 @@ jobs:
         with:
           fetch-depth: '1'
           ref: staging
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
+          cache-dependency-path: '**/yarn.lock'
       - name: Install Vercel CLI
         working-directory: ./web/frontend/rl-angular-spa
         run: npm install --global vercel@latest
