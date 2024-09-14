@@ -100,7 +100,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: ${{ matrix.project }}
-          args: -Dsonar.projectKey=jonathanlee-lee-devel_roomyledger-backend
+          args: -Dsonar.projectKey=jonathan-lee-devel_roomyledger-rl-nestjs-mono
             -Dsonar.organization=jonathan-lee-devel
             -Dsonar.sources=src
             -Dsonar.tests=src
@@ -204,8 +204,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: ${{ matrix.project }}
-          args: -Dsonar.projectKey=jonathanlee-io_roomyledger.com-ui-angular-spa
-            -Dsonar.organization=jonathanlee-io
+          args: -Dsonar.projectKey=jonathan-lee-devel_roomyledger-rl-angular-spa
+            -Dsonar.organization=jonathan-lee-devel
             -Dsonar.sources=src
             -Dsonar.tests=src
             -Dsonar.inclusions=**
