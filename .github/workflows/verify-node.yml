@@ -229,7 +229,7 @@ jobs:
       - name: Install Railway
         run: npm i -g @railway/cli
       - name: Deploy
-        run: railway up
+        run: railway up --service rl-api-service
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_STAGING_TOKEN }}
 
