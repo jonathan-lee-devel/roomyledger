@@ -235,16 +235,12 @@ jobs:
           cache: yarn
           cache-dependency-path: '**/yarn.lock'
       - name: Install Vercel CLI
-        working-directory: ./web/frontend/rl-angular-spa
         run: npm install --global vercel@latest
       - name: Pull Vercel Environment Information
-        working-directory: ./web/frontend/rl-angular-spa
         run: vercel pull --yes --git-branch=staging --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
       - name: Build Project Artifacts
-        working-directory: ./web/frontend/rl-angular-spa
         run: vercel build --yes --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
-        working-directory: ./web/frontend/rl-angular-spa
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
 
   await-vercel-deployment:
