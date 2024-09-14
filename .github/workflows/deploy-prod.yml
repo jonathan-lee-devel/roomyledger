@@ -271,7 +271,7 @@ jobs:
           poll-interval: '10'
 
   playwright-test:
-    needs: [deploy-vercel-prod, await-vercel-deployment-prod]
+    needs: [deploy-railway-production, deploy-vercel-prod, await-vercel-deployment-prod]
     timeout-minutes: 60
     runs-on: ubuntu-22.04
     steps:
