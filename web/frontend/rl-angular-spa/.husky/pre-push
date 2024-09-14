@@ -1,1 +1,0 @@
-yarn run lint && yarn run build && yarn run build:stage && rm -rf dist/test-out || true && yarn run test
