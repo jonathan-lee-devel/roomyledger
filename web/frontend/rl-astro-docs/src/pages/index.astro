@@ -1,0 +1,56 @@
+---
+import DefaultLayout from '../layouts/DefaultLayout.astro'
+import Hero from '../components/Hero.astro'
+import Feature from '../components/Feature.astro'
+import Counter from '../components/Counter.astro'
+import ContentMedia from '../components/ContentMedia.astro'
+---
+
+<DefaultLayout title="Docs">
+  <Hero />
+  <section class="my-64">
+    <div class="container">
+      <h2 class="mb-16 text-6xl">Features</h2>
+      <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
+        <Feature icon="mdi:cash-multiple" title="Expense Tracking">
+          Track expenses for your property in multiple currencies.
+        </Feature>
+        <Feature icon="mdi:cellphone" title="Mobile First Design">
+          Designed with mobile in mind to allow you to track expenses and collaborate on the go.
+        </Feature>
+        <Feature icon="mdi:account-multiple-check" title="Collaboration">
+          Collaboratively track expenses by approving, disputing, commenting and creating expenses.
+        </Feature>
+        <Feature icon="mdi:account-credit-card" title="Payments Integration">
+          Integration with payments services such as PayPal and Revolut.
+        </Feature>
+        <Feature icon="mdi:book-open-page-variant" title="Monthly Reports">
+          Monthly reports available to easily monitor your spending and provide details to new-comers etc.
+        </Feature>
+        <Feature icon="mdi:cog" title="Customizability">
+          Configure your own account settings.
+        </Feature>
+        <Feature icon="mdi:lock-check-outline" title="Secure">
+          Designed with security in mind using modern frameworks and libraries.
+        </Feature>
+        <Feature icon="mdi:cloud-outline" title="Cloud-Hosted">
+          Hosted in the cloud, namely Railway and Vercel.
+        </Feature>
+        <Feature icon="mdi:earth" title="Globally Available">
+          Available anywhere in the world with deployments spanning across the globe.
+        </Feature>
+      </div>
+    </div>
+  </section>
+  <section class="mb-32 mt-64">
+    <div class="container">
+      <h2 class="mb-16 text-6xl">Counters</h2>
+      <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-4">
+        <Counter count="v3" title="3rd Iteration" sub="Of The Project" />
+        <Counter count="80+%" title="Code Coverage" sub="Unit, Integration, and E2E Testing" />
+        <Counter count="500+" title="Commits" sub="Merged" />
+        <Counter count="1" title="Collaborator" sub="And Author" />
+      </div>
+    </div>
+  </section>
+</DefaultLayout>

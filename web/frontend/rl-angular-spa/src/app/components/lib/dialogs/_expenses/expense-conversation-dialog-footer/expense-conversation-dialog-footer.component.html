@@ -1,0 +1,15 @@
+<p-inputGroup>
+  <p-inputGroupAddon><i class="pi pi-pencil"></i></p-inputGroupAddon>
+  <input id="comment-input" type="text" pInputText [style]="{ 'width': '30rem'}" [(ngModel)]="text" />
+</p-inputGroup>
+<div class="mt-2">
+  <p-button
+    [loading]="expensesStore.isLoading()"
+    (click)="doAddComment()"
+    class="w-full"
+    data-testid="email-login-button"
+    type="submit"
+    icon="pi pi-check-square"
+    label="Add Comment"
+    pRipple />
+</div>

@@ -1,0 +1,51 @@
+<div class="flex-none flex align-items-center justify-content-center mt-8">
+  <div
+    class="surface-card p-4 shadow-2 border-round w-full lg:w-6"
+  >
+    <div class="text-center mb-5">
+      <img
+        alt="Image"
+        class="mb-3"
+        height="50"
+        ngSrc="assets/favicon.ico"
+        width="50"
+      />
+      <div class="text-900 text-3xl font-medium mb-3">Create a Property</div>
+    </div>
+    <div>
+      <form (ngSubmit)="doCreateProperty()">
+        <p-inputGroup class="my-4">
+          <p-inputGroupAddon>
+            <i class="pi pi-pencil"></i>
+          </p-inputGroupAddon>
+          <input
+            [(ngModel)]="name"
+            name="name"
+            pInputText
+            placeholder="Property Name"
+            type="text"
+          />
+        </p-inputGroup>
+        <p-checkbox
+          [(ngModel)]="addSelfAsTenant"
+          [binary]="true"
+          inputId="addSelfAsTenant"
+          name="addSelfAsTenant"
+          id="addSelfAsTenant"
+        />
+        <label class="mx-1" for="addSelfAsTenant"
+        >Add Yourself as a Tenant of the Property</label
+        >
+        <div class="flex justify-center items-center text-center my-3">
+          <p-button
+            [loading]="propertiesStore.isLoading()"
+            class="w-full"
+            icon="pi pi-home"
+            label="Create Property"
+            type="submit"
+          />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

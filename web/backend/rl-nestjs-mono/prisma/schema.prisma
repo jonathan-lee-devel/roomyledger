@@ -1,0 +1,260 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                             String                          @id @default(uuid())
+  email                          String                          @unique
+  isEmailVerified                Boolean
+  profile                        UserProfile?
+  propertys                      Property[]
+  expenses                       Expense[]
+  propertyAdministrators         PropertyAdministrator[]
+  propertyTenants                PropertyTenant[]
+  createdAt                      DateTime                        @default(now())
+  updatedAt                      DateTime                        @default(now())
+  expenseApprovals               ExpenseApproval[]
+  expenseDisputes                ExpenseDispute[]
+  expenseComments                ExpenseComment[]
+  createdExpenseDistributions    ExpenseDistribution[]           @relation(name: "createdExpenseDistributions")
+  targetedExpenseDistributions   ExpenseDistribution[]           @relation(name: "targetedExpenseDistributions")
+  applicationMessages            ApplicationMessage[]
+  notifications                  Notification[]
+  registrationVerificationToken  RegistrationVerificationToken?
+  passwordResetVerificationToken PasswordResetVerificationToken?
+  sensitiveInformation           SensitiveInformation?
+  propertyInvitationToken        PropertyInvitationToken[]
+}
+
+model SensitiveInformation {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId    String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model RegistrationVerificationToken {
+  id                 String   @id @default(uuid())
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId             String   @unique
+  value              String
+  expirationDateTime DateTime
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @default(now())
+}
+
+model PasswordResetVerificationToken {
+  id                 String   @id @default(uuid())
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId             String   @unique
+  value              String
+  expirationDateTime DateTime
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @default(now())
+}
+
+model UserProfile {
+  id          String   @id @default(uuid())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId      String   @unique
+  displayName String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+}
+
+enum StripeSubscriptionStatus {
+  CREATED
+  DELETED
+}
+
+model StripeSubscription {
+  id                   String                   @id @default(uuid())
+  email                String
+  stripeSubscriptionId String
+  stripeCustomerId     String
+  trialEndDate         DateTime
+  status               StripeSubscriptionStatus
+  createdAt            DateTime                 @default(now())
+  updatedAt            DateTime                 @default(now())
+}
+
+enum NotificationType {
+  PROPERTY_INVITATION
+}
+
+model Notification {
+  id                   String           @id @default(uuid())
+  user                 User             @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId               String
+  title                String
+  extendedMessage      String
+  isAcknowledged       Boolean
+  type                 NotificationType
+  invitationTokenValue String?
+  propertyId           String?
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @default(now())
+}
+
+enum ApplicationMessageSeverity {
+  INFO
+  WARNING
+  ERROR
+}
+
+model ApplicationMessage {
+  id              String                     @id @default(uuid())
+  createdBy       User                       @relation(fields: [createdByUserId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdByUserId String
+  isShow          Boolean
+  isPublic        Boolean
+  title           String
+  message         String
+  severity        ApplicationMessageSeverity
+  routerLink      String?
+  routerLinkText  String?
+  createdAt       DateTime                   @default(now())
+  updatedAt       DateTime                   @default(now())
+}
+
+model Property {
+  id              String                  @id @default(uuid())
+  name            String
+  createdBy       User                    @relation(fields: [createdByUserId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdByUserId String
+  expenses        Expense[]
+  administrators  PropertyAdministrator[]
+  tenants         PropertyTenant[]
+  createdAt       DateTime                @default(now())
+  updatedAt       DateTime                @default(now())
+  rules           PropertyRules?
+  rulesId         String
+}
+
+model PropertyRules {
+  id                               String   @id @default(uuid())
+  property                         Property @relation(fields: [propertyId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  propertyId                       String   @unique
+  numberOfExpenseApprovalsRequired Int
+  createdAt                        DateTime @default(now())
+  updatedAt                        DateTime @default(now())
+}
+
+model PropertyAdministrator {
+  id         String   @id @default(uuid())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId     String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  propertyId String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+}
+
+model PropertyTenant {
+  id         String   @id @default(uuid())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId     String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  propertyId String
+  isAccepted Boolean
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+}
+
+model PropertyInvitationToken {
+  id                 String   @id @default(uuid())
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId             String
+  value              String   @unique
+  expirationDateTime DateTime
+  propertyId         String
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @default(now())
+}
+
+enum Currency {
+  USD
+  EUR
+  GBP
+}
+
+enum ExpenseState {
+  PENDING
+  DISPUTED
+  APPROVED
+}
+
+model Expense {
+  id              String                @id @default(uuid())
+  name            String
+  description     String
+  amount          Float
+  currency        Currency
+  state           ExpenseState
+  property        Property              @relation(fields: [propertyId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  propertyId      String
+  createdBy       User                  @relation(fields: [createdByUserId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdByUserId String
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @default(now())
+  approvals       ExpenseApproval[]
+  disputes        ExpenseDispute[]
+  comments        ExpenseComment[]
+  distributions   ExpenseDistribution[]
+}
+
+model ExpenseApproval {
+  id              String   @id @default(uuid())
+  createdBy       User     @relation(fields: [createdByUserId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdByUserId String
+  expense         Expense  @relation(fields: [expenseId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  expenseId       String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now())
+}
+
+model ExpenseDispute {
+  id              String   @id @default(uuid())
+  createdBy       User     @relation(fields: [createdByUserId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdByUserId String
+  expense         Expense  @relation(fields: [expenseId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  expenseId       String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now())
+}
+
+model ExpenseComment {
+  id              String   @id @default(uuid())
+  createdBy       User     @relation(fields: [createdByUserId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdByUserId String
+  expense         Expense  @relation(fields: [expenseId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  expenseId       String
+  text            String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now())
+}
+
+model ExpenseDistribution {
+  id              String   @id @default(uuid())
+  createdBy       User     @relation(name: "createdExpenseDistributions", fields: [createdByUserId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  createdByUserId String
+  expense         Expense  @relation(fields: [expenseId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  expenseId       String
+  targetTenant    User     @relation(name: "targetedExpenseDistributions", fields: [targetTenantId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  targetTenantId  String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now())
+}

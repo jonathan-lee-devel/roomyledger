@@ -1,0 +1,85 @@
+<mat-toolbar color="primary">
+  <ng-container *ngIf="userAuthenticationStore.loggedInState() === 'LOGGED_IN'">
+    <button (click)="sideNavToggleEvent.emit(true)" aria-label="Sidenav menu icon button" mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+  </ng-container>
+  <p-button *ngIf="userAuthenticationStore.loggedInState() !== 'LOGGED_IN'"
+            [routerLink]="rebaseRoutePath(RoutePath.LANDING_PAGE)" class="mx-4" data-testid="navbar-home-button">Home
+  </p-button>
+  <span class="example-spacer"></span>
+  <app-span-dark-mode [ngClass]="userAuthenticationStore.isDarkMode() ? 'pi pi-moon mr-2' : 'pi pi-sun mr-2'"/>
+  <p-inputSwitch (onChange)="handleDarkModeToggleChange($event)" [(ngModel)]="isDarkMode" class="pt-2 mr-2"/>
+  <ng-container *ngIf="userAuthenticationStore.loggedInState() === 'LOGGED_IN' && !notificationsStore.isLoading()">
+    <button
+      [matMenuTriggerFor]="notificationsMenu"
+      aria-label="Example icon-button with share icon"
+      class="example-icon"
+      mat-icon-button
+    >
+      <mat-icon
+        [matBadge]="notificationsStore.unacknowledgedNotificationsCount() > 0 ? notificationsStore.unacknowledgedNotificationsCount() : null"
+        aria-hidden="false"
+        matBadgeColor="accent"
+      >notifications
+      </mat-icon>
+    </button>
+    <mat-menu #notificationsMenu="matMenu">
+      @for (notification of notificationsStore.unacknowledgedNotifications(); track $index) {
+        <a [routerLink]="rebaseRoutePath(RoutePath.NOTIFICATIONS)" mat-menu-item>
+          {{ formatNotificationSummary(notification.title) }}
+          <mat-icon>announcement</mat-icon>
+        </a>
+      } @empty {
+        <p [routerLink]="rebaseRoutePath(RoutePath.NOTIFICATIONS)" mat-menu-item>No notifications to display</p>
+      }
+    </mat-menu>
+  </ng-container>
+  <ng-container *ngIf="userAuthenticationStore.loggedInState() === 'LOGGED_IN' && notificationsStore.isLoading()">
+    <mat-spinner class="ml-2" color="accent" diameter="28"/>
+  </ng-container>
+  <ng-container *ngIf="!featureFlagsStore.isLoading() && userAuthenticationStore.loggedInState() !== 'LOADING'">
+    <button
+      [matMenuTriggerFor]="menu"
+      aria-label="Example icon-button with a menu"
+      mat-icon-button
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </ng-container>
+  <ng-container *ngIf="featureFlagsStore.isLoading() || userAuthenticationStore.loggedInState() === 'LOADING'">
+    <mat-spinner color="accent" diameter="28"/>
+  </ng-container>
+  <mat-menu #menu="matMenu">
+    <button data-featurebase-feedback mat-menu-item>
+      Feedback
+      <mat-icon>feedback</mat-icon>
+    </button>
+    <ng-container *ngIf="paymentStore.paymentStatus() !== 'PAID'">
+      <a [routerLink]="rebaseRoutePath(RoutePath.GO_PREMIUM)" mat-menu-item>
+        Go Premium
+        <mat-icon>bolt</mat-icon>
+      </a>
+    </ng-container>
+    <ng-container *ngIf="userAuthenticationStore.loggedInState() === 'LOGGED_IN'">
+      <a [routerLink]="rebaseRoutePath(RoutePath.MAIN_MENU)" mat-menu-item>
+        Main Menu
+        <mat-icon>dashboard</mat-icon>
+      </a>
+      <button (click)="doLogout()" mat-menu-item>
+        Logout
+        <mat-icon>logout</mat-icon>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="userAuthenticationStore.loggedInState() !== 'LOGGED_IN'">
+      <a [routerLink]="rebaseRoutePath(RoutePath.LANDING_PAGE)" mat-menu-item>
+        Register
+        <mat-icon>assignment_ind</mat-icon>
+      </a>
+      <a [routerLink]="rebaseRoutePath(RoutePath.LOGIN)" mat-menu-item>
+        Login
+        <mat-icon>login</mat-icon>
+      </a>
+    </ng-container>
+  </mat-menu>
+</mat-toolbar>

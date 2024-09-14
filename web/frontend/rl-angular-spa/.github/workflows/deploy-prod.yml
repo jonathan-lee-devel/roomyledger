@@ -1,0 +1,167 @@
+name: Deploy Production
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [20.x]
+    name: Lint (v${{ matrix.node-version }})
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
+          cache-dependency-path: '**/yarn.lock'
+      - run: yarn install
+      - name: Lint (v${{ matrix.node-version }})
+        run: yarn run lint
+
+  build:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [20.x]
+    name: Build (v${{ matrix.node-version }})
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
+          cache-dependency-path: '**/yarn.lock'
+      - run: yarn install
+      - name: Build Staging (v${{ matrix.node-version }})
+        run: yarn run build:stage
+      - name: Build (v${{ matrix.node-version }})
+        run: yarn run build
+
+  test:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [20.x]
+    name: Test (v${{ matrix.node-version }})
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
+          cache-dependency-path: '**/yarn.lock'
+      - run: yarn install
+      - name: Test (v${{ matrix.node-version }})
+        run: yarn run test
+
+  sonarcloud-analysis:
+    name: SonarCloud (v${{ matrix.node-version }})
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
+          cache-dependency-path: '**/yarn.lock'
+      - name: Install Dependencies
+        run: yarn install
+      - name: Run Tests
+        run: yarn run test
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          projectBaseDir: ${{ matrix.project }}
+          args: -Dsonar.projectKey=jonathanlee-io_roomyledger.com-ui-angular-spa
+            -Dsonar.organization=jonathanlee-io
+            -Dsonar.sources=src
+            -Dsonar.tests=src
+            -Dsonar.inclusions=**
+            -Dsonar.exclusions=**/*.spec.ts,**.module.ts,src/main.ts
+            -Dsonar.test.inclusions=src/**/*.spec.ts
+            -Dsonar.javascript.lcov.reportPaths=coverage/roomyledger-ui-spa/lcov.info
+            -Dsonar.qualitygate.wait=true
+
+  deploy-vercel-prod:
+    needs: [lint, build, test, sonarcloud-analysis]
+    runs-on: ubuntu-22.04
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      ENV: prod
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: '1'
+          ref: main
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+  await-vercel-deployment-prod:
+    needs: [deploy-vercel-prod]
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Sleep
+        run: sleep 20s
+        shell: bash
+      - name: Await for Vercel deployment
+        uses: UnlyEd/github-action-await-vercel@v2.0
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        with:
+          deployment-url: 'www.roomyledger.com'
+          timeout: 360
+          poll-interval: '10'
+
+  playwright-test:
+    needs: [deploy-vercel-prod, await-vercel-deployment-prod]
+    timeout-minutes: 60
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Install dependencies
+        run: npm install -g yarn && yarn
+      - name: Install Playwright Browsers
+        run: yarn playwright install --with-deps
+      - name: Run Playwright tests
+        run: yarn playwright test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+    env:
+      CI: true
+      BASE_URL: 'https://www.roomyledger.com'

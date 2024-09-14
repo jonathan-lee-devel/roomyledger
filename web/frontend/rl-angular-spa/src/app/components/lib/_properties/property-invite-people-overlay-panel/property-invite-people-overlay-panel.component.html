@@ -1,0 +1,42 @@
+<p-button (onClick)="op.toggle($event)" [disabled]="isInvitePeopleDisabled()" icon="pi pi-share-alt" label="Invite People" />
+<p-overlayPanel #op>
+  <div class="flex flex-column gap-3 w-25rem">
+    <div>
+      <span class="font-medium text-900 block mb-2">Share this document</span>
+      <p-inputGroup>
+        <input [value]="getPropertyDashboardShareURL()" class="w-25rem" pInputText
+               readonly />
+        <p-inputGroupAddon>
+          <i (click)="copyPropertyDashboardShareURL()" (keydown)="copyPropertyDashboardShareURL()"
+             [class]="(isCopied) ? 'pi pi-check' : 'pi pi-copy'"></i>
+        </p-inputGroupAddon>
+      </p-inputGroup>
+    </div>
+    <div>
+      <span class="font-medium text-900 block mb-2">Invite Member via E-mail</span>
+      <div>
+        <p-inputGroup>
+          <input [(ngModel)]="email" class="w-25rem" pInputText />
+        </p-inputGroup>
+        <p-button (click)="doInviteTenant()" [loading]="propertiesStore.isLoading()" icon="pi pi-users" label="Invite" />
+      </div>
+    </div>
+    <div>
+      <span class="font-medium text-900 block mb-2">Team Members</span>
+      <ul class="list-none p-0 m-0 flex flex-column gap-3">
+        @for (member of getCombinedMembers(propertiesStore.propertyById()); track $index;) {
+          <li class="flex align-items-center gap-2">
+            <img ngSrc="favicon.ico" width="50" height="50" />
+            <div>
+              <span class="font-medium">{{ member.displayName }}</span>
+              <div class="text-sm text-color-secondary">{{ member.email }}</div>
+            </div>
+            <div class="flex align-items-center gap-2 text-color-secondary ml-auto text-sm">
+              <span>{{ member.role }}</span>
+            </div>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</p-overlayPanel>

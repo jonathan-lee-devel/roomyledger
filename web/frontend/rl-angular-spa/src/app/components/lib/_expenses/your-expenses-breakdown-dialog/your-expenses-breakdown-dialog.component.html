@@ -1,0 +1,47 @@
+<div>
+  <p-table
+    [tableStyle]="{'min-width': '50rem'}"
+    [value]="expensesStore.getStateFilteredExpensesAmountPerTenant(propertiesStore.propertyById(), convertedSelectedTotalExpenseFilters)"
+    styleClass="p-datatable-striped"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Name</th>
+        <th>Expense Total</th>
+        <th>Your Amount</th>
+      </tr>
+    </ng-template>
+    <ng-template let-expense pTemplate="body">
+      <tr>
+        <td>
+          <p class="mt-3">{{ expense.name }}</p>
+        </td>
+        <td>
+          <p class="mt-3">{{ expense.formattedTotal }}</p>
+        </td>
+        <td>
+          <p class="mt-3">{{ expense.formattedAmount }}</p>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <tr>
+        <td colspan="3">
+          <p class="flex align-content-end">Number of Tenants: {{ propertiesStore.propertyById().tenants.length }}</p>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <p class="flex align-content-end">
+            Household Total: {{ expensesStore.getStateFilteredTotalExpensesAmount(convertedSelectedTotalExpenseFilters) }}</p>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <p class="flex align-content-end">
+            Your Total: {{ expensesStore.getStateFilteredExpensesAmountPerTenantTotal(propertiesStore.propertyById(), convertedSelectedTotalExpenseFilters) }}</p>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

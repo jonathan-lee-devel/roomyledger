@@ -1,0 +1,65 @@
+<div class="flex-none flex align-items-center justify-content-center mt-4">
+  <label for="datepicker">Filter by Month</label>
+</div>
+<div class="flex-none flex align-items-center justify-content-center mt-2">
+  <p-calendar
+    (ngModelChange)="onMonthAndYearSelected($event)"
+    [(ngModel)]="date"
+    [defaultDate]="getCurrentDate()"
+    [maxDate]="getMaxDate()"
+    [minDate]="getMinDateBasedOnCreatorPaymentStatus()"
+    [placeholder]="getCurrentDateInMonthYear()"
+    [readonlyInput]="true"
+    [showIcon]="true"
+    dateFormat="mm/yy"
+    id="datepicker"
+    view="month"
+  />
+</div>
+<div class="flex-none flex align-items-center justify-content-center mt-4">
+  <label for="state-filter">Filter by State</label>
+</div>
+<div class="flex-none flex align-items-center justify-content-center mt-2">
+  <p-multiSelect
+    [(ngModel)]="selectedTotalExpenseFilters"
+    [options]="expenseTotalFilterOptions"
+    id="state-filter"
+    optionLabel="name"
+    placeholder="Select States to Filter By"/>
+</div>
+
+<div *ngIf="!expensesStore.isLoading() && expensesStore.expensesForPropertyById().length === 0"
+     class="flex-none flex align-items-center justify-content-center mt-4">
+  <p>No Expenses for Selected Month</p>
+</div>
+<div class="flex-none flex align-items-center justify-content-center mt-4">
+  <div class="my-2 text-center">
+    <p class="text-2xl underline">Household Expenses</p>
+  </div>
+</div>
+<div class="flex-none flex align-items-center justify-content-center mt-2">
+  <ng-container *ngIf="expensesStore.isLoading()">
+    <div
+      class="flex-none flex align-items-center justify-content-center mt-1"
+    >
+      <mat-spinner diameter="80"/>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!expensesStore.isLoading()">
+    <div>
+      <div class="my-4 text-center">
+        Household
+        Total: {{ expensesStore.getStateFilteredTotalExpensesAmount(convertSelectedExpenseFilters(selectedTotalExpenseFilters)) }}
+      </div>
+      <div class="my-4 text-center">
+        Your
+        Total: {{ expensesStore.getStateFilteredExpensesAmountPerTenantTotal(propertiesStore.propertyById(), convertSelectedExpenseFilters(selectedTotalExpenseFilters)) }}
+      </div>
+    </div>
+  </ng-container>
+</div>
+<div>
+  <div class="my-2 text-center">
+    <p-button (click)="openYourExpensesBreakdownDialog()" label="View Breakdown"/>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="text-900 font-semibold text-lg mt-3">Account</div>
+<p-divider></p-divider>
+<div class="flex gap-5 flex-column-reverse md:flex-row">
+  <div class="flex-auto p-fluid">
+    <div class="flex-none flex align-items-center justify-content-center mt-3">
+      <div class="max-w-10rem">
+        <p-button
+          [loading]="(userAuthenticationStore.loggedInState() === 'LOADING')"
+          icon="pi pi-cloud-upload"
+          class="max-w-2rem"
+          data-testid="update-profile-button"
+          label="Update Profile"
+          pRipple
+          type="submit"
+        />
+      </div>
+    </div>
+  </div>
+</div>

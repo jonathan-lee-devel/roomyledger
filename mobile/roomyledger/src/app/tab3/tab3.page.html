@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      People
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-accordion-group>
+    <ion-accordion value="first">
+      <ion-item slot="header" color="light">
+        <ion-label>Jonathan Lee</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">First Content</div>
+    </ion-accordion>
+    <ion-accordion value="second">
+      <ion-item slot="header" color="light">
+        <ion-label>John Doe</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">Second Content</div>
+    </ion-accordion>
+    <ion-accordion value="third">
+      <ion-item slot="header" color="light">
+        <ion-label>Todd Baker</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">Third Content</div>
+    </ion-accordion>
+  </ion-accordion-group>
+</ion-content>
