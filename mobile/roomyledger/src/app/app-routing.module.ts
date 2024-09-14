@@ -6,6 +6,10 @@ const routes: Routes = [
     path: 'manage-properties',
     loadChildren: () => import('./manage-properties/manage-properties.module').then(m => m.ManagePropertiesModule),
   },
+  {
+    path: 'property-dashboard',
+    loadChildren: () => import('./property-dashboard/property-dashboard.module').then(m => m.PropertyDashboardModule),
+  },
 ];
 @NgModule({
   imports: [
