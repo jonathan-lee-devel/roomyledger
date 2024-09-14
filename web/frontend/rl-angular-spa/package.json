@@ -1,6 +1,6 @@
 {
-  "name": "@roomyledger-ui/roomyledger-ui-spa",
-  "version": "0.0.3",
+  "name": "rl-angular-spa",
+  "version": "0.0.1",
   "description": "Bill-splitting application",
   "repository": "git@github.com:jonathan-lee-devel/roomyledger.com.git",
   "author": "Jonathan Lee <jonathan.lee.devel@gmail.com>",
