@@ -152,7 +152,7 @@ export class PropertiesDashboardComponent implements OnInit, AfterViewInit, OnDe
   }
 
   ngOnDestroy() {
-    this.shepherdService.cancel();
+    this.shepherdService?.cancel();
     this.routeParamsSubscription?.unsubscribe();
     this.routeQueryParamsSubscription?.unsubscribe();
   }
@@ -278,13 +278,6 @@ export class PropertiesDashboardComponent implements OnInit, AfterViewInit, OnDe
       text: 'View, Create, Approve, Dispute, and Comment on Expenses in this tab',
       buttons: [
         {
-          text: `Don't Show Again`,
-          action: () => {
-            this.shepherdService.next();
-            localStorage.setItem('manage-first-ledger-tour', JSON.stringify(true));
-          },
-        },
-        {
           text: 'Next',
           action: () => this.shepherdService.next(),
         },
@@ -301,13 +294,6 @@ export class PropertiesDashboardComponent implements OnInit, AfterViewInit, OnDe
       text: 'This is a premium feature, create custom splits for expenses that are divided unevenly',
       buttons: [
         {
-          text: `Don't Show Again`,
-          action: () => {
-            this.shepherdService.next();
-            localStorage.setItem('manage-first-ledger-tour', JSON.stringify(true));
-          },
-        },
-        {
           text: 'Next',
           action: () => this.shepherdService.next(),
         },
@@ -323,13 +309,6 @@ export class PropertiesDashboardComponent implements OnInit, AfterViewInit, OnDe
       title: 'Reports Tab',
       text: 'View reports up to 60 days in the past for free tier, or unlimited history for premium',
       buttons: [
-        {
-          text: `Don't Show Again`,
-          action: () => {
-            this.shepherdService.next();
-            localStorage.setItem('manage-first-ledger-tour', JSON.stringify(true));
-          },
-        },
         {
           text: 'Next',
           action: () => this.shepherdService.next(),

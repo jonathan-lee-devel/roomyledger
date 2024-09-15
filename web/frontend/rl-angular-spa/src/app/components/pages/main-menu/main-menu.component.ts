@@ -65,6 +65,6 @@ export class MainMenuComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.shepherdService.cancel();
+    this.shepherdService?.cancel();
   }
 }
