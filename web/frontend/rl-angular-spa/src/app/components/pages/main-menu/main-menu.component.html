@@ -20,6 +20,7 @@
     class="mt-3 min-w-full animate__animated animate__bounceInUp"
   />
   <app-card-with-link
+    [cardTitleClass]="'create-ledger-card'"
     [cardBodyText]="'Create a new Property Ledger'"
     [cardButtonTargetLink]="rebaseRoutePath(RoutePath.PROPERTIES_CREATE)"
     [cardButtonText]="'Create Ledger'"

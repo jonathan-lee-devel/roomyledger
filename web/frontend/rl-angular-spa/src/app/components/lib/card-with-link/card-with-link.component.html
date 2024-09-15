@@ -1,7 +1,7 @@
 <div [class]="isFaded() ? 'card bg-gray-500' : 'card bg-[#133247]'">
   <app-h1-dark-mode class="card-header text-center mb-2" [innerText]="cardHeaderText()" />
   <div class="card-body">
-    <app-p-dark-mode class="card-title text-center text-3xl" [innerText]="cardTitle()" />
+    <app-p-dark-mode [ngClass]="cardTitleClass()" class="card-title text-center text-3xl" [innerText]="cardTitle()" />
     <app-p-dark-mode class="card-text text-center italic" [innerText]="cardBodyText()" />
     <div class="flex-none flex align-items-center justify-content-center my-4">
       <a pButton
