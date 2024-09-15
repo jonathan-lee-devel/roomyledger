@@ -25,6 +25,7 @@ export class CardWithLinkComponent {
   isFaded = input<boolean>(false);
   entityId = input<string>();
   isDisabled = input<boolean>(false);
+  cardTitleClass = input<string>('');
   @Output() actionButtonClicked: EventEmitter<string> = new EventEmitter();
   @Output() deleteButtonClicked: EventEmitter<string> = new EventEmitter();
   protected readonly userAuthenticationStore = inject(UserAuthenticationStore);

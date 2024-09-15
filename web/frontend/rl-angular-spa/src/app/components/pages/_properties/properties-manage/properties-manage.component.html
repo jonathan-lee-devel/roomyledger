@@ -17,7 +17,7 @@
         [cardBodyText]="getPropertyCardBodyText(property, userAuthenticationStore.userInfo().email)"
         [cardButtonTargetLink]="
               rebaseRoutePathAsString(
-                RoutePath.PROPERTIES_DASHBOARD_ID.valueOf().replace(
+                RoutePath.LEDGERS_DASHBOARD_ID.valueOf().replace(
                   routePathParameters.PROPERTY_ID,
                   property.id
                 )
@@ -39,7 +39,7 @@
     <app-card-with-link
       [isDisabled]="isCreatePropertyDisabled()"
       [cardBodyText]="getCreatePropertyCardText()"
-      [cardButtonTargetLink]="rebaseRoutePath(RoutePath.PROPERTIES_CREATE)"
+      [cardButtonTargetLink]="rebaseRoutePath(RoutePath.LEDGERS_CREATE)"
       [cardButtonText]="'Create Property'"
       [cardHeaderText]="'Navigation'"
       [cardTitle]="'You are not currently involved with any properties'"

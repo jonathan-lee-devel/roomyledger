@@ -1,26 +1,12 @@
 import {computed, inject} from '@angular/core';
 import {Router} from '@angular/router';
-import {
-  patchState,
-  signalStore,
-  withComputed,
-  withMethods,
-  withState,
-} from '@ngrx/signals';
+import {patchState, signalStore, withComputed, withMethods, withState} from '@ngrx/signals';
 import {ConfirmationService} from 'primeng/api';
 import {take, tap} from 'rxjs';
 
 import {environment} from '../../../../environments/environment';
-import {
-  rebaseRoutePath,
-  rebaseRoutePathAsString,
-  RoutePath,
-  routePathParameters,
-} from '../../../app.routes';
-import {
-  initialPropertyDto,
-  PropertyDto,
-} from '../../../dtos/properties/Property.dto';
+import {rebaseRoutePath, rebaseRoutePathAsString, RoutePath, routePathParameters} from '../../../app.routes';
+import {initialPropertyDto, PropertyDto} from '../../../dtos/properties/Property.dto';
 import {PropertyCreateRequestDto} from '../../../dtos/properties/PropertyCreateRequest.dto';
 import {PropertyService} from '../../../services/property/property.service';
 import {ToastWrapperService} from '../../../services/toast-wrapper/toast-wrapper.service';
@@ -83,7 +69,7 @@ export const PropertiesStore = signalStore(
                     environment.TOAST_DURATION_MS,
                 );
                 router
-                    .navigate([rebaseRoutePath(RoutePath.PROPERTIES_MANAGE)])
+                    .navigate([rebaseRoutePath(RoutePath.LEDGERS_MANAGE)])
                     .catch(RouterUtils.navigateCatchErrorCallback);
               }),
           ).subscribe();
@@ -138,7 +124,7 @@ export const PropertiesStore = signalStore(
                 router
                     .navigate([
                       rebaseRoutePathAsString(
-                          RoutePath.PROPERTIES_DASHBOARD_ID.replace(
+                          RoutePath.LEDGERS_DASHBOARD_ID.replace(
                               routePathParameters.PROPERTY_ID,
                               createdProperty.id,
                           ),
@@ -225,7 +211,7 @@ export const PropertiesStore = signalStore(
                 router
                     .navigate([
                       rebaseRoutePathAsString(
-                          RoutePath.PROPERTIES_DASHBOARD_ID.replace(
+                          RoutePath.LEDGERS_DASHBOARD_ID.replace(
                               routePathParameters.PROPERTY_ID,
                               updatedProperty.id,
                           ),
@@ -260,7 +246,7 @@ export const PropertiesStore = signalStore(
                 router
                     .navigate([
                       rebaseRoutePathAsString(
-                          RoutePath.PROPERTIES_DASHBOARD_ID.replace(
+                          RoutePath.LEDGERS_DASHBOARD_ID.replace(
                               routePathParameters.PROPERTY_ID,
                               updatedProperty.id,
                           ),

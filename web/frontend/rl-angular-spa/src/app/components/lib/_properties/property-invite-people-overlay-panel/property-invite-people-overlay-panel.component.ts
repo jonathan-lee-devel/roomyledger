@@ -44,7 +44,7 @@ export class PropertyInvitePeopleOverlayPanelComponent {
   constructor(private readonly clipboard: Clipboard) {}
 
   getPropertyDashboardShareURL() {
-    return `${environment.FRONT_END_URL}/properties/dashboard/${this.propertiesStore.propertyById().id}`;
+    return `${environment.FRONT_END_URL}/ledgers/dashboard/${this.propertiesStore.propertyById().id}`;
   }
 
   copyPropertyDashboardShareURL() {
