@@ -29,6 +29,9 @@ export class MainMenuComponent implements AfterViewInit {
   private readonly shepherdService = inject(ShepherdService);
 
   ngAfterViewInit() {
+    if (JSON.parse(localStorage.getItem('create-first-ledger-tour') ?? 'false')) {
+      return;
+    }
     const cardElement = document.querySelector('.create-ledger-card') as HTMLElement;
     if (!cardElement) {
       return;
@@ -41,6 +44,13 @@ export class MainMenuComponent implements AfterViewInit {
       title: 'Create a Ledger',
       text: 'Click here to create your first ledger',
       buttons: [
+        {
+          text: `Don't Show Again`,
+          action: () => {
+            this.shepherdService.cancel();
+            localStorage.setItem('create-first-ledger-tour', JSON.stringify(true));
+          },
+        },
         {
           text: 'Close',
           action: () => this.shepherdService.cancel(),
