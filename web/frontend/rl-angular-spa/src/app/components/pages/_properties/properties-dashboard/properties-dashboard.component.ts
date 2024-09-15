@@ -180,7 +180,7 @@ export class PropertiesDashboardComponent implements OnInit, AfterViewInit, OnDe
 
   onActiveItemChange($event: MenuItem) {
     this.activeItem = $event;
-    let tabQueryParam: string = 'expenses';
+    let tabQueryParam: string = '';
     if ($event.label === this.items?.[this.EXPENSE_TAB_INDEX]?.label) {
       tabQueryParam = 'expenses';
     } else if (
