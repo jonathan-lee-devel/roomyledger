@@ -152,6 +152,7 @@ export class PropertiesDashboardComponent implements OnInit, AfterViewInit, OnDe
   }
 
   ngOnDestroy() {
+    this.shepherdService.cancel();
     this.routeParamsSubscription?.unsubscribe();
     this.routeQueryParamsSubscription?.unsubscribe();
   }
