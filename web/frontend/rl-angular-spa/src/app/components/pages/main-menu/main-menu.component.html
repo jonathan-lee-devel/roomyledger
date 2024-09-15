@@ -5,10 +5,10 @@
 <div class="grid grid-cols-1 justify-center my-3 py-3">
   <app-card-with-link
     [cardBodyText]="'Manage your existing Properties'"
-    [cardButtonTargetLink]="rebaseRoutePath(RoutePath.PROPERTIES_MANAGE)"
-    [cardButtonText]="'Manage Properties'"
+    [cardButtonTargetLink]="rebaseRoutePath(RoutePath.LEDGERS_MANAGE)"
+    [cardButtonText]="'Manage Ledgers'"
     [cardHeaderText]="navigationTitle"
-    [cardTitle]="'Manage Properties'"
+    [cardTitle]="'Manage Ledgers'"
     class="min-w-full animate__animated animate__bounceInUp animate__faster"
   />
   <app-card-with-link
@@ -22,7 +22,7 @@
   <app-card-with-link
     [cardTitleClass]="'create-ledger-card'"
     [cardBodyText]="'Create a new Property Ledger'"
-    [cardButtonTargetLink]="rebaseRoutePath(RoutePath.PROPERTIES_CREATE)"
+    [cardButtonTargetLink]="rebaseRoutePath(RoutePath.LEDGERS_CREATE)"
     [cardButtonText]="'Create Ledger'"
     [cardHeaderText]="navigationTitle"
     [cardTitle]="'Create Ledger'"

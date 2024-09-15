@@ -1,32 +1,20 @@
 import {HttpErrorResponse} from '@angular/common/http';
 import {computed, inject} from '@angular/core';
 import {Router} from '@angular/router';
-import {
-  patchState,
-  signalStore,
-  withComputed,
-  withMethods,
-  withState,
-} from '@ngrx/signals';
+import {patchState, signalStore, withComputed, withMethods, withState} from '@ngrx/signals';
 import {ConfirmationService} from 'primeng/api';
 import {catchError, take, tap, throwError} from 'rxjs';
 
 import {environment} from '../../../../environments/environment';
-import {
-  rebaseRoutePathAsString,
-  RoutePath,
-  routePathParameters,
-} from '../../../app.routes';
+import {rebaseRoutePathAsString, RoutePath, routePathParameters} from '../../../app.routes';
 import {HttpStatus} from '../../../common/enums/HttpStatus';
-import {ExpenseCreateOverlayPanelComponent} from '../../../components/lib/_expenses/expense-create-overlay-panel/expense-create-overlay-panel.component';
+import {
+  ExpenseCreateOverlayPanelComponent,
+} from '../../../components/lib/_expenses/expense-create-overlay-panel/expense-create-overlay-panel.component';
 import {DateRangeDto} from '../../../dtos/date/DateRange.dto';
 import {CreateExpenseRequestDto} from '../../../dtos/expenses/CreateExpenseRequestDto';
 import {ExpenseDistributionDto} from '../../../dtos/expenses/ExpenseDistribution.dto';
-import {
-  ExpenseDto,
-  ExpenseStateEnum,
-  initialExpenseDto,
-} from '../../../dtos/expenses/ExpenseDto';
+import {ExpenseDto, ExpenseStateEnum, initialExpenseDto} from '../../../dtos/expenses/ExpenseDto';
 import {PropertyDto} from '../../../dtos/properties/Property.dto';
 import {ExpenseService} from '../../../services/expense/expense.service';
 import {ToastWrapperService} from '../../../services/toast-wrapper/toast-wrapper.service';
@@ -102,7 +90,7 @@ export const ExpensesStore = signalStore(
           router
               .navigate([
                 rebaseRoutePathAsString(
-                    RoutePath.PROPERTIES_DASHBOARD_ID.replace(
+                    RoutePath.LEDGERS_DASHBOARD_ID.replace(
                         routePathParameters.PROPERTY_ID,
                         expense.propertyId,
                     ),
