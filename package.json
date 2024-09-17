@@ -1,24 +1,28 @@
 {
   "name": "roomyledger",
   "version": "0.0.1",
+  "private": true,
   "scripts": {
-    "backend:lint": "cd web/backend/rl-nestjs-mono && yarn run lint",
-    "backend:build": "cd web/backend/rl-nestjs-mono && yarn run build",
-    "backend:test": "cd web/backend/rl-nestjs-mono && yarn run test",
-    "frontend:lint": "cd web/frontend/rl-angular-spa && yarn run lint",
-    "frontend:build": "cd web/frontend/rl-angular-spa && yarn run build",
-    "frontend:build:stage": "cd web/frontend/rl-angular-spa && yarn run build:stage",
-    "frontend:test": "cd web/frontend/rl-angular-spa && yarn run test",
-    "lint": "yarn run backend:lint && yarn run frontend:lint",
-    "build": "yarn run backend:build && yarn run frontend:build && yarn run frontend:build:stage",
-    "test": "yarn run backend:test && yarn run frontend:test",
-    "prepare": "husky"
+    "build": "turbo build",
+    "build:prod": "turbo build:prod",
+    "build:stage": "turbo build:stage",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "devDependencies": {
-    "husky": "^9.1.6"
-  }
+    "prettier": "^3.2.5",
+    "turbo": "^2.1.2",
+    "typescript": "^5.4.5"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "yarn@1.22.22",
+  "workspaces": [
+    "apps/backend/*",
+    "apps/frontend/*",
+    "apps/mobile/*",
+    "packages/*"
+  ]
 }

@@ -1,0 +1,4 @@
+0000000000000000000000000000000000000000 738f5e28b4a5ba9305388543856806ff3db713bd Jonathan Lee <jonathan.lee.devel@gmail.com> 1726432920 +0100	branch: Created from HEAD
+738f5e28b4a5ba9305388543856806ff3db713bd d74fc8a91eb1f5e02596a2d254f9898296f4aa17 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726432987 +0100	commit: Cancel ShepherdService on component destroy
+d74fc8a91eb1f5e02596a2d254f9898296f4aa17 552f35c1fa1aff476b5ab3d79209839948bef7e7 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726433524 +0100	commit: Refactor error handling and cleanup tour component
+552f35c1fa1aff476b5ab3d79209839948bef7e7 e827ee5b25eb150fc4ef424c592a48572d59a931 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726549953 +0100	branch: Reset to HEAD
