@@ -17,25 +17,19 @@ export class SupabaseJwtStrategy extends PassportStrategy(
   'supabase-jwt',
 ) {
   public constructor(
-    configService: ConfigService,
+    configService: ConfigService<EnvironmentVariables>,
     private readonly jwtService: JwtService,
   ) {
     super({
-      supabaseUrl: configService.getOrThrow<string>(
-        EnvironmentVariables.SUPABASE_URL,
-      ),
-      supabaseKey: configService.getOrThrow<string>(
-        EnvironmentVariables.SUPABASE_KEY,
-      ),
+      supabaseUrl: configService.getOrThrow<string>('SUPABASE_URL'),
+      supabaseKey: configService.getOrThrow<string>('SUPABASE_KEY'),
       supabaseOptions: {},
       supabaseJwtSecret: configService.getOrThrow<string>(
-        EnvironmentVariables.SUPABASE_JWT_SECRET,
+        'SUPABASE_JWT_SECRET',
       ),
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: configService.getOrThrow<string>(
-        EnvironmentVariables.SUPABASE_JWT_SECRET,
-      ),
+      secretOrKey: configService.getOrThrow<string>('SUPABASE_JWT_SECRET'),
       extractor: ExtractJwt.fromAuthHeaderAsBearerToken(),
     });
   }
