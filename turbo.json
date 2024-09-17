@@ -29,7 +29,21 @@
       "persistent": true
     },
     "start:prod": {
-      "dependsOn": ["build"]
+      "dependsOn": ["build"],
+      "env": [
+        "NODE_ENV",
+        "DATABASE_URL",
+        "EMAIL_PASSWORD",
+        "EMAIL_USER",
+        "FRONT_END_URL",
+        "JWT_EXPIRES_IN",
+        "JWT_SECRET",
+        "STRIPE_API_KEY",
+        "STRIPE_WEBHOOK_SECRET",
+        "SUPABASE_URL",
+        "SUPABASE_KEY",
+        "SUPABASE_JWT_SECRET"
+      ]
     }
   }
 }
