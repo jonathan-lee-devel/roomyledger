@@ -19,6 +19,7 @@ import {FeatureFlagsStore} from './+state/feature-flags/feature-flags.store';
 import {NotificationsStore} from './+state/notifications/notifications.store';
 import {PaymentStore} from './+state/payment/payment.store';
 import {rebaseRoutePath, RoutePath} from './app.routes';
+import {environment} from '../environments/environment';
 import {FooterComponent} from './components/lib/footer/footer.component';
 import {ApplicationMessageComponent} from './components/lib/messages/application-message/application-message.component';
 import {FreeTrialMessageComponent} from './components/lib/messages/free-trial-message/free-trial-message.component';
@@ -35,7 +36,6 @@ import {
 import {ApplicationMessageService} from './services/application-message/application-message.service';
 import {AuthService} from './services/auth/auth.service';
 import {SupabaseService} from './services/supabase/supabase.service';
-import {environment} from '../environments/environment';
 
 @Component({
   selector: 'app-root',
