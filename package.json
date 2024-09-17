@@ -1,6 +1,7 @@
 {
   "name": "roomyledger",
   "version": "0.0.1",
+  "private": true,
   "scripts": {
     "build": "turbo build",
     "build:prod": "turbo build:prod",
