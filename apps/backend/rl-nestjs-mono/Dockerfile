@@ -10,7 +10,7 @@ LABEL fly_launch_runtime="NestJS"
 WORKDIR /app
 
 # Set production environment
-ENV NODE_ENV=production
+ARG NODE_ENV
 
 # Throw-away build stage to reduce size of final image
 FROM base as build
@@ -35,5 +35,19 @@ FROM base
 COPY --from=build /app /app
 
 EXPOSE 4000
+
+ARG DATABASE_URL
+ARG EMAIL_PASSWORD
+ARG EMAIL_USER
+ARG FRONT_END_URL
+ARG JWT_EXPIRES_IN
+ARG JWT_SECRET
+ARG NODE_ENV
+ARG STRIPE_API_KEY
+ARG STRIPE_WEBHOOK_SECRET
+ARG SUPABASE_URL
+ARG SUPABASE_KEY
+ARG SUPABASE_JWT_SECRET
+ARG ENV
 
 CMD [ "yarn", "run", "start:prod" ]
