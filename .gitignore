@@ -5,8 +5,16 @@ node_modules
 .pnp
 .pnp.js
 
+.idea/
+.idea/*.iml
+.idea/roomyledger.iml
+
+web/frontend/rl-angular-spa/.angular
+mobile/roomyledger/.angular
+web/backend/rl-nestjs-mono/.env*
+
 # Local env files
-.env
+.env*
 .env.local
 .env.development.local
 .env.test.local

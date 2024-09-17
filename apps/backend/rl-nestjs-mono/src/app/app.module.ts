@@ -18,7 +18,9 @@ import {PrismaModule} from '../prisma/prisma.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     RouterModule.register(routes),
     EventEmitterModule.forRoot(),
     ThrottlerModule.forRoot([
