@@ -8,7 +8,8 @@
     "build:stage": "turbo build:stage",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "build:nest-mono": "turbo run build --filter=rl-nestjs-mono"
   },
   "devDependencies": {
     "prettier": "^3.2.5",
