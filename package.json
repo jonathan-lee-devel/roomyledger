@@ -11,9 +11,11 @@
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "build:nest-mono": "turbo run build --filter=rl-nestjs-mono",
-    "start:prod:nest-mono": "turbo run start:prod --filter=rl-nestjs-mono"
+    "start:prod:nest-mono": "turbo run start:prod --filter=rl-nestjs-mono",
+    "prepare": "husky"
   },
   "devDependencies": {
+    "husky": "^9.1.6",
     "prettier": "^3.2.5",
     "turbo": "^2.1.2",
     "typescript": "^5.4.5"
