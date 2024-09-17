@@ -1,0 +1,67 @@
+0000000000000000000000000000000000000000 d84fb843c2a9db8b9299856bbf00b87b018be22e Jonathan Lee <jonathan.lee.devel@gmail.com> 1726279978 +0100	commit (initial): Initial commit
+d84fb843c2a9db8b9299856bbf00b87b018be22e d84fb843c2a9db8b9299856bbf00b87b018be22e Jonathan Lee <jonathan.lee.devel@gmail.com> 1726280086 +0100	checkout: moving from main to staging
+d84fb843c2a9db8b9299856bbf00b87b018be22e 8f3dcbba0563ebd1dc2f55f4dbc293e9f64528e1 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726280725 +0100	commit: Initial commit
+8f3dcbba0563ebd1dc2f55f4dbc293e9f64528e1 8f3dcbba0563ebd1dc2f55f4dbc293e9f64528e1 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726281690 +0100	reset: moving to HEAD
+8f3dcbba0563ebd1dc2f55f4dbc293e9f64528e1 8f3dcbba0563ebd1dc2f55f4dbc293e9f64528e1 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726281756 +0100	reset: moving to HEAD
+8f3dcbba0563ebd1dc2f55f4dbc293e9f64528e1 da4e4c21df58f36278489d386ac701223c8d3638 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726281766 +0100	commit: Initial commit
+da4e4c21df58f36278489d386ac701223c8d3638 6dc0ab93a1cf366ffb9d89569738e8f79fe7e8bb Jonathan Lee <jonathan.lee.devel@gmail.com> 1726281872 +0100	commit: Initial commit
+6dc0ab93a1cf366ffb9d89569738e8f79fe7e8bb 7087a1cdf3ddfc658afa4c69e8f7c545d9df4d84 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726282874 +0100	commit: Move and update GitHub workflows for unified directory structure
+7087a1cdf3ddfc658afa4c69e8f7c545d9df4d84 ced0aa8dc42ce7007ebdc3249aa5b96702d92c51 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726283192 +0100	commit: Remove unnecessary working-directory in CI workflows
+ced0aa8dc42ce7007ebdc3249aa5b96702d92c51 ed58bdc98c9e3a9ba6d96a3dd4aea1b736973b56 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726283376 +0100	commit: Update workflow job names for clarity
+ed58bdc98c9e3a9ba6d96a3dd4aea1b736973b56 7df84ef37334dd5d451e016665d16036fc9de1af Jonathan Lee <jonathan.lee.devel@gmail.com> 1726283778 +0100	commit: Update SonarQube project keys and add properties files
+7df84ef37334dd5d451e016665d16036fc9de1af 306ad5c74087d5822ad44c219b934300c8c78884 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726284054 +0100	commit: Update SonarQube projectBaseDir values in GitHub Actions
+306ad5c74087d5822ad44c219b934300c8c78884 d18efa221c399ef30e2be3cc6f19cba63b173a63 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726285328 +0100	commit: Add vercel.json to disable GitHub integration
+d18efa221c399ef30e2be3cc6f19cba63b173a63 707f9a2eaf5c977fd3744d06f068133893805463 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726285804 +0100	commit: Add Node.js version matrix to verify-node.yml workflow
+707f9a2eaf5c977fd3744d06f068133893805463 888069fc6cd7aa36b811a5c610e07cd879e97994 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726286399 +0100	commit: Update Vercel configuration and gitignore file
+888069fc6cd7aa36b811a5c610e07cd879e97994 f85e8e151374ab4506954bd347d59dc582507919 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726286782 +0100	commit: Simplify Vercel actions in GitHub workflow
+f85e8e151374ab4506954bd347d59dc582507919 66f6f545d7c43703ee19e918aa8748dd9ab8a697 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726287884 +0100	commit: Add Railway deployment step to CI workflow
+66f6f545d7c43703ee19e918aa8748dd9ab8a697 235e7a48b6d2012689034eaa5528f628b7b08f9c Jonathan Lee <jonathan.lee.devel@gmail.com> 1726288246 +0100	commit: Specify Railway service in deployment step
+235e7a48b6d2012689034eaa5528f628b7b08f9c aa9e9697bbcc016bdd2685ec7bded47cf9642f22 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726289199 +0100	commit: Refactor deployment workflows for modular structure
+aa9e9697bbcc016bdd2685ec7bded47cf9642f22 f6a2ad2b1cc9b0f8a4680f8bca6170f33004b55d Jonathan Lee <jonathan.lee.devel@gmail.com> 1726289758 +0100	commit: Fix Playwright report path in CI workflow
+f6a2ad2b1cc9b0f8a4680f8bca6170f33004b55d cd3429c68a4510390fec2391edbd74d52ccb7a70 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726290259 +0100	commit: Update Playwright report path in deployment workflow
+cd3429c68a4510390fec2391edbd74d52ccb7a70 d84fb843c2a9db8b9299856bbf00b87b018be22e Jonathan Lee <jonathan.lee.devel@gmail.com> 1726290764 +0100	checkout: moving from staging to main
+d84fb843c2a9db8b9299856bbf00b87b018be22e 6a383d778beef236fecd94cc16d583bb26929611 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726290770 +0100	pull --no-stat -v --progress origin main: Fast-forward
+6a383d778beef236fecd94cc16d583bb26929611 6a383d778beef236fecd94cc16d583bb26929611 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726290786 +0100	checkout: moving from main to staging
+6a383d778beef236fecd94cc16d583bb26929611 251dd369629ddb60f1133cfbdbac00ddbd88cbf5 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726290810 +0100	commit: Update GitHub Actions to only run on staging branch
+251dd369629ddb60f1133cfbdbac00ddbd88cbf5 363261457ec542c749a9a26e46b36d59ce3e7f31 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726291314 +0100	commit: Update test workflow dependencies
+363261457ec542c749a9a26e46b36d59ce3e7f31 0f511761a107daa689d916bb4c1a9c24c0fca6b8 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726291429 +0100	commit: Update deploy-prod workflow to specify working directory
+0f511761a107daa689d916bb4c1a9c24c0fca6b8 6a383d778beef236fecd94cc16d583bb26929611 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726349096 +0100	checkout: moving from staging to main
+6a383d778beef236fecd94cc16d583bb26929611 79dc22c61d651db5b56234ddc9a680adcccbbd81 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726349102 +0100	pull --no-stat -v --progress origin main: Fast-forward
+79dc22c61d651db5b56234ddc9a680adcccbbd81 79dc22c61d651db5b56234ddc9a680adcccbbd81 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726349117 +0100	checkout: moving from main to staging
+79dc22c61d651db5b56234ddc9a680adcccbbd81 40802c03033641907b09504ae51d42e0e2eb43a3 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726352022 +0100	commit: Add main menu component and Tailwind CSS integration
+40802c03033641907b09504ae51d42e0e2eb43a3 40802c03033641907b09504ae51d42e0e2eb43a3 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726352960 +0100	reset: moving to staging
+40802c03033641907b09504ae51d42e0e2eb43a3 e0c10e07a75c728af0d3c2186954a69580fc7ae1 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726353878 +0100	commit: Remove unused components and implement ManageProperties
+e0c10e07a75c728af0d3c2186954a69580fc7ae1 e0c10e07a75c728af0d3c2186954a69580fc7ae1 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726354435 +0100	reset: moving to staging
+e0c10e07a75c728af0d3c2186954a69580fc7ae1 60f41d983680710ad205ee751e08e60c3045d76b Jonathan Lee <jonathan.lee.devel@gmail.com> 1726354835 +0100	commit: Add property dashboard module and routing
+60f41d983680710ad205ee751e08e60c3045d76b 79dc22c61d651db5b56234ddc9a680adcccbbd81 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726354951 +0100	checkout: moving from staging to main
+79dc22c61d651db5b56234ddc9a680adcccbbd81 eea6e0cc1206a882825d82ff2acf79fd0ddbe041 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726354957 +0100	pull --no-stat -v --progress origin main: Fast-forward
+eea6e0cc1206a882825d82ff2acf79fd0ddbe041 eea6e0cc1206a882825d82ff2acf79fd0ddbe041 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726354973 +0100	checkout: moving from main to staging
+eea6e0cc1206a882825d82ff2acf79fd0ddbe041 7e17dc3c402b226313012cec04fca04edbb363fd Jonathan Lee <jonathan.lee.devel@gmail.com> 1726355366 +0100	commit: Add appflow configuration for mobile app
+7e17dc3c402b226313012cec04fca04edbb363fd eea6e0cc1206a882825d82ff2acf79fd0ddbe041 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726355397 +0100	checkout: moving from staging to main
+eea6e0cc1206a882825d82ff2acf79fd0ddbe041 63e6f6694d7e6bce26a65fa8c1e01b68a8662439 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726355401 +0100	pull --no-stat -v --progress origin main: Fast-forward
+63e6f6694d7e6bce26a65fa8c1e01b68a8662439 63e6f6694d7e6bce26a65fa8c1e01b68a8662439 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726355408 +0100	checkout: moving from main to staging
+63e6f6694d7e6bce26a65fa8c1e01b68a8662439 ff4deab9dd924a18fe381f231cde2601e7f355e2 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726365863 +0100	commit: Add README with project information and licensing details
+ff4deab9dd924a18fe381f231cde2601e7f355e2 ff4deab9dd924a18fe381f231cde2601e7f355e2 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726368944 +0100	reset: moving to staging
+ff4deab9dd924a18fe381f231cde2601e7f355e2 ff4deab9dd924a18fe381f231cde2601e7f355e2 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726370942 +0100	reset: moving to staging
+ff4deab9dd924a18fe381f231cde2601e7f355e2 ff4deab9dd924a18fe381f231cde2601e7f355e2 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726371332 +0100	reset: moving to staging
+ff4deab9dd924a18fe381f231cde2601e7f355e2 4f7e38b8d5877312d44197a2cbecfe8b75a56dcc Jonathan Lee <jonathan.lee.devel@gmail.com> 1726372621 +0100	commit: Add Shepherd.js tour for creating ledger
+4f7e38b8d5877312d44197a2cbecfe8b75a56dcc 60138c602fa90ccea5f5a7bd8fdd7fa66ae28884 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726372907 +0100	commit: Rename 'Properties' to 'Ledgers' across components
+60138c602fa90ccea5f5a7bd8fdd7fa66ae28884 d4cdec70645601b2a32b276ca4d5c24982d90483 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726373302 +0100	commit: Change URL path and add ability to skip ledger tour
+d4cdec70645601b2a32b276ca4d5c24982d90483 bd9b26f3a715eff09b8b2511e87a1aed52a4098a Jonathan Lee <jonathan.lee.devel@gmail.com> 1726379224 +0100	commit: Add Custom Splits tab to properties dashboard
+bd9b26f3a715eff09b8b2511e87a1aed52a4098a 139e5c42f61bcbafc741ede7dec2e021e0934ddd Jonathan Lee <jonathan.lee.devel@gmail.com> 1726379490 +0100	commit: Refactor test setup for CustomSplitsTabComponent
+139e5c42f61bcbafc741ede7dec2e021e0934ddd 0e46ccb1f291021e4d8a2427e11f5c336f4346c8 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726379556 +0100	rebase (start): checkout origin/staging
+0e46ccb1f291021e4d8a2427e11f5c336f4346c8 212d0e8d33fff5ae12f0eabd4a7736e51ed71281 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726379557 +0100	rebase (pick): Add Custom Splits tab to properties dashboard
+212d0e8d33fff5ae12f0eabd4a7736e51ed71281 f462e69c20b07315db9ea39f86d1ce11e2815bfe Jonathan Lee <jonathan.lee.devel@gmail.com> 1726379557 +0100	rebase (pick): Refactor test setup for CustomSplitsTabComponent
+f462e69c20b07315db9ea39f86d1ce11e2815bfe f462e69c20b07315db9ea39f86d1ce11e2815bfe Jonathan Lee <jonathan.lee.devel@gmail.com> 1726379557 +0100	rebase (finish): returning to refs/heads/staging
+f462e69c20b07315db9ea39f86d1ce11e2815bfe bbf5af8415afd1e33ef99c7cf814d51aa339fe5e Jonathan Lee <jonathan.lee.devel@gmail.com> 1726379985 +0100	commit: Fix default tab query parameter in properties dashboard
+bbf5af8415afd1e33ef99c7cf814d51aa339fe5e 63e6f6694d7e6bce26a65fa8c1e01b68a8662439 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726383065 +0100	checkout: moving from staging to main
+63e6f6694d7e6bce26a65fa8c1e01b68a8662439 63e6f6694d7e6bce26a65fa8c1e01b68a8662439 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726383077 +0100	checkout: moving from main to staging
+63e6f6694d7e6bce26a65fa8c1e01b68a8662439 63e6f6694d7e6bce26a65fa8c1e01b68a8662439 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726432902 +0100	checkout: moving from staging to main
+63e6f6694d7e6bce26a65fa8c1e01b68a8662439 738f5e28b4a5ba9305388543856806ff3db713bd Jonathan Lee <jonathan.lee.devel@gmail.com> 1726432907 +0100	pull origin main: Fast-forward
+738f5e28b4a5ba9305388543856806ff3db713bd 738f5e28b4a5ba9305388543856806ff3db713bd Jonathan Lee <jonathan.lee.devel@gmail.com> 1726432920 +0100	checkout: moving from main to staging
+738f5e28b4a5ba9305388543856806ff3db713bd d74fc8a91eb1f5e02596a2d254f9898296f4aa17 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726432987 +0100	commit: Cancel ShepherdService on component destroy
+d74fc8a91eb1f5e02596a2d254f9898296f4aa17 552f35c1fa1aff476b5ab3d79209839948bef7e7 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726433524 +0100	commit: Refactor error handling and cleanup tour component
+552f35c1fa1aff476b5ab3d79209839948bef7e7 738f5e28b4a5ba9305388543856806ff3db713bd Jonathan Lee <jonathan.lee.devel@gmail.com> 1726549930 +0100	checkout: moving from staging to main
+738f5e28b4a5ba9305388543856806ff3db713bd e827ee5b25eb150fc4ef424c592a48572d59a931 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726549938 +0100	pull --no-stat -v --progress origin main: Fast-forward
+e827ee5b25eb150fc4ef424c592a48572d59a931 e827ee5b25eb150fc4ef424c592a48572d59a931 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726549953 +0100	checkout: moving from main to staging
+e827ee5b25eb150fc4ef424c592a48572d59a931 e827ee5b25eb150fc4ef424c592a48572d59a931 Jonathan Lee <jonathan.lee.devel@gmail.com> 1726550314 +0100	reset: moving to staging
