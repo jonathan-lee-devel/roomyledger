@@ -8,6 +8,7 @@
     "dev": "ng serve",
     "ng": "ng",
     "start": "ng serve",
+    "start:prod": "exit 1",
     "build": "yarn run build:prod",
     "build:prod": "ng build --configuration production",
     "build:stage": "ng build --configuration stage",

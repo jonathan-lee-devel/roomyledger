@@ -6,10 +6,12 @@
     "build": "turbo build",
     "build:prod": "turbo build:prod",
     "build:stage": "turbo build:stage",
+    "start:prod": "turbo start:prod",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "build:nest-mono": "turbo run build --filter=rl-nestjs-mono"
+    "build:nest-mono": "turbo run build --filter=rl-nestjs-mono",
+    "start:prod:nest-mono": "turbo run start:prod --filter=rl-nestjs-mono"
   },
   "devDependencies": {
     "prettier": "^3.2.5",
