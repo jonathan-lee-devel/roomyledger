@@ -1,8 +1,10 @@
 {
   "name": "roomyledger",
-  "private": true,
+  "version": "0.0.1",
   "scripts": {
     "build": "turbo build",
+    "build:prod": "turbo build:prod",
+    "build:stage": "turbo build:stage",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
@@ -13,11 +15,10 @@
     "typescript": "^5.4.5"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "packageManager": "yarn@1.22.22",
   "workspaces": [
-    "apps/*",
     "apps/backend/*",
     "apps/frontend/*",
     "apps/mobile/*",
