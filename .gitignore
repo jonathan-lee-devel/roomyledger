@@ -5,6 +5,11 @@ node_modules
 .pnp
 .pnp.js
 
+.idea/
+
+web/frontend/rl-angular-spa/.angular
+mobile/roomyledger/.angular
+
 # Local env files
 .env
 .env.local
