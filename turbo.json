@@ -54,7 +54,7 @@
       "dependsOn": ["build", "build:stage"]
     },
     "start:prod": {
-      "dependsOn": ["build"],
+      "dependsOn": ["test", "test:cov"],
       "env": [
         "NODE_ENV",
         "DATABASE_URL",

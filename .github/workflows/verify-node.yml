@@ -9,47 +9,7 @@ permissions:
   pull-requests: read
 
 jobs:
-  lint:
-    runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        node-version: [20.x]
-    name: Lint (v${{ matrix.node-version }})
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: yarn
-          cache-dependency-path: '**/yarn.lock'
-      - run: yarn install --frozen-lockfile
-      - name: Lint (v${{ matrix.node-version }})
-        run: yarn run lint
-
-  build:
-    runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        node-version: [20.x]
-    name: Build (v${{ matrix.node-version }})
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: yarn
-          cache-dependency-path: '**/yarn.lock'
-      - run: yarn install --frozen-lockfile
-      - name: Build (v${{ matrix.node-version }})
-        run: yarn run build
-      - name: Build Staging (v${{ matrix.node-version }})
-        run: yarn run build:stage
-
-  test:
+  turbo-lint-build-test:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
@@ -67,6 +27,8 @@ jobs:
       - run: yarn install --frozen-lockfile
       - name: Test (v${{ matrix.node-version }})
         run: yarn run test
+      - name: Test:Cov (v${{ matrix.node-version }})
+        run: yarn run test:cov
 
   sonarcloud-analysis-backend:
     name: SonarCloud Backend (v${{ matrix.node-version }})
@@ -129,7 +91,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          projectBaseDir: web/frontend/rl-angular-spa
+          projectBaseDir: apps/frontend/rl-angular-spa
           args: -Dsonar.projectKey=jonathan-lee-devel_roomyledger-rl-angular-spa
             -Dsonar.organization=jonathan-lee-devel
             -Dsonar.sources=src
@@ -141,7 +103,7 @@ jobs:
             -Dsonar.qualitygate.wait=true
 
   deploy-railway-staging:
-    needs: [lint, build, test, sonarcloud-analysis-backend, sonarcloud-analysis-frontend]
+    needs: [turbo-lint-build-test, sonarcloud-analysis-backend, sonarcloud-analysis-frontend]
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
@@ -160,7 +122,7 @@ jobs:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_STAGING_TOKEN }}
 
   deploy-vercel-preview:
-    needs: [lint, build, test, sonarcloud-analysis-backend, sonarcloud-analysis-frontend]
+    needs: [turbo-lint-build-test, sonarcloud-analysis-backend, sonarcloud-analysis-frontend]
     runs-on: ubuntu-22.04
     strategy:
       matrix:
@@ -214,19 +176,19 @@ jobs:
         with:
           node-version: lts/*
       - name: Install dependencies
-        working-directory: ./web/frontend/rl-angular-spa
+        working-directory: ./apps/frontend/rl-angular-spa
         run: npm install -g yarn && yarn
       - name: Install Playwright Browsers
-        working-directory: ./web/frontend/rl-angular-spa
+        working-directory: ./apps/frontend/rl-angular-spa
         run: yarn playwright install --with-deps
       - name: Run Playwright tests
-        working-directory: ./web/frontend/rl-angular-spa
+        working-directory: ./apps/frontend/rl-angular-spa
         run: yarn playwright test
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: playwright-report
-          path: web/frontend/rl-angular-spa/playwright-report/
+          path: apps/frontend/rl-angular-spa/playwright-report/
           retention-days: 30
     env:
       CI: true
