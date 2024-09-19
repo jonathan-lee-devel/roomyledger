@@ -11,6 +11,7 @@
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "test": "turbo test",
+    "test:cov": "turbo test:cov",
     "build:nest-mono": "turbo run build --filter=rl-nestjs-mono",
     "start:prod:nest-mono": "turbo run start:prod --filter=rl-nestjs-mono",
     "prepare": "husky"
