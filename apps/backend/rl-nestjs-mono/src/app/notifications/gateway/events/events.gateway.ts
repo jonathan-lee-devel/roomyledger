@@ -1,3 +1,4 @@
+import {Logger} from '@nestjs/common';
 import {
   SubscribeMessage,
   WebSocketGateway,
@@ -17,9 +18,12 @@ export class EventsGateway {
     ServerToClientNotificationEvents
   >;
 
+  constructor(private readonly logger: Logger) {}
+
   @SubscribeMessage('message')
   handleMessage(client: any, payload: any): string {
-    return 'Hello world!';
+    this.logger.log(`Handling message from client: ${JSON.stringify(client)}`);
+    return payload;
   }
 
   sendMessage() {
