@@ -2,6 +2,13 @@
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
   "tasks": {
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
     "build": {
       "dependsOn": ["^build", "lint"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
@@ -21,18 +28,33 @@
         "SUPABASE_JWT_SECRET"
       ]
     },
-    "lint": {
-      "dependsOn": ["^lint"]
-    },
-    "dev": {
-      "cache": false,
-      "persistent": true
+    "build:stage": {
+      "dependsOn": ["^build", "lint"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**", "!.next/cache/**"],
+      "env": [
+        "NODE_ENV",
+        "DATABASE_URL",
+        "EMAIL_PASSWORD",
+        "EMAIL_USER",
+        "FRONT_END_URL",
+        "JWT_EXPIRES_IN",
+        "JWT_SECRET",
+        "STRIPE_API_KEY",
+        "STRIPE_WEBHOOK_SECRET",
+        "SUPABASE_URL",
+        "SUPABASE_KEY",
+        "SUPABASE_JWT_SECRET"
+      ]
     },
     "test": {
-      "dependsOn": ["build"]
+      "dependsOn": ["build", "build:stage"]
+    },
+    "test:cov": {
+      "dependsOn": ["build", "build:stage"]
     },
     "start:prod": {
-      "dependsOn": ["build"],
+      "dependsOn": ["test"],
       "env": [
         "NODE_ENV",
         "DATABASE_URL",
