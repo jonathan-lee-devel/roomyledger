@@ -1,0 +1,44 @@
+<div *ngIf="!propertiesStore.isLoading() else topSpinner"
+     class="flex-none flex align-items-center justify-content-center mt-8">
+  <app-p-dark-mode [innerText]="getPropertyTier()" class="text-2xl"/>
+</div>
+<ng-template #topSpinner>
+  <div class="flex-none flex align-items-center justify-content-center mt-8">
+    <p-progressSpinner styleClass="w-2rem h-2rem"/>
+  </div>
+</ng-template>
+<div class="flex-none flex align-items-center justify-content-center mt-2">
+  <app-h1-dark-mode [innerText]="'Manage Property Ledger'" class="text-3xl underline"/>
+</div>
+<ng-container *ngIf="propertiesStore.isLoading()">
+  <div
+    class="flex-none flex align-items-center justify-content-center mt-1"
+  >
+    <p-progressSpinner/>
+  </div>
+</ng-container>
+<div class="flex-none flex align-items-center justify-content-center mt-1">
+  <app-p-dark-mode [innerText]="propertiesStore.propertyById().name" class="text-3xl"/>
+</div>
+<div class="flex-none flex align-items-center justify-content-center mt-3 animate__animated animate__bounceInUp">
+  <p-tabMenu
+    (activeItemChange)="onActiveItemChange($event)"
+    [activeItem]="activeItem"
+    [model]="items"/>
+</div>
+<div *ngIf="activeItem?.label === items?.[EXPENSE_TAB_INDEX]?.label"
+     class="flex-none flex align-items-center justify-content-center mt-3 animate__animated animate__bounceInUp">
+  <app-expense-tab/>
+</div>
+<div *ngIf="activeItem?.label === items?.[CUSTOM_SPLITS_TAB_INDEX]?.label"
+     class="flex-none flex align-items-center justify-content-center mt-3 animate__animated animate__bounceInUp">
+  <app-custom-splits-tab />
+</div>
+<div *ngIf="activeItem?.label === items?.[REPORTS_TAB_INDEX]?.label"
+     class="flex-none flex align-items-center justify-content-center mt-3 animate__animated animate__bounceInUp">
+  <app-reports-tab (monthAndYearSelected)="loadExpensesForSelectedMonthAndYear($event)" [date]="date"/>
+</div>
+<div *ngIf="activeItem?.label === items?.[PEOPLE_TAB_INDEX]?.label"
+     class="flex-none flex align-items-center justify-content-center mt-3 animate__animated animate__bounceInUp">
+  <app-property-dashboard-people-tab/>
+</div>

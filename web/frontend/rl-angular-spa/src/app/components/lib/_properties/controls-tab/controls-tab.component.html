@@ -1,0 +1,19 @@
+<ng-container *ngIf="!currentUserIsAdmin">
+  <div class="flex-none flex align-items-center justify-content-center mt-1">
+    <p>You have limited permissions on this property</p>
+  </div>
+</ng-container>
+<ng-container *ngIf="currentUserIsAdmin">
+  <p-divider />
+  <div class="flex-none flex align-items-center justify-content-center mt-1">
+
+  </div>
+  <p-divider />
+  <div class="flex-none flex align-items-center justify-content-center mt-1">
+    <p-button
+      (click)="doDeleteProperty()"
+      label="Delete Property"
+      severity="danger"
+    />
+  </div>
+</ng-container>

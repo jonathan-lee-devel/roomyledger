@@ -1,0 +1,18 @@
+<ng-container *ngIf="expensesStore.isLoading()">
+  <div
+    class="flex-none flex align-items-center justify-content-center mt-1"
+  >
+    <p-progressSpinner />
+  </div>
+</ng-container>
+<div class="flex-none flex align-items-center justify-content-center my-3">
+  <app-expense-create-overlay-panel />
+</div>
+<app-expense-table [expenses]="expensesStore.approvedExpenses()" [statusSeverity]="'success'" [state]="'APPROVED'" [label]="'Approved Expenses'" />
+<app-expense-table [expenses]="expensesStore.pendingExpenses()" [statusSeverity]="'warning'" [state]="'PENDING'" [label]="'Pending Expenses'" />
+<app-expense-table [expenses]="expensesStore.disputedExpenses()" [statusSeverity]="'danger'" [state]="'DISPUTED'" [label]="'Disputed Expenses'" />
+<ng-container *ngIf="expensesStore.expenseDistributionsForPropertyById().length === 0">
+  <div class="flex-none flex align-items-center justify-content-center my-4">
+    <p>No Expense Distributions</p>
+  </div>
+</ng-container>

@@ -1,0 +1,8 @@
+{
+  "name": "RoomyLedger",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "9b6bc435"
+}

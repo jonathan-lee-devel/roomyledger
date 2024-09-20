@@ -1,0 +1,64 @@
+<div>
+  <h3><span class="underline">Submitted by</span>: {{ expensesStore.expenseById().createdBy.profile.displayName }}</h3>
+</div>
+<div>
+  <h3 class="mt-2">Approvals {{ expensesStore.expenseById().approvals.length }} out of the required {{ propertiesStore.propertyById().rules.numberOfExpenseApprovalsRequired }}</h3>
+  <p-table [rows]="3" [value]="expensesStore.expenseById().approvals" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Approver</th>
+        <th>Date</th>
+        <th style="width:4em">Action</th>
+      </tr>
+    </ng-template>
+    <ng-template let-approval pTemplate="body">
+      <tr>
+        <td>{{ approval.createdBy.profile.displayName }}</td>
+        <td>{{ approval.createdAt | date }}</td>
+        <td>
+          <p-button [rounded]="true" [text]="true" icon="pi pi-trash" type="button" />
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <h3 class="mt-4">Disputes</h3>
+  <p-table [rows]="3" [value]="expensesStore.expenseById().disputes" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Disputer</th>
+        <th>Date</th>
+        <th style="width:4em">Action</th>
+      </tr>
+    </ng-template>
+    <ng-template let-dispute pTemplate="body">
+      <tr>
+        <td>{{ dispute.createdBy.profile.displayName }}</td>
+        <td>{{ dispute.createdAt | date }}</td>
+        <td>
+          <p-button [rounded]="true" [text]="true" icon="pi pi-trash" type="button" />
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <h3 class="mt-4">Comments</h3>
+  <p-table [rows]="3" [value]="expensesStore.expenseById().comments" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Commenter</th>
+        <th>Text</th>
+        <th>Date</th>
+        <th style="width:4em">Action</th>
+      </tr>
+    </ng-template>
+    <ng-template let-comment pTemplate="body">
+      <tr>
+        <td>{{ comment.createdBy.profile.displayName }}</td>
+        <td>{{ comment.text }}</td>
+        <td>{{ comment.createdAt | date }}</td>
+        <td>
+          <p-button [rounded]="true" [text]="true" icon="pi pi-trash" type="button" />
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

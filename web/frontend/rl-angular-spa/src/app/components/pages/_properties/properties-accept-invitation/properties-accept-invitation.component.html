@@ -1,0 +1,49 @@
+<div class="flex-none flex align-items-center justify-content-center mt-8">
+  <div
+    class="surface-card p-4 shadow-2 border-round w-full lg:w-6 animate__animated animate__zoomInDown"
+  >
+    <div class="text-center mb-5">
+      <img
+        alt="Image"
+        class="mb-3"
+        height="50"
+        ngSrc="assets/favicon.ico"
+        width="50"
+      />
+      <div class="text-900 text-3xl font-medium mb-3">Property Invitation</div>
+      <div class="text-600 text-1xl font-italic mb-3"><strong>Warning:</strong>&nbsp;Tenants and Admins of this property
+        will be able to view your public profile information if you accept.
+      </div>
+    </div>
+    @if (propertiesStore.propertyById()) {
+      <div
+        class="flex-none flex align-items-center justify-content-center my-3"
+      >
+        <h2>{{ isAccepted ? 'Welcome to ' : 'Invited to ' }} {{ propertiesStore.propertyById().name }}</h2>
+      </div>
+      <div
+        class="flex-none flex align-items-center justify-content-center my-3"
+      >
+        @if (isAccepted) {
+          <p-progressSpinner styleClass="w-5rem h-5rem" />
+        } @else {
+          <div
+            class="flex-none flex align-items-center justify-content-center"
+          >
+            <form (ngSubmit)="doAcceptInvitation()">
+              <p-inputGroup>
+                <p-button
+                  [outlined]="true"
+                  [raised]="true"
+                  class="flex-none flex align-items-center justify-content-center my-3"
+                  label="Accept Invitation"
+                  type="submit"
+                />
+              </p-inputGroup>
+            </form>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

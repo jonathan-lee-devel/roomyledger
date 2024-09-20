@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Delete Property</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="p-6 space-y-6">
+    <p class="text-base leading-relaxed text-black">
+      {{ prompt }}
+    </p>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button (click)="confirmAction()" mat-button mat-dialog-close>Confirm</button>
+</mat-dialog-actions>

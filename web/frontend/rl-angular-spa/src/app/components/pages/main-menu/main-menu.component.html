@@ -1,0 +1,31 @@
+<div class="mt-5 text-center">
+  <app-p-dark-mode [innerText]="'Welcome to the Main Menu'" class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl" />
+  <app-h1-dark-mode [innerText]="userAuthenticationStore.userInfo().displayName" class="text-3xl dark:text-white mat-h1" />
+</div>
+<div class="grid grid-cols-1 justify-center my-3 py-3">
+  <app-card-with-link
+    [cardBodyText]="'Manage your existing Properties'"
+    [cardButtonTargetLink]="rebaseRoutePath(RoutePath.LEDGERS_MANAGE)"
+    [cardButtonText]="'Manage Ledgers'"
+    [cardHeaderText]="navigationTitle"
+    [cardTitle]="'Manage Ledgers'"
+    class="min-w-full animate__animated animate__bounceInUp animate__faster"
+  />
+  <app-card-with-link
+    [cardBodyText]="'Manage your user Account'"
+    [cardButtonTargetLink]="rebaseRoutePath(RoutePath.ACCOUNT_MANAGE)"
+    [cardButtonText]="'Manage Account'"
+    [cardHeaderText]="navigationTitle"
+    [cardTitle]="'Manage Account'"
+    class="mt-3 min-w-full animate__animated animate__bounceInUp"
+  />
+  <app-card-with-link
+    [cardTitleClass]="'create-ledger-card'"
+    [cardBodyText]="'Create a new Property Ledger'"
+    [cardButtonTargetLink]="rebaseRoutePath(RoutePath.LEDGERS_CREATE)"
+    [cardButtonText]="'Create Ledger'"
+    [cardHeaderText]="navigationTitle"
+    [cardTitle]="'Create Ledger'"
+    class="mt-3 min-w-full animate__animated animate__bounceInUp animate__fast"
+  />
+</div>

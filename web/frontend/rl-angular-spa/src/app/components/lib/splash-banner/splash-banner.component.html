@@ -1,0 +1,61 @@
+<div class="p-6 overflow-hidden">
+  <div class="text-center my-6">
+    <h1 class="lg:text-6xl md:text-4xl sm:text-4xl font-bold mb-1">{{ getWelcomeMessage(isNewCustomer()) }}</h1>
+    <h2
+      class="lg:text-6xl md:text-4xl sm:text-4xl lg:mt-3 text-primary font-bold mb-4 animate__animated animate__infinite animate__pulse">
+      A Ledger for Roommates</h2>
+    <div *ngIf="featureFlagsStore.isSignInWithGoogleEnabled()" class="flex justify-center items-center text-center my-5">
+      <p-button
+        (click)="doGoogleLogin()"
+        [label]="'Sign ' + getVerb(isNewCustomer()) + ' With Google'"
+        [loading]="userAuthenticationStore.loggedInState() === 'LOADING'"
+        class="w-full animate__animated animate__delay-1s animate__tada"
+        data-testid="google-login-button"
+        icon="pi pi-google"
+        pRipple
+      />
+    </div>
+    <div *ngIf="featureFlagsStore.isSignInWithAppleEnabled()" class="flex justify-center items-center text-center my-5">
+      <p-button
+        (click)="doAppleLogin()"
+        [disabled]="!featureFlagsStore.isSignInWithAppleEnabled()"
+        [label]="'Sign ' + getVerb(isNewCustomer()) + ' With Apple'"
+        [loading]="userAuthenticationStore.loggedInState() === 'LOADING'"
+        class="w-full animate__animated animate__delay-1s animate__tada"
+        data-testid="apple-login-button"
+        icon="pi pi-apple"
+        pRipple
+      />
+    </div>
+    <div *ngIf="featureFlagsStore.isSignInWithGitHubEnabled()" class="flex justify-center items-center text-center my-5">
+      <p-button
+        (click)="doGitHubLogin()"
+        [label]="'Sign ' + getVerb(isNewCustomer()) + ' With GitHub'"
+        [loading]="userAuthenticationStore.loggedInState() === 'LOADING'"
+        class="w-full animate__animated animate__delay-1s animate__tada"
+        data-testid="github-login-button"
+        icon="pi pi-github"
+        pRipple
+      />
+    </div>
+    <div class="animate__animated animate__delay-1s animate__tada">
+      <app-email-login-overlay-panel [isNewCustomer]="isNewCustomer()" />
+    </div>
+    <div class="flex justify-center items-center text-center my-5">
+    </div>
+    <a *ngIf="isNewCustomer()" [routerLink]="rebaseRoutePath(RoutePath.LOGIN)" data-testid="have-an-account-sign-in" pButton>Already have an Account? Sign In</a>
+    <a *ngIf="!isNewCustomer()" [routerLink]="rebaseRoutePath(RoutePath.LANDING_PAGE)" data-testid="dont-have-an-account-sign-up" pButton>Don't have an Account? Sign Up</a>
+    <p class="text-sm mt-4 mb-4 line-height-3">Available as a Web Application with support for mobile devices</p>
+    <div class="flex justify-content-center align-items-center">
+      <app-span-dark-mode class="mr-3">
+        <i class="pi pi-apple text-2xl"></i>
+      </app-span-dark-mode>
+      <app-span-dark-mode class="mr-3">
+        <i class="pi pi-android text-2xl"></i>
+      </app-span-dark-mode>
+      <app-span-dark-mode>
+        <i class="pi pi-globe text-2xl"></i>
+      </app-span-dark-mode>
+    </div>
+  </div>
+</div>

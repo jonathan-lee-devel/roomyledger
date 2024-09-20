@@ -1,0 +1,47 @@
+<div class="text-900 font-semibold text-lg mt-3">Premium</div>
+<p-divider></p-divider>
+<div class="flex gap-5 flex-column-reverse md:flex-row">
+  <div class="flex-auto p-fluid">
+    <div *ngIf="paymentsStore.isLoading()" class="flex-none flex align-items-center justify-content-center mt-3">
+      <p-progressSpinner styleClass="w-4rem h-4rem"/>
+    </div>
+    <ng-container *ngIf="!paymentsStore.isLoading() && paymentsStore.subscriptions().activeSubscriptions.length === 0">
+      <div class="flex-none flex align-items-center justify-content-center mt-3">
+        <h3>Currently No Active Subscriptions!</h3>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!paymentsStore.isLoading() && paymentsStore.subscriptions().trial.isTrialActive">
+      <div class="flex-none flex align-items-center justify-content-center mt-3">
+        <h3>Free Trial Active Until:</h3>
+      </div>
+      <div class="flex-none flex align-items-center justify-content-center mt-1">
+        <p>{{ formatDate(paymentsStore.subscriptions().trial.trialEndDate) }}</p>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!paymentsStore.isLoading() && paymentsStore.subscriptions().activeSubscriptions.length > 0">
+      <div class="flex-none flex align-items-center justify-content-center mt-3">
+        <h3>Active Subscriptions:</h3>
+      </div>
+      @for(activeSubscription of paymentsStore.subscriptions().activeSubscriptions; track $index;) {
+        <div class="flex-none flex align-items-center justify-content-center mb-3">
+          <h4>Started: {{ formatDate(activeSubscription.createdAt) }}</h4>
+        </div>
+      }
+    </ng-container>
+    <div class="flex-none flex align-items-center justify-content-center mt-3">
+      <div class="max-w-10rem">
+        <p-button
+          (click)="promptCancelSubscriptions()"
+          [loading]="paymentsStore.isLoading()"
+          class="max-w-2rem"
+          data-testid="update-profile-button"
+          icon="pi pi-minus-circle"
+          label="Cancel All Subscriptions"
+          pRipple
+          severity="danger"
+          type="submit"
+        />
+      </div>
+    </div>
+  </div>
+</div>

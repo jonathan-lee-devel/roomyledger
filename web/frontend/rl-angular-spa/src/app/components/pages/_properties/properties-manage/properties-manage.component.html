@@ -1,0 +1,49 @@
+<div class="mt-5 text-center">
+  <h1
+    class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white"
+  >
+    Manage your Properties
+  </h1>
+</div>
+<ng-container *ngIf="propertiesStore.isLoading()">
+  <div class="flex-none flex align-items-center justify-content-center mt-1">
+    <mat-spinner />
+  </div>
+</ng-container>
+@if (propertiesStore.propertiesWhereInvolvedCount() > 0 && !propertiesStore.isLoading()) {
+  <div class="grid grid-cols-1 justify-center mt-3">
+    @for (property of propertiesStore.propertiesWhereInvolved(); track $index;) {
+      <app-card-with-link
+        [cardBodyText]="getPropertyCardBodyText(property, userAuthenticationStore.userInfo().email)"
+        [cardButtonTargetLink]="
+              rebaseRoutePathAsString(
+                RoutePath.LEDGERS_DASHBOARD_ID.valueOf().replace(
+                  routePathParameters.PROPERTY_ID,
+                  property.id
+                )
+              )
+            "
+        [cardButtonTargetQueryParams]="{tab: 'expenses'}"
+        [cardButtonText]="getPropertyCardButtonActionText(property, userAuthenticationStore.userInfo().email)"
+        [cardHeaderText]="'Navigation'"
+        [cardTitle]="property.name"
+        [isDeleteButtonShown]="isCurrentUserCreatorOfProperty(userAuthenticationStore.userInfo().email, property)"
+        (deleteButtonClicked)="deletePropertyById(property.id)"
+        class="mt-3 min-w-full animate__animated animate__bounceInUp animate__faster"
+      />
+    }
+  </div>
+}
+<ng-container *ngIf="propertiesStore.propertiesWhereInvolvedCount() === 0 && !propertiesStore.isLoading()">
+  <div class="flex mt-3">
+    <app-card-with-link
+      [isDisabled]="isCreatePropertyDisabled()"
+      [cardBodyText]="getCreatePropertyCardText()"
+      [cardButtonTargetLink]="rebaseRoutePath(RoutePath.LEDGERS_CREATE)"
+      [cardButtonText]="'Create Property'"
+      [cardHeaderText]="'Navigation'"
+      [cardTitle]="'You are not currently involved with any properties'"
+      class="min-w-full animate__animated animate__bounceInUp animate__faster"
+    />
+  </div>
+</ng-container>

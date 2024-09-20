@@ -1,0 +1,23 @@
+<div class="flex-none flex align-items-center justify-content-center mt-8">
+  <div class="mt-5 animate__animated animate__bounceInUp">
+    <div
+      class="flex-none flex align-items-center justify-content-center mt-8 animate__animated animate__faster animate__bounceInUp">
+      <h1 class="text-3xl mt-10">Processing Stripe Payment&period;</h1>
+    </div>
+    <div
+      class="flex-none flex align-items-center justify-content-center animate__animated animate__faster animate__bounceInUp">
+      <h2 class="text-2xl mt-10 italic">
+        You will be redirected shortly
+      </h2>
+    </div>
+    <div
+      class="flex-none flex align-items-center justify-content-center mb-2 animate__animated animate__faster animate__bounceInUp">
+      <p>
+        to the {{ getRedirectText(userAuthenticationStore.loggedInState()) }}...
+      </p>
+    </div>
+    <div class="card flex justify-content-center">
+      <p-progressSpinner class="animate__animated animate__bounceInUp" />
+    </div>
+  </div>
+</div>

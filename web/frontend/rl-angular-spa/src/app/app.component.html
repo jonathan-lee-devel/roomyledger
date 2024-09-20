@@ -1,0 +1,222 @@
+<app-navbar (darkModeToggleEvent)="handleDarkModeToggleEvent($event)" (sideNavToggleEvent)="isSidebarVisible = $event"/>
+<app-update-or-maintenance-in-progress-message *ngIf="featureFlagsStore.isUpdateOrMaintenanceInProgress()"/>
+<ng-container *ngIf="publicApplicationMessage$ | async as publicMessages">
+  @for (publicMessage of publicMessages; track $index; ) {
+    <app-application-message
+      *ngIf="featureFlagsStore.isUpdateOrMaintenanceInProgress() === false &&
+      userAuthenticationStore.loggedInState() !== 'LOGGED_IN' &&
+      publicMessage.isShow"
+      [severity]="publicMessage.severity"
+      [message]="publicMessage.message"
+      [routerLink]="publicMessage.routerLink"
+      [routerLinkText]="publicMessage.routerLinkText"
+    />
+  }
+</ng-container>
+<app-free-trial-message
+  *ngIf="userAuthenticationStore.loggedInState() === 'LOGGED_IN' && paymentStore.paymentStatus() === 'TRIAL'"/>
+<p-toast
+  [hideTransitionOptions]="'300ms'"
+  [showTransformOptions]="'translateY(100%)'"
+  [showTransformOptions]="'translateX(100%)'"
+  [showTransitionOptions]="'300ms'"
+  key="general"
+  position="bottom-right"
+/>
+<p-toast [baseZIndex]="5000" key="confirm" position="bottom-center">
+  <ng-template let-message pTemplate="message">
+    <div class="flex flex-column align-items-start" style="flex: 1">
+      <div class="flex align-items-center gap-2">
+        <p-avatar image="assets/favicon.ico" shape="circle"/>
+        <span class="font-bold text-900">{{ message.summary }}</span>
+      </div>
+      <div class="font-medium text-lg my-3 text-900">{{ message.detail }}</div>
+    </div>
+  </ng-template>
+</p-toast>
+<p-confirmDialog/>
+<p-sidebar #sidebarRef [(visible)]="isSidebarVisible">
+  <ng-template pTemplate="headless">
+    <div class="flex flex-column h-full">
+      <div class="flex align-items-center justify-content-between px-4 pt-3 flex-shrink-0">
+                <span class="inline-flex align-items-center gap-2">
+                    <img alt="Logo" height="50" ngSrc="favicon.ico" width="50"/>
+                    <span class="font-semibold text-2xl text-primary">RoomyLedger</span>
+                </span>
+        <span>
+                    <p-button (onClick)="closeCallback($event)" icon="pi pi-times" outlined="true" rounded="true"
+                              styleClass="h-2rem w-2rem" type="button"></p-button>
+                </span>
+      </div>
+      <div class="overflow-y-auto">
+        <ul class="list-none p-3 m-0">
+          <li>
+            <div
+              class="p-3 flex align-items-center justify-content-between text-600 cursor-pointer p-ripple"
+              enterActiveClass="slidedown"
+              enterClass="hidden"
+              leaveActiveClass="slideup"
+              leaveToClass="hidden"
+              pRipple
+              pStyleClass="@next"
+            >
+              <span class="font-medium">FAVORITES</span>
+            </div>
+            <ul class="list-none p-0 m-0 overflow-hidden">
+              <li>
+                <a
+                  [routerLink]="rebaseRoutePath(RoutePath.MAIN_MENU)"
+                  class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                  pRipple>
+                  <i class="pi pi-home mr-2"></i>
+                  <span class="font-medium">Main Menu</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  [routerLink]="rebaseRoutePath(RoutePath.LEDGERS_MANAGE)"
+                  class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                  pRipple>
+                  <i class="pi pi-bookmark mr-2"></i>
+                  <span class="font-medium">Manage Ledgers</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  [routerLink]="rebaseRoutePath(RoutePath.LEDGERS_CREATE)"
+                  class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                  pRipple>
+                  <i class="pi pi-dollar mr-2"></i>
+                  <span class="font-medium">Create Ledger</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  [routerLink]="rebaseRoutePath(RoutePath.NOTIFICATIONS)"
+                  class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                  pRipple>
+                  <i class="pi pi-bell mr-2"></i>
+                  <span class="font-medium">Notifications</span>
+                  <ng-container *ngIf="notificationsStore.unacknowledgedNotificationsCount() > 0">
+                    <span class="inline-flex align-items-center justify-content-center ml-auto bg-primary border-circle"
+                          style="min-width: 1.5rem; height: 1.5rem">{{ notificationsStore.unacknowledgedNotificationsCount() }}</span>
+                  </ng-container>
+                </a>
+              </li>
+              <ng-container *ngIf="featureFlagsStore.isSignInWithAppleEnabled()">
+                <div
+                  class="p-3 flex align-items-center justify-content-between text-600 cursor-pointer p-ripple"
+                  enterActiveClass="slidedown"
+                  enterClass="hidden"
+                  leaveActiveClass="slideup"
+                  leaveToClass="hidden"
+                  pRipple
+                  pStyleClass="@next"
+                >
+                  <span class="font-medium">LEDGER SHORTCUTS</span>
+                </div>
+                <li>
+                  <a
+                    class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                    pRipple>
+                    <i class="pi pi-dollar mr-2"></i>
+                    <span class="font-medium">Expenses</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                  >
+                    <i class="pi pi-chart-line mr-2"></i>
+                    <span class="font-medium">Reports</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                    pRipple>
+                    <i class="pi pi-users mr-2"></i>
+                    <span class="font-medium">People</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                    pRipple>
+                    <i class="pi pi-calendar mr-2"></i>
+                    <span class="font-medium">Calendar</span>
+                  </a>
+                </li>
+              </ng-container>
+            </ul>
+          </li>
+        </ul>
+        <ul class="list-none p-3 m-0">
+          <li>
+            <div
+              class="p-3 flex align-items-center justify-content-between text-600 cursor-pointer p-ripple"
+              enterActiveClass="slidedown"
+              enterClass="hidden"
+              leaveActiveClass="slideup"
+              leaveToClass="hidden"
+              pRipple
+              pStyleClass="@next"
+            >
+              <span class="font-medium">SETTINGS</span>
+            </div>
+            <ul class="list-none p-0 m-0 overflow-hidden">
+              <li>
+                <a
+                  [queryParams]="{'tab': 'profile'}" [routerLink]="rebaseRoutePath(RoutePath.ACCOUNT_MANAGE)"
+                  class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                  pRipple>
+                  <i class="pi pi-user mr-2"></i>
+                  <span class="font-medium">Profile</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  [queryParams]="{'tab': 'account'}" [routerLink]="rebaseRoutePath(RoutePath.ACCOUNT_MANAGE)"
+                  class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                  pRipple>
+                  <i class="pi pi-cog mr-2"></i>
+                  <span class="font-medium">Account</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  [queryParams]="{'tab': 'premium'}" [routerLink]="rebaseRoutePath(RoutePath.ACCOUNT_MANAGE)"
+                  class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                  pRipple>
+                  <i class="pi pi-bolt mr-2"></i>
+                  <span class="font-medium">Premium</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  [queryParams]="{'tab': 'notifications'}" [routerLink]="rebaseRoutePath(RoutePath.ACCOUNT_MANAGE)"
+                  class="flex align-items-center cursor-pointer p-3 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+                  pRipple>
+                  <i class="pi pi-bell mr-2"></i>
+                  <span class="font-medium">Notifications</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="mt-auto">
+        <hr class="mb-3 mx-3 border-top-1 border-none surface-border"/>
+        <a
+          class="m-3 flex align-items-center cursor-pointer p-3 gap-2 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+          pRipple>
+          <span class="font-bold">{{ userAuthenticationStore.currentUserEmail() }}</span>
+        </a>
+      </div>
+    </div>
+  </ng-template>
+</p-sidebar>
+<div class="min-h-full">
+  <router-outlet/>
+</div>
+<app-footer/>

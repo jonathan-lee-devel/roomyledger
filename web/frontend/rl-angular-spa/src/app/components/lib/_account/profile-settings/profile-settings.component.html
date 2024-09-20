@@ -1,0 +1,63 @@
+<div class="text-900 font-semibold text-lg mt-3">Profile</div>
+<p-divider></p-divider>
+<div class="flex gap-5 flex-column-reverse md:flex-row">
+  <div class="flex-auto p-fluid">
+    <div class="mb-4">
+      <label for="email" class="block font-normal text-900 mb-2">E-mail</label>
+      <p-inputGroup>
+        <p-inputGroupAddon><i class="pi pi-verified"></i></p-inputGroupAddon>
+        <input id="email" type="text" [(ngModel)]="email" name="email" [disabled]="true" pInputText>
+      </p-inputGroup>
+    </div>
+    <div class="mb-4">
+      <label for="displayName" class="block font-normal text-900 mb-2">Display Name</label>
+      <p-inputGroup>
+        <p-inputGroupAddon><i class="pi pi-pencil"></i></p-inputGroupAddon>
+        <input id="displayName" [(ngModel)]="displayName" name="displayName" type="text" pInputText>
+      </p-inputGroup>
+    </div>
+    <div class="mb-4">
+      <label for="iban" class="block font-normal text-900 mb-2">IBAN</label>
+      <p-inputGroup>
+        <p-inputGroupAddon><i class="pi pi-pencil"></i></p-inputGroupAddon>
+        <input id="iban" type="text" [(ngModel)]="iban" name="iban" pInputText>
+        <p-inputGroupAddon><i class="pi pi-eye"></i></p-inputGroupAddon>
+      </p-inputGroup>
+    </div>
+    <div class="mb-4">
+      <label for="iban" class="block font-normal text-900 mb-2">Revolut Tag</label>
+      <p-inputGroup>
+        <p-inputGroupAddon><i class="pi pi-pencil"></i></p-inputGroupAddon>
+        <input id="revTag" type="text" [(ngModel)]="revTag" name="revTag" pInputText>
+        <p-inputGroupAddon><i class="pi pi-eye"></i></p-inputGroupAddon>
+      </p-inputGroup>
+    </div>
+    <div class="mb-4">
+      <label for="visibility" class="block font-normal text-900 mb-2">Profile Visibility</label>
+      <div class="flex align-items-center">
+        <p-checkbox [(ngModel)]="value1" [binary]="true" id="visibility"></p-checkbox>
+        <span class="ml-2 font-normal text-base text-color-primary">Make profile private <span
+          class="font-italic">(this will hide your IBAN etc. from other tenants, they will still be able to see your e-mail address and name)</span></span>
+      </div>
+    </div>
+    <div class="flex-none flex align-items-center justify-content-center mt-3">
+      <div class="max-w-10rem">
+        <p-button
+          [loading]="(userAuthenticationStore.loggedInState() === 'LOADING')"
+          icon="pi pi-cloud-upload"
+          class="max-w-2rem"
+          data-testid="update-profile-button"
+          label="Update Profile"
+          pRipple
+          type="submit"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-column align-items-center flex-or">
+    <span class="font-normal text-900 mb-2">Profile Picture</span>
+    <img ngSrc="assets/no-user-avatar-icon.ico" alt="Profile picture" width="15" height="15"
+         class="h-2rem w-2rem mb-5" />
+    <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded -mt-4"></button>
+  </div>
+</div>

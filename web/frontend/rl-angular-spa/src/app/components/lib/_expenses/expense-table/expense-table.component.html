@@ -1,0 +1,32 @@
+<div class="card my-2">
+  <p-table [value]="expenses()" styleClass="p-datatable-striped">
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        {{ label() }}
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Name</th>
+        <th>Amount</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Menu</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-expense>
+      <tr>
+        <td>{{expense.name}}</td>
+        <td>{{expense.amount | currency:expense.currency}}</td>
+        <td>{{expense.description}}</td>
+        <td><p-tag [value]="expense.state" [severity]="statusSeverity()" /></td>
+        <ng-container *ngIf="propertiesStore.isLoading() || expensesStore.isLoading()">
+          <td><p-progressSpinner styleClass="w-3rem h-3rem" /></td>
+        </ng-container>
+        <ng-container *ngIf="!propertiesStore.isLoading() && !expensesStore.isLoading()">
+          <td><app-expense-action-menu [propertyId]="expense.propertyId" [expenseId]="expense.id" /></td>
+        </ng-container>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

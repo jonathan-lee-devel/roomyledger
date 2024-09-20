@@ -1,0 +1,94 @@
+<section class="flex flex-column bg-black-alpha-90">
+  <div class="flex flex-column flex-auto bg-black-alpha-90">
+    <div class="surface-section px-4 py-4 lg:py-5 lg:px-6 h-full">
+      <div class="flex flex-column md:flex-row w-full justify-content-between md:align-items-center">
+        <div>
+          <h2 class="mt-0 mb-2 text-900 font-medium text-2xl">Settings</h2>
+          <p class="mt-0 mb-0 text-500">Here you can manage your user preferences and account settings.</p>
+        </div>
+      </div>
+      <p-divider styleClass="my-5"></p-divider>
+
+      <div class="p-fluid flex flex-column lg:flex-row">
+        <ul
+          class="list-none m-0 p-0 flex flex-row lg:flex-column justify-content-between lg:justify-content-start mb-5 lg:mb-0">
+          <li>
+            <a [ngClass]="{'surface-200': activeTabIndex === profileTabIndex}" [queryParams]="{'tab': 'profile'}"
+               [routerLink]="rebaseRoutePath(RoutePath.ACCOUNT_MANAGE)"
+               class="lg:w-15rem flex align-items-center cursor-pointer p-3 border-round hover:surface-200 transition-duration-150 transition-colors"
+               pRipple>
+              <i
+                [ngClass]="{'text-700' : activeTabIndex === profileTabIndex, 'text-600': activeTabIndex !== profileTabIndex}"
+                class="pi pi-user md:mr-2"></i>
+              <span
+                [ngClass]="{'text-800': activeTabIndex === profileTabIndex, 'text-700': activeTabIndex !== profileTabIndex}"
+                class="font-medium hidden md:block">Profile</span>
+            </a>
+          </li>
+          <li>
+            <a
+              [ngClass]="{'surface-200': activeTabIndex === accountTabIndex}"
+              [queryParams]="{'tab': 'account'}" [routerLink]="rebaseRoutePath(RoutePath.ACCOUNT_MANAGE)"
+              class="lg:w-15rem flex align-items-center cursor-pointer p-3 border-round hover:surface-200 transition-duration-150 transition-colors"
+              pRipple>
+              <i
+                [ngClass]="{'text-700' : activeTabIndex === accountTabIndex, 'text-600': activeTabIndex !== accountTabIndex}"
+                class="pi pi-cog md:mr-2"></i>
+              <span
+                [ngClass]="{'text-800': activeTabIndex === accountTabIndex, 'text-700': activeTabIndex !== accountTabIndex}"
+                class="font-medium hidden md:block">Account</span>
+            </a>
+          </li>
+          <li>
+            <a [ngClass]="{'surface-200': activeTabIndex === premiumTabIndex}"
+               [queryParams]="{'tab': 'premium'}"
+               [routerLink]="rebaseRoutePath(RoutePath.ACCOUNT_MANAGE)"
+               class="lg:w-15rem flex align-items-center cursor-pointer p-3 border-round hover:surface-200 transition-duration-150 transition-colors"
+               pRipple>
+              <i
+                [ngClass]="{'text-700' : activeTabIndex === premiumTabIndex, 'text-600': activeTabIndex !== premiumTabIndex}"
+                class="pi pi-bolt md:mr-2"></i>
+              <span
+                [ngClass]="{'text-800': activeTabIndex === premiumTabIndex, 'text-700': activeTabIndex !== premiumTabIndex}"
+                class="font-medium hidden md:block">Premium</span>
+            </a>
+          </li>
+          <li>
+            <a [ngClass]="{'surface-200': activeTabIndex === notificationsTabIndex}"
+               [queryParams]="{'tab': 'notifications'}"
+               [routerLink]="rebaseRoutePath(RoutePath.ACCOUNT_MANAGE)"
+               class="lg:w-15rem flex align-items-center cursor-pointer p-3 border-round hover:surface-200 transition-duration-150 transition-colors"
+               pRipple>
+              <i
+                [ngClass]="{'text-700' : activeTabIndex === notificationsTabIndex, 'text-600': activeTabIndex !== notificationsTabIndex}"
+                class="pi pi-bell md:mr-2"></i>
+              <span
+                [ngClass]="{'text-800': activeTabIndex === notificationsTabIndex, 'text-700': activeTabIndex !== notificationsTabIndex}"
+                class="font-medium hidden md:block">Notifications</span>
+            </a>
+          </li>
+        </ul>
+        <ng-container *ngIf="activeTabIndex === profileTabIndex">
+          <div class="surface-card p-5 shadow-2 border-round flex-auto xl:ml-5">
+            <app-profile-settings/>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="activeTabIndex === accountTabIndex">
+          <div class="surface-card p-5 shadow-2 border-round flex-auto xl:ml-5">
+            <app-account-settings/>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="activeTabIndex === premiumTabIndex">
+          <div class="surface-card p-5 shadow-2 border-round flex-auto xl:ml-5">
+            <app-premium-settings/>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="activeTabIndex === notificationsTabIndex">
+          <div class="surface-card p-5 shadow-2 border-round flex-auto xl:ml-5">
+            <app-notifications-settings/>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</section>

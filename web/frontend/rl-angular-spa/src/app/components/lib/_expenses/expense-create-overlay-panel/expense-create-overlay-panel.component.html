@@ -1,0 +1,68 @@
+<p-button (onClick)="op.toggle($event)" icon="pi pi-dollar" label="Create new Expense" />
+<p-overlayPanel #op>
+  <div class="flex flex-column gap-3 w-25rem">
+    <div>
+      <form (ngSubmit)="doCreateExpense()">
+        <p-inputGroup class="my-4">
+          <p-inputGroupAddon>
+            <i class="pi pi-pencil"></i>
+          </p-inputGroupAddon>
+          <input
+            [(ngModel)]="name"
+            name="name"
+            pInputText
+            placeholder="Expense Name"
+            type="text"
+          />
+        </p-inputGroup>
+        <p-inputGroup class="my-4">
+          <p-inputGroupAddon>
+            <i class="pi pi-pencil"></i>
+          </p-inputGroupAddon>
+          <input
+            [(ngModel)]="description"
+            name="description"
+            pInputText
+            placeholder="A short description"
+            type="text"
+          />
+        </p-inputGroup>
+        <div class="flex">
+          <p-dropdown
+            [(ngModel)]="currencyCode"
+            [options]="validCurrencies"
+            name="currency"
+            optionLabel="name"
+            optionValue="code"
+            placeholder="Select a Currency" />
+        </div>
+        <p-inputGroup class="my-4">
+          <p-inputGroupAddon>
+            <i
+              [classList]="currencyCode === 'EUR' ? 'pi pi-euro' : 'pi pi-dollar'"
+            ></i>
+          </p-inputGroupAddon>
+          <input
+            [(ngModel)]="amount"
+            name="password"
+            pInputText
+            placeholder="0.00"
+            type="number"
+          />
+        </p-inputGroup>
+        <div class="flex justify-center items-center text-center my-3">
+          <p-button
+            (click)=doCreateExpense()
+            [icon]="currencyCode === 'EUR' ? 'pi pi-euro' : 'pi pi-dollar'"
+            [loading]="expensesStore.isLoading()"
+            class="w-full"
+            data-testid="create-expense-button"
+            label="Create"
+            pRipple
+            type="submit"
+          />
+        </div>
+      </form>
+    </div>
+  </div>
+</p-overlayPanel>
