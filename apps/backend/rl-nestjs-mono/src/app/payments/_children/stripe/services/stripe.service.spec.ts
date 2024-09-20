@@ -8,15 +8,13 @@ import {EnvironmentVariables} from '../../../../../config/environment';
 
 describe('StripeService', () => {
   let service: StripeService;
-  let mockConfigService: jest.Mocked<ConfigService<EnvironmentVariables>>;
+  let mockConfigService: jest.Mocked<ConfigService>;
 
   beforeEach(async () => {
     const {unit, unitRef} = TestBed.create(StripeService).compile();
     service = unit;
 
-    mockConfigService = unitRef.get<ConfigService<EnvironmentVariables>>(
-      ConfigService<EnvironmentVariables>,
-    );
+    mockConfigService = unitRef.get<ConfigService>(ConfigService);
   });
 
   it('should be defined', () => {
@@ -32,14 +30,16 @@ describe('StripeService', () => {
     };
     const payloadString = JSON.stringify(payload, null, 2);
     const stripe = new Stripe(
-      mockConfigService.getOrThrow<string>('STRIPE_API_KEY'),
+      mockConfigService.getOrThrow<string>(EnvironmentVariables.STRIPE_API_KEY),
       {
         apiVersion: '2024-06-20',
       },
     );
     const header = stripe.webhooks.generateTestHeaderString({
       payload: payloadString,
-      secret: mockConfigService.getOrThrow<string>('STRIPE_WEBHOOK_SECRET'),
+      secret: mockConfigService.getOrThrow<string>(
+        EnvironmentVariables.STRIPE_WEBHOOK_SECRET,
+      ),
     });
 
     let thrownError: any;

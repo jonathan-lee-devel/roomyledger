@@ -19,7 +19,7 @@ export class MailService {
 
   constructor(
     private readonly logger: Logger,
-    private readonly configService: ConfigService<EnvironmentVariables>,
+    private readonly configService: ConfigService,
     @Inject(MailModuleInjectionTokens.NODEMAILER_TRANSPORTER)
     private readonly transporter: Transporter<SMTPTransport.SentMessageInfo>,
   ) {}
@@ -30,7 +30,7 @@ export class MailService {
       `Sending e-mail from: ${fromName} to: <${addressTo}> with subject: ${subject}`,
     );
     const result = await this.transporter.sendMail({
-      from: `${fromName} <${this.configService.getOrThrow<string>('EMAIL_USER')}>`,
+      from: `${fromName} <${this.configService.getOrThrow<string>(EnvironmentVariables.EMAIL_USER)}>`,
       to: addressTo,
       subject,
       html,
@@ -46,7 +46,9 @@ export class MailService {
 
   private getFromName() {
     let fromName: string;
-    const nodeEnv = this.configService.getOrThrow<string>('NODE_ENV');
+    const nodeEnv = this.configService.getOrThrow<string>(
+      EnvironmentVariables.NODE_ENV,
+    );
     if (nodeEnv === MailService.NODE_ENV_STAGING) {
       fromName = 'Staging.RoomyLedger';
     } else if (nodeEnv === MailService.NODE_ENV_PRODUCTION) {

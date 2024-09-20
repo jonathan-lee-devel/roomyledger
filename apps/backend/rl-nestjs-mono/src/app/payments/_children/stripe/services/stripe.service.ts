@@ -16,12 +16,14 @@ export class StripeService {
 
   constructor(
     private readonly logger: Logger,
-    private readonly configService: ConfigService<EnvironmentVariables>,
+    private readonly configService: ConfigService,
     private readonly eventEmitter: EventEmitter2,
     private readonly prismaService: PrismaService,
   ) {
     this.stripe = new Stripe(
-      this.configService.getOrThrow<string>('STRIPE_API_KEY'),
+      this.configService.getOrThrow<string>(
+        EnvironmentVariables.STRIPE_API_KEY,
+      ),
       {
         apiVersion: '2024-06-20',
       },
@@ -33,7 +35,9 @@ export class StripeService {
       const event = await this.stripe.webhooks.constructEventAsync(
         payload,
         stripeSignature,
-        this.configService.getOrThrow<string>('STRIPE_WEBHOOK_SECRET'),
+        this.configService.getOrThrow<string>(
+          EnvironmentVariables.STRIPE_WEBHOOK_SECRET,
+        ),
       );
 
       this.logger.log(`Stripe webhook event type: ${event.type}`);

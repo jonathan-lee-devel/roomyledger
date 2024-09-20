@@ -15,10 +15,10 @@ import {EnvironmentVariables} from '../../config/environment';
     {
       provide: MailModuleInjectionTokens.NODEMAILER_TRANSPORTER,
       inject: [ConfigService],
-      useFactory: (configService: ConfigService<EnvironmentVariables>) =>
+      useFactory: (configService: ConfigService) =>
         transporterConfig(
-          configService.getOrThrow<string>('EMAIL_USER'),
-          configService.getOrThrow<string>('EMAIL_PASSWORD'),
+          configService.getOrThrow<string>(EnvironmentVariables.EMAIL_USER),
+          configService.getOrThrow<string>(EnvironmentVariables.EMAIL_PASSWORD),
         ),
     },
     MailService,
