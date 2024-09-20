@@ -14,13 +14,17 @@ export class SupabaseStrategy extends PassportStrategy(
   SupabaseAuthStrategy,
   'supabase',
 ) {
-  public constructor(configService: ConfigService<EnvironmentVariables>) {
+  public constructor(configService: ConfigService) {
     super({
-      supabaseUrl: configService.getOrThrow<string>('SUPABASE_URL'),
-      supabaseKey: configService.getOrThrow<string>('SUPABASE_KEY'),
+      supabaseUrl: configService.getOrThrow<string>(
+        EnvironmentVariables.SUPABASE_URL,
+      ),
+      supabaseKey: configService.getOrThrow<string>(
+        EnvironmentVariables.SUPABASE_KEY,
+      ),
       supabaseOptions: {},
       supabaseJwtSecret: configService.getOrThrow<string>(
-        'SUPABASE_JWT_SECRET',
+        EnvironmentVariables.SUPABASE_JWT_SECRET,
       ),
       extractor: ExtractJwt.fromAuthHeaderAsBearerToken(),
     });

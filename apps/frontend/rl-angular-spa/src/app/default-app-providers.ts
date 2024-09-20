@@ -9,10 +9,10 @@ import {ConfirmationService, MessageService} from 'primeng/api';
 import {DialogService} from 'primeng/dynamicdialog';
 
 import {routes} from './app.routes';
-import {extModules} from '../build-specifics';
 import {initializeApp} from './init/app-initializer.factory';
 import {authTokenInterceptor} from './interceptors/auth-token/auth-token.interceptor';
 import {requestErrorInterceptors} from './interceptors/request-error-interceptors';
+import {extModules} from '../build-specifics';
 
 const MY_FORMATS = {
   parse: {
