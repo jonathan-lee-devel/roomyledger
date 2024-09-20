@@ -31,7 +31,5 @@
     "apps/mobile/*",
     "packages/*"
   ],
-  "dependencies": {
-    "sharp": "^0.33.5"
-  }
+  "dependencies": {}
 }
