@@ -47,13 +47,13 @@ export class MainMenuComponent implements AfterViewInit, OnDestroy {
         {
           text: `Don't Show Again`,
           action: () => {
-            this.shepherdService.cancel();
+            this.shepherdService?.cancel();
             localStorage.setItem('create-first-ledger-tour', JSON.stringify(true));
           },
         },
         {
           text: 'Close',
-          action: () => this.shepherdService.cancel(),
+          action: () => this.shepherdService?.cancel(),
         },
       ],
       attachTo: {
@@ -65,6 +65,8 @@ export class MainMenuComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.shepherdService?.cancel();
+    if (this.shepherdService !== null) {
+      this.shepherdService?.cancel();
+    }
   }
 }
