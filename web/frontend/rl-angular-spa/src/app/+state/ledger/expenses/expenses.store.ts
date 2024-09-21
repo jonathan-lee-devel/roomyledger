@@ -164,6 +164,26 @@ export const ExpensesStore = signalStore(
       const supabaseService = inject(SupabaseService);
       const toastWrapperService = inject(ToastWrapperService);
       return {
+        getExpenseProofImageUrl: async (filePath: string) => {
+          patchState(store, {isLoading: true});
+          const {data, error} = await supabaseService
+              .getPhotoUrl(SupabaseService.expenseProofImagesBucketName,
+                  filePath.replace(`${SupabaseService.expenseProofImagesBucketName}/`, ''),
+              );
+          patchState(store, {isLoading: false});
+          if (error) {
+            toastWrapperService.showToast(
+                'Image Load Failure',
+                'Failed to load Expense Proof Image',
+                false,
+                true,
+                'error',
+                5000,
+            );
+            return null;
+          }
+          return data?.signedUrl;
+        },
         loadExpensesForProperty: (propertyId: string, dateRange: DateRangeDto) => {
           patchState(store, {expensesForPropertyById: [], expensesForPropertyByIdDateRange: dateRange, isLoading: true});
           expenseService.getExpensesForProperty(propertyId, dateRange).pipe(
@@ -195,7 +215,7 @@ export const ExpensesStore = signalStore(
           let uploadResponse: {id: string, path: string, fullPath: string} | null = null;
           if (createExpenseRequestDto.uploadedFile) {
             const {data, error} = await supabaseService.uploadPhoto(
-                'expense-proof-images',
+                SupabaseService.expenseProofImagesBucketName,
                 createExpenseRequestDto.uploadedFile,
             );
             uploadResponse = data;

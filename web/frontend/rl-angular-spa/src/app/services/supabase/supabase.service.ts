@@ -8,6 +8,8 @@ import {environment} from '../../../environments/environment';
   providedIn: 'root',
 })
 export class SupabaseService {
+  static readonly expenseProofImagesBucketName = 'expense-proof-images';
+
   private readonly _supabaseClient: SupabaseClient;
 
   constructor() {
@@ -69,16 +71,6 @@ export class SupabaseService {
 
   signOut() {
     return this._supabaseClient.auth.signOut();
-  }
-
-  async createBucketPhoto() {
-    const {data, error} = await this._supabaseClient.storage.createBucket('expense-proof-images');
-    return {data, error};
-  }
-
-  async getBucketPhoto() {
-    const {data, error} = await this._supabaseClient.storage.getBucket('expense-proof-images');
-    return {data, error};
   }
 
   async uploadPhoto(bucketName: string, file: File) {

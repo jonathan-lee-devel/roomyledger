@@ -7,7 +7,6 @@ import {DynamicDialogConfig} from 'primeng/dynamicdialog';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 import {ExpensesStore} from '../../../../../+state/ledger/expenses/expenses.store';
-import {SupabaseService} from '../../../../../services/supabase/supabase.service';
 
 export interface ExpenseProofDialogData {
   submitterDisplayName: string;
@@ -39,33 +38,17 @@ export class ExpenseProofDialogComponent implements OnInit {
 
   protected photoUrl?: string;
 
-  private readonly supabaseService = inject(SupabaseService);
-
-  protected isLoading: boolean = true;
-
   constructor(readonly config: DynamicDialogConfig) {
     const data = (config.data as ExpenseProofDialogData);
     this.expenseDescription = data.expenseDescription;
     this.submitterDisplayName = data.submitterDisplayName;
   }
 
-  ngOnInit() {
-    this.isLoading = true;
+  async ngOnInit() {
     const filePath = this.expensesStore.expenseById().filePath;
     if (!filePath) {
-      this.isLoading = false;
       return;
     }
-    this.supabaseService
-        .getPhotoUrl('expense-proof-images', filePath.replace('expense-proof-images/', ''))
-        .then(({data, error}) => {
-          if (error) {
-            console.error(error);
-            this.isLoading = false;
-            return;
-          }
-          this.photoUrl = data?.signedUrl;
-          this.isLoading = false;
-        });
+    this.photoUrl = (await this.expensesStore.getExpenseProofImageUrl(filePath)) ?? 'assets/favicon.ico';
   }
 }

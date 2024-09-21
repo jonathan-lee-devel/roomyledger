@@ -6,7 +6,7 @@
     <span class="underline">Submitted By:</span>
     {{ submitterDisplayName }}
   </p>
-  <ng-container *ngIf="!isLoading else loadingSpinner">
+  <ng-container *ngIf="!expensesStore.isLoading() else loadingSpinner">
     <img
       [ngSrc]="photoUrl ?? 'assets/favicon.ico'"
       alt="Proof"
