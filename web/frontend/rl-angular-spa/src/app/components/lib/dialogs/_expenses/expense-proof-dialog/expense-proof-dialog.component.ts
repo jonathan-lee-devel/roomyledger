@@ -61,6 +61,7 @@ export class ExpenseProofDialogComponent implements OnInit {
         .then(({data, error}) => {
           if (error) {
             console.error(error);
+            this.isLoading = false;
             return;
           }
           this.photoUrl = data?.signedUrl;

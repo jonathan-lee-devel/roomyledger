@@ -200,6 +200,7 @@ export const ExpensesStore = signalStore(
             );
             uploadResponse = data;
             if (error) {
+              console.error(error);
               toastWrapperService.showToast('Upload Failed', 'File could not be uploaded', false, true, 'error', 5000);
               return;
             }
