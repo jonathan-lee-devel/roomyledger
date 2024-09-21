@@ -204,8 +204,8 @@ export const ExpensesStore = signalStore(
               toastWrapperService.showToast('Upload Failed', 'File could not be uploaded', false, true, 'error', 5000);
               return;
             }
+            toastWrapperService.showToast('Upload Successful', 'File was uploaded successfully', false, true, 'success', 5000);
           }
-          toastWrapperService.showToast('Upload Successful', 'File was uploaded successfully', false, true, 'success', 5000);
           delete createExpenseRequestDto.uploadedFile;
           expenseService.createExpense({...createExpenseRequestDto, filePath: uploadResponse?.fullPath}).pipe(
               take(1),
