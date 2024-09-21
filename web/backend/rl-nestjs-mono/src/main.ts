@@ -10,12 +10,11 @@ import {EnvironmentVariables, NodeEnvironment} from './config/environment';
 async function bootstrap() {
   const logger = new Logger('Main');
   const app = await NestFactory.create(AppModule, {logger, rawBody: true});
-  const configService = app.get<ConfigService>(ConfigService);
+  const configService =
+    app.get<ConfigService<EnvironmentVariables>>(ConfigService);
 
   app.enableCors({
-    origin: configService
-      .getOrThrow<string>(EnvironmentVariables.FRONT_END_URL)
-      .split(','),
+    origin: configService.getOrThrow<string>('FRONT_END_URL').split(','),
     credentials: true,
     allowedHeaders: ['Authorization', 'Content-Type'],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
@@ -28,10 +27,7 @@ async function bootstrap() {
     defaultVersion: '1',
     prefix: 'v',
   });
-  if (
-    configService.getOrThrow<NodeEnvironment>(EnvironmentVariables.NODE_ENV) ===
-    'development'
-  ) {
+  if (configService.getOrThrow<NodeEnvironment>('NODE_ENV') === 'development') {
     const swaggerConfig = new DocumentBuilder()
       .setTitle('RoomyLedger')
       .setDescription('RoomyLedger API')
@@ -53,7 +49,7 @@ async function bootstrap() {
   );
 
   logger.log(
-    `Running in NODE_ENV: ${configService.getOrThrow<NodeEnvironment>(EnvironmentVariables.NODE_ENV)}`,
+    `Running in NODE_ENV: ${configService.getOrThrow<NodeEnvironment>('NODE_ENV')}`,
   );
 
   const port = 3000;
