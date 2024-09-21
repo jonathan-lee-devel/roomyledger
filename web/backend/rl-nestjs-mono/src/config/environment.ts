@@ -1,16 +1,16 @@
 export type NodeEnvironment = 'production' | 'staging' | 'development';
 
-export const EnvironmentVariables = {
-  FRONT_END_URL: 'FRONT_END_URL',
-  NODE_ENV: 'NODE_ENV',
-  JWT_SECRET: 'JWT_SECRET',
-  JWT_EXPIRES_IN: 'JWT_EXPIRES_IN',
-  EMAIL_USER: 'EMAIL_USER',
-  EMAIL_PASSWORD: 'EMAIL_PASSWORD',
-  STRIPE_API_KEY: 'STRIPE_API_KEY',
-  STRIPE_WEBHOOK_URL: 'STRIPE_WEBHOOK_URL',
-  STRIPE_WEBHOOK_SECRET: 'STRIPE_WEBHOOK_SECRET',
-  SUPABASE_URL: 'SUPABASE_URL',
-  SUPABASE_KEY: 'SUPABASE_KEY',
-  SUPABASE_JWT_SECRET: 'SUPABASE_JWT_SECRET',
-} as const;
+export type EnvironmentVariables = {
+  FRONT_END_URL: string;
+  NODE_ENV: string;
+  JWT_SECRET: string;
+  JWT_EXPIRES_IN: string;
+  EMAIL_USER: string;
+  EMAIL_PASSWORD: string;
+  STRIPE_API_KEY: string;
+  STRIPE_WEBHOOK_URL: string;
+  STRIPE_WEBHOOK_SECRET: string;
+  SUPABASE_URL: string;
+  SUPABASE_KEY: string;
+  SUPABASE_JWT_SECRET: string;
+};

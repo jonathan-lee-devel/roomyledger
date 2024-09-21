@@ -11,8 +11,10 @@ import {EnvironmentVariables} from '../../config/environment';
     PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
-        secret: configService.get(EnvironmentVariables.SUPABASE_JWT_SECRET),
+      useFactory: async (
+        configService: ConfigService<EnvironmentVariables>,
+      ) => ({
+        secret: configService.get('SUPABASE_JWT_SECRET'),
       }),
       inject: [ConfigService],
     }),
