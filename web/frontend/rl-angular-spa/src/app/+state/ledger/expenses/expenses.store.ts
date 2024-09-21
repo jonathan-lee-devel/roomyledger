@@ -17,6 +17,7 @@ import {ExpenseDistributionDto} from '../../../dtos/expenses/ExpenseDistribution
 import {ExpenseDto, ExpenseStateEnum, initialExpenseDto} from '../../../dtos/expenses/ExpenseDto';
 import {PropertyDto} from '../../../dtos/properties/Property.dto';
 import {ExpenseService} from '../../../services/expense/expense.service';
+import {SupabaseService} from '../../../services/supabase/supabase.service';
 import {ToastWrapperService} from '../../../services/toast-wrapper/toast-wrapper.service';
 import {RouterUtils} from '../../../util/router/Router.utils';
 
@@ -160,6 +161,8 @@ export const ExpensesStore = signalStore(
     withMethods((store) => {
       const expenseService = inject(ExpenseService);
       const confirmationService = inject(ConfirmationService);
+      const supabaseService = inject(SupabaseService);
+      const toastWrapperService = inject(ToastWrapperService);
       return {
         loadExpensesForProperty: (propertyId: string, dateRange: DateRangeDto) => {
           patchState(store, {expensesForPropertyById: [], expensesForPropertyByIdDateRange: dateRange, isLoading: true});
@@ -187,9 +190,23 @@ export const ExpensesStore = signalStore(
               }),
           ).subscribe();
         },
-        addExpense: (createExpenseRequestDto: CreateExpenseRequestDto, component: ExpenseCreateOverlayPanelComponent) => {
+        addExpense: async (createExpenseRequestDto: CreateExpenseRequestDto, component: ExpenseCreateOverlayPanelComponent) => {
           patchState(store, {isLoading: true});
-          expenseService.createExpense(createExpenseRequestDto).pipe(
+          let uploadResponse: {id: string, path: string, fullPath: string} | null = null;
+          if (createExpenseRequestDto.uploadedFile) {
+            const {data, error} = await supabaseService.uploadPhoto(
+                'expense-proof-images',
+                createExpenseRequestDto.uploadedFile,
+            );
+            uploadResponse = data;
+            if (error) {
+              toastWrapperService.showToast('Upload Failed', 'File could not be uploaded', false, true, 'error', 5000);
+              return;
+            }
+          }
+          toastWrapperService.showToast('Upload Successful', 'File was uploaded successfully', false, true, 'success', 5000);
+          delete createExpenseRequestDto.uploadedFile;
+          expenseService.createExpense({...createExpenseRequestDto, filePath: uploadResponse?.fullPath}).pipe(
               take(1),
               catchError((err) => {
                 if (err instanceof HttpErrorResponse && err.status === HttpStatus.BAD_REQUEST) {

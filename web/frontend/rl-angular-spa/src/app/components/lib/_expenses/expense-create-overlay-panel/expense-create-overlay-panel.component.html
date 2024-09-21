@@ -50,6 +50,19 @@
             type="number"
           />
         </p-inputGroup>
+        <p-inputGroup class="my-4">
+          <p-fileUpload
+            mode="basic"
+            chooseLabel="Choose Proof Image"
+            chooseIcon="pi pi-upload"
+            name="demo[]"
+            accept="image/*"
+            [fileLimit]="1"
+            [files]="expenseProofImages"
+            maxFileSize="10000000"
+            (onSelect)="selectProofImage($event)"
+          />
+        </p-inputGroup>
         <div class="flex justify-center items-center text-center my-3">
           <p-button
             (click)=doCreateExpense()

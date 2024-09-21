@@ -184,6 +184,7 @@ export const UserAuthenticationStore = signalStore(
       return {
         currentAccessToken: computed(() => store.tokens().accessToken),
         currentUserEmail: computed(() => store.userInfo().email),
+        currentUserId: computed(() => 'ba310337-7a8b-4c92-97ca-54b59f40b70a'),
       };
     }),
     withHooks({

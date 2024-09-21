@@ -39,6 +39,7 @@ export class ExpensesService {
         name: createExpenseDto.name,
         propertyId: createExpenseDto.propertyId,
         description: createExpenseDto.description,
+        filePath: createExpenseDto.filePath,
         state: 'PENDING',
         createdByUserId: user.id,
       },

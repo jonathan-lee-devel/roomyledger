@@ -204,6 +204,7 @@ model Expense {
   amount          Float
   currency        Currency
   state           ExpenseState
+  filePath        String?
   property        Property              @relation(fields: [propertyId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   propertyId      String
   createdBy       User                  @relation(fields: [createdByUserId], references: [id], onDelete: Cascade, onUpdate: Cascade)

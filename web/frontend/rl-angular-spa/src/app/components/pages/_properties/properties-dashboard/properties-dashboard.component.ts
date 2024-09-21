@@ -96,7 +96,7 @@ export class PropertiesDashboardComponent implements OnInit, AfterViewInit, OnDe
   private readonly utilService = inject(UtilService);
   private readonly TAB_QUERY_PARAM_KEY = 'tab';
   private readonly isInitialLoad = new BehaviorSubject<boolean>(true);
-  private readonly shepherdService = inject(ShepherdService);
+  private readonly shepherdService: ShepherdService | null = inject(ShepherdService);
   private routeParamsSubscription?: Subscription;
   private routeQueryParamsSubscription?: Subscription;
 
@@ -144,6 +144,10 @@ export class PropertiesDashboardComponent implements OnInit, AfterViewInit, OnDe
       return;
     }
 
+    if (this.shepherdService === null) {
+      return;
+    }
+
     this.shepherdService.modal = false;
     this.shepherdService.confirmCancel = false;
     // @ts-expect-error using function to get all Step.StepOptions tour steps
@@ -152,7 +156,7 @@ export class PropertiesDashboardComponent implements OnInit, AfterViewInit, OnDe
   }
 
   ngOnDestroy() {
-    this.shepherdService?.cancel();
+    // TODO: Re-enable this.shepherdService?.cancel();
     this.routeParamsSubscription?.unsubscribe();
     this.routeQueryParamsSubscription?.unsubscribe();
   }
@@ -279,7 +283,11 @@ export class PropertiesDashboardComponent implements OnInit, AfterViewInit, OnDe
       buttons: [
         {
           text: 'Next',
-          action: () => this.shepherdService.next(),
+          action: () => {
+            if (this.shepherdService !== null) {
+              this.shepherdService.next();
+            }
+          },
         },
       ],
       attachTo: {
@@ -295,7 +303,11 @@ export class PropertiesDashboardComponent implements OnInit, AfterViewInit, OnDe
       buttons: [
         {
           text: 'Next',
-          action: () => this.shepherdService.next(),
+          action: () => {
+            if (this.shepherdService !== null) {
+              this.shepherdService.next();
+            }
+          },
         },
       ],
       attachTo: {
@@ -311,7 +323,11 @@ export class PropertiesDashboardComponent implements OnInit, AfterViewInit, OnDe
       buttons: [
         {
           text: 'Next',
-          action: () => this.shepherdService.next(),
+          action: () => {
+            if (this.shepherdService !== null) {
+              this.shepherdService.next();
+            }
+          },
         },
       ],
       attachTo: {
@@ -328,13 +344,19 @@ export class PropertiesDashboardComponent implements OnInit, AfterViewInit, OnDe
         {
           text: `Don't Show Again`,
           action: () => {
-            this.shepherdService.next();
+            if (this.shepherdService !== null) {
+              this.shepherdService.next();
+            }
             localStorage.setItem('manage-first-ledger-tour', JSON.stringify(true));
           },
         },
         {
           text: 'Close',
-          action: () => this.shepherdService.next(),
+          action: () => {
+            if (this.shepherdService !== null) {
+              this.shepherdService.next();
+            }
+          },
         },
       ],
       attachTo: {

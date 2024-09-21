@@ -1,11 +1,6 @@
 import {Injectable} from '@angular/core';
-import {
-  AuthChangeEvent,
-  AuthSession,
-  createClient,
-  Session,
-  SupabaseClient,
-} from '@supabase/supabase-js';
+import {AuthChangeEvent, AuthSession, createClient, Session, SupabaseClient} from '@supabase/supabase-js';
+import {uuid} from '@supabase/supabase-js/dist/main/lib/helpers';
 
 import {environment} from '../../../environments/environment';
 
@@ -74,5 +69,29 @@ export class SupabaseService {
 
   signOut() {
     return this._supabaseClient.auth.signOut();
+  }
+
+  async createBucketPhoto() {
+    const {data, error} = await this._supabaseClient.storage.createBucket('expense-proof-images');
+    return {data, error};
+  }
+
+  async getBucketPhoto() {
+    const {data, error} = await this._supabaseClient.storage.getBucket('expense-proof-images');
+    return {data, error};
+  }
+
+  async uploadPhoto(bucketName: string, file: File) {
+    const {data, error} = await this._supabaseClient.storage
+        .from(bucketName)
+        .upload(`${this.session?.user.id}/${uuid()}`, file);
+    return {data, error};
+  }
+
+  async getPhotoUrl(bucketName: string, path: string) {
+    const {data, error} = await this._supabaseClient.storage
+        .from(bucketName)
+        .createSignedUrl(path, 3600);
+    return {data, error};
   }
 }

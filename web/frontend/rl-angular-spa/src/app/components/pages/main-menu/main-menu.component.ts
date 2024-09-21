@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {AfterViewInit, Component, inject, OnDestroy} from '@angular/core';
+import {AfterViewInit, Component, inject} from '@angular/core';
 import {ShepherdService} from 'angular-shepherd';
 
 import {UserAuthenticationStore} from '../../../+state/auth/user-auth.store';
@@ -20,7 +20,7 @@ import {CardWithLinkComponent} from '../../lib/card-with-link/card-with-link.com
   templateUrl: './main-menu.component.html',
   styleUrl: './main-menu.component.scss',
 })
-export class MainMenuComponent implements AfterViewInit, OnDestroy {
+export class MainMenuComponent implements AfterViewInit {
   protected readonly userAuthenticationStore = inject(UserAuthenticationStore);
   protected readonly rebaseRoutePath = rebaseRoutePath;
   protected readonly RoutePath = RoutePath;
@@ -64,9 +64,7 @@ export class MainMenuComponent implements AfterViewInit, OnDestroy {
     this.shepherdService.start();
   }
 
-  ngOnDestroy() {
-    if (this.shepherdService !== null) {
-      this.shepherdService?.cancel();
-    }
-  }
+  /* ngOnDestroy() {
+    // TODO: Re-enable this.shepherdService?.cancel();
+  }*/
 }
