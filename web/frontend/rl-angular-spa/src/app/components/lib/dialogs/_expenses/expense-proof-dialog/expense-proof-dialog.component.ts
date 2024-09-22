@@ -37,8 +37,6 @@ export class ExpenseProofDialogComponent implements OnInit {
   protected readonly submitterDisplayName: string;
   private readonly expenseId: string;
 
-  protected photoUrl?: string;
-
   constructor(readonly config: DynamicDialogConfig) {
     const data = (config.data as ExpenseProofDialogData);
     this.expenseDescription = data.expenseDescription;
@@ -48,10 +46,5 @@ export class ExpenseProofDialogComponent implements OnInit {
 
   async ngOnInit() {
     this.expensesStore.loadExpenseById(this.expenseId);
-    const imageUrl = this.expensesStore.expenseById().imageUrl;
-    if (!imageUrl) {
-      return;
-    }
-    this.photoUrl = imageUrl ?? 'assets/favicon.ico';
   }
 }
