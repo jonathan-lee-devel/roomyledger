@@ -12,10 +12,10 @@ import {ExpensesModule} from './ledgers/_children/expenses/expenses.module';
 import {PropertiesModule} from './ledgers/_children/properties/properties.module';
 import {NotificationsModule} from './notifications/notifications.module';
 import {PaymentsModule} from './payments/payments.module';
+import {SupabaseDbModule} from './supabase-db/supabase-db.module';
 import {UsersModule} from './users/users.module';
 import {UtilModule} from './util/util.module';
 import {PrismaModule} from '../prisma/prisma.module';
-import { SupabaseDbModule } from './supabase-db/supabase-db.module';
 
 @Module({
   imports: [
