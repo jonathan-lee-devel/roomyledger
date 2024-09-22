@@ -214,7 +214,10 @@ export class ExpensesService {
         [...splitImageFilePath.slice(1)].join('/'),
       );
       if (error) {
-        this.logger.error(error);
+        this.logger.error(
+          `Error while generating URL for expense with ID: ${expense.id}`,
+          error,
+        );
         return expense;
       }
       imageUrl = data?.signedUrl;
