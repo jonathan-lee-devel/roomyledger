@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 
 import {PrismaService} from '../../../../../prisma/services/prisma.service';
+import {SupabaseDbService} from '../../../../supabase-db/services/supabase-db/supabase-db.service';
 import {UsersService} from '../../../../users/services/users.service';
 import {PropertiesService} from '../../properties/services/properties.service';
 import {CreateExpenseDto} from '../dto/create-expense.dto';
@@ -18,6 +19,7 @@ export class ExpensesService {
     private readonly prismaService: PrismaService,
     private readonly propertiesService: PropertiesService,
     private readonly usersService: UsersService,
+    private readonly supabaseDbService: SupabaseDbService,
   ) {}
 
   async create(
@@ -39,6 +41,7 @@ export class ExpensesService {
         name: createExpenseDto.name,
         propertyId: createExpenseDto.propertyId,
         description: createExpenseDto.description,
+        filePath: createExpenseDto.filePath,
         state: 'PENDING',
         createdByUserId: user.id,
       },
@@ -149,7 +152,7 @@ export class ExpensesService {
     return this.prismaService.expense.delete({where: {id: id}});
   }
 
-  async getExpense(requestingUserEmail: string, id: string) {
+  async getExpenseById(requestingUserEmail: string, id: string) {
     const expense = await this.prismaService.expense.findUnique({
       where: {id: id},
       include: {
@@ -203,6 +206,25 @@ export class ExpensesService {
       requestingUserEmail,
       expense.propertyId,
     );
-    return expense;
+    let imageUrl: string | undefined = undefined;
+    if (expense.filePath) {
+      const splitImageFilePath = expense.filePath.split('/');
+      const {data, error} = await this.supabaseDbService.generateUrlForImage(
+        splitImageFilePath[0],
+        [...splitImageFilePath.slice(1)].join('/'),
+      );
+      if (error) {
+        this.logger.error(
+          `Error while generating URL for expense with ID: ${expense.id}`,
+          error,
+        );
+        return expense;
+      }
+      imageUrl = data?.signedUrl;
+    }
+    return {
+      ...expense,
+      imageUrl,
+    };
   }
 }

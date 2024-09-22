@@ -6,10 +6,15 @@
     <span class="underline">Submitted By:</span>
     {{ submitterDisplayName }}
   </p>
-  <img
-    [ngSrc]="'assets/example-receipt-full.png'"
-    alt="Proof"
-    height="600"
-    width="600"
-  />
+  <ng-container *ngIf="!expensesStore.isLoading() else loadingSpinner">
+    <img
+      [ngSrc]="expensesStore.expenseById().imageUrl ?? 'assets/favicon.ico'"
+      alt="Proof"
+      height="600"
+      width="600"
+    />
+  </ng-container>
+  <ng-template #loadingSpinner>
+    <p-progressSpinner styleClass="w-10rem h-10rem" />
+  </ng-template>
 </div>

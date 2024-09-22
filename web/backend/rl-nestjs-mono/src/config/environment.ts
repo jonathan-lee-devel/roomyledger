@@ -13,4 +13,5 @@ export type EnvironmentVariables = {
   SUPABASE_URL: string;
   SUPABASE_KEY: string;
   SUPABASE_JWT_SECRET: string;
+  SUPABASE_SERVICE_KEY: string;
 };

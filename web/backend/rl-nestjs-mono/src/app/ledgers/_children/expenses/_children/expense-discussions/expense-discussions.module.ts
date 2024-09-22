@@ -7,6 +7,7 @@ import {ExpenseDiscussionsService} from './services/expense-discussions.service'
 import {PrismaService} from '../../../../../../prisma/services/prisma.service';
 import {StripeService} from '../../../../../payments/_children/stripe/services/stripe.service';
 import {PaymentsService} from '../../../../../payments/services/payments.service';
+import {SupabaseDbModule} from '../../../../../supabase-db/supabase-db.module';
 import {RegistrationService} from '../../../../../users/services/registration/registration.service';
 import {UsersService} from '../../../../../users/services/users.service';
 import {RandomService} from '../../../../../util/services/random/random.service';
@@ -32,5 +33,6 @@ import {ExpensesService} from '../../services/expenses.service';
     PaymentsService,
     StripeService,
   ],
+  imports: [SupabaseDbModule],
 })
 export class ExpenseDiscussionsModule {}

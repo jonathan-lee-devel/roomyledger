@@ -14,6 +14,8 @@ export interface ExpenseDto extends Dto {
   description: string;
   amount: number;
   currency: Currency;
+  filePath?: string;
+  imageUrl?: string;
   state: ExpenseStateEnum;
   createdByUserId: string;
   createdBy: UserDto & {profile: UserProfile};

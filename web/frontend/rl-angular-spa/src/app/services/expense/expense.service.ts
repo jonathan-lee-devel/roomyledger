@@ -75,4 +75,10 @@ export class ExpenseService {
         `${environment.EXPENSES_SERVICE_BASE_URL}/distributions/for-property/${propertyId}`,
     );
   }
+
+  getExpenseById(expenseId: string) {
+    return this.httpClient.get<ExpenseDto & {imageUrl?: string}>(
+        `${environment.EXPENSES_SERVICE_BASE_URL}/${expenseId}`,
+    );
+  }
 }

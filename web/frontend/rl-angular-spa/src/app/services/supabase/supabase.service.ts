@@ -1,11 +1,6 @@
 import {Injectable} from '@angular/core';
-import {
-  AuthChangeEvent,
-  AuthSession,
-  createClient,
-  Session,
-  SupabaseClient,
-} from '@supabase/supabase-js';
+import {AuthChangeEvent, AuthSession, createClient, Session, SupabaseClient} from '@supabase/supabase-js';
+import {uuid} from '@supabase/supabase-js/dist/main/lib/helpers';
 
 import {environment} from '../../../environments/environment';
 
@@ -13,6 +8,8 @@ import {environment} from '../../../environments/environment';
   providedIn: 'root',
 })
 export class SupabaseService {
+  static readonly expenseProofImagesBucketName = 'expense-proof-images';
+
   private readonly _supabaseClient: SupabaseClient;
 
   constructor() {
@@ -74,5 +71,12 @@ export class SupabaseService {
 
   signOut() {
     return this._supabaseClient.auth.signOut();
+  }
+
+  async uploadPhoto(bucketName: string, file: File) {
+    const {data, error} = await this._supabaseClient.storage
+        .from(bucketName)
+        .upload(`${this.session?.user.id}/${uuid()}`, file);
+    return {data, error};
   }
 }

@@ -6,4 +6,6 @@ export interface CreateExpenseRequestDto {
   description: string;
   amount: number;
   currencyCode: Currency;
+  uploadedFile?: File | undefined;
+  filePath?: string;
 }

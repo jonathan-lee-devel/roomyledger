@@ -3,6 +3,7 @@ import {
   IsDefined,
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsString,
   IsUUID,
 } from 'class-validator';
@@ -40,4 +41,8 @@ export class CreateExpenseDto {
   @IsDefined()
   @ApiProperty({required: true})
   currencyCode: Currency;
+
+  @IsOptional()
+  @ApiProperty({required: false})
+  filePath?: string;
 }
