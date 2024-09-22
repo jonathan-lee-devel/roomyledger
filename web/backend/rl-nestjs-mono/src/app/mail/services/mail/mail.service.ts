@@ -1,17 +1,8 @@
-import {Inject, Injectable, Logger} from '@nestjs/common';
+import {Injectable, Logger} from '@nestjs/common';
 import {ConfigService} from '@nestjs/config';
-import {Transporter} from 'nodemailer';
-import SMTPTransport from 'nodemailer/lib/smtp-transport';
 
 import {EnvironmentVariables} from '../../../../config/environment';
-import {MailModuleInjectionTokens} from '../../constants/injection-tokens';
 
-/**
- * Class representing a MailService.
- * @class
- * @public
- * @Injectable()
- */
 @Injectable()
 export class MailService {
   private static readonly NODE_ENV_STAGING = 'staging';
@@ -20,8 +11,6 @@ export class MailService {
   constructor(
     private readonly logger: Logger,
     private readonly configService: ConfigService<EnvironmentVariables>,
-    @Inject(MailModuleInjectionTokens.NODEMAILER_TRANSPORTER)
-    private readonly transporter: Transporter<SMTPTransport.SentMessageInfo>,
   ) {}
 
   async sendEmail(addressTo: string, subject: string, html: string) {
@@ -29,30 +18,40 @@ export class MailService {
     this.logger.log(
       `Sending e-mail from: ${fromName} to: <${addressTo}> with subject: ${subject}`,
     );
-    const result = await this.transporter.sendMail({
-      from: `${fromName} <${this.configService.getOrThrow<string>('EMAIL_USER')}>`,
-      to: addressTo,
-      subject,
-      html,
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.configService.getOrThrow<string>('RESEND_API_KEY')}`,
+      },
+      body: JSON.stringify({
+        from: `${this.getFromName()} <${this.configService.getOrThrow<string>('EMAIL_USER')}>`,
+        to: [addressTo],
+        subject,
+        html,
+      }),
     });
-    if (result.accepted.includes(addressTo)) {
-      this.logger.log(`Successfully sent e-mail to: <${addressTo}>`);
-    } else {
+    if (!response.ok) {
       this.logger.error(
-        `Error while sending e-mail to: <${addressTo}>: ${result.response}`,
+        `Error while sending e-mail to: ${addressTo}: `,
+        response.status,
       );
+      return;
     }
+    this.logger.log(
+      `Successfully sent e-mail to: <${addressTo}> with ID: ${(await response.json())?.['id']}`,
+    );
   }
 
   private getFromName() {
     let fromName: string;
     const nodeEnv = this.configService.getOrThrow<string>('NODE_ENV');
     if (nodeEnv === MailService.NODE_ENV_STAGING) {
-      fromName = 'Staging.RoomyLedger';
+      fromName = 'RoomyLedger Staging';
     } else if (nodeEnv === MailService.NODE_ENV_PRODUCTION) {
       fromName = 'RoomyLedger';
     } else {
-      fromName = 'Dev.RoomyLedger';
+      fromName = 'RoomyLedger Dev';
     }
     return fromName;
   }

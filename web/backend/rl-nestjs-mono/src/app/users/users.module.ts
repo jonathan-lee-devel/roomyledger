@@ -6,11 +6,8 @@ import {AuthenticatedUsersController} from './controllers/authenticated-users/au
 import {RegistrationService} from './services/registration/registration.service';
 import {UserEventsHandlerService} from './services/user-events-handler/user-events-handler.service';
 import {UsersService} from './services/users.service';
-import {EnvironmentVariables} from '../../config/environment';
 import {PrismaService} from '../../prisma/services/prisma.service';
-import {MailModuleInjectionTokens} from '../mail/constants/injection-tokens';
 import {MailService} from '../mail/services/mail/mail.service';
-import {transporterConfig} from '../mail/transporter/transporter.config';
 import {RandomService} from '../util/services/random/random.service';
 
 @Module({
@@ -19,15 +16,6 @@ import {RandomService} from '../util/services/random/random.service';
     {
       provide: Logger,
       useFactory: () => new Logger(UsersModule.name),
-    },
-    {
-      provide: MailModuleInjectionTokens.NODEMAILER_TRANSPORTER,
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService<EnvironmentVariables>) =>
-        transporterConfig(
-          configService.getOrThrow<string>('EMAIL_USER'),
-          configService.getOrThrow<string>('EMAIL_PASSWORD'),
-        ),
     },
     UsersService,
     RegistrationService,

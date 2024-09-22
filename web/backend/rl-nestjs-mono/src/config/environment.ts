@@ -14,4 +14,5 @@ export type EnvironmentVariables = {
   SUPABASE_KEY: string;
   SUPABASE_JWT_SECRET: string;
   SUPABASE_SERVICE_KEY: string;
+  RESEND_API_KEY: string;
 };
