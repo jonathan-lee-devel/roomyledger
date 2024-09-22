@@ -44,7 +44,7 @@ export class ExpenseProofDialogComponent implements OnInit {
     this.expenseId = data.expenseId;
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.expensesStore.loadExpenseById(this.expenseId);
   }
 }
