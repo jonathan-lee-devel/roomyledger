@@ -8,7 +8,7 @@
   </p>
   <ng-container *ngIf="!expensesStore.isLoading() else loadingSpinner">
     <img
-      [ngSrc]="photoUrl ?? 'assets/favicon.ico'"
+      [ngSrc]="expensesStore.expenseById().imageUrl ?? 'assets/favicon.ico'"
       alt="Proof"
       height="600"
       width="600"

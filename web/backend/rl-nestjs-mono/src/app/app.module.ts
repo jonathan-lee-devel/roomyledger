@@ -15,6 +15,7 @@ import {PaymentsModule} from './payments/payments.module';
 import {UsersModule} from './users/users.module';
 import {UtilModule} from './util/util.module';
 import {PrismaModule} from '../prisma/prisma.module';
+import { SupabaseDbModule } from './supabase-db/supabase-db.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import {PrismaModule} from '../prisma/prisma.module';
     NotificationsModule,
     UtilModule,
     AuthModule,
+    SupabaseDbModule,
   ],
   controllers: [],
   providers: [

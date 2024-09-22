@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   Post,
   Query,
@@ -21,7 +22,21 @@ import {ExpensesService} from '../services/expenses.service';
 @ApiTags('Expenses')
 @Controller()
 export class ExpensesController {
-  constructor(private readonly expensesService: ExpensesService) {}
+  constructor(
+    private readonly logger: Logger,
+    private readonly expensesService: ExpensesService,
+  ) {}
+
+  @Get(':id')
+  async getExpenseById(
+    @CurrentUser() currentUser: AuthUser,
+    @Param() {id}: IdParamDto,
+  ) {
+    this.logger.log(
+      `Request from <${currentUser.email}> to get expense by ID: ${id}`,
+    );
+    return this.expensesService.getExpenseById(currentUser.email, id);
+  }
 
   @Post()
   async create(

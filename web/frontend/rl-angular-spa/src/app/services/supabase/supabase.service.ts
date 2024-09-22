@@ -79,11 +79,4 @@ export class SupabaseService {
         .upload(`${this.session?.user.id}/${uuid()}`, file);
     return {data, error};
   }
-
-  async getPhotoUrl(bucketName: string, path: string) {
-    const {data, error} = await this._supabaseClient.storage
-        .from(bucketName)
-        .createSignedUrl(path, 3600);
-    return {data, error};
-  }
 }

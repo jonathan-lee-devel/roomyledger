@@ -19,7 +19,7 @@ export class ExpenseDiscussionsService {
     this.logger.log(
       `Request from ${requestingUserEmail} to approve expense with ID: ${id}`,
     );
-    const expense = await this.expensesService.getExpense(
+    const expense = await this.expensesService.getExpenseById(
       requestingUserEmail,
       id,
     );
@@ -53,7 +53,7 @@ export class ExpenseDiscussionsService {
         },
       },
     });
-    const updatedExpense = await this.expensesService.getExpense(
+    const updatedExpense = await this.expensesService.getExpenseById(
       requestingUserEmail,
       id,
     );
@@ -71,7 +71,7 @@ export class ExpenseDiscussionsService {
         where: {id: expense.id},
         data: {state: 'APPROVED'},
       });
-      return this.expensesService.getExpense(requestingUserEmail, id);
+      return this.expensesService.getExpenseById(requestingUserEmail, id);
     } else if (
       updatedExpense.approvals.length < numberOfApprovalsRequired &&
       updatedExpense.disputes.length < 1
@@ -80,7 +80,7 @@ export class ExpenseDiscussionsService {
         where: {id: expense.id},
         data: {state: 'PENDING'},
       });
-      return this.expensesService.getExpense(requestingUserEmail, id);
+      return this.expensesService.getExpenseById(requestingUserEmail, id);
     }
     return updatedExpense;
   }
@@ -89,7 +89,7 @@ export class ExpenseDiscussionsService {
     this.logger.log(
       `Request from ${requestingUserEmail} to dispute expense with ID: ${id}`,
     );
-    const expense = await this.expensesService.getExpense(
+    const expense = await this.expensesService.getExpenseById(
       requestingUserEmail,
       id,
     );
@@ -144,7 +144,7 @@ export class ExpenseDiscussionsService {
     this.logger.log(
       `Request from ${requestingUserEmail} to comment on expense with ID: ${id}`,
     );
-    const expense = await this.expensesService.getExpense(
+    const expense = await this.expensesService.getExpenseById(
       requestingUserEmail,
       id,
     );

@@ -39,7 +39,7 @@ describe('ExpenseDiscussionsService', () => {
     const mockRequestingUserEmail = faker.internet.email();
     const mockId = faker.string.uuid();
 
-    mockExpensesService.getExpense.mockResolvedValue({
+    mockExpensesService.getExpenseById.mockResolvedValue({
       createdBy: {
         email: mockRequestingUserEmail,
       },
@@ -51,7 +51,7 @@ describe('ExpenseDiscussionsService', () => {
     expect(mockLogger.log).toHaveBeenCalledWith(
       `Request from ${mockRequestingUserEmail} to approve expense with ID: ${mockId}`,
     );
-    expect(mockExpensesService.getExpense).toHaveBeenCalledWith(
+    expect(mockExpensesService.getExpenseById).toHaveBeenCalledWith(
       mockRequestingUserEmail,
       mockId,
     );
@@ -74,7 +74,7 @@ describe('ExpenseDiscussionsService', () => {
       ],
     };
 
-    mockExpensesService.getExpense.mockResolvedValue(mockExpense as any);
+    mockExpensesService.getExpenseById.mockResolvedValue(mockExpense as any);
 
     await expect(
       service.approveExpense(mockRequestingUserEmail, mockId),
@@ -82,7 +82,7 @@ describe('ExpenseDiscussionsService', () => {
     expect(mockLogger.log).toHaveBeenCalledWith(
       `Request from ${mockRequestingUserEmail} to approve expense with ID: ${mockId}`,
     );
-    expect(mockExpensesService.getExpense).toHaveBeenCalledWith(
+    expect(mockExpensesService.getExpenseById).toHaveBeenCalledWith(
       mockRequestingUserEmail,
       mockId,
     );
@@ -107,7 +107,7 @@ describe('ExpenseDiscussionsService', () => {
       ],
       disputes: [],
     };
-    mockExpensesService.getExpense.mockResolvedValue(mockExpense as any);
+    mockExpensesService.getExpenseById.mockResolvedValue(mockExpense as any);
 
     const mockProperty = {
       rules: {
@@ -131,7 +131,7 @@ describe('ExpenseDiscussionsService', () => {
       mockExpenseId,
     );
     expect(result).toStrictEqual(mockExpense);
-    expect(mockExpensesService.getExpense).toHaveBeenCalledWith(
+    expect(mockExpensesService.getExpenseById).toHaveBeenCalledWith(
       mockRequestingUserEmail,
       mockExpenseId,
     );
@@ -178,7 +178,7 @@ describe('ExpenseDiscussionsService', () => {
       ],
       disputes: [],
     };
-    mockExpensesService.getExpense.mockResolvedValue(mockExpense as any);
+    mockExpensesService.getExpenseById.mockResolvedValue(mockExpense as any);
 
     const mockProperty = {
       rules: {
@@ -202,7 +202,7 @@ describe('ExpenseDiscussionsService', () => {
       mockExpenseId,
     );
     expect(result).toStrictEqual(mockExpense);
-    expect(mockExpensesService.getExpense).toHaveBeenCalledWith(
+    expect(mockExpensesService.getExpenseById).toHaveBeenCalledWith(
       mockRequestingUserEmail,
       mockExpenseId,
     );
@@ -255,7 +255,7 @@ describe('ExpenseDiscussionsService', () => {
         },
       ],
     };
-    mockExpensesService.getExpense.mockResolvedValue(mockExpense as any);
+    mockExpensesService.getExpenseById.mockResolvedValue(mockExpense as any);
 
     const mockProperty = {
       rules: {
@@ -279,7 +279,7 @@ describe('ExpenseDiscussionsService', () => {
       mockExpenseId,
     );
     expect(result).toStrictEqual(mockExpense);
-    expect(mockExpensesService.getExpense).toHaveBeenCalledWith(
+    expect(mockExpensesService.getExpenseById).toHaveBeenCalledWith(
       mockRequestingUserEmail,
       mockExpenseId,
     );
@@ -315,7 +315,7 @@ describe('ExpenseDiscussionsService', () => {
     const mockId = faker.string.uuid();
     const mockRequestingUserEmail = faker.internet.email();
 
-    mockExpensesService.getExpense.mockResolvedValue({
+    mockExpensesService.getExpenseById.mockResolvedValue({
       createdBy: {
         email: mockRequestingUserEmail,
       },
@@ -327,7 +327,7 @@ describe('ExpenseDiscussionsService', () => {
     expect(mockLogger.log).toHaveBeenCalledWith(
       `Request from ${mockRequestingUserEmail} to dispute expense with ID: ${mockId}`,
     );
-    expect(mockExpensesService.getExpense).toHaveBeenCalledWith(
+    expect(mockExpensesService.getExpenseById).toHaveBeenCalledWith(
       mockRequestingUserEmail,
       mockId,
     );
@@ -337,7 +337,7 @@ describe('ExpenseDiscussionsService', () => {
     const mockId = faker.string.uuid();
     const mockRequestingUserEmail = faker.internet.email();
 
-    mockExpensesService.getExpense.mockResolvedValue({
+    mockExpensesService.getExpenseById.mockResolvedValue({
       createdBy: {
         email: faker.internet.email(),
       },
@@ -356,7 +356,7 @@ describe('ExpenseDiscussionsService', () => {
     expect(mockLogger.log).toHaveBeenCalledWith(
       `Request from ${mockRequestingUserEmail} to dispute expense with ID: ${mockId}`,
     );
-    expect(mockExpensesService.getExpense).toHaveBeenCalledWith(
+    expect(mockExpensesService.getExpenseById).toHaveBeenCalledWith(
       mockRequestingUserEmail,
       mockId,
     );
@@ -373,7 +373,7 @@ describe('ExpenseDiscussionsService', () => {
     };
     mockPrismaService.user.findUnique = jest.fn().mockResolvedValue(mockUser);
 
-    mockExpensesService.getExpense.mockResolvedValue({
+    mockExpensesService.getExpenseById.mockResolvedValue({
       id: mockId,
       createdBy: {
         email: faker.internet.email(),
@@ -398,7 +398,7 @@ describe('ExpenseDiscussionsService', () => {
     expect(mockLogger.log).toHaveBeenCalledWith(
       `Request from ${mockRequestingUserEmail} to dispute expense with ID: ${mockId}`,
     );
-    expect(mockExpensesService.getExpense).toHaveBeenCalledWith(
+    expect(mockExpensesService.getExpenseById).toHaveBeenCalledWith(
       mockRequestingUserEmail,
       mockId,
     );
@@ -436,7 +436,9 @@ describe('ExpenseDiscussionsService', () => {
     const mockId = faker.string.uuid();
     const mockText = faker.string.alpha();
 
-    mockExpensesService.getExpense.mockRejectedValue(new NotFoundException());
+    mockExpensesService.getExpenseById.mockRejectedValue(
+      new NotFoundException(),
+    );
 
     await expect(
       service.commentOnExpense(mockRequestingUserEmail, mockId, mockText),
@@ -448,7 +450,7 @@ describe('ExpenseDiscussionsService', () => {
     const mockId = faker.string.uuid();
     const mockText = faker.string.alpha();
 
-    mockExpensesService.getExpense.mockResolvedValue({} as any);
+    mockExpensesService.getExpenseById.mockResolvedValue({} as any);
     mockUsersService.findByEmail.mockRejectedValue(new NotFoundException());
 
     await expect(
@@ -462,7 +464,7 @@ describe('ExpenseDiscussionsService', () => {
     const mockId = faker.string.uuid();
     const mockText = faker.string.alpha();
 
-    mockExpensesService.getExpense.mockResolvedValue({
+    mockExpensesService.getExpenseById.mockResolvedValue({
       id: mockId,
     } as any);
     mockUsersService.findByEmail.mockResolvedValue({

@@ -136,6 +136,15 @@ export const ExpensesStore = signalStore(
       const expenseService = inject(ExpenseService);
       const toastWrapperService = inject(ToastWrapperService);
       return {
+        loadExpenseById: (expenseId: string) => {
+          patchState(store, {isLoading: true});
+          expenseService.getExpenseById(expenseId).pipe(
+              take(1),
+              tap((expense) => {
+                patchState(store, {expenseById: {...expense}, isLoading: false});
+              }),
+          ).subscribe();
+        },
         deleteExpenseById: (expenseId: string) => {
           patchState(store, {isLoading: true});
           expenseService.deleteExpenseById(expenseId).pipe(
@@ -164,26 +173,6 @@ export const ExpensesStore = signalStore(
       const supabaseService = inject(SupabaseService);
       const toastWrapperService = inject(ToastWrapperService);
       return {
-        getExpenseProofImageUrl: async (filePath: string) => {
-          patchState(store, {isLoading: true});
-          const {data, error} = await supabaseService
-              .getPhotoUrl(SupabaseService.expenseProofImagesBucketName,
-                  filePath.replace(`${SupabaseService.expenseProofImagesBucketName}/`, ''),
-              );
-          patchState(store, {isLoading: false});
-          if (error) {
-            toastWrapperService.showToast(
-                'Image Load Failure',
-                'Failed to load Expense Proof Image',
-                false,
-                true,
-                'error',
-                5000,
-            );
-            return null;
-          }
-          return data?.signedUrl;
-        },
         loadExpensesForProperty: (propertyId: string, dateRange: DateRangeDto) => {
           patchState(store, {expensesForPropertyById: [], expensesForPropertyByIdDateRange: dateRange, isLoading: true});
           expenseService.getExpensesForProperty(propertyId, dateRange).pipe(

@@ -35,6 +35,7 @@ export class ExpenseProofDialogComponent implements OnInit {
   protected readonly expensesStore = inject(ExpensesStore);
   protected readonly expenseDescription: string;
   protected readonly submitterDisplayName: string;
+  private readonly expenseId: string;
 
   protected photoUrl?: string;
 
@@ -42,13 +43,15 @@ export class ExpenseProofDialogComponent implements OnInit {
     const data = (config.data as ExpenseProofDialogData);
     this.expenseDescription = data.expenseDescription;
     this.submitterDisplayName = data.submitterDisplayName;
+    this.expenseId = data.expenseId;
   }
 
   async ngOnInit() {
-    const filePath = this.expensesStore.expenseById().filePath;
-    if (!filePath) {
+    this.expensesStore.loadExpenseById(this.expenseId);
+    const imageUrl = this.expensesStore.expenseById().imageUrl;
+    if (!imageUrl) {
       return;
     }
-    this.photoUrl = (await this.expensesStore.getExpenseProofImageUrl(filePath)) ?? 'assets/favicon.ico';
+    this.photoUrl = imageUrl ?? 'assets/favicon.ico';
   }
 }
