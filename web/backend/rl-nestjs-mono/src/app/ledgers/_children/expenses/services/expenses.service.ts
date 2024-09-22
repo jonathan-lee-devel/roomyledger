@@ -217,7 +217,7 @@ export class ExpensesService {
         this.logger.error(error);
         return expense;
       }
-      imageUrl = data.signedUrl;
+      imageUrl = data?.signedUrl;
     }
     return {
       ...expense,
