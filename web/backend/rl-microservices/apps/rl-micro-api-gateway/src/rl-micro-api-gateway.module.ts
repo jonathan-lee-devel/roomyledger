@@ -6,6 +6,7 @@ import { PAYMENTS_PACKAGE_NAME } from '../../../proto/payments';
 import { getProtoPath } from '@rl-config/config';
 
 import dotenv from 'dotenv';
+import { COMMS_PACKAGE_NAME } from '../../../proto/comms';
 
 dotenv.config();
 
@@ -19,6 +20,15 @@ dotenv.config();
           url: `${process.env.PAYMENTS_SERVICE_DOMAIN}:10000`,
           protoPath: getProtoPath('payments.proto'),
           package: PAYMENTS_PACKAGE_NAME,
+        },
+      },
+      {
+        transport: Transport.GRPC,
+        name: COMMS_PACKAGE_NAME,
+        options: {
+          url: `${process.env.COMMS_SERVICE_DOMAIN}:10001`,
+          protoPath: getProtoPath('comms.proto'),
+          package: COMMS_PACKAGE_NAME,
         },
       },
     ]),

@@ -15,6 +15,7 @@
     "start:dev": "concurrently -c \"cyan.bold,blue.bold,green.bold\" yarn:start:dev:*",
     "start:dev:rl-micro-api-gateway": "nest start --watch rl-micro-api-gateway",
     "start:dev:rl-micro-payments": "nest start --watch rl-micro-payments",
+    "start:dev:rl-micro-comms": "nest start --watch rl-micro-comms",
     "start:debug": "nest start --debug --watch",
     "start:prod": "concurrently -c \"cyan.bold,blue.bold,green.bold\" yarn:start:prod:*",
     "start:prod:rl-micro-api-gateway": "node dist/apps/rl-micro-api-gateway/main",

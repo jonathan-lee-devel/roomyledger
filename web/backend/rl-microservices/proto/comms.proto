@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package comms;
+
+service CommsService {
+  rpc GetPublicApplicationMessages (GetPublicApplicationMessagesDto) returns (ApplicationMessagesDto) {}
+}
+
+message GetPublicApplicationMessagesDto {
+  string email = 1;
+}
+
+message ApplicationMessagesDto {
+  string id = 1;
+  string createdByEmail = 2;
+  string createdByUserId = 3;
+  bool isShow = 4;
+  bool isPublic = 5;
+  string title = 6;
+  string message = 7;
+  string severity = 8;
+  optional string routerLink = 9;
+  optional string routerLinkText = 10;
+  string createdAt = 11;
+  string updatedAt = 12;
+}
