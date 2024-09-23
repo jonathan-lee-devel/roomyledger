@@ -8,9 +8,9 @@
     "tsConfigPath": "apps/rl-micro-api-gateway/tsconfig.app.json",
     "assets": [
       {
-        "include": "../proto/*.proto",
+        "include": "**/*.proto",
         "watchAssets": true,
-        "outDir": "dist/apps/proto"
+        "outDir": "dist/apps"
       }
     ]
   },

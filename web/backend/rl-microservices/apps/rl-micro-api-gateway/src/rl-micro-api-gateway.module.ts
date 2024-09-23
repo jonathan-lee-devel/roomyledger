@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common';
 import { RlMicroApiGatewayController } from './rl-micro-api-gateway.controller';
 import { RlMicroApiGatewayService } from './rl-micro-api-gateway.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { PAYMENTS_PACKAGE_NAME } from '../../../proto/payments';
 import { getProtoPath } from '@rl-config/config';
 
 import dotenv from 'dotenv';
-import { COMMS_PACKAGE_NAME } from '../../../proto/comms';
+import { PAYMENTS_PACKAGE_NAME } from './proto/payments';
+import { COMMS_PACKAGE_NAME } from './proto/comms';
 
 dotenv.config();
 

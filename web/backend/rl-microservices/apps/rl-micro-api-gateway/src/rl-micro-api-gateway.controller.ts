@@ -5,20 +5,33 @@ import {
   PAYMENTS_PACKAGE_NAME,
   PAYMENTS_SERVICE_NAME,
   PaymentsServiceClient,
-} from '../../../proto/payments';
+} from './proto/payments';
+import {
+  COMMS_PACKAGE_NAME,
+  COMMS_SERVICE_NAME,
+  CommsServiceClient,
+} from './proto/comms';
 
 @Controller()
 export class RlMicroApiGatewayController implements OnModuleInit {
   private paymentsServiceClient: PaymentsServiceClient;
+  private commsServiceClient: CommsServiceClient;
 
   constructor(
     private readonly rlMicroApiGatewayService: RlMicroApiGatewayService,
-    @Inject(PAYMENTS_PACKAGE_NAME) private readonly clientGrpc: ClientGrpc,
+    @Inject(PAYMENTS_PACKAGE_NAME)
+    private readonly paymentsClientGrpc: ClientGrpc,
+    @Inject(COMMS_PACKAGE_NAME)
+    private readonly commsClientGrpc: ClientGrpc,
   ) {}
 
   async onModuleInit() {
     this.paymentsServiceClient =
-      this.clientGrpc.getService<PaymentsServiceClient>(PAYMENTS_SERVICE_NAME);
+      this.paymentsClientGrpc.getService<PaymentsServiceClient>(
+        PAYMENTS_SERVICE_NAME,
+      );
+    this.commsServiceClient =
+      this.commsClientGrpc.getService<CommsServiceClient>(COMMS_SERVICE_NAME);
   }
 
   @Get()
@@ -30,6 +43,13 @@ export class RlMicroApiGatewayController implements OnModuleInit {
   getPaymentStatus() {
     return this.paymentsServiceClient.getPaymentStatusForUserId({
       id: '12345',
+    });
+  }
+
+  @Get('public-messages')
+  getPublicMessages() {
+    return this.commsServiceClient.getPublicApplicationMessages({
+      email: 'test@test.com',
     });
   }
 }

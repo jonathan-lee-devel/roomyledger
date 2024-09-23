@@ -1,13 +1,13 @@
 import { Controller } from '@nestjs/common';
 import { PaymentsService } from './payments.service';
+import { Observable } from 'rxjs';
 import {
   GetPaymentStatusForEmailDto,
   GetPaymentStatusForUserIdDto,
   PaymentsServiceController,
   PaymentsServiceControllerMethods,
   PaymentsStatusDto,
-} from '../../../../proto/payments';
-import { Observable } from 'rxjs';
+} from '../../../rl-micro-api-gateway/src/proto/payments';
 
 @Controller()
 @PaymentsServiceControllerMethods()

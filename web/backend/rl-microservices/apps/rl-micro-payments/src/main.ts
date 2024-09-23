@@ -1,10 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { RlMicroPaymentsModule } from './rl-micro-payments.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
-import { PAYMENTS_PACKAGE_NAME } from '../../../proto/payments';
 
 import dotenv from 'dotenv';
 import { getProtoPath } from '@rl-config/config';
+import { PAYMENTS_PACKAGE_NAME } from '../../rl-micro-api-gateway/src/proto/payments';
 
 dotenv.config();
 

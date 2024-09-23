@@ -14,7 +14,7 @@ export interface GetPublicApplicationMessagesDto {
   email: string;
 }
 
-export interface ApplicationMessagesDto {
+export interface ApplicationMessageDto {
   id: string;
   createdByEmail: string;
   createdByUserId: string;
@@ -29,16 +29,20 @@ export interface ApplicationMessagesDto {
   updatedAt: string;
 }
 
+export interface ApplicationMessageDtos {
+  messages: ApplicationMessageDto[];
+}
+
 export const COMMS_PACKAGE_NAME = "comms";
 
 export interface CommsServiceClient {
-  getPublicApplicationMessages(request: GetPublicApplicationMessagesDto): Observable<ApplicationMessagesDto>;
+  getPublicApplicationMessages(request: GetPublicApplicationMessagesDto): Observable<ApplicationMessageDtos>;
 }
 
 export interface CommsServiceController {
   getPublicApplicationMessages(
     request: GetPublicApplicationMessagesDto,
-  ): Promise<ApplicationMessagesDto> | Observable<ApplicationMessagesDto> | ApplicationMessagesDto;
+  ): Promise<ApplicationMessageDtos> | Observable<ApplicationMessageDtos> | ApplicationMessageDtos;
 }
 
 export function CommsServiceControllerMethods() {

@@ -2,9 +2,9 @@ import { NestFactory } from '@nestjs/core';
 import { RlMicroCommsModule } from './rl-micro-comms.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { getProtoPath } from '@rl-config/config';
-import { COMMS_PACKAGE_NAME } from '../../../proto/comms';
 
 import dotenv from 'dotenv';
+import { COMMS_PACKAGE_NAME } from '../../rl-micro-api-gateway/src/proto/comms';
 
 dotenv.config();
 

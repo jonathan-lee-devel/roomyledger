@@ -3,14 +3,14 @@ syntax = "proto3";
 package comms;
 
 service CommsService {
-  rpc GetPublicApplicationMessages (GetPublicApplicationMessagesDto) returns (ApplicationMessagesDto) {}
+  rpc GetPublicApplicationMessages (GetPublicApplicationMessagesDto) returns (ApplicationMessageDtos) {}
 }
 
 message GetPublicApplicationMessagesDto {
   string email = 1;
 }
 
-message ApplicationMessagesDto {
+message ApplicationMessageDto {
   string id = 1;
   string createdByEmail = 2;
   string createdByUserId = 3;
@@ -23,4 +23,8 @@ message ApplicationMessagesDto {
   optional string routerLinkText = 10;
   string createdAt = 11;
   string updatedAt = 12;
+}
+
+message ApplicationMessageDtos {
+  repeated ApplicationMessageDto messages = 1;
 }
