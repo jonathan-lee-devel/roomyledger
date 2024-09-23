@@ -1,0 +1,65 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2021",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@rl-validation/validation": [
+        "libs/validation/src"
+      ],
+      "@rl-validation/validation/*": [
+        "libs/validation/src/*"
+      ],
+      "@rl-auth/auth": [
+        "libs/auth/src"
+      ],
+      "@rl-auth/auth/*": [
+        "libs/auth/src/*"
+      ],
+      "@rl-supabase/supabase": [
+        "libs/supabase/src"
+      ],
+      "@rl-supabase/supabase/*": [
+        "libs/supabase/src/*"
+      ],
+      "@rl-email/email": [
+        "libs/email/src"
+      ],
+      "@rl-email/email/*": [
+        "libs/email/src/*"
+      ],
+      "@rl-util/util": [
+        "libs/util/src"
+      ],
+      "@rl-util/util/*": [
+        "libs/util/src/*"
+      ],
+      "@rl-prisma/prisma": [
+        "libs/prisma/src"
+      ],
+      "@rl-prisma/prisma/*": [
+        "libs/prisma/src/*"
+      ],
+      "@rl-config/config": [
+        "libs/config/src"
+      ],
+      "@rl-config/config/*": [
+        "libs/config/src/*"
+      ]
+    }
+  }
+}

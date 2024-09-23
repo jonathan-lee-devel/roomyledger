@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "entryFile": "main",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/rl-micro-api-gateway/tsconfig.app.json",
+    "assets": [
+      {
+        "include": "../proto/*.proto",
+        "watchAssets": true,
+        "outDir": "dist/apps/proto"
+      }
+    ]
+  },
+  "monorepo": true,
+  "root": "apps/rl-micro-api-gateway",
+  "projects": {
+    "rl-micro-api-gateway": {
+      "type": "application",
+      "root": "apps/rl-micro-api-gateway",
+      "entryFile": "main",
+      "sourceRoot": "apps/rl-micro-api-gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/rl-micro-api-gateway/tsconfig.app.json"
+      }
+    },
+    "rl-micro-comms": {
+      "type": "application",
+      "root": "apps/rl-micro-comms",
+      "entryFile": "main",
+      "sourceRoot": "apps/rl-micro-comms/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/rl-micro-comms/tsconfig.app.json"
+      }
+    },
+    "rl-micro-ledgers": {
+      "type": "application",
+      "root": "apps/rl-micro-ledgers",
+      "entryFile": "main",
+      "sourceRoot": "apps/rl-micro-ledgers/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/rl-micro-ledgers/tsconfig.app.json"
+      }
+    },
+    "rl-micro-payments": {
+      "type": "application",
+      "root": "apps/rl-micro-payments",
+      "entryFile": "main",
+      "sourceRoot": "apps/rl-micro-payments/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/rl-micro-payments/tsconfig.app.json"
+      }
+    },
+    "rl-micro-users": {
+      "type": "application",
+      "root": "apps/rl-micro-users",
+      "entryFile": "main",
+      "sourceRoot": "apps/rl-micro-users/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/rl-micro-users/tsconfig.app.json"
+      }
+    },
+    "validation": {
+      "type": "library",
+      "root": "libs/validation",
+      "entryFile": "index",
+      "sourceRoot": "libs/validation/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/validation/tsconfig.lib.json"
+      }
+    },
+    "auth": {
+      "type": "library",
+      "root": "libs/auth",
+      "entryFile": "index",
+      "sourceRoot": "libs/auth/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/auth/tsconfig.lib.json"
+      }
+    },
+    "supabase": {
+      "type": "library",
+      "root": "libs/supabase",
+      "entryFile": "index",
+      "sourceRoot": "libs/supabase/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/supabase/tsconfig.lib.json"
+      }
+    },
+    "email": {
+      "type": "library",
+      "root": "libs/email",
+      "entryFile": "index",
+      "sourceRoot": "libs/email/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/email/tsconfig.lib.json"
+      }
+    },
+    "util": {
+      "type": "library",
+      "root": "libs/util",
+      "entryFile": "index",
+      "sourceRoot": "libs/util/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/util/tsconfig.lib.json"
+      }
+    },
+    "prisma": {
+      "type": "library",
+      "root": "libs/prisma",
+      "entryFile": "index",
+      "sourceRoot": "libs/prisma/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/prisma/tsconfig.lib.json"
+      }
+    },
+    "config": {
+      "type": "library",
+      "root": "libs/config",
+      "entryFile": "index",
+      "sourceRoot": "libs/config/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/config/tsconfig.lib.json"
+      }
+    }
+  }
+}

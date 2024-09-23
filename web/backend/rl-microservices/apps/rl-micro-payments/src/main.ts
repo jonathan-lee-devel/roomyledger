@@ -1,0 +1,21 @@
+import { NestFactory } from '@nestjs/core';
+import { RlMicroPaymentsModule } from './rl-micro-payments.module';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { PAYMENTS_PACKAGE_NAME } from '../../../proto/payments';
+import { join } from 'path';
+
+async function bootstrap() {
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
+    RlMicroPaymentsModule,
+    {
+      transport: Transport.GRPC,
+      options: {
+        package: PAYMENTS_PACKAGE_NAME,
+        protoPath: join(__dirname, '../proto/payments.proto'),
+      },
+    },
+  );
+  await app.listen();
+}
+
+bootstrap().catch((reason) => console.error(reason));

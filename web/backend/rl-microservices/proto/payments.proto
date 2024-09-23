@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package payments;
+
+service PaymentsService {
+  rpc GetPaymentStatusForUserId (GetPaymentStatusForUserIdDto) returns (PaymentsStatusDto) {}
+  rpc GetPaymentStatusForEmail (GetPaymentStatusForEmailDto) returns (PaymentsStatusDto) {}
+}
+
+message GetPaymentStatusForUserIdDto {
+  string id = 1;
+}
+
+message GetPaymentStatusForEmailDto {
+  string email = 1;
+}
+
+message PaymentsStatusDto {
+  string id = 1;
+  string email = 2;
+  string status = 3;
+}
