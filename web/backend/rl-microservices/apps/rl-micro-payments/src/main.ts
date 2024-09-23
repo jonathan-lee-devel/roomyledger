@@ -14,7 +14,7 @@ async function bootstrap() {
     {
       transport: Transport.GRPC,
       options: {
-        url: `${process.env.PRIVATE_DOMAIN}:4000`,
+        url: `grpc://${process.env.PRIVATE_DOMAIN}:4000`,
         package: PAYMENTS_PACKAGE_NAME,
         protoPath: getProtoPath('payments.proto'),
       },
