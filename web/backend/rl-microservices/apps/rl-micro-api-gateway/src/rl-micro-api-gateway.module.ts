@@ -3,7 +3,11 @@ import { RlMicroApiGatewayController } from './rl-micro-api-gateway.controller';
 import { RlMicroApiGatewayService } from './rl-micro-api-gateway.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { PAYMENTS_PACKAGE_NAME } from '../../../proto/payments';
-import { join } from 'path';
+import { getProtoPath } from '@rl-config/config';
+
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 @Module({
   imports: [
@@ -12,7 +16,8 @@ import { join } from 'path';
         transport: Transport.GRPC,
         name: PAYMENTS_PACKAGE_NAME,
         options: {
-          protoPath: join(__dirname, '../proto/payments.proto'),
+          url: `${process.env.PAYMENTS_SERVICE_URL}`,
+          protoPath: getProtoPath('payments.proto'),
           package: PAYMENTS_PACKAGE_NAME,
         },
       },
