@@ -16,7 +16,7 @@ dotenv.config();
         transport: Transport.GRPC,
         name: PAYMENTS_PACKAGE_NAME,
         options: {
-          url: `grpc://${process.env.PAYMENTS_SERVICE_DOMAIN}:4000`,
+          url: `grpc://${process.env.PAYMENTS_SERVICE_DOMAIN}:5000`,
           protoPath: getProtoPath('payments.proto'),
           package: PAYMENTS_PACKAGE_NAME,
         },
