@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
-import { RlMicroUsersService } from './rl-micro-users.service';
+import {Controller, Get} from '@nestjs/common';
+
+import {RlMicroUsersService} from './rl-micro-users.service';
 
 @Controller()
 export class RlMicroUsersController {

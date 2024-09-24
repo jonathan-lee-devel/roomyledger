@@ -1,5 +1,6 @@
-import { NestFactory } from '@nestjs/core';
-import { RlMicroLedgersModule } from './rl-micro-ledgers.module';
+import {NestFactory} from '@nestjs/core';
+
+import {RlMicroLedgersModule} from './rl-micro-ledgers.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(RlMicroLedgersModule);

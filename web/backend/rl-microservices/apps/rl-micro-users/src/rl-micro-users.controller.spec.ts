@@ -1,6 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { RlMicroUsersController } from './rl-micro-users.controller';
-import { RlMicroUsersService } from './rl-micro-users.service';
+import {Test, TestingModule} from '@nestjs/testing';
+
+import {RlMicroUsersController} from './rl-micro-users.controller';
+import {RlMicroUsersService} from './rl-micro-users.service';
 
 describe('RlMicroUsersController', () => {
   let rlMicroUsersController: RlMicroUsersController;
@@ -11,7 +12,9 @@ describe('RlMicroUsersController', () => {
       providers: [RlMicroUsersService],
     }).compile();
 
-    rlMicroUsersController = app.get<RlMicroUsersController>(RlMicroUsersController);
+    rlMicroUsersController = app.get<RlMicroUsersController>(
+      RlMicroUsersController,
+    );
   });
 
   describe('root', () => {

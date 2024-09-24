@@ -1,6 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { CommsController } from './comms.controller';
-import { CommsService } from './comms.service';
+import {Test, TestingModule} from '@nestjs/testing';
+
+import {CommsController} from './comms.controller';
+import {CommsService} from './comms.service';
 
 describe('CommsController', () => {
   let controller: CommsController;

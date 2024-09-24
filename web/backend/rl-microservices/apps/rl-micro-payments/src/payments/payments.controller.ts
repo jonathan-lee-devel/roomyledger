@@ -1,7 +1,8 @@
-import { Controller } from '@nestjs/common';
-import { PaymentsService } from './payments.service';
-import { Observable } from 'rxjs';
-import { paymentsProto } from '@rl-gw';
+import {Controller} from '@nestjs/common';
+import {paymentsProto} from '@rl-gw';
+import {Observable} from 'rxjs';
+
+import {PaymentsService} from './payments.service';
 
 @Controller()
 @paymentsProto.PaymentsServiceControllerMethods()

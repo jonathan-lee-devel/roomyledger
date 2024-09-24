@@ -1,6 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { RlMicroLedgersController } from './rl-micro-ledgers.controller';
-import { RlMicroLedgersService } from './rl-micro-ledgers.service';
+import {Test, TestingModule} from '@nestjs/testing';
+
+import {RlMicroLedgersController} from './rl-micro-ledgers.controller';
+import {RlMicroLedgersService} from './rl-micro-ledgers.service';
 
 describe('RlMicroLedgersController', () => {
   let rlMicroLedgersController: RlMicroLedgersController;
@@ -11,7 +12,9 @@ describe('RlMicroLedgersController', () => {
       providers: [RlMicroLedgersService],
     }).compile();
 
-    rlMicroLedgersController = app.get<RlMicroLedgersController>(RlMicroLedgersController);
+    rlMicroLedgersController = app.get<RlMicroLedgersController>(
+      RlMicroLedgersController,
+    );
   });
 
   describe('root', () => {

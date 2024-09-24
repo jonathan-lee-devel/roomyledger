@@ -1,11 +1,11 @@
-import { Logger, Module } from '@nestjs/common';
-import { RlMicroApiGatewayController } from './rl-micro-api-gateway.controller';
-import { RlMicroApiGatewayService } from './rl-micro-api-gateway.service';
-import { ClientsModule, Transport } from '@nestjs/microservices';
-import { getProtoPath } from '@rl-config/config';
-
+import {Logger, Module} from '@nestjs/common';
+import {ClientsModule, Transport} from '@nestjs/microservices';
+import {getProtoPath} from '@rl-config/config';
+import {commsProto, paymentsProto} from '@rl-gw';
 import dotenv from 'dotenv';
-import { commsProto, paymentsProto } from '@rl-gw';
+
+import {RlMicroApiGatewayController} from './rl-micro-api-gateway.controller';
+import {RlMicroApiGatewayService} from './rl-micro-api-gateway.service';
 
 dotenv.config();
 

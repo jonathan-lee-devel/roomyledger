@@ -1,15 +1,16 @@
-import { Controller, Get, Inject, Logger, OnModuleInit } from '@nestjs/common';
-import { ClientGrpc } from '@nestjs/microservices';
-import {
-  PAYMENTS_PACKAGE_NAME,
-  PAYMENTS_SERVICE_NAME,
-  PaymentsServiceClient,
-} from './proto/payments';
+import {Controller, Get, Inject, Logger, OnModuleInit} from '@nestjs/common';
+import {ClientGrpc} from '@nestjs/microservices';
+
 import {
   COMMS_PACKAGE_NAME,
   COMMS_SERVICE_NAME,
   CommsServiceClient,
 } from './proto/comms';
+import {
+  PAYMENTS_PACKAGE_NAME,
+  PAYMENTS_SERVICE_NAME,
+  PaymentsServiceClient,
+} from './proto/payments';
 
 @Controller()
 export class RlMicroApiGatewayController implements OnModuleInit {

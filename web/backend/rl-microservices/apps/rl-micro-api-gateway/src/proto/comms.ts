@@ -5,10 +5,10 @@
 // source: proto/comms.proto
 
 /* eslint-disable */
-import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
-import { Observable } from "rxjs";
+import {GrpcMethod, GrpcStreamMethod} from '@nestjs/microservices';
+import {Observable} from 'rxjs';
 
-export const protobufPackage = "comms";
+export const protobufPackage = 'comms';
 
 export interface GetPublicApplicationMessagesDto {
   email: string;
@@ -33,31 +33,50 @@ export interface ApplicationMessageDtos {
   messages: ApplicationMessageDto[];
 }
 
-export const COMMS_PACKAGE_NAME = "comms";
+export const COMMS_PACKAGE_NAME = 'comms';
 
 export interface CommsServiceClient {
-  getPublicApplicationMessages(request: GetPublicApplicationMessagesDto): Observable<ApplicationMessageDtos>;
+  getPublicApplicationMessages(
+    request: GetPublicApplicationMessagesDto,
+  ): Observable<ApplicationMessageDtos>;
 }
 
 export interface CommsServiceController {
   getPublicApplicationMessages(
     request: GetPublicApplicationMessagesDto,
-  ): Promise<ApplicationMessageDtos> | Observable<ApplicationMessageDtos> | ApplicationMessageDtos;
+  ):
+    | Promise<ApplicationMessageDtos>
+    | Observable<ApplicationMessageDtos>
+    | ApplicationMessageDtos;
 }
 
 export function CommsServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ["getPublicApplicationMessages"];
+    const grpcMethods: string[] = ['getPublicApplicationMessages'];
     for (const method of grpcMethods) {
-      const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
-      GrpcMethod("CommsService", method)(constructor.prototype[method], method, descriptor);
+      const descriptor: any = Reflect.getOwnPropertyDescriptor(
+        constructor.prototype,
+        method,
+      );
+      GrpcMethod('CommsService', method)(
+        constructor.prototype[method],
+        method,
+        descriptor,
+      );
     }
     const grpcStreamMethods: string[] = [];
     for (const method of grpcStreamMethods) {
-      const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
-      GrpcStreamMethod("CommsService", method)(constructor.prototype[method], method, descriptor);
+      const descriptor: any = Reflect.getOwnPropertyDescriptor(
+        constructor.prototype,
+        method,
+      );
+      GrpcStreamMethod('CommsService', method)(
+        constructor.prototype[method],
+        method,
+        descriptor,
+      );
     }
   };
 }
 
-export const COMMS_SERVICE_NAME = "CommsService";
+export const COMMS_SERVICE_NAME = 'CommsService';

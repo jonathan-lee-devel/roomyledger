@@ -1,7 +1,8 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
+import {INestApplication} from '@nestjs/common';
+import {Test, TestingModule} from '@nestjs/testing';
 import * as request from 'supertest';
-import { RlMicroApiGatewayModule } from './../src/rl-micro-api-gateway.module';
+
+import {RlMicroApiGatewayModule} from './../src/rl-micro-api-gateway.module';
 
 describe('RlMicroApiGatewayController (e2e)', () => {
   let app: INestApplication;

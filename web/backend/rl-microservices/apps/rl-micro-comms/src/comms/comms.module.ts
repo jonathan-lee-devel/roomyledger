@@ -1,6 +1,7 @@
-import { Module } from '@nestjs/common';
-import { CommsService } from './comms.service';
-import { CommsController } from './comms.controller';
+import {Module} from '@nestjs/common';
+
+import {CommsController} from './comms.controller';
+import {CommsService} from './comms.service';
 
 @Module({
   controllers: [CommsController],

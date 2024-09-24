@@ -1,12 +1,13 @@
-import { Controller, Inject, Logger, OnModuleInit } from '@nestjs/common';
-import { map, Observable } from 'rxjs';
-import { commsProto } from '@rl-gw';
+import {Controller, Inject, Logger, OnModuleInit} from '@nestjs/common';
+import {ClientGrpc} from '@nestjs/microservices';
+import {commsProto} from '@rl-gw';
+import {map, Observable} from 'rxjs';
+
 import {
   PAYMENTS_PACKAGE_NAME,
   PAYMENTS_SERVICE_NAME,
   PaymentsServiceClient,
 } from '../../../rl-micro-api-gateway/src/proto/payments';
-import { ClientGrpc } from '@nestjs/microservices';
 
 @Controller()
 @commsProto.CommsServiceControllerMethods()

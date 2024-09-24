@@ -1,6 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { RlMicroApiGatewayController } from './rl-micro-api-gateway.controller';
-import { RlMicroApiGatewayService } from './rl-micro-api-gateway.service';
+import {Test, TestingModule} from '@nestjs/testing';
+
+import {RlMicroApiGatewayController} from './rl-micro-api-gateway.controller';
+import {RlMicroApiGatewayService} from './rl-micro-api-gateway.service';
 
 describe('RlMicroApiGatewayController', () => {
   let rlMicroApiGatewayController: RlMicroApiGatewayController;
@@ -11,7 +12,9 @@ describe('RlMicroApiGatewayController', () => {
       providers: [RlMicroApiGatewayService],
     }).compile();
 
-    rlMicroApiGatewayController = app.get<RlMicroApiGatewayController>(RlMicroApiGatewayController);
+    rlMicroApiGatewayController = app.get<RlMicroApiGatewayController>(
+      RlMicroApiGatewayController,
+    );
   });
 
   describe('root', () => {

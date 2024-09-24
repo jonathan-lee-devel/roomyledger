@@ -1,10 +1,11 @@
-import { Logger, Module } from '@nestjs/common';
-import { CommsController } from './comms/comms.controller';
-import { CommsService } from './comms/comms.service';
-import { ClientsModule, Transport } from '@nestjs/microservices';
-import { PAYMENTS_PACKAGE_NAME } from '../../rl-micro-api-gateway/src/proto/payments';
-import { getProtoPath } from '@rl-config/config';
-import { paymentsProto } from '@rl-gw';
+import {Logger, Module} from '@nestjs/common';
+import {ClientsModule, Transport} from '@nestjs/microservices';
+import {getProtoPath} from '@rl-config/config';
+import {paymentsProto} from '@rl-gw';
+
+import {CommsController} from './comms/comms.controller';
+import {CommsService} from './comms/comms.service';
+import {PAYMENTS_PACKAGE_NAME} from '../../rl-micro-api-gateway/src/proto/payments';
 
 @Module({
   imports: [
