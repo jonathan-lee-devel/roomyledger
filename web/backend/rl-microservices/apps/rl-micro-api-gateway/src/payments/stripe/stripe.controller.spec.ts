@@ -1,5 +1,6 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { StripeController } from './stripe.controller';
+import {Test, TestingModule} from '@nestjs/testing';
+
+import {StripeController} from './stripe.controller';
 
 describe('StripeController', () => {
   let controller: StripeController;

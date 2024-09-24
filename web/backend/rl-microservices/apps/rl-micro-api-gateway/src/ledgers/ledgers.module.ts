@@ -1,8 +1,9 @@
-import { Module } from '@nestjs/common';
-import { PropertiesController } from './properties/properties.controller';
-import { ExpensesController } from './expenses/expenses.controller';
+import {Module} from '@nestjs/common';
+
+import {ExpensesController} from './expenses/expenses.controller';
+import {PropertiesController} from './properties/properties.controller';
 
 @Module({
-  controllers: [PropertiesController, ExpensesController]
+  controllers: [PropertiesController, ExpensesController],
 })
 export class LedgersModule {}

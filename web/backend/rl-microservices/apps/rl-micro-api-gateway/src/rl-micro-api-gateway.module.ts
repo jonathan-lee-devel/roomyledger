@@ -5,12 +5,12 @@ import {environment} from '@rl-config/config/environment.index';
 import {commsProto, paymentsProto} from '@rl-gw';
 import dotenv from 'dotenv';
 
+import {CommsModule} from './comms/comms.module';
+import {LedgersModule} from './ledgers/ledgers.module';
+import {PaymentsModule} from './payments/payments.module';
 import {RlMicroApiGatewayController} from './rl-micro-api-gateway.controller';
 import {RlMicroApiGatewayService} from './rl-micro-api-gateway.service';
-import { CommsModule } from './comms/comms.module';
-import { PaymentsModule } from './payments/payments.module';
-import { LedgersModule } from './ledgers/ledgers.module';
-import { UsersModule } from './users/users.module';
+import {UsersModule} from './users/users.module';
 
 dotenv.config();
 

@@ -1,5 +1,6 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { PreferencesController } from './preferences.controller';
+import {Test, TestingModule} from '@nestjs/testing';
+
+import {PreferencesController} from './preferences.controller';
 
 describe('PreferencesController', () => {
   let controller: PreferencesController;

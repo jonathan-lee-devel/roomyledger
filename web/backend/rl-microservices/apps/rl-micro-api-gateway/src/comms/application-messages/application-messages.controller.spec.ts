@@ -1,5 +1,6 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { ApplicationMessagesController } from './application-messages.controller';
+import {Test, TestingModule} from '@nestjs/testing';
+
+import {ApplicationMessagesController} from './application-messages.controller';
 
 describe('ApplicationMessagesController', () => {
   let controller: ApplicationMessagesController;
@@ -9,7 +10,9 @@ describe('ApplicationMessagesController', () => {
       controllers: [ApplicationMessagesController],
     }).compile();
 
-    controller = module.get<ApplicationMessagesController>(ApplicationMessagesController);
+    controller = module.get<ApplicationMessagesController>(
+      ApplicationMessagesController,
+    );
   });
 
   it('should be defined', () => {

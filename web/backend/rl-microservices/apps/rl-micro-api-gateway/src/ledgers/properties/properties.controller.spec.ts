@@ -1,5 +1,6 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { PropertiesController } from './properties.controller';
+import {Test, TestingModule} from '@nestjs/testing';
+
+import {PropertiesController} from './properties.controller';
 
 describe('PropertiesController', () => {
   let controller: PropertiesController;
