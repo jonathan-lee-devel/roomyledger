@@ -1,10 +1,31 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { CommsController } from './comms/comms.controller';
 import { CommsService } from './comms/comms.service';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+import { PAYMENTS_PACKAGE_NAME } from '../../rl-micro-api-gateway/src/proto/payments';
+import { getProtoPath } from '@rl-config/config';
 
 @Module({
-  imports: [],
+  imports: [
+    ClientsModule.register([
+      {
+        transport: Transport.GRPC,
+        name: PAYMENTS_PACKAGE_NAME,
+        options: {
+          url: `localhost:10000`,
+          protoPath: getProtoPath('payments.proto'),
+          package: PAYMENTS_PACKAGE_NAME,
+        },
+      },
+    ]),
+  ],
   controllers: [CommsController],
-  providers: [CommsService],
+  providers: [
+    {
+      provide: Logger,
+      useFactory: () => new Logger(RlMicroCommsModule.name),
+    },
+    CommsService,
+  ],
 })
 export class RlMicroCommsModule {}
