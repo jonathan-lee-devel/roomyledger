@@ -18,7 +18,7 @@ dotenv.config();
         name: PAYMENTS_PACKAGE_NAME,
         options: {
           url: `localhost:10000`,
-          protoPath: getProtoPath('payments.proto'),
+          protoPath: getProtoPath(PAYMENTS_PACKAGE_NAME),
           package: PAYMENTS_PACKAGE_NAME,
         },
       },
@@ -27,7 +27,7 @@ dotenv.config();
         name: COMMS_PACKAGE_NAME,
         options: {
           url: `localhost:10001`,
-          protoPath: getProtoPath('comms.proto'),
+          protoPath: getProtoPath(COMMS_PACKAGE_NAME),
           package: COMMS_PACKAGE_NAME,
         },
       },

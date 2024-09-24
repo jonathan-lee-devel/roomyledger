@@ -1,5 +1,5 @@
 import { join } from 'path';
 
-export const getProtoPath = (protoFile: string) => {
-  return join(__dirname, `../proto/${protoFile}`);
+export const getProtoPath = (protoPackageName: string) => {
+  return join(__dirname, `../proto/${protoPackageName}.proto`);
 };

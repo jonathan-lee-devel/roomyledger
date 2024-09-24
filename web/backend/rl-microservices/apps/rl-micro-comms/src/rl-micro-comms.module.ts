@@ -13,7 +13,7 @@ import { getProtoPath } from '@rl-config/config';
         name: PAYMENTS_PACKAGE_NAME,
         options: {
           url: `localhost:10000`,
-          protoPath: getProtoPath('payments.proto'),
+          protoPath: getProtoPath(PAYMENTS_PACKAGE_NAME),
           package: PAYMENTS_PACKAGE_NAME,
         },
       },

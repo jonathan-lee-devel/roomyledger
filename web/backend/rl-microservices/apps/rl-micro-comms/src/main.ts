@@ -5,6 +5,7 @@ import { getProtoPath } from '@rl-config/config';
 
 import dotenv from 'dotenv';
 import { commsProto } from '@rl-gw';
+import { COMMS_PACKAGE_NAME } from '../../rl-micro-api-gateway/src/proto/comms';
 
 dotenv.config();
 
@@ -16,7 +17,7 @@ async function bootstrap() {
       options: {
         url: `0.0.0.0:10001`,
         package: commsProto.COMMS_PACKAGE_NAME,
-        protoPath: getProtoPath('comms.proto'),
+        protoPath: getProtoPath(COMMS_PACKAGE_NAME),
       },
     },
   );
