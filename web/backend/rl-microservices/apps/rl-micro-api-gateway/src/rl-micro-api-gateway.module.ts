@@ -17,7 +17,7 @@ dotenv.config();
         transport: Transport.GRPC,
         name: PAYMENTS_PACKAGE_NAME,
         options: {
-          url: `${process.env.PAYMENTS_SERVICE_DOMAIN}:10000`,
+          url: `localhost:10000`,
           protoPath: getProtoPath('payments.proto'),
           package: PAYMENTS_PACKAGE_NAME,
         },
@@ -26,7 +26,7 @@ dotenv.config();
         transport: Transport.GRPC,
         name: COMMS_PACKAGE_NAME,
         options: {
-          url: `${process.env.COMMS_SERVICE_DOMAIN}:10001`,
+          url: `localhost:10001`,
           protoPath: getProtoPath('comms.proto'),
           package: COMMS_PACKAGE_NAME,
         },
