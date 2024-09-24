@@ -4,7 +4,7 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { getProtoPath } from '@rl-config/config';
 
 import dotenv from 'dotenv';
-import { COMMS_PACKAGE_NAME } from '../../rl-micro-api-gateway/src/proto/comms';
+import { commsProto } from '@rl-gw';
 
 dotenv.config();
 
@@ -15,11 +15,12 @@ async function bootstrap() {
       transport: Transport.GRPC,
       options: {
         url: `0.0.0.0:10001`,
-        package: COMMS_PACKAGE_NAME,
+        package: commsProto.COMMS_PACKAGE_NAME,
         protoPath: getProtoPath('comms.proto'),
       },
     },
   );
   await app.listen();
 }
-bootstrap();
+
+bootstrap().catch((reason) => console.error(reason));

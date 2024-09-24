@@ -1,24 +1,19 @@
 import { Controller } from '@nestjs/common';
 import { CommsService } from './comms.service';
 import { Observable } from 'rxjs';
-import {
-  ApplicationMessageDtos,
-  CommsServiceController,
-  CommsServiceControllerMethods,
-  GetPublicApplicationMessagesDto,
-} from '../../../rl-micro-api-gateway/src/proto/comms';
+import { commsProto } from '@rl-gw';
 
 @Controller()
-@CommsServiceControllerMethods()
-export class CommsController implements CommsServiceController {
+@commsProto.CommsServiceControllerMethods()
+export class CommsController implements commsProto.CommsServiceController {
   constructor(private readonly commsService: CommsService) {}
 
   getPublicApplicationMessages(
-    request: GetPublicApplicationMessagesDto,
+    request: commsProto.GetPublicApplicationMessagesDto,
   ):
-    | Promise<ApplicationMessageDtos>
-    | Observable<ApplicationMessageDtos>
-    | ApplicationMessageDtos {
+    | Promise<commsProto.ApplicationMessageDtos>
+    | Observable<commsProto.ApplicationMessageDtos>
+    | commsProto.ApplicationMessageDtos {
     return {
       messages: [
         {

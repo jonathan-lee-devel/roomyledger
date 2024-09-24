@@ -19,6 +19,9 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
+      "@rl-gw": [
+        "apps/rl-micro-api-gateway/src"
+      ],
       "@rl-validation/validation": [
         "libs/validation/src"
       ],

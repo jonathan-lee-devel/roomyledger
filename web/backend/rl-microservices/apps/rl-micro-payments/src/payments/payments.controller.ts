@@ -1,26 +1,21 @@
 import { Controller } from '@nestjs/common';
 import { PaymentsService } from './payments.service';
 import { Observable } from 'rxjs';
-import {
-  GetPaymentStatusForEmailDto,
-  GetPaymentStatusForUserIdDto,
-  PaymentsServiceController,
-  PaymentsServiceControllerMethods,
-  PaymentsStatusDto,
-} from '../../../rl-micro-api-gateway/src/proto/payments';
+import { paymentsProto } from '@rl-gw';
 
 @Controller()
-@PaymentsServiceControllerMethods()
-export class PaymentsController implements PaymentsServiceController {
+@paymentsProto.PaymentsServiceControllerMethods()
+export class PaymentsController
+  implements paymentsProto.PaymentsServiceController
+{
   constructor(private readonly paymentsService: PaymentsService) {}
 
-  // @GrpcMethod(PAYMENTS_SERVICE_NAME, 'GetPaymentStatusForUserId')
   getPaymentStatusForUserId(
-    request: GetPaymentStatusForUserIdDto,
+    request: paymentsProto.GetPaymentStatusForUserIdDto,
   ):
-    | Promise<PaymentsStatusDto>
-    | Observable<PaymentsStatusDto>
-    | PaymentsStatusDto {
+    | Promise<paymentsProto.PaymentsStatusDto>
+    | Observable<paymentsProto.PaymentsStatusDto>
+    | paymentsProto.PaymentsStatusDto {
     return {
       id: request.id,
       email: 'test@example.com',
@@ -28,13 +23,12 @@ export class PaymentsController implements PaymentsServiceController {
     };
   }
 
-  // @GrpcMethod(PAYMENTS_SERVICE_NAME, 'GetPaymentStatusForEmail')
   getPaymentStatusForEmail(
-    request: GetPaymentStatusForEmailDto,
+    request: paymentsProto.GetPaymentStatusForEmailDto,
   ):
-    | Promise<PaymentsStatusDto>
-    | Observable<PaymentsStatusDto>
-    | PaymentsStatusDto {
+    | Promise<paymentsProto.PaymentsStatusDto>
+    | Observable<paymentsProto.PaymentsStatusDto>
+    | paymentsProto.PaymentsStatusDto {
     return {
       id: '12345',
       email: request.email,

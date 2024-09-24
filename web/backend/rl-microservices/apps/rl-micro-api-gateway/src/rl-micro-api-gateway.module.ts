@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { RlMicroApiGatewayController } from './rl-micro-api-gateway.controller';
 import { RlMicroApiGatewayService } from './rl-micro-api-gateway.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
@@ -34,6 +34,12 @@ dotenv.config();
     ]),
   ],
   controllers: [RlMicroApiGatewayController],
-  providers: [RlMicroApiGatewayService],
+  providers: [
+    {
+      provide: Logger,
+      useFactory: () => new Logger(RlMicroApiGatewayModule.name),
+    },
+    RlMicroApiGatewayService,
+  ],
 })
 export class RlMicroApiGatewayModule {}

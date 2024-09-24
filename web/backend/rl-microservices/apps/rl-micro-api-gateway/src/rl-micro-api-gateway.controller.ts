@@ -1,5 +1,4 @@
-import { Controller, Get, Inject, OnModuleInit } from '@nestjs/common';
-import { RlMicroApiGatewayService } from './rl-micro-api-gateway.service';
+import { Controller, Get, Inject, Logger, OnModuleInit } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import {
   PAYMENTS_PACKAGE_NAME,
@@ -18,7 +17,7 @@ export class RlMicroApiGatewayController implements OnModuleInit {
   private commsServiceClient: CommsServiceClient;
 
   constructor(
-    private readonly rlMicroApiGatewayService: RlMicroApiGatewayService,
+    private readonly logger: Logger,
     @Inject(PAYMENTS_PACKAGE_NAME)
     private readonly paymentsClientGrpc: ClientGrpc,
     @Inject(COMMS_PACKAGE_NAME)
@@ -34,13 +33,9 @@ export class RlMicroApiGatewayController implements OnModuleInit {
       this.commsClientGrpc.getService<CommsServiceClient>(COMMS_SERVICE_NAME);
   }
 
-  @Get()
-  getHello(): string {
-    return this.rlMicroApiGatewayService.getHello();
-  }
-
   @Get('payment-status')
   getPaymentStatus() {
+    this.logger.log(`Request to get payment status for user with ID: 12345`);
     return this.paymentsServiceClient.getPaymentStatusForUserId({
       id: '12345',
     });
@@ -48,6 +43,9 @@ export class RlMicroApiGatewayController implements OnModuleInit {
 
   @Get('public-messages')
   getPublicMessages() {
+    this.logger.log(
+      `Request to get public-messages for user with e-mail test@test.com`,
+    );
     return this.commsServiceClient.getPublicApplicationMessages({
       email: 'test@test.com',
     });
