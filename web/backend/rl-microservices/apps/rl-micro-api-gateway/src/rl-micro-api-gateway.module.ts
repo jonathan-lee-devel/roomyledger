@@ -7,6 +7,10 @@ import dotenv from 'dotenv';
 
 import {RlMicroApiGatewayController} from './rl-micro-api-gateway.controller';
 import {RlMicroApiGatewayService} from './rl-micro-api-gateway.service';
+import { CommsModule } from './comms/comms.module';
+import { PaymentsModule } from './payments/payments.module';
+import { LedgersModule } from './ledgers/ledgers.module';
+import { UsersModule } from './users/users.module';
 
 dotenv.config();
 
@@ -32,6 +36,10 @@ dotenv.config();
         },
       },
     ]),
+    CommsModule,
+    PaymentsModule,
+    LedgersModule,
+    UsersModule,
   ],
   controllers: [RlMicroApiGatewayController],
   providers: [
