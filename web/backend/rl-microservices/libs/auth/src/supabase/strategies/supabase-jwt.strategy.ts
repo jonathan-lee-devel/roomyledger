@@ -2,13 +2,13 @@ import {Injectable} from '@nestjs/common';
 import {ConfigService} from '@nestjs/config';
 import {JwtService} from '@nestjs/jwt';
 import {PassportStrategy} from '@nestjs/passport';
+import {EnvironmentVariables} from '@rl-config/config/environment.index';
 import {Request} from 'express';
 import {ParamsDictionary} from 'express-serve-static-core';
 import {UNAUTHORIZED} from 'nestjs-supabase-auth';
 import {ExtractJwt} from 'passport-jwt';
 import {ParsedQs} from 'qs';
 
-import {EnvironmentVariables} from '../../../../config/environment';
 import {SupabaseAuthStrategy} from '../passport/passport-supabase.strategy';
 
 @Injectable()
@@ -48,6 +48,7 @@ export class SupabaseJwtStrategy extends PassportStrategy(
     try {
       payload = await this.jwtService.verifyAsync(accessToken);
     } catch (error) {
+      this.logger.error(`Error during validation, ${error.message}`);
       this.fail(UNAUTHORIZED, 401);
       return;
     }

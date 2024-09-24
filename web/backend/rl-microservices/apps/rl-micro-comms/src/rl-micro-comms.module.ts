@@ -3,9 +3,11 @@ import {ClientsModule, Transport} from '@nestjs/microservices';
 import {getProtoPath} from '@rl-config/config';
 import {environment} from '@rl-config/config/environment.index';
 import {paymentsProto} from '@rl-gw';
+import {PrismaModule} from '@rl-prisma/prisma';
 
 import {CommsController} from './comms/comms.controller';
 import {CommsService} from './comms/comms.service';
+import {NotificationsService} from './notifications/services/notifications.service';
 
 @Module({
   imports: [
@@ -20,6 +22,7 @@ import {CommsService} from './comms/comms.service';
         },
       },
     ]),
+    PrismaModule,
   ],
   controllers: [CommsController],
   providers: [
@@ -28,6 +31,7 @@ import {CommsService} from './comms/comms.service';
       useFactory: () => new Logger(RlMicroCommsModule.name),
     },
     CommsService,
+    NotificationsService,
   ],
 })
 export class RlMicroCommsModule {}

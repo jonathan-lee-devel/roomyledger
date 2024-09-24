@@ -1,7 +1,9 @@
 import {Controller, Get, Inject, Logger, OnModuleInit} from '@nestjs/common';
 import {ClientGrpc} from '@nestjs/microservices';
 import {ApiTags} from '@nestjs/swagger';
+import {CurrentUser} from '@rl-auth/auth/supabase/decorators/current-user.decorator';
 import {paymentsProto} from '@rl-gw';
+import {AuthUser} from '@supabase/supabase-js';
 
 import {PaymentsServiceClient} from '../../proto/payments';
 
@@ -23,11 +25,13 @@ export class CustomersController implements OnModuleInit {
       );
   }
 
-  @Get('payment-status')
-  getPaymentStatus() {
-    this.logger.log(`Request to get payment status for user with ID: 12345`);
+  @Get('status')
+  getCustomerPaymentStatus(@CurrentUser() currentUser: AuthUser) {
+    this.logger.log(
+      `Request to get payment status for user with ID: ${currentUser.id}`,
+    );
     return this.paymentsServiceClient.getPaymentStatusForUserId({
-      id: '12345',
+      id: currentUser.id,
     });
   }
 }

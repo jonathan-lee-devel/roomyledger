@@ -1,9 +1,13 @@
-import {Module} from '@nestjs/common';
-
-import {EmailService} from './email.service';
+import {Logger, Module} from '@nestjs/common';
+import {EmailService} from '@rl-email/email/services/email.service';
 
 @Module({
-  providers: [EmailService],
-  exports: [EmailService],
+  providers: [
+    {
+      provide: Logger,
+      useFactory: () => new Logger(EmailModule.name),
+    },
+    EmailService,
+  ],
 })
 export class EmailModule {}

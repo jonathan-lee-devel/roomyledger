@@ -5,10 +5,10 @@
 // source: proto/payments.proto
 
 /* eslint-disable */
-import {GrpcMethod, GrpcStreamMethod} from '@nestjs/microservices';
-import {Observable} from 'rxjs';
+import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
+import { Observable } from "rxjs";
 
-export const protobufPackage = 'payments';
+export const protobufPackage = "payments";
 
 export interface GetPaymentStatusForUserIdDto {
   id: string;
@@ -19,69 +19,41 @@ export interface GetPaymentStatusForEmailDto {
 }
 
 export interface PaymentsStatusDto {
-  id: string;
-  email: string;
   status: string;
+  trialEndDate?: string | undefined;
 }
 
-export const PAYMENTS_PACKAGE_NAME = 'payments';
+export const PAYMENTS_PACKAGE_NAME = "payments";
 
 export interface PaymentsServiceClient {
-  getPaymentStatusForUserId(
-    request: GetPaymentStatusForUserIdDto,
-  ): Observable<PaymentsStatusDto>;
+  getPaymentStatusForUserId(request: GetPaymentStatusForUserIdDto): Observable<PaymentsStatusDto>;
 
-  getPaymentStatusForEmail(
-    request: GetPaymentStatusForEmailDto,
-  ): Observable<PaymentsStatusDto>;
+  getPaymentStatusForEmail(request: GetPaymentStatusForEmailDto): Observable<PaymentsStatusDto>;
 }
 
 export interface PaymentsServiceController {
   getPaymentStatusForUserId(
     request: GetPaymentStatusForUserIdDto,
-  ):
-    | Promise<PaymentsStatusDto>
-    | Observable<PaymentsStatusDto>
-    | PaymentsStatusDto;
+  ): Promise<PaymentsStatusDto> | Observable<PaymentsStatusDto> | PaymentsStatusDto;
 
   getPaymentStatusForEmail(
     request: GetPaymentStatusForEmailDto,
-  ):
-    | Promise<PaymentsStatusDto>
-    | Observable<PaymentsStatusDto>
-    | PaymentsStatusDto;
+  ): Promise<PaymentsStatusDto> | Observable<PaymentsStatusDto> | PaymentsStatusDto;
 }
 
 export function PaymentsServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = [
-      'getPaymentStatusForUserId',
-      'getPaymentStatusForEmail',
-    ];
+    const grpcMethods: string[] = ["getPaymentStatusForUserId", "getPaymentStatusForEmail"];
     for (const method of grpcMethods) {
-      const descriptor: any = Reflect.getOwnPropertyDescriptor(
-        constructor.prototype,
-        method,
-      );
-      GrpcMethod('PaymentsService', method)(
-        constructor.prototype[method],
-        method,
-        descriptor,
-      );
+      const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
+      GrpcMethod("PaymentsService", method)(constructor.prototype[method], method, descriptor);
     }
     const grpcStreamMethods: string[] = [];
     for (const method of grpcStreamMethods) {
-      const descriptor: any = Reflect.getOwnPropertyDescriptor(
-        constructor.prototype,
-        method,
-      );
-      GrpcStreamMethod('PaymentsService', method)(
-        constructor.prototype[method],
-        method,
-        descriptor,
-      );
+      const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
+      GrpcStreamMethod("PaymentsService", method)(constructor.prototype[method], method, descriptor);
     }
   };
 }
 
-export const PAYMENTS_SERVICE_NAME = 'PaymentsService';
+export const PAYMENTS_SERVICE_NAME = "PaymentsService";

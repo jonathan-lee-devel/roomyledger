@@ -16,7 +16,6 @@ message GetPaymentStatusForEmailDto {
 }
 
 message PaymentsStatusDto {
-  string id = 1;
-  string email = 2;
-  string status = 3;
+  string status = 1;
+  optional string trialEndDate = 2;
 }

@@ -5,13 +5,18 @@
 // source: proto/comms.proto
 
 /* eslint-disable */
-import {GrpcMethod, GrpcStreamMethod} from '@nestjs/microservices';
-import {Observable} from 'rxjs';
+import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
+import { Observable } from "rxjs";
 
-export const protobufPackage = 'comms';
+export const protobufPackage = "comms";
 
-export interface GetPublicApplicationMessagesDto {
+export interface ByEmailDto {
   email: string;
+}
+
+export interface ByIdWithRequestingUserEmailDto {
+  requestingUserEmail: string;
+  id: string;
 }
 
 export interface ApplicationMessageDto {
@@ -33,50 +38,92 @@ export interface ApplicationMessageDtos {
   messages: ApplicationMessageDto[];
 }
 
-export const COMMS_PACKAGE_NAME = 'comms';
+export interface NotificationDto {
+  id: string;
+  userId: string;
+  title: string;
+  extendedMessage: string;
+  isAcknowledged: boolean;
+  type: string;
+  createdAt: string;
+  updatedAt: string;
+  invitationTokenValue?: string | undefined;
+  propertyId?: string | undefined;
+}
+
+export interface NotificationDtos {
+  notifications: NotificationDto[];
+}
+
+export const COMMS_PACKAGE_NAME = "comms";
 
 export interface CommsServiceClient {
-  getPublicApplicationMessages(
-    request: GetPublicApplicationMessagesDto,
-  ): Observable<ApplicationMessageDtos>;
+  getPublicApplicationMessages(request: ByEmailDto): Observable<ApplicationMessageDtos>;
+
+  getNotificationsForUserByEmail(request: ByEmailDto): Observable<NotificationDtos>;
+
+  acknowledgeAllNotificationsForUserByEmail(request: ByEmailDto): Observable<NotificationDtos>;
+
+  deleteAllNotificationsForUserByEmail(request: ByEmailDto): Observable<NotificationDtos>;
+
+  getNotificationById(request: ByIdWithRequestingUserEmailDto): Observable<NotificationDto>;
+
+  acknowledgeNotificationById(request: ByIdWithRequestingUserEmailDto): Observable<NotificationDto>;
+
+  deleteNotificationById(request: ByIdWithRequestingUserEmailDto): Observable<NotificationDto>;
 }
 
 export interface CommsServiceController {
   getPublicApplicationMessages(
-    request: GetPublicApplicationMessagesDto,
-  ):
-    | Promise<ApplicationMessageDtos>
-    | Observable<ApplicationMessageDtos>
-    | ApplicationMessageDtos;
+    request: ByEmailDto,
+  ): Promise<ApplicationMessageDtos> | Observable<ApplicationMessageDtos> | ApplicationMessageDtos;
+
+  getNotificationsForUserByEmail(
+    request: ByEmailDto,
+  ): Promise<NotificationDtos> | Observable<NotificationDtos> | NotificationDtos;
+
+  acknowledgeAllNotificationsForUserByEmail(
+    request: ByEmailDto,
+  ): Promise<NotificationDtos> | Observable<NotificationDtos> | NotificationDtos;
+
+  deleteAllNotificationsForUserByEmail(
+    request: ByEmailDto,
+  ): Promise<NotificationDtos> | Observable<NotificationDtos> | NotificationDtos;
+
+  getNotificationById(
+    request: ByIdWithRequestingUserEmailDto,
+  ): Promise<NotificationDto> | Observable<NotificationDto> | NotificationDto;
+
+  acknowledgeNotificationById(
+    request: ByIdWithRequestingUserEmailDto,
+  ): Promise<NotificationDto> | Observable<NotificationDto> | NotificationDto;
+
+  deleteNotificationById(
+    request: ByIdWithRequestingUserEmailDto,
+  ): Promise<NotificationDto> | Observable<NotificationDto> | NotificationDto;
 }
 
 export function CommsServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ['getPublicApplicationMessages'];
+    const grpcMethods: string[] = [
+      "getPublicApplicationMessages",
+      "getNotificationsForUserByEmail",
+      "acknowledgeAllNotificationsForUserByEmail",
+      "deleteAllNotificationsForUserByEmail",
+      "getNotificationById",
+      "acknowledgeNotificationById",
+      "deleteNotificationById",
+    ];
     for (const method of grpcMethods) {
-      const descriptor: any = Reflect.getOwnPropertyDescriptor(
-        constructor.prototype,
-        method,
-      );
-      GrpcMethod('CommsService', method)(
-        constructor.prototype[method],
-        method,
-        descriptor,
-      );
+      const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
+      GrpcMethod("CommsService", method)(constructor.prototype[method], method, descriptor);
     }
     const grpcStreamMethods: string[] = [];
     for (const method of grpcStreamMethods) {
-      const descriptor: any = Reflect.getOwnPropertyDescriptor(
-        constructor.prototype,
-        method,
-      );
-      GrpcStreamMethod('CommsService', method)(
-        constructor.prototype[method],
-        method,
-        descriptor,
-      );
+      const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
+      GrpcStreamMethod("CommsService", method)(constructor.prototype[method], method, descriptor);
     }
   };
 }
 
-export const COMMS_SERVICE_NAME = 'CommsService';
+export const COMMS_SERVICE_NAME = "CommsService";

@@ -3,11 +3,22 @@ syntax = "proto3";
 package comms;
 
 service CommsService {
-  rpc GetPublicApplicationMessages (GetPublicApplicationMessagesDto) returns (ApplicationMessageDtos) {}
+  rpc GetPublicApplicationMessages (ByEmailDto) returns (ApplicationMessageDtos) {}
+  rpc GetNotificationsForUserByEmail (ByEmailDto) returns (NotificationDtos) {}
+  rpc AcknowledgeAllNotificationsForUserByEmail (ByEmailDto) returns (NotificationDtos) {}
+  rpc DeleteAllNotificationsForUserByEmail (ByEmailDto) returns (NotificationDtos) {}
+  rpc GetNotificationById(ByIdWithRequestingUserEmailDto) returns (NotificationDto) {}
+  rpc AcknowledgeNotificationById (ByIdWithRequestingUserEmailDto) returns (NotificationDto) {}
+  rpc DeleteNotificationById (ByIdWithRequestingUserEmailDto) returns (NotificationDto) {}
 }
 
-message GetPublicApplicationMessagesDto {
+message ByEmailDto {
   string email = 1;
+}
+
+message ByIdWithRequestingUserEmailDto {
+  string requestingUserEmail = 1;
+  string id = 2;
 }
 
 message ApplicationMessageDto {
@@ -27,4 +38,21 @@ message ApplicationMessageDto {
 
 message ApplicationMessageDtos {
   repeated ApplicationMessageDto messages = 1;
+}
+
+message NotificationDto {
+  string id = 1;
+  string userId = 2;
+  string title = 3;
+  string extendedMessage = 4;
+  bool isAcknowledged = 5;
+  string type = 6;
+  string createdAt = 7;
+  string updatedAt = 8;
+  optional string invitationTokenValue = 9;
+  optional string propertyId = 10;
+}
+
+message NotificationDtos {
+  repeated NotificationDto notifications = 1;
 }

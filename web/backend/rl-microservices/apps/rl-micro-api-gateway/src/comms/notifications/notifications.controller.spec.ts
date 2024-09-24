@@ -1,4 +1,4 @@
-import {Test, TestingModule} from '@nestjs/testing';
+import {TestBed} from '@automock/jest';
 
 import {NotificationsController} from './notifications.controller';
 
@@ -6,11 +6,8 @@ describe('NotificationsController', () => {
   let controller: NotificationsController;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [NotificationsController],
-    }).compile();
-
-    controller = module.get<NotificationsController>(NotificationsController);
+    const {unit} = TestBed.create(NotificationsController).compile();
+    controller = unit;
   });
 
   it('should be defined', () => {

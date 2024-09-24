@@ -1,9 +1,8 @@
 import {Module} from '@nestjs/common';
-
-import {UtilService} from './util.service';
+import {RandomService} from '@rl-util/util/services/random.service';
 
 @Module({
-  providers: [UtilService],
-  exports: [UtilService],
+  providers: [RandomService],
+  exports: [RandomService],
 })
 export class UtilModule {}

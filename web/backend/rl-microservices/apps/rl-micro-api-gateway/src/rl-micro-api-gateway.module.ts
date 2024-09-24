@@ -4,6 +4,7 @@ import {APP_GUARD, RouterModule} from '@nestjs/core';
 import {EventEmitterModule} from '@nestjs/event-emitter';
 import {ClientsModule, Transport} from '@nestjs/microservices';
 import {ThrottlerGuard, ThrottlerModule} from '@nestjs/throttler';
+import {AuthModule} from '@rl-auth/auth';
 import {SupabaseAuthGuard} from '@rl-auth/auth/supabase/guards/supabase-auth/supabase-auth.guard';
 import {getProtoPath} from '@rl-config/config';
 import {environment} from '@rl-config/config/environment.index';
@@ -21,8 +22,8 @@ dotenv.config();
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    RouterModule.register(routes),
     EventEmitterModule.forRoot(),
+    RouterModule.register(routes),
     ThrottlerModule.forRoot([
       {
         ttl: 5_000,
@@ -49,6 +50,7 @@ dotenv.config();
         },
       },
     ]),
+    AuthModule,
     CommsModule,
     PaymentsModule,
     LedgersModule,

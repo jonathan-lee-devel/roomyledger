@@ -1,65 +1,82 @@
-import {Controller, Inject, Logger, OnModuleInit} from '@nestjs/common';
-import {ClientGrpc} from '@nestjs/microservices';
+import {Controller} from '@nestjs/common';
 import {commsProto} from '@rl-gw';
-import {map, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 
 import {
-  PAYMENTS_PACKAGE_NAME,
-  PAYMENTS_SERVICE_NAME,
-  PaymentsServiceClient,
-} from '../../../rl-micro-api-gateway/src/proto/payments';
+  ApplicationMessageDtos,
+  ByEmailDto,
+} from '../../../rl-micro-api-gateway/src/proto/comms';
+import {NotificationsService} from '../notifications/services/notifications.service';
 
 @Controller()
 @commsProto.CommsServiceControllerMethods()
-export class CommsController
-  implements commsProto.CommsServiceController, OnModuleInit
-{
-  private paymentsServiceClient: PaymentsServiceClient;
+export class CommsController implements commsProto.CommsServiceController {
+  constructor(private readonly notificationsService: NotificationsService) {}
 
-  constructor(
-    private readonly logger: Logger,
-    @Inject(PAYMENTS_PACKAGE_NAME)
-    private readonly paymentsClientGrpc: ClientGrpc,
-  ) {}
-
-  async onModuleInit() {
-    this.paymentsServiceClient =
-      this.paymentsClientGrpc.getService<PaymentsServiceClient>(
-        PAYMENTS_SERVICE_NAME,
-      );
+  getNotificationsForUserByEmail(
+    request: commsProto.ByEmailDto,
+  ):
+    | Promise<commsProto.NotificationDtos>
+    | Observable<commsProto.NotificationDtos>
+    | commsProto.NotificationDtos {
+    return this.notificationsService.findAllForUser(request.email);
+  }
+  acknowledgeAllNotificationsForUserByEmail(
+    request: commsProto.ByEmailDto,
+  ):
+    | Promise<commsProto.NotificationDtos>
+    | Observable<commsProto.NotificationDtos>
+    | commsProto.NotificationDtos {
+    return this.notificationsService.acknowledgeAllForUser(request.email);
+  }
+  deleteAllNotificationsForUserByEmail(
+    request: commsProto.ByEmailDto,
+  ):
+    | Promise<commsProto.NotificationDtos>
+    | Observable<commsProto.NotificationDtos>
+    | commsProto.NotificationDtos {
+    return this.notificationsService.deleteAllForUser(request.email);
+  }
+  getNotificationById(
+    request: commsProto.ByIdWithRequestingUserEmailDto,
+  ):
+    | Promise<commsProto.NotificationDto>
+    | Observable<commsProto.NotificationDto>
+    | commsProto.NotificationDto {
+    return this.notificationsService.findOne(
+      request.requestingUserEmail,
+      request.id,
+    );
+  }
+  acknowledgeNotificationById(
+    request: commsProto.ByIdWithRequestingUserEmailDto,
+  ):
+    | Promise<commsProto.NotificationDto>
+    | Observable<commsProto.NotificationDto>
+    | commsProto.NotificationDto {
+    return this.notificationsService.acknowledgeOne(
+      request.requestingUserEmail,
+      request.id,
+    );
+  }
+  deleteNotificationById(
+    request: commsProto.ByIdWithRequestingUserEmailDto,
+  ):
+    | Promise<commsProto.NotificationDto>
+    | Observable<commsProto.NotificationDto>
+    | commsProto.NotificationDto {
+    return this.notificationsService.removeOne(
+      request.requestingUserEmail,
+      request.id,
+    );
   }
 
   getPublicApplicationMessages(
-    request: commsProto.GetPublicApplicationMessagesDto,
+    request: ByEmailDto,
   ):
-    | Promise<commsProto.ApplicationMessageDtos>
-    | Observable<commsProto.ApplicationMessageDtos>
-    | commsProto.ApplicationMessageDtos {
-    return this.paymentsServiceClient
-      .getPaymentStatusForUserId({
-        id: '12345',
-      })
-      .pipe(
-        map((paymentStatusResponse) => {
-          return {
-            messages: [
-              {
-                id: '12345',
-                message: `payment status: ${paymentStatusResponse.status}`,
-                title: 'Introduction',
-                isPublic: true,
-                isShow: true,
-                createdByEmail: request.email,
-                createdByUserId: '12345',
-                routerLink: '/login',
-                routerLinkText: 'Login',
-                severity: 'info',
-                createdAt: new Date().toISOString(),
-                updatedAt: new Date().toISOString(),
-              },
-            ],
-          };
-        }),
-      );
+    | Promise<ApplicationMessageDtos>
+    | Observable<ApplicationMessageDtos>
+    | ApplicationMessageDtos {
+    return {messages: []};
   }
 }
