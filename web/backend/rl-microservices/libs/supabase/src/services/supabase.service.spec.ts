@@ -1,4 +1,4 @@
-import {Test, TestingModule} from '@nestjs/testing';
+import {TestBed} from '@automock/jest';
 
 import {SupabaseService} from './supabase.service';
 
@@ -6,11 +6,8 @@ describe('SupabaseService', () => {
   let service: SupabaseService;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [SupabaseService],
-    }).compile();
-
-    service = module.get<SupabaseService>(SupabaseService);
+    const {unit} = TestBed.create(SupabaseService).compile();
+    service = unit;
   });
 
   it('should be defined', () => {

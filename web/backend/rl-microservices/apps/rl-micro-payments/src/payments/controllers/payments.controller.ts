@@ -2,7 +2,7 @@ import {Controller} from '@nestjs/common';
 import {paymentsProto} from '@rl-gw';
 import {Observable} from 'rxjs';
 
-import {PaymentsService} from './payments.service';
+import {PaymentsService} from '../services/payments.service';
 
 @Controller()
 @paymentsProto.PaymentsServiceControllerMethods()
@@ -17,11 +17,7 @@ export class PaymentsController
     | Promise<paymentsProto.PaymentsStatusDto>
     | Observable<paymentsProto.PaymentsStatusDto>
     | paymentsProto.PaymentsStatusDto {
-    return {
-      id: request.id,
-      email: 'test@example.com',
-      status: 'Test',
-    };
+    return this.paymentsService.getCustomerPaymentStatusByUserId(request.id);
   }
 
   getPaymentStatusForEmail(
@@ -30,10 +26,6 @@ export class PaymentsController
     | Promise<paymentsProto.PaymentsStatusDto>
     | Observable<paymentsProto.PaymentsStatusDto>
     | paymentsProto.PaymentsStatusDto {
-    return {
-      id: '12345',
-      email: request.email,
-      status: 'Test',
-    };
+    return this.paymentsService.getCustomerPaymentStatus(request.email);
   }
 }
