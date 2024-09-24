@@ -1,6 +1,7 @@
 import {NestFactory} from '@nestjs/core';
 import {MicroserviceOptions, Transport} from '@nestjs/microservices';
 import {getProtoPath} from '@rl-config/config';
+import {environment} from '@rl-config/config/environment.index';
 import {paymentsProto} from '@rl-gw';
 import dotenv from 'dotenv';
 
@@ -14,7 +15,7 @@ async function bootstrap() {
     {
       transport: Transport.GRPC,
       options: {
-        url: `0.0.0.0:10000`,
+        url: `${environment.paymentsService.listenAddress}:${environment.paymentsService.listenPort}`,
         package: paymentsProto.PAYMENTS_PACKAGE_NAME,
         protoPath: getProtoPath(paymentsProto.PAYMENTS_PACKAGE_NAME),
       },

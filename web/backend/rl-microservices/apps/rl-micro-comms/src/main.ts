@@ -1,6 +1,7 @@
 import {NestFactory} from '@nestjs/core';
 import {MicroserviceOptions, Transport} from '@nestjs/microservices';
 import {getProtoPath} from '@rl-config/config';
+import {environment} from '@rl-config/config/environment.index';
 import {commsProto} from '@rl-gw';
 import dotenv from 'dotenv';
 
@@ -14,7 +15,7 @@ async function bootstrap() {
     {
       transport: Transport.GRPC,
       options: {
-        url: `0.0.0.0:10001`,
+        url: `${environment.commsService.listenAddress}:${environment.commsService.listenPort}`,
         package: commsProto.COMMS_PACKAGE_NAME,
         protoPath: getProtoPath(commsProto.COMMS_PACKAGE_NAME),
       },

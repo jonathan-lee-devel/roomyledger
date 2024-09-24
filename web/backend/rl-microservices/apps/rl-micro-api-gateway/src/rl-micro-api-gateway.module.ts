@@ -1,6 +1,7 @@
 import {Logger, Module} from '@nestjs/common';
 import {ClientsModule, Transport} from '@nestjs/microservices';
 import {getProtoPath} from '@rl-config/config';
+import {environment} from '@rl-config/config/environment.index';
 import {commsProto, paymentsProto} from '@rl-gw';
 import dotenv from 'dotenv';
 
@@ -16,7 +17,7 @@ dotenv.config();
         transport: Transport.GRPC,
         name: paymentsProto.PAYMENTS_PACKAGE_NAME,
         options: {
-          url: `localhost:10000`,
+          url: `localhost:${environment.paymentsService.listenPort}`,
           protoPath: getProtoPath(paymentsProto.PAYMENTS_PACKAGE_NAME),
           package: paymentsProto.PAYMENTS_PACKAGE_NAME,
         },
@@ -25,7 +26,7 @@ dotenv.config();
         transport: Transport.GRPC,
         name: commsProto.COMMS_PACKAGE_NAME,
         options: {
-          url: `localhost:10001`,
+          url: `localhost:${environment.commsService.listenPort}`,
           protoPath: getProtoPath(commsProto.COMMS_PACKAGE_NAME),
           package: commsProto.COMMS_PACKAGE_NAME,
         },
