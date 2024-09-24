@@ -4,6 +4,7 @@ import { CommsService } from './comms/comms.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { PAYMENTS_PACKAGE_NAME } from '../../rl-micro-api-gateway/src/proto/payments';
 import { getProtoPath } from '@rl-config/config';
+import { paymentsProto } from '@rl-gw';
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { getProtoPath } from '@rl-config/config';
         name: PAYMENTS_PACKAGE_NAME,
         options: {
           url: `localhost:10000`,
-          protoPath: getProtoPath(PAYMENTS_PACKAGE_NAME),
+          protoPath: getProtoPath(paymentsProto.PAYMENTS_PACKAGE_NAME),
           package: PAYMENTS_PACKAGE_NAME,
         },
       },

@@ -5,8 +5,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { getProtoPath } from '@rl-config/config';
 
 import dotenv from 'dotenv';
-import { PAYMENTS_PACKAGE_NAME } from './proto/payments';
-import { COMMS_PACKAGE_NAME } from './proto/comms';
+import { commsProto, paymentsProto } from '@rl-gw';
 
 dotenv.config();
 
@@ -15,20 +14,20 @@ dotenv.config();
     ClientsModule.register([
       {
         transport: Transport.GRPC,
-        name: PAYMENTS_PACKAGE_NAME,
+        name: paymentsProto.PAYMENTS_PACKAGE_NAME,
         options: {
           url: `localhost:10000`,
-          protoPath: getProtoPath(PAYMENTS_PACKAGE_NAME),
-          package: PAYMENTS_PACKAGE_NAME,
+          protoPath: getProtoPath(paymentsProto.PAYMENTS_PACKAGE_NAME),
+          package: paymentsProto.PAYMENTS_PACKAGE_NAME,
         },
       },
       {
         transport: Transport.GRPC,
-        name: COMMS_PACKAGE_NAME,
+        name: commsProto.COMMS_PACKAGE_NAME,
         options: {
           url: `localhost:10001`,
-          protoPath: getProtoPath(COMMS_PACKAGE_NAME),
-          package: COMMS_PACKAGE_NAME,
+          protoPath: getProtoPath(commsProto.COMMS_PACKAGE_NAME),
+          package: commsProto.COMMS_PACKAGE_NAME,
         },
       },
     ]),

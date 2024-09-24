@@ -5,7 +5,6 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import dotenv from 'dotenv';
 import { getProtoPath } from '@rl-config/config';
 import { paymentsProto } from '@rl-gw';
-import { PAYMENTS_PACKAGE_NAME } from '../../rl-micro-api-gateway/src/proto/payments';
 
 dotenv.config();
 
@@ -17,7 +16,7 @@ async function bootstrap() {
       options: {
         url: `0.0.0.0:10000`,
         package: paymentsProto.PAYMENTS_PACKAGE_NAME,
-        protoPath: getProtoPath(PAYMENTS_PACKAGE_NAME),
+        protoPath: getProtoPath(paymentsProto.PAYMENTS_PACKAGE_NAME),
       },
     },
   );
