@@ -3,7 +3,7 @@ syntax = "proto3";
 package comms;
 
 service CommsService {
-  rpc GetPublicApplicationMessages (ByEmailDto) returns (ApplicationMessageDtos) {}
+  rpc GetPublicApplicationMessages (EmptyDto) returns (ApplicationMessageDtos) {}
   rpc GetNotificationsForUserByEmail (ByEmailDto) returns (NotificationDtos) {}
   rpc AcknowledgeAllNotificationsForUserByEmail (ByEmailDto) returns (NotificationDtos) {}
   rpc DeleteAllNotificationsForUserByEmail (ByEmailDto) returns (NotificationDtos) {}
@@ -11,6 +11,8 @@ service CommsService {
   rpc AcknowledgeNotificationById (ByIdWithRequestingUserEmailDto) returns (NotificationDto) {}
   rpc DeleteNotificationById (ByIdWithRequestingUserEmailDto) returns (NotificationDto) {}
 }
+
+message EmptyDto {}
 
 message ByEmailDto {
   string email = 1;

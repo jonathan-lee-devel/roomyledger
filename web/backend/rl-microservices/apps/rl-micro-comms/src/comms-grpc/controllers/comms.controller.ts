@@ -2,12 +2,16 @@ import {Controller} from '@nestjs/common';
 import {commsProto} from '@rl-gw';
 import {Observable} from 'rxjs';
 
+import {ApplicationMessagesService} from '../../application-messages/services/application-messages.service';
 import {NotificationsService} from '../../notifications/services/notifications.service';
 
 @Controller()
 @commsProto.CommsServiceControllerMethods()
 export class CommsController implements commsProto.CommsServiceController {
-  constructor(private readonly notificationsService: NotificationsService) {}
+  constructor(
+    private readonly notificationsService: NotificationsService,
+    private readonly applicationMessagesService: ApplicationMessagesService,
+  ) {}
 
   getNotificationsForUserByEmail(
     request: commsProto.ByEmailDto,
@@ -67,13 +71,10 @@ export class CommsController implements commsProto.CommsServiceController {
     );
   }
 
-  getPublicApplicationMessages(
-    request: commsProto.ByEmailDto,
-  ):
+  getPublicApplicationMessages():
     | Promise<commsProto.ApplicationMessageDtos>
     | Observable<commsProto.ApplicationMessageDtos>
     | commsProto.ApplicationMessageDtos {
-    console.log(request);
-    return {messages: []};
+    return this.applicationMessagesService.findAllPublicShownMessages();
   }
 }

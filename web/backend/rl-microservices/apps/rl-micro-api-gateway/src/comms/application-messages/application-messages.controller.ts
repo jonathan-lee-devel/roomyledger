@@ -26,7 +26,7 @@ export class ApplicationMessagesController implements OnModuleInit {
   @Get('public')
   getPublicMessages(@CurrentUser() currentUser: AuthUser) {
     this.logger.log(
-      `Request to get public-messages for user with e-mail test@test.com`,
+      `Request to get public-messages for user with e-mail ${currentUser.email}`,
     );
     return this.commsServiceClient.getPublicApplicationMessages({
       email: currentUser.email,

@@ -3,7 +3,6 @@ import {
   Delete,
   Get,
   Inject,
-  Logger,
   OnModuleInit,
   Param,
   Patch,
@@ -21,7 +20,6 @@ export class NotificationsController implements OnModuleInit {
   private commsServiceClient: commsProto.CommsServiceClient;
 
   constructor(
-    private readonly logger: Logger,
     @Inject(commsProto.COMMS_PACKAGE_NAME)
     private readonly commsClientGrpc: ClientGrpc,
   ) {}

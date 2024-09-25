@@ -10,6 +10,9 @@ import { Observable } from "rxjs";
 
 export const protobufPackage = "comms";
 
+export interface EmptyDto {
+}
+
 export interface ByEmailDto {
   email: string;
 }
@@ -58,7 +61,7 @@ export interface NotificationDtos {
 export const COMMS_PACKAGE_NAME = "comms";
 
 export interface CommsServiceClient {
-  getPublicApplicationMessages(request: ByEmailDto): Observable<ApplicationMessageDtos>;
+  getPublicApplicationMessages(request: EmptyDto): Observable<ApplicationMessageDtos>;
 
   getNotificationsForUserByEmail(request: ByEmailDto): Observable<NotificationDtos>;
 
@@ -75,7 +78,7 @@ export interface CommsServiceClient {
 
 export interface CommsServiceController {
   getPublicApplicationMessages(
-    request: ByEmailDto,
+    request: EmptyDto,
   ): Promise<ApplicationMessageDtos> | Observable<ApplicationMessageDtos> | ApplicationMessageDtos;
 
   getNotificationsForUserByEmail(
