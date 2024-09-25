@@ -1,5 +1,5 @@
 import {AsyncPipe, NgClass, NgIf, NgOptimizedImage} from '@angular/common';
-import {AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -10,7 +10,6 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTabsModule} from '@angular/material/tabs';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
-import {ShepherdService} from 'angular-shepherd';
 import {MenuItem} from 'primeng/api';
 import {Button} from 'primeng/button';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
@@ -76,7 +75,7 @@ import {ReportsTabComponent} from '../../../lib/_properties/reports-tab/reports-
   styleUrl: './properties-dashboard.component.scss',
   changeDetection: ChangeDetectionStrategy.Default,
 })
-export class PropertiesDashboardComponent implements OnInit, AfterViewInit, OnDestroy {
+export class PropertiesDashboardComponent implements OnInit, OnDestroy {
   protected readonly userAuthenticationStore = inject(UserAuthenticationStore);
   protected readonly propertiesStore = inject(PropertiesStore);
   protected readonly expensesStore = inject(ExpensesStore);
@@ -96,7 +95,6 @@ export class PropertiesDashboardComponent implements OnInit, AfterViewInit, OnDe
   private readonly utilService = inject(UtilService);
   private readonly TAB_QUERY_PARAM_KEY = 'tab';
   private readonly isInitialLoad = new BehaviorSubject<boolean>(true);
-  private readonly shepherdService: ShepherdService | null = inject(ShepherdService);
   private routeParamsSubscription?: Subscription;
   private routeQueryParamsSubscription?: Subscription;
 
@@ -139,24 +137,7 @@ export class PropertiesDashboardComponent implements OnInit, AfterViewInit, OnDe
         .subscribe();
   }
 
-  ngAfterViewInit() {
-    if (JSON.parse(localStorage.getItem('manage-first-ledger-tour') ?? 'false')) {
-      return;
-    }
-
-    if (this.shepherdService === null) {
-      return;
-    }
-
-    this.shepherdService.modal = false;
-    this.shepherdService.confirmCancel = false;
-    // @ts-expect-error using function to get all Step.StepOptions tour steps
-    this.shepherdService.addSteps(this.getTourSteps());
-    this.shepherdService.start();
-  }
-
   ngOnDestroy() {
-    // TODO: Re-enable this.shepherdService?.cancel();
     this.routeParamsSubscription?.unsubscribe();
     this.routeQueryParamsSubscription?.unsubscribe();
   }
@@ -265,104 +246,5 @@ export class PropertiesDashboardComponent implements OnInit, AfterViewInit, OnDe
 
   private resetReportsTabComponent() {
     this.date.setValue(new Date());
-  }
-
-  private getTourSteps() {
-    const expensesTabElement = document.querySelector('.tab-class-expenses') as HTMLElement;
-    const customSplitsTabElement = document.querySelector('.tab-class-custom-splits') as HTMLElement;
-    const reportsTabElement = document.querySelector('.tab-class-reports') as HTMLElement;
-    const peopleTabElement = document.querySelector('.tab-class-people') as HTMLElement;
-    if (!expensesTabElement || !customSplitsTabElement || !reportsTabElement || !peopleTabElement) {
-      return [];
-    }
-    return [{
-      id: 'expenses-tab',
-      arrow: true,
-      title: 'Expenses Tab',
-      text: 'View, Create, Approve, Dispute, and Comment on Expenses in this tab',
-      buttons: [
-        {
-          text: 'Next',
-          action: () => {
-            if (this.shepherdService !== null) {
-              this.shepherdService.next();
-            }
-          },
-        },
-      ],
-      attachTo: {
-        element: expensesTabElement,
-        on: 'top-end',
-      },
-    },
-    {
-      id: 'custom-splits-tab',
-      arrow: true,
-      title: 'Custom Splits Tab',
-      text: 'This is a premium feature, create custom splits for expenses that are divided unevenly',
-      buttons: [
-        {
-          text: 'Next',
-          action: () => {
-            if (this.shepherdService !== null) {
-              this.shepherdService.next();
-            }
-          },
-        },
-      ],
-      attachTo: {
-        element: customSplitsTabElement,
-        on: 'top-end',
-      },
-    },
-    {
-      id: 'reports-tab',
-      arrow: true,
-      title: 'Reports Tab',
-      text: 'View reports up to 60 days in the past for free tier, or unlimited history for premium',
-      buttons: [
-        {
-          text: 'Next',
-          action: () => {
-            if (this.shepherdService !== null) {
-              this.shepherdService.next();
-            }
-          },
-        },
-      ],
-      attachTo: {
-        element: reportsTabElement,
-        on: 'top-end',
-      },
-    },
-    {
-      id: 'people-tab',
-      arrow: true,
-      title: 'People Tab',
-      text: `View people's profile data such as IBAN for convenient copy & paste for bank transfers, if you're an admin you can invite or remove people`,
-      buttons: [
-        {
-          text: `Don't Show Again`,
-          action: () => {
-            if (this.shepherdService !== null) {
-              this.shepherdService.next();
-            }
-            localStorage.setItem('manage-first-ledger-tour', JSON.stringify(true));
-          },
-        },
-        {
-          text: 'Close',
-          action: () => {
-            if (this.shepherdService !== null) {
-              this.shepherdService.next();
-            }
-          },
-        },
-      ],
-      attachTo: {
-        element: peopleTabElement,
-        on: 'top-end',
-      },
-    }];
   }
 }
