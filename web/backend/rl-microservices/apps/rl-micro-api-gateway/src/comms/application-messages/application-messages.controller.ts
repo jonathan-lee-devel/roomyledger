@@ -1,7 +1,9 @@
 import {Controller, Get, Inject, Logger, OnModuleInit} from '@nestjs/common';
 import {ClientGrpc} from '@nestjs/microservices';
 import {ApiTags} from '@nestjs/swagger';
+import {CurrentUser} from '@rl-auth/auth/supabase/decorators/current-user.decorator';
 import {commsProto} from '@rl-gw';
+import {AuthUser} from '@supabase/supabase-js';
 
 @ApiTags('Comms')
 @Controller('application-messages')
@@ -22,12 +24,12 @@ export class ApplicationMessagesController implements OnModuleInit {
   }
 
   @Get('public')
-  getPublicMessages() {
+  getPublicMessages(@CurrentUser() currentUser: AuthUser) {
     this.logger.log(
       `Request to get public-messages for user with e-mail test@test.com`,
     );
     return this.commsServiceClient.getPublicApplicationMessages({
-      email: 'test@test.com',
+      email: currentUser.email,
     });
   }
 }
