@@ -1,8 +1,7 @@
 import {Logger} from '@nestjs/common';
-import {NestFactory} from '@nestjs/core';
-import {MicroserviceOptions, Transport} from '@nestjs/microservices';
-import {getProtoPath} from '@rl-config/config';
+import {boostrapErrorHandler, createGrpcMicroservice} from '@rl-config/config';
 import {environment} from '@rl-config/config/environment.index';
+import {logMicroServiceListenStart} from '@rl-config/config/log/common.log';
 import {paymentsProto} from '@rl-gw';
 import dotenv from 'dotenv';
 
@@ -12,19 +11,19 @@ dotenv.config();
 
 async function bootstrap() {
   const logger = new Logger(RlMicroPaymentsModule.name);
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
+  const app = await createGrpcMicroservice(
     RlMicroPaymentsModule,
-    {
-      transport: Transport.GRPC,
-      options: {
-        url: `${environment.paymentsService.listenAddress}:${environment.paymentsService.listenPort}`,
-        package: paymentsProto.PAYMENTS_PACKAGE_NAME,
-        protoPath: getProtoPath(paymentsProto.PAYMENTS_PACKAGE_NAME),
-      },
-    },
+    environment.paymentsService.listenAddress,
+    environment.paymentsService.listenPort,
+    paymentsProto.PAYMENTS_PACKAGE_NAME,
   );
-  logger.log(`Listening on port ${environment.paymentsService.listenPort}`);
+  logMicroServiceListenStart(
+    logger,
+    paymentsProto.PAYMENTS_SERVICE_NAME,
+    environment.paymentsService.listenAddress,
+    environment.paymentsService.listenPort,
+  );
   await app.listen();
 }
 
-bootstrap().catch((reason) => console.error(reason));
+bootstrap().catch(boostrapErrorHandler);

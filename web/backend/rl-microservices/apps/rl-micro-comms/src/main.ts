@@ -1,8 +1,7 @@
 import {Logger} from '@nestjs/common';
-import {NestFactory} from '@nestjs/core';
-import {MicroserviceOptions, Transport} from '@nestjs/microservices';
-import {getProtoPath} from '@rl-config/config';
+import {boostrapErrorHandler, createGrpcMicroservice} from '@rl-config/config';
 import {environment} from '@rl-config/config/environment.index';
+import {logMicroServiceListenStart} from '@rl-config/config/log/common.log';
 import {commsProto} from '@rl-gw';
 import dotenv from 'dotenv';
 
@@ -12,19 +11,19 @@ dotenv.config();
 
 async function bootstrap() {
   const logger = new Logger(RlMicroCommsModule.name);
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
+  const app = await createGrpcMicroservice(
     RlMicroCommsModule,
-    {
-      transport: Transport.GRPC,
-      options: {
-        url: `${environment.commsService.listenAddress}:${environment.commsService.listenPort}`,
-        package: commsProto.COMMS_PACKAGE_NAME,
-        protoPath: getProtoPath(commsProto.COMMS_PACKAGE_NAME),
-      },
-    },
+    environment.commsService.listenAddress,
+    environment.commsService.listenPort,
+    commsProto.COMMS_PACKAGE_NAME,
   );
-  logger.log(`Listening on port ${environment.commsService.listenPort}`);
+  logMicroServiceListenStart(
+    logger,
+    commsProto.COMMS_SERVICE_NAME,
+    environment.commsService.listenAddress,
+    environment.commsService.listenPort,
+  );
   await app.listen();
 }
 
-bootstrap().catch((reason) => console.error(reason));
+bootstrap().catch(boostrapErrorHandler);
