@@ -5,8 +5,7 @@ import {environment} from '@rl-config/config/environment.index';
 import {paymentsProto} from '@rl-gw';
 import {PrismaModule} from '@rl-prisma/prisma';
 
-import {CommsController} from './comms/comms.controller';
-import {CommsService} from './comms/comms.service';
+import {CommsController} from './comms-grpc/controllers/comms.controller';
 import {NotificationsService} from './notifications/services/notifications.service';
 
 @Module({
@@ -30,7 +29,6 @@ import {NotificationsService} from './notifications/services/notifications.servi
       provide: Logger,
       useFactory: () => new Logger(RlMicroCommsModule.name),
     },
-    CommsService,
     NotificationsService,
   ],
 })

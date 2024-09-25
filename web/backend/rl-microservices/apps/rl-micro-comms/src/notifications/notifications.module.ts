@@ -3,12 +3,11 @@ import {ConfigService} from '@nestjs/config';
 import {JwtService} from '@nestjs/jwt';
 import {PrismaModule} from '@rl-prisma/prisma';
 
-import {NotificationsController} from './controllers/notifications.controller';
 import {NotificationsService} from './services/notifications.service';
 
 @Module({
   imports: [PrismaModule],
-  controllers: [NotificationsController],
+  controllers: [],
   providers: [
     {
       provide: Logger,

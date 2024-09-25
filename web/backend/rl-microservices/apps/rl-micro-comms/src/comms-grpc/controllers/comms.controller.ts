@@ -2,11 +2,7 @@ import {Controller} from '@nestjs/common';
 import {commsProto} from '@rl-gw';
 import {Observable} from 'rxjs';
 
-import {
-  ApplicationMessageDtos,
-  ByEmailDto,
-} from '../../../rl-micro-api-gateway/src/proto/comms';
-import {NotificationsService} from '../notifications/services/notifications.service';
+import {NotificationsService} from '../../notifications/services/notifications.service';
 
 @Controller()
 @commsProto.CommsServiceControllerMethods()
@@ -72,11 +68,11 @@ export class CommsController implements commsProto.CommsServiceController {
   }
 
   getPublicApplicationMessages(
-    request: ByEmailDto,
+    request: commsProto.ByEmailDto,
   ):
-    | Promise<ApplicationMessageDtos>
-    | Observable<ApplicationMessageDtos>
-    | ApplicationMessageDtos {
+    | Promise<commsProto.ApplicationMessageDtos>
+    | Observable<commsProto.ApplicationMessageDtos>
+    | commsProto.ApplicationMessageDtos {
     console.log(request);
     return {messages: []};
   }
