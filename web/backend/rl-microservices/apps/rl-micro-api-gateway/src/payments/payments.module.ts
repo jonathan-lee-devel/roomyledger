@@ -14,7 +14,7 @@ import {StripeController} from './stripe/stripe.controller';
         transport: Transport.GRPC,
         name: paymentsProto.PAYMENTS_PACKAGE_NAME,
         options: {
-          url: `localhost:${environment.paymentsService.listenPort}`,
+          url: `${process.env.PAYMENTS_SERVICE_DOMAIN}:${environment.paymentsService.listenPort}`,
           protoPath: getProtoPath(paymentsProto.PAYMENTS_PACKAGE_NAME),
           package: paymentsProto.PAYMENTS_PACKAGE_NAME,
         },

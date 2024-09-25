@@ -1,3 +1,4 @@
+import {Logger} from '@nestjs/common';
 import {NestFactory} from '@nestjs/core';
 import {MicroserviceOptions, Transport} from '@nestjs/microservices';
 import {getProtoPath} from '@rl-config/config';
@@ -10,6 +11,7 @@ import {RlMicroCommsModule} from './rl-micro-comms.module';
 dotenv.config();
 
 async function bootstrap() {
+  const logger = new Logger(RlMicroCommsModule.name);
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     RlMicroCommsModule,
     {
@@ -21,6 +23,7 @@ async function bootstrap() {
       },
     },
   );
+  logger.log(`Listening on port ${environment.commsService.listenPort}`);
   await app.listen();
 }
 

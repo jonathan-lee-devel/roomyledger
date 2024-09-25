@@ -14,7 +14,7 @@ import {NotificationsController} from './notifications/notifications.controller'
         transport: Transport.GRPC,
         name: commsProto.COMMS_PACKAGE_NAME,
         options: {
-          url: `localhost:${environment.commsService.listenPort}`,
+          url: `${process.env.COMMS_SERVICE_DOMAIN}:${environment.commsService.listenPort}`,
           protoPath: getProtoPath(commsProto.COMMS_PACKAGE_NAME),
           package: commsProto.COMMS_PACKAGE_NAME,
         },

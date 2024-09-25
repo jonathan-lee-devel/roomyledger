@@ -1,3 +1,4 @@
+import {Logger} from '@nestjs/common';
 import {NestFactory} from '@nestjs/core';
 import {MicroserviceOptions, Transport} from '@nestjs/microservices';
 import {getProtoPath} from '@rl-config/config';
@@ -10,6 +11,7 @@ import {RlMicroPaymentsModule} from './rl-micro-payments.module';
 dotenv.config();
 
 async function bootstrap() {
+  const logger = new Logger(RlMicroPaymentsModule.name);
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     RlMicroPaymentsModule,
     {
@@ -21,6 +23,7 @@ async function bootstrap() {
       },
     },
   );
+  logger.log(`Listening on port ${environment.paymentsService.listenPort}`);
   await app.listen();
 }
 
