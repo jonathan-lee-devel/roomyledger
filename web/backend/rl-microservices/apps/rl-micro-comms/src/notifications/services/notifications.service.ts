@@ -17,26 +17,24 @@ export class NotificationsService {
     private readonly prismaService: PrismaService,
   ) {}
 
-  async findAllForUser(requestingUserEmail: string) {
+  async getAllNotificationsForUser(requestingUserEmail: string) {
     this.logger.log(
       `Request from ${requestingUserEmail} to load all notifications`,
     );
-    return {
-      notifications: (
-        await this.prismaService.notification.findMany({
-          where: {
-            user: {
-              email: requestingUserEmail,
-            },
+    return (
+      await this.prismaService.notification.findMany({
+        where: {
+          user: {
+            email: requestingUserEmail,
           },
-        })
-      ).map((queryNotification) =>
-        this.mapQueryNotificationToNotificationDto(queryNotification),
-      ),
-    };
+        },
+      })
+    ).map((queryNotification) =>
+      this.mapQueryNotificationToNotificationDto(queryNotification),
+    );
   }
 
-  async acknowledgeAllForUser(requestingUserEmail: string) {
+  async acknowledgeAllNotificationsForUser(requestingUserEmail: string) {
     this.logger.log(
       `Request from ${requestingUserEmail} to acknowledge all notifications`,
     );
@@ -50,10 +48,10 @@ export class NotificationsService {
         isAcknowledged: true,
       },
     });
-    return this.findAllForUser(requestingUserEmail);
+    return this.getAllNotificationsForUser(requestingUserEmail);
   }
 
-  async deleteAllForUser(requestingUserEmail: string) {
+  async deleteAllNotificationsForUser(requestingUserEmail: string) {
     this.logger.log(
       `Request from ${requestingUserEmail} to acknowledge all notifications`,
     );
@@ -64,7 +62,7 @@ export class NotificationsService {
         },
       },
     });
-    return this.findAllForUser(requestingUserEmail);
+    return this.getAllNotificationsForUser(requestingUserEmail);
   }
 
   async getNotificationById(requestingUserEmail: string, id: string) {
@@ -86,7 +84,7 @@ export class NotificationsService {
     return this.mapQueryNotificationToNotificationDto(notification);
   }
 
-  async removeOne(requestingUserEmail: string, id: string) {
+  async deleteNotificationById(requestingUserEmail: string, id: string) {
     this.logger.log(
       `Request from ${requestingUserEmail} to delete notification by ID: ${id}`,
     );
@@ -108,7 +106,7 @@ export class NotificationsService {
     return this.mapQueryNotificationToNotificationDto(notification);
   }
 
-  async acknowledgeOne(requestingUserEmail: string, id: string) {
+  async acknowledgeNotificationById(requestingUserEmail: string, id: string) {
     this.logger.log(
       `Request from ${requestingUserEmail} to acknowledge notification by ID: ${id}`,
     );

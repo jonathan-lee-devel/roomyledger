@@ -5,7 +5,7 @@ import {CurrentUser} from '@rl-auth/auth/supabase/decorators/current-user.decora
 import {ByAuthenticatedUserDto} from '@rl-config/config/micro/rabbitmq/dto/common/ByAuthenticatedUser.dto';
 import {AuthenticatedNotificationById} from '@rl-config/config/micro/rabbitmq/dto/notifications/AuthenticatedNotificationById';
 import {NotificationDto} from '@rl-config/config/micro/rabbitmq/dto/notifications/Notification.dto';
-import {notificationsMessagePatterns} from '@rl-config/config/micro/rabbitmq/message-patterns/notifications/notifications.message.patterns';
+import {notificationsMessagePatterns} from '@rl-config/config/micro/rabbitmq/message-patterns/comms/notifications/notifications.message.patterns';
 import {IdParamDto} from '@rl-validation/validation';
 import {AuthUser} from '@supabase/supabase-js';
 
