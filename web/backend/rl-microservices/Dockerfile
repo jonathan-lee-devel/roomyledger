@@ -4,8 +4,11 @@ WORKDIR /usr/src/app
 
 COPY --chown=node:node package.json ./
 COPY --chown=node:node yarn.lock ./
+COPY --chown=node:node prisma ./
 
 RUN yarn install --frozen-lockfile
+
+RUN yarn prisma generate
 
 COPY --chown=node:node . .
 
