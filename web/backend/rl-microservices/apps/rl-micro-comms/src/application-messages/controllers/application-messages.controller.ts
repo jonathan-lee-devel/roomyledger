@@ -8,8 +8,8 @@ import {
   Post,
 } from '@nestjs/common';
 import {ApiTags} from '@nestjs/swagger';
+import {Public} from '@rl-auth/auth/supabase/decorators/is-public.decorator';
 
-import {Public} from '../../auth/supabase/decorators/is-public.decorator';
 import {CreateApplicationMessageDto} from '../dto/create-application-message.dto';
 import {UpdateApplicationMessageDto} from '../dto/update-application-message.dto';
 import {ApplicationMessagesService} from '../services/application-messages.service';

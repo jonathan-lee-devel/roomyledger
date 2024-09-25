@@ -1,4 +1,4 @@
-FROM node:20.17.0-alpine3.20 As development
+FROM --platform=linux/amd64 node:20.17.0-alpine3.20 As development
 
 WORKDIR /usr/src/app
 
@@ -11,7 +11,7 @@ COPY --chown=node:node . .
 
 USER node
 
-FROM node:20.17.0-alpine3.20 As build
+FROM --platform=linux/amd64 node:20.17.0-alpine3.20 As build
 
 WORKDIR /usr/src/app
 
@@ -28,10 +28,12 @@ ENV NODE_ENV production
 
 USER node
 
-FROM node:20.17.0-alpine3.20 As production
+FROM --platform=linux/amd64 node:20.17.0-alpine3.20 As production
 
 COPY --chown=node:node --from=build /usr/src/app/package.json ./package.json
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
+
+EXPOSE 8080
 
 CMD [ "yarn", "run", "start:prod" ]

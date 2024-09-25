@@ -57,7 +57,7 @@ async function bootstrap() {
     `Running in NODE_ENV: ${configService.getOrThrow<NodeEnvironment>('NODE_ENV')}`,
   );
 
-  const port = 3000;
+  const port = 8080;
   logger.log(`Listening on port: ${port}`);
   await app.listen(port);
 }

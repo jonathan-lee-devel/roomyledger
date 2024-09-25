@@ -4,11 +4,11 @@ import {
   Logger,
   NotFoundException,
 } from '@nestjs/common';
-import {$Enums} from '@prisma/client';
 import {commsProto} from '@rl-gw';
 import {PrismaService} from '@rl-prisma/prisma';
 
 import {CreateNotificationDto} from '../dto/CreateNotification.dto';
+import {NotificationType} from '../types/NotificationType.type';
 
 @Injectable()
 export class NotificationsService {
@@ -183,7 +183,7 @@ export class NotificationsService {
     title: string;
     extendedMessage: string;
     isAcknowledged: boolean;
-    type: $Enums.NotificationType;
+    type: NotificationType;
     invitationTokenValue: string | null;
     propertyId: string | null;
   }): commsProto.NotificationDto {
