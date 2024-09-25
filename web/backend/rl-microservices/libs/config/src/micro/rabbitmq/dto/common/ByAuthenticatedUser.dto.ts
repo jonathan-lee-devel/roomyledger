@@ -1,6 +1,5 @@
 import {AuthUser} from '@supabase/supabase-js';
 
-export interface GetNotificationByIdDto {
+export interface ByAuthenticatedUserDto {
   requestingUser: AuthUser;
-  notificationId: string;
 }
