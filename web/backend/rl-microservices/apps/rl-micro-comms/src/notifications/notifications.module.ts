@@ -1,13 +1,21 @@
 import {Logger, Module} from '@nestjs/common';
-import {ConfigService} from '@nestjs/config';
+import {ConfigModule, ConfigService} from '@nestjs/config';
 import {JwtService} from '@nestjs/jwt';
+import {RabbitmqModule} from '@rl-config/config/micro/rabbitmq/rabbitmq.module';
 import {PrismaModule} from '@rl-prisma/prisma';
 
+import {NotificationsController} from './notifications/notifications.controller';
 import {NotificationsService} from './services/notifications.service';
 
 @Module({
-  imports: [PrismaModule],
-  controllers: [],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    RabbitmqModule,
+    PrismaModule,
+  ],
+  controllers: [NotificationsController],
   providers: [
     {
       provide: Logger,

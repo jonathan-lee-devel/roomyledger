@@ -1,84 +1,41 @@
-import {
-  Controller,
-  Delete,
-  Get,
-  Inject,
-  OnModuleInit,
-  Param,
-  Patch,
-} from '@nestjs/common';
-import {ClientGrpc} from '@nestjs/microservices';
+import {Controller, Delete, Get, Inject, Param, Patch} from '@nestjs/common';
+import {ClientProxy} from '@nestjs/microservices';
 import {ApiTags} from '@nestjs/swagger';
 import {CurrentUser} from '@rl-auth/auth/supabase/decorators/current-user.decorator';
-import {commsProto} from '@rl-gw';
 import {IdParamDto} from '@rl-validation/validation';
 import {AuthUser} from '@supabase/supabase-js';
+import {timeout} from 'rxjs';
 
 @ApiTags('Comms')
 @Controller('notifications')
-export class NotificationsController implements OnModuleInit {
-  private commsServiceClient: commsProto.CommsServiceClient;
-
-  constructor(
-    @Inject(commsProto.COMMS_PACKAGE_NAME)
-    private readonly commsClientGrpc: ClientGrpc,
-  ) {}
-
-  async onModuleInit() {
-    this.commsServiceClient =
-      this.commsClientGrpc.getService<commsProto.CommsServiceClient>(
-        commsProto.COMMS_SERVICE_NAME,
-      );
-  }
+export class NotificationsController {
+  constructor(@Inject('COMMS') private readonly commsClient: ClientProxy) {}
 
   @Get('for-user')
-  findAllForUser(@CurrentUser() currentUser: AuthUser) {
-    return this.commsServiceClient.getNotificationsForUserByEmail({
-      email: currentUser.email,
-    });
-  }
+  findAllForUser(@CurrentUser() currentUser: AuthUser) {}
 
   @Patch('for-user')
-  async acknowledgeAllForUser(@CurrentUser() currentUser: AuthUser) {
-    return this.commsServiceClient.acknowledgeAllNotificationsForUserByEmail({
-      email: currentUser.email,
-    });
-  }
+  async acknowledgeAllForUser(@CurrentUser() currentUser: AuthUser) {}
 
   @Delete('for-user')
-  async deleteAllForUser(@CurrentUser() currentUser: AuthUser) {
-    return this.commsServiceClient.deleteAllNotificationsForUserByEmail({
-      email: currentUser.email,
-    });
-  }
+  async deleteAllForUser(@CurrentUser() currentUser: AuthUser) {}
 
   @Get(':id')
   async findOne(
     @CurrentUser() currentUser: AuthUser,
     @Param() {id}: IdParamDto,
   ) {
-    return this.commsServiceClient.getNotificationById({
-      requestingUserEmail: currentUser.email,
-      id,
-    });
+    return this.commsClient
+      .send({cmd: 'get-notification-by-id'}, {hello: 'World'})
+      .pipe(timeout(10_000));
   }
 
   @Patch(':id')
   async acknowledgeOne(
     @CurrentUser() currentUser: AuthUser,
     @Param() {id}: IdParamDto,
-  ) {
-    return this.commsServiceClient.acknowledgeNotificationById({
-      requestingUserEmail: currentUser.email,
-      id,
-    });
-  }
+  ) {}
 
   @Delete(':id')
-  remove(@CurrentUser() currentUser: AuthUser, @Param() {id}: IdParamDto) {
-    return this.commsServiceClient.deleteNotificationById({
-      requestingUserEmail: currentUser.email,
-      id,
-    });
-  }
+  remove(@CurrentUser() currentUser: AuthUser, @Param() {id}: IdParamDto) {}
 }

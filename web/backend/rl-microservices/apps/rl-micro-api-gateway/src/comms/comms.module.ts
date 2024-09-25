@@ -1,25 +1,16 @@
 import {Logger, Module} from '@nestjs/common';
-import {ClientsModule, Transport} from '@nestjs/microservices';
-import {getProtoPath} from '@rl-config/config';
-import {environment} from '@rl-config/config/environment.index';
-import {commsProto} from '@rl-gw';
+import {ConfigModule} from '@nestjs/config';
+import {RabbitmqModule} from '@rl-config/config/micro/rabbitmq/rabbitmq.module';
 
 import {ApplicationMessagesController} from './application-messages/application-messages.controller';
 import {NotificationsController} from './notifications/notifications.controller';
 
 @Module({
   imports: [
-    ClientsModule.register([
-      {
-        transport: Transport.GRPC,
-        name: commsProto.COMMS_PACKAGE_NAME,
-        options: {
-          url: `${process.env.COMMS_SERVICE_DOMAIN}:${environment.commsService.listenPort}`,
-          protoPath: getProtoPath(commsProto.COMMS_PACKAGE_NAME),
-          package: commsProto.COMMS_PACKAGE_NAME,
-        },
-      },
-    ]),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    RabbitmqModule.register({serviceName: 'COMMS'}),
   ],
   controllers: [ApplicationMessagesController, NotificationsController],
   providers: [

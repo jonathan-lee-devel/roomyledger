@@ -18,3 +18,18 @@ export const createGrpcMicroservice = async (
       protoPath: getProtoPath(protoPackageName),
     },
   });
+
+export const createRabbitMqConsumerMicroservice = async (
+  module: typeof RlMicroApiGatewayModule,
+) => {
+  return NestFactory.createMicroservice<MicroserviceOptions>(module, {
+    transport: Transport.RMQ,
+    options: {
+      urls: ['amqp://localhost:5672'],
+      queue: 'comms',
+      queueOptions: {
+        durable: true,
+      },
+    },
+  });
+};
