@@ -1,12 +1,8 @@
 import {Controller, Logger} from '@nestjs/common';
-import {
-  Ctx,
-  EventPattern,
-  MessagePattern,
-  Payload,
-  RmqContext,
-} from '@nestjs/microservices';
-import {RabbitmqService} from '@rl-config/config/micro/rabbitmq/rabbitmq.service';
+import {EventPattern, MessagePattern, Payload} from '@nestjs/microservices';
+import {GetNotificationByIdDto} from '@rl-config/config/micro/rabbitmq/dto/notifications/GetNotificationById.dto';
+import {notificationsMessagePatterns} from '@rl-config/config/micro/rabbitmq/message-patterns/notifications/notifications.message.patterns';
+import {RabbitmqService} from '@rl-config/config/micro/rabbitmq/services/rabbitmq.service';
 
 import {NotificationsService} from '../services/notifications.service';
 
@@ -18,14 +14,12 @@ export class NotificationsController {
     private readonly rabbitMqService: RabbitmqService,
   ) {}
 
-  @MessagePattern({cmd: 'get-notification-by-id'})
-  async getNotificationById(
-    @Payload() payload: any,
-    @Ctx() context: RmqContext,
-  ) {
-    this.logger.log(`Payload received, ACK-ing`, payload);
-    // this.rabbitMqService.ack(context);
-    // return this.notificationsService.findOne(data.user.email, data.id);
+  @MessagePattern(notificationsMessagePatterns.getNotificationById)
+  async getNotificationById(@Payload() payload: GetNotificationByIdDto) {
+    return this.notificationsService.getNotificationById(
+      payload.requestingUser.email,
+      payload.notificationId,
+    );
   }
 
   @EventPattern('notification')

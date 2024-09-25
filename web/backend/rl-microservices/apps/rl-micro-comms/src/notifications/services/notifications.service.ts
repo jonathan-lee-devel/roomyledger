@@ -4,7 +4,7 @@ import {
   Logger,
   NotFoundException,
 } from '@nestjs/common';
-import {commsProto} from '@rl-gw';
+import {NotificationDto} from '@rl-config/config/micro/rabbitmq/dto/notifications/Notification.dto';
 import {PrismaService} from '@rl-prisma/prisma';
 
 import {CreateNotificationDto} from '../dto/CreateNotification.dto';
@@ -67,9 +67,9 @@ export class NotificationsService {
     return this.findAllForUser(requestingUserEmail);
   }
 
-  async findOne(requestingUserEmail: string, id: string) {
+  async getNotificationById(requestingUserEmail: string, id: string) {
     this.logger.log(
-      `Request from ${requestingUserEmail} to acknowledge notification by ID: ${id}`,
+      `Request from ${requestingUserEmail} to get notification by ID: ${id}`,
     );
     const notification = await this.prismaService.notification.findUnique({
       where: {id},
@@ -186,8 +186,8 @@ export class NotificationsService {
     type: NotificationType;
     invitationTokenValue: string | null;
     propertyId: string | null;
-  }): commsProto.NotificationDto {
-    return <commsProto.NotificationDto>{
+  }): NotificationDto {
+    return <NotificationDto>{
       id: queryNotification.id,
       userId: queryNotification.userId,
       title: queryNotification.title,

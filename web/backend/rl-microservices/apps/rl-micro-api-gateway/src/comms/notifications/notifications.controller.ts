@@ -2,9 +2,11 @@ import {Controller, Delete, Get, Inject, Param, Patch} from '@nestjs/common';
 import {ClientProxy} from '@nestjs/microservices';
 import {ApiTags} from '@nestjs/swagger';
 import {CurrentUser} from '@rl-auth/auth/supabase/decorators/current-user.decorator';
+import {GetNotificationByIdDto} from '@rl-config/config/micro/rabbitmq/dto/notifications/GetNotificationById.dto';
+import {NotificationDto} from '@rl-config/config/micro/rabbitmq/dto/notifications/Notification.dto';
+import {notificationsMessagePatterns} from '@rl-config/config/micro/rabbitmq/message-patterns/notifications/notifications.message.patterns';
 import {IdParamDto} from '@rl-validation/validation';
 import {AuthUser} from '@supabase/supabase-js';
-import {timeout} from 'rxjs';
 
 @ApiTags('Comms')
 @Controller('notifications')
@@ -25,9 +27,14 @@ export class NotificationsController {
     @CurrentUser() currentUser: AuthUser,
     @Param() {id}: IdParamDto,
   ) {
-    return this.commsClient
-      .send({cmd: 'get-notification-by-id'}, {hello: 'World'})
-      .pipe(timeout(10_000));
+    const payload: GetNotificationByIdDto = {
+      requestingUser: currentUser,
+      notificationId: id,
+    };
+    return this.commsClient.send<NotificationDto, GetNotificationByIdDto>(
+      notificationsMessagePatterns.getNotificationById,
+      payload,
+    );
   }
 
   @Patch(':id')
