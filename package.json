@@ -2,9 +2,9 @@
   "name": "roomyledger",
   "version": "0.0.1",
   "scripts": {
-    "backend:lint": "cd web/backend/rl-nestjs-mono && yarn run lint",
-    "backend:build": "cd web/backend/rl-nestjs-mono && yarn run build",
-    "backend:test": "cd web/backend/rl-nestjs-mono && yarn run test",
+    "backend:lint": "cd web/backend/rl-microservices && yarn run lint",
+    "backend:build": "cd web/backend/rl-microservices && yarn run build",
+    "backend:test": "cd web/backend/rl-microservices && yarn run test",
     "frontend:lint": "cd web/frontend/rl-angular-spa && yarn run lint",
     "frontend:build": "cd web/frontend/rl-angular-spa && yarn run build",
     "frontend:build:stage": "cd web/frontend/rl-angular-spa && yarn run build:stage",

@@ -77,6 +77,7 @@ export class CommsController implements commsProto.CommsServiceController {
     | Promise<ApplicationMessageDtos>
     | Observable<ApplicationMessageDtos>
     | ApplicationMessageDtos {
+    console.log(request);
     return {messages: []};
   }
 }
