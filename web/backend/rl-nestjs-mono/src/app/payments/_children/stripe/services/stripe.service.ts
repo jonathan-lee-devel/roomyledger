@@ -1,18 +1,18 @@
-import {Injectable, InternalServerErrorException, Logger} from '@nestjs/common';
-import {ConfigService} from '@nestjs/config';
-import {EventEmitter2} from '@nestjs/event-emitter';
-import {DateTime} from 'luxon';
+import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { EventEmitter2 } from '@nestjs/event-emitter';
+import { DateTime } from 'luxon';
 import Stripe from 'stripe';
 
-import {EnvironmentVariables} from '../../../../../config/environment';
-import {PrismaService} from '../../../../../prisma/services/prisma.service';
-import {StripeChargeSucceededEvent} from '../events/StripeChargeSucceeded.event';
-import {StripeCustomerSubscriptionCreatedEvent} from '../events/StripeCustomerSubscriptionCreated.event';
-import {StripeCustomerSubscriptionDeletedEvent} from '../events/StripeCustomerSubscriptionDeleted.event';
+import { EnvironmentVariables } from '../../../../../config/environment';
+import { PrismaService } from '../../../../../prisma/services/prisma.service';
+import { StripeChargeSucceededEvent } from '../events/StripeChargeSucceeded.event';
+import { StripeCustomerSubscriptionCreatedEvent } from '../events/StripeCustomerSubscriptionCreated.event';
+import { StripeCustomerSubscriptionDeletedEvent } from '../events/StripeCustomerSubscriptionDeleted.event';
 
 @Injectable()
 export class StripeService {
-  private stripe?: Stripe;
+  private readonly stripe: Stripe;
 
   constructor(
     private readonly logger: Logger,
