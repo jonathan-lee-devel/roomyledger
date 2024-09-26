@@ -12,7 +12,7 @@ import {StripeCustomerSubscriptionDeletedEvent} from '../events/StripeCustomerSu
 
 @Injectable()
 export class StripeService {
-  private stripe?: Stripe;
+  private readonly stripe: Stripe;
 
   constructor(
     private readonly logger: Logger,

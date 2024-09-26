@@ -15,7 +15,7 @@ import {ExpenseDto} from '../../dtos/expenses/ExpenseDto';
   providedIn: 'root',
 })
 export class ExpenseService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private readonly httpClient: HttpClient) {}
 
   public createExpense(
       createExpenseRequestDto: CreateExpenseRequestDto,
