@@ -1,8 +1,10 @@
 import {Logger} from '@nestjs/common';
-import {boostrapErrorHandler, createGrpcMicroservice} from '@rl-config/config';
+import {
+  boostrapErrorHandler,
+  createRabbitMqConsumerMicroservice,
+} from '@rl-config/config';
 import {environment} from '@rl-config/config/environment.index';
 import {logMicroServiceListenStart} from '@rl-config/config/log/common.log';
-import {paymentsProto} from '@rl-gw';
 import dotenv from 'dotenv';
 
 import {RlMicroPaymentsModule} from './rl-micro-payments.module';
@@ -11,15 +13,14 @@ dotenv.config();
 
 async function bootstrap() {
   const logger = new Logger(RlMicroPaymentsModule.name);
-  const app = await createGrpcMicroservice(
+  const app = await createRabbitMqConsumerMicroservice(
     RlMicroPaymentsModule,
-    environment.paymentsService.listenAddress,
-    environment.paymentsService.listenPort,
-    paymentsProto.PAYMENTS_PACKAGE_NAME,
+    ['amqp://localhost:5672'],
+    environment.paymentsService.name,
   );
   logMicroServiceListenStart(
     logger,
-    paymentsProto.PAYMENTS_SERVICE_NAME,
+    environment.paymentsService.name,
     environment.paymentsService.listenAddress,
     environment.paymentsService.listenPort,
   );

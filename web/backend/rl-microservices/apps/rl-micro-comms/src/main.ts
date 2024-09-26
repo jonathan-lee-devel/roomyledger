@@ -5,7 +5,6 @@ import {
 } from '@rl-config/config';
 import {environment} from '@rl-config/config/environment.index';
 import {logMicroServiceListenStart} from '@rl-config/config/log/common.log';
-import {commsProto} from '@rl-gw';
 import dotenv from 'dotenv';
 
 import {RlMicroCommsModule} from './rl-micro-comms.module';
@@ -14,10 +13,14 @@ dotenv.config();
 
 async function bootstrap() {
   const logger = new Logger(RlMicroCommsModule.name);
-  const app = await createRabbitMqConsumerMicroservice(RlMicroCommsModule);
+  const app = await createRabbitMqConsumerMicroservice(
+    RlMicroCommsModule,
+    ['amqp://localhost:5672'],
+    environment.commsService.name,
+  );
   logMicroServiceListenStart(
     logger,
-    commsProto.COMMS_SERVICE_NAME,
+    environment.commsService.name,
     environment.commsService.listenAddress,
     environment.commsService.listenPort,
   );

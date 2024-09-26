@@ -1,34 +1,27 @@
 import {
   ForbiddenException,
   Injectable,
-  InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
+import {PrismaService} from '@rl-prisma/prisma';
+import {RandomService} from '@rl-util/util';
+import {AuthUser} from '@supabase/supabase-js';
 
-import {PrismaService} from '../../../../../prisma/services/prisma.service';
-import {PaymentsService} from '../../../../payments-grpc/services/payments-grpc.service';
-import {UsersService} from '../../../../users/services/users.service';
-import {RandomService} from '../../../../util/services/random/random.service';
 import {CreatePropertyDto} from '../dto/create-property.dto';
 
 @Injectable()
 export class PropertiesService {
   constructor(
-    private readonly usersService: UsersService,
     private readonly prismaService: PrismaService,
     private readonly randomService: RandomService,
-    private readonly paymentsService: PaymentsService,
+    // private readonly paymentsService: PaymentsService,
   ) {}
 
-  async create(
-    requestingUserEmail: string,
-    createPropertyDto: CreatePropertyDto,
-  ) {
-    const user = await this.usersService.findByEmail(requestingUserEmail);
+  async create(requestingUser: AuthUser, createPropertyDto: CreatePropertyDto) {
     const propertyRulesId = await this.randomService.generateUUID();
     return this.prismaService.property.create({
       data: {
-        createdByUserId: user.id,
+        createdByUserId: requestingUser.id,
         name: createPropertyDto.name,
         expenses: {
           create: [],
@@ -36,7 +29,7 @@ export class PropertiesService {
         administrators: {
           create: [
             {
-              userId: user.id,
+              userId: requestingUser.id,
             },
           ],
         },
@@ -44,7 +37,7 @@ export class PropertiesService {
           create: createPropertyDto.addSelfAsTenant
             ? [
                 {
-                  userId: user.id,
+                  userId: requestingUser.id,
                   isAccepted: true,
                 },
               ]
@@ -61,25 +54,21 @@ export class PropertiesService {
     });
   }
 
-  async findAllWhereInvolved(requestingUserEmail: string) {
-    const user = await this.usersService.findByEmail(requestingUserEmail);
-    if (!user) {
-      throw new InternalServerErrorException();
-    }
+  async findAllWhereInvolved(requestingUser: AuthUser) {
     const propertiesWhereInvolved = await this.prismaService.property.findMany({
       where: {
         OR: [
           {
             administrators: {
               some: {
-                user,
+                userId: requestingUser.id,
               },
             },
           },
           {
             tenants: {
               some: {
-                user,
+                userId: requestingUser.id,
                 isAccepted: true,
               },
             },
@@ -144,64 +133,62 @@ export class PropertiesService {
   }
 
   async togglePropertyAdmin(
-    requestingUserEmail: string,
+    requestingUser: AuthUser,
     id: string,
     emailToToggle: string,
   ) {
     const property = await this.getPropertyForModification(
-      requestingUserEmail,
+      requestingUser.email,
       id,
     );
-    const user = await this.usersService.findByEmail(emailToToggle);
     if (
       property.administrators
         .map((administrator) => administrator.user.email)
         .includes(emailToToggle)
     ) {
       await this.prismaService.propertyAdministrator.deleteMany({
-        where: {propertyId: id, userId: user.id},
+        where: {propertyId: id, userId: requestingUser.id},
       });
     } else {
       await this.prismaService.propertyAdministrator.create({
         data: {
           propertyId: id,
-          userId: user.id,
+          userId: requestingUser.id,
         },
       });
     }
 
-    return this.getPropertyForViewing(requestingUserEmail, id);
+    return this.getPropertyForViewing(requestingUser.email, id);
   }
 
   async togglePropertyTenant(
-    requestingUserEmail: string,
+    requestingUser: AuthUser,
     id: string,
     emailToToggle: string,
   ) {
     const property = await this.getPropertyForModification(
-      requestingUserEmail,
+      requestingUser.email,
       id,
     );
-    const user = await this.usersService.findByEmail(emailToToggle);
     if (
       property.tenants
         .map((tenant) => tenant.user.email)
         .includes(emailToToggle)
     ) {
       await this.prismaService.propertyTenant.deleteMany({
-        where: {propertyId: id, userId: user.id},
+        where: {propertyId: id, userId: requestingUser.id},
       });
     } else {
       await this.prismaService.propertyTenant.create({
         data: {
           propertyId: id,
-          userId: user.id,
+          userId: requestingUser.id,
           isAccepted: true,
         },
       });
     }
 
-    return this.getPropertyForViewing(requestingUserEmail, id);
+    return this.getPropertyForViewing(requestingUser.email, id);
   }
 
   async getPropertyForViewing(requestingUserEmail: string, id: string) {

@@ -1,8 +1,8 @@
 import {Controller} from '@nestjs/common';
 import {MessagePattern, Payload} from '@nestjs/microservices';
+import {notificationsMessagePatterns} from '@rl-config/config';
 import {ByAuthenticatedUserDto} from '@rl-config/config/micro/rabbitmq/dto/common/ByAuthenticatedUser.dto';
 import {AuthenticatedNotificationById} from '@rl-config/config/micro/rabbitmq/dto/notifications/AuthenticatedNotificationById';
-import {notificationsMessagePatterns} from '@rl-config/config/micro/rabbitmq/message-patterns/notifications/notifications.message.patterns';
 
 import {NotificationsService} from '../services/notifications.service';
 
