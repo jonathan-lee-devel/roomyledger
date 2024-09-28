@@ -9,10 +9,10 @@ import {
   Query,
 } from '@nestjs/common';
 import {ApiTags} from '@nestjs/swagger';
+import {CurrentUser} from '@rl-auth/auth/supabase/decorators/current-user.decorator';
+import {IdParamDto} from '@rl-validation/validation';
 import {AuthUser} from '@supabase/supabase-js';
 
-import {IdParamDto} from '../../../../../validation/id.param.dto';
-import {CurrentUser} from '../../../../auth/supabase/decorators/current-user.decorator';
 import {CreateExpenseDto} from '../dto/create-expense.dto';
 import {DateRangeDto} from '../dto/date-range.dto';
 import {EndDateDto} from '../dto/end-date.dto';

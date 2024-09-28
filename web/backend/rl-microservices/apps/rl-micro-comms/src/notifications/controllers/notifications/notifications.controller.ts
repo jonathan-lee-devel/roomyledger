@@ -4,7 +4,7 @@ import {notificationsMessagePatterns} from '@rl-config/config';
 import {ByAuthenticatedUserDto} from '@rl-config/config/micro/rabbitmq/dto/common/ByAuthenticatedUser.dto';
 import {AuthenticatedNotificationById} from '@rl-config/config/micro/rabbitmq/dto/notifications/AuthenticatedNotificationById';
 
-import {NotificationsService} from '../services/notifications.service';
+import {NotificationsService} from '../../services/notifications.service';
 
 @Controller()
 export class NotificationsController {

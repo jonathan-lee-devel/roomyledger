@@ -2,6 +2,7 @@ import {Controller, Delete, Get, Inject, Param, Patch} from '@nestjs/common';
 import {ClientProxy} from '@nestjs/microservices';
 import {ApiTags} from '@nestjs/swagger';
 import {CurrentUser} from '@rl-auth/auth/supabase/decorators/current-user.decorator';
+import {environment} from '@rl-config/config/environment.index';
 import {ByAuthenticatedUserDto} from '@rl-config/config/micro/rabbitmq/dto/common/ByAuthenticatedUser.dto';
 import {AuthenticatedNotificationById} from '@rl-config/config/micro/rabbitmq/dto/notifications/AuthenticatedNotificationById';
 import {NotificationDto} from '@rl-config/config/micro/rabbitmq/dto/notifications/Notification.dto';
@@ -12,7 +13,10 @@ import {AuthUser} from '@supabase/supabase-js';
 @ApiTags('Comms')
 @Controller('notifications')
 export class NotificationsController {
-  constructor(@Inject('COMMS') private readonly commsClient: ClientProxy) {}
+  constructor(
+    @Inject(environment.commsService.name)
+    private readonly commsClient: ClientProxy,
+  ) {}
 
   @Get('for-user')
   getAllForUser(@CurrentUser() currentUser: AuthUser) {
