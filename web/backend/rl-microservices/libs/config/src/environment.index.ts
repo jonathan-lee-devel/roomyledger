@@ -20,17 +20,14 @@ export type EnvironmentVariables = {
 export const environment = {
   paymentsService: {
     name: 'PAYMENTS',
-    listenAddress: '[::]',
-    listenPort: '10000',
   },
   commsService: {
     name: 'COMMS',
-    listenAddress: '[::]',
-    listenPort: '10001',
   },
   ledgersService: {
     name: 'LEDGERS',
-    listenAddress: '[::]',
-    listenPort: '10002',
+  },
+  usersService: {
+    name: 'USERS',
   },
 } as const;

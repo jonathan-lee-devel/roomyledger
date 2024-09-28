@@ -1,9 +1,17 @@
-import {NestFactory} from '@nestjs/core';
+import {createRabbitMqConsumerMicroservice} from '@rl-config/config';
+import {environment} from '@rl-config/config/environment.index';
+import dotenv from 'dotenv';
 
-import {RlMicroUsersModule} from './rl-micro-users.module';
+import {RlMicroPaymentsModule} from '../../rl-micro-payments/src/rl-micro-payments.module';
+
+dotenv.config();
 
 async function bootstrap() {
-  const app = await NestFactory.create(RlMicroUsersModule);
-  await app.listen(3000);
+  const app = await createRabbitMqConsumerMicroservice(
+    RlMicroPaymentsModule,
+    [[...process.env.RABBIT_MQ_URLS.split(',')]],
+    environment.usersService.name,
+  );
+  await app.listen();
 }
 bootstrap();

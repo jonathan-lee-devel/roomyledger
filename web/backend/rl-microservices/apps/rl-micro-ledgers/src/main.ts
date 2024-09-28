@@ -1,25 +1,19 @@
-import {Logger} from '@nestjs/common';
 import {
   boostrapErrorHandler,
   createRabbitMqConsumerMicroservice,
 } from '@rl-config/config';
 import {environment} from '@rl-config/config/environment.index';
-import {logMicroServiceListenStart} from '@rl-config/config/log/common.log';
+import dotenv from 'dotenv';
 
 import {RlMicroLedgersModule} from './rl-micro-ledgers.module';
 
+dotenv.config();
+
 async function bootstrap() {
-  const logger = new Logger(RlMicroLedgersModule.name);
   const app = await createRabbitMqConsumerMicroservice(
     RlMicroLedgersModule,
-    ['amqp://localhost:5672'],
+    [[...process.env.RABBIT_MQ_URLS.split(',')]],
     environment.ledgersService.name,
-  );
-  logMicroServiceListenStart(
-    logger,
-    environment.ledgersService.name,
-    environment.ledgersService.listenAddress,
-    environment.ledgersService.listenPort,
   );
   await app.listen();
 }
