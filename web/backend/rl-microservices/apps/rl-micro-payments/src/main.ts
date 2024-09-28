@@ -12,7 +12,7 @@ dotenv.config();
 async function bootstrap() {
   const app = await createRabbitMqConsumerMicroservice(
     RlMicroPaymentsModule,
-    [[...process.env.RABBIT_MQ_URLS.split(',')]],
+    [...process.env.RABBIT_MQ_URLS.split(',')],
     environment.paymentsService.name,
   );
   await app.listen();
