@@ -1,30 +1,33 @@
 <div class="surface-section px-4 animate__animated animate__zoomInDown mb-5">
   <div>
     <div class="flex flex-column md:flex-row mt-6">
-      <div class="mb-6 md:mb-0 mr-0 md:mr-4 flex flex-column flex-grow-1">
-        <div class="bg-bluegray-100 text-center p-3" style="border-radius: 6px 6px 0 0">
-          <div class="text-2xl font-bold text-bluegray-900 mb-3">One-time Lifetime Subscription</div>
+      <div class="mb-6 md:mb-0 flex flex-column flex-grow-1">
+        <div class="bg-blue-800 text-center p-3" style="border-radius: 6px 6px 0 0">
+          <div class="text-2xl font-bold text-white mb-3">Billed Monthly</div>
           <div class="flex align-items-center justify-content-center">
-            <span class="font-bold text-bluegray-900 text-5xl mr-2">$34.99</span>
+            <span class="font-bold text-white text-5xl mr-2">$3.99</span>
+            <span class="text-2xl text-blue-400"> / Month</span>
           </div>
         </div>
-        <div class="bg-bluegray-50 p-4 flex flex-column flex-grow-1" style="box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1); border-radius: 0 0 6px 6px">
-          <div class="text-bluegray-500 font-bold line-height-3 mb-4"></div>
-          <ul class="list-none p-0 m-0 mb-5 text-bluegray-600">
+        <div class="bg-blue-900 p-4 flex flex-column flex-grow-1" style="box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1); border-radius: 0 0 6px 6px">
+          <div class="text-blue-400 font-bold line-height-3 mb-4"></div>
+          <ul class="list-none p-0 m-0 mb-5 text-blue-100">
             <li class="flex align-items-center mb-3">
               <i class="pi pi-circle-on mr-2 text-sm"></i>
-              <span>Make a simple one-time payment and never have to worry about it again</span>
+              <span>30-day free trial</span>
             </li>
             <li class="flex align-items-center mb-3">
               <i class="pi pi-circle-on mr-2 text-sm"></i>
-              <span>You will still gain access to any new features that are added even long after you paid</span>
+              <span>Cancel your subscription at any time</span>
+            </li>
+            <li class="flex align-items-center mb-3">
+              <i class="pi pi-circle-on mr-2 text-sm"></i>
+              <span>Re-activate your subscription to access your data as it was when you canceled</span>
             </li>
           </ul>
-
-          <a [href]="environment.STRIPE_LIFETIME_PAYMENT_URL" class="p-button-secondary w-full mt-auto" label="Buy Now" pButton pRipple></a>
+          <a [href]="environment.STRIPE_MONTHLY_PAYMENT_URL" class="p-button-outlined w-full mt-auto" label="Subscribe Now" pButton pRipple></a>
         </div>
       </div>
-
       <div class="mb-6 md:mb-0 mr-0 md:mr-4 flex flex-column flex-grow-1">
         <div class="bg-bluegray-800 text-center p-3 border-3 border-green-500 border-bottom-none" style="border-radius: 6px 6px 0 0">
           <div class="bg-green-500 text-0 font-bold text-sm inline-block p-2 mb-3" style="border-radius: 20px">MOST POPULAR</div>
@@ -53,32 +56,27 @@
           <a [href]="environment.STRIPE_ANNUALLY_PAYMENT_URL" class="p-button-success w-full mt-auto" label="Subscribe Now" pButton pRipple></a>
         </div>
       </div>
-
-      <div class="mb-6 md:mb-0 flex flex-column flex-grow-1">
-        <div class="bg-blue-800 text-center p-3" style="border-radius: 6px 6px 0 0">
-          <div class="text-2xl font-bold text-white mb-3">Billed Monthly</div>
+      <div class="mb-6 md:mb-0 mr-0 md:mr-4 flex flex-column flex-grow-1">
+        <div class="bg-bluegray-100 text-center p-3" style="border-radius: 6px 6px 0 0">
+          <div class="text-2xl font-bold text-bluegray-900 mb-3">One-time Lifetime Subscription</div>
           <div class="flex align-items-center justify-content-center">
-            <span class="font-bold text-white text-5xl mr-2">$3.99</span>
-            <span class="text-2xl text-blue-400"> / Month</span>
+            <span class="font-bold text-bluegray-900 text-5xl mr-2">$34.99</span>
           </div>
         </div>
-        <div class="bg-blue-900 p-4 flex flex-column flex-grow-1" style="box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1); border-radius: 0 0 6px 6px">
-          <div class="text-blue-400 font-bold line-height-3 mb-4"></div>
-          <ul class="list-none p-0 m-0 mb-5 text-blue-100">
+        <div class="bg-bluegray-50 p-4 flex flex-column flex-grow-1" style="box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1); border-radius: 0 0 6px 6px">
+          <div class="text-bluegray-500 font-bold line-height-3 mb-4"></div>
+          <ul class="list-none p-0 m-0 mb-5 text-bluegray-600">
             <li class="flex align-items-center mb-3">
               <i class="pi pi-circle-on mr-2 text-sm"></i>
-              <span>30-day free trial</span>
+              <span>Make a simple one-time payment and never have to worry about it again</span>
             </li>
             <li class="flex align-items-center mb-3">
               <i class="pi pi-circle-on mr-2 text-sm"></i>
-              <span>Cancel your subscription at any time</span>
-            </li>
-            <li class="flex align-items-center mb-3">
-              <i class="pi pi-circle-on mr-2 text-sm"></i>
-              <span>Re-activate your subscription to access your data as it was when you canceled</span>
+              <span>You will still gain access to any new features that are added even long after you paid</span>
             </li>
           </ul>
-          <a [href]="environment.STRIPE_MONTHLY_PAYMENT_URL" class="p-button-outlined w-full mt-auto" label="Subscribe Now" pButton pRipple></a>
+
+          <a [href]="environment.STRIPE_LIFETIME_PAYMENT_URL" class="p-button-secondary w-full mt-auto" label="Buy Now" pButton pRipple></a>
         </div>
       </div>
     </div>
