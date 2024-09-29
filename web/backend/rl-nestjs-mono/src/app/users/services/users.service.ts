@@ -1,7 +1,7 @@
 import {Injectable} from '@nestjs/common';
 import {EventEmitter2} from '@nestjs/event-emitter';
 
-import {PrismaService} from '../../../prisma/services/prisma.service';
+import {PrismaService} from '../../../lib/prisma/services/prisma.service';
 import {UserCheckInEvent} from '../events/UserCheckIn.event';
 
 @Injectable()

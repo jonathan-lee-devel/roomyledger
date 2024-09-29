@@ -8,7 +8,7 @@ import {UNAUTHORIZED} from 'nestjs-supabase-auth';
 import {ExtractJwt} from 'passport-jwt';
 import {ParsedQs} from 'qs';
 
-import {EnvironmentVariables} from '../../../../config/environment';
+import {EnvironmentVariables} from '../../../config/environment';
 import {SupabaseAuthStrategy} from '../passport/passport-supabase.strategy';
 
 @Injectable()

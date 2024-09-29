@@ -2,7 +2,7 @@ import {Injectable, Logger} from '@nestjs/common';
 import {OnEvent} from '@nestjs/event-emitter';
 import {DateTime} from 'luxon';
 
-import {PrismaService} from '../../../../../../prisma/services/prisma.service';
+import {PrismaService} from '../../../../../../lib/prisma/services/prisma.service';
 import {StripeChargeSucceededEvent} from '../../events/StripeChargeSucceeded.event';
 import {StripeCustomerSubscriptionCreatedEvent} from '../../events/StripeCustomerSubscriptionCreated.event';
 import {StripeCustomerSubscriptionDeletedEvent} from '../../events/StripeCustomerSubscriptionDeleted.event';

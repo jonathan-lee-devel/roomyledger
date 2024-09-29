@@ -5,10 +5,10 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 
-import {PrismaService} from '../../../../../prisma/services/prisma.service';
+import {PrismaService} from '../../../../../lib/prisma/services/prisma.service';
+import {RandomService} from '../../../../../lib/util/services/random/random.service';
 import {PaymentsService} from '../../../../payments/services/payments.service';
 import {UsersService} from '../../../../users/services/users.service';
-import {RandomService} from '../../../../util/services/random/random.service';
 import {CreatePropertyDto} from '../dto/create-property.dto';
 
 @Injectable()

@@ -2,8 +2,8 @@ import {Controller, Delete, Get, Param, Patch} from '@nestjs/common';
 import {ApiTags} from '@nestjs/swagger';
 import {AuthUser} from '@supabase/supabase-js';
 
-import {IdParamDto} from '../../../validation/id.param.dto';
-import {CurrentUser} from '../../auth/supabase/decorators/current-user.decorator';
+import {CurrentUser} from '../../../lib/auth/supabase/decorators/current-user.decorator';
+import {IdParamDto} from '../../../lib/validation/id.param.dto';
 import {NotificationsService} from '../services/notifications.service';
 
 @ApiTags('Notifications')

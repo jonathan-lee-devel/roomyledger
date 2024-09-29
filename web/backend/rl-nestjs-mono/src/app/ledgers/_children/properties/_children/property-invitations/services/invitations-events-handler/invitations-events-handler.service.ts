@@ -2,7 +2,7 @@ import {Injectable, Logger} from '@nestjs/common';
 import {OnEvent} from '@nestjs/event-emitter';
 import {DateTime} from 'luxon';
 
-import {PrismaService} from '../../../../../../../../prisma/services/prisma.service';
+import {PrismaService} from '../../../../../../../../lib/prisma/services/prisma.service';
 import {NotificationsService} from '../../../../../../../notifications/services/notifications.service';
 import {UsersService} from '../../../../../../../users/services/users.service';
 import {PropertiesService} from '../../../../services/properties.service';

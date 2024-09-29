@@ -11,8 +11,8 @@ import {
 import {ApiTags} from '@nestjs/swagger';
 import {AuthUser} from '@supabase/supabase-js';
 
-import {IdParamDto} from '../../../../../validation/id.param.dto';
-import {CurrentUser} from '../../../../auth/supabase/decorators/current-user.decorator';
+import {CurrentUser} from '../../../../../lib/auth/supabase/decorators/current-user.decorator';
+import {IdParamDto} from '../../../../../lib/validation/id.param.dto';
 import {CreateExpenseDto} from '../dto/create-expense.dto';
 import {DateRangeDto} from '../dto/date-range.dto';
 import {EndDateDto} from '../dto/end-date.dto';

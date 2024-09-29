@@ -5,7 +5,7 @@ import {StripeService} from './_children/stripe/services/stripe.service';
 import {StripeModule} from './_children/stripe/stripe.module';
 import {PaymentsController} from './controllers/payments.controller';
 import {PaymentsService} from './services/payments.service';
-import {PrismaService} from '../../prisma/services/prisma.service';
+import {PrismaService} from '../../lib/prisma/services/prisma.service';
 
 @Module({
   controllers: [PaymentsController],

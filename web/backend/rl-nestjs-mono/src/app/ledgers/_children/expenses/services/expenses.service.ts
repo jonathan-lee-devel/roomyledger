@@ -5,8 +5,8 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 
-import {PrismaService} from '../../../../../prisma/services/prisma.service';
-import {SupabaseDbService} from '../../../../supabase-db/services/supabase-db/supabase-db.service';
+import {PrismaService} from '../../../../../lib/prisma/services/prisma.service';
+import {SupabaseStorageService} from '../../../../../lib/supabase-storage/services/supabase-db/supabase-storage.service';
 import {UsersService} from '../../../../users/services/users.service';
 import {PropertiesService} from '../../properties/services/properties.service';
 import {CreateExpenseDto} from '../dto/create-expense.dto';
@@ -19,7 +19,7 @@ export class ExpensesService {
     private readonly prismaService: PrismaService,
     private readonly propertiesService: PropertiesService,
     private readonly usersService: UsersService,
-    private readonly supabaseDbService: SupabaseDbService,
+    private readonly supabaseStorageService: SupabaseStorageService,
   ) {}
 
   async create(
@@ -209,10 +209,11 @@ export class ExpensesService {
     let imageUrl: string | undefined = undefined;
     if (expense.filePath) {
       const splitImageFilePath = expense.filePath.split('/');
-      const {data, error} = await this.supabaseDbService.generateUrlForImage(
-        splitImageFilePath[0],
-        [...splitImageFilePath.slice(1)].join('/'),
-      );
+      const {data, error} =
+        await this.supabaseStorageService.generateUrlForImage(
+          splitImageFilePath[0],
+          [...splitImageFilePath.slice(1)].join('/'),
+        );
       if (error) {
         this.logger.error(
           `Error while generating URL for expense with ID: ${expense.id}`,

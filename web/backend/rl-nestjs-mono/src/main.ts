@@ -5,7 +5,7 @@ import {DocumentBuilder, SwaggerModule} from '@nestjs/swagger';
 import helmet from 'helmet';
 
 import {AppModule} from './app/app.module';
-import {EnvironmentVariables, NodeEnvironment} from './config/environment';
+import {EnvironmentVariables, NodeEnvironment} from './lib/config/environment';
 
 async function bootstrap() {
   const logger = new Logger('Main');

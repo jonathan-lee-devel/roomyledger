@@ -2,9 +2,9 @@ import {BadRequestException, Injectable, Logger} from '@nestjs/common';
 import {EventEmitter2} from '@nestjs/event-emitter';
 import {DateTime} from 'luxon';
 
-import {PrismaService} from '../../../../../../../prisma/services/prisma.service';
+import {PrismaService} from '../../../../../../../lib/prisma/services/prisma.service';
+import {RandomService} from '../../../../../../../lib/util/services/random/random.service';
 import {UsersService} from '../../../../../../users/services/users.service';
-import {RandomService} from '../../../../../../util/services/random/random.service';
 import {PropertiesService} from '../../../services/properties.service';
 import {PropertyTenantInvitationAcceptedEvent} from '../events/PropertyTenantInvitationAccepted.event';
 import {PropertyTenantInvitedEvent} from '../events/PropertyTenantInvited.event';

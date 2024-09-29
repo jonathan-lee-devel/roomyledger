@@ -4,8 +4,8 @@ import {EventEmitter2} from '@nestjs/event-emitter';
 import {DateTime} from 'luxon';
 import Stripe from 'stripe';
 
-import {EnvironmentVariables} from '../../../../../config/environment';
-import {PrismaService} from '../../../../../prisma/services/prisma.service';
+import {EnvironmentVariables} from '../../../../../lib/config/environment';
+import {PrismaService} from '../../../../../lib/prisma/services/prisma.service';
 import {StripeChargeSucceededEvent} from '../events/StripeChargeSucceeded.event';
 import {StripeCustomerSubscriptionCreatedEvent} from '../events/StripeCustomerSubscriptionCreated.event';
 import {StripeCustomerSubscriptionDeletedEvent} from '../events/StripeCustomerSubscriptionDeleted.event';

@@ -6,9 +6,9 @@ import {AuthenticatedUsersController} from './controllers/authenticated-users/au
 import {RegistrationService} from './services/registration/registration.service';
 import {UserEventsHandlerService} from './services/user-events-handler/user-events-handler.service';
 import {UsersService} from './services/users.service';
-import {PrismaService} from '../../prisma/services/prisma.service';
+import {PrismaService} from '../../lib/prisma/services/prisma.service';
+import {RandomService} from '../../lib/util/services/random/random.service';
 import {MailService} from '../mail/services/mail/mail.service';
-import {RandomService} from '../util/services/random/random.service';
 
 @Module({
   controllers: [AuthenticatedUsersController],

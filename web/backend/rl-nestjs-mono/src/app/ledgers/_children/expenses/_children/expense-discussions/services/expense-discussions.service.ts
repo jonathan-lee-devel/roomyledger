@@ -1,6 +1,6 @@
 import {BadRequestException, Injectable, Logger} from '@nestjs/common';
 
-import {PrismaService} from '../../../../../../../prisma/services/prisma.service';
+import {PrismaService} from '../../../../../../../lib/prisma/services/prisma.service';
 import {UsersService} from '../../../../../../users/services/users.service';
 import {PropertiesService} from '../../../../properties/services/properties.service';
 import {ExpensesService} from '../../../services/expenses.service';

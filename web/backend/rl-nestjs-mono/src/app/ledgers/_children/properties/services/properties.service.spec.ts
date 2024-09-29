@@ -3,7 +3,7 @@ import {faker} from '@faker-js/faker';
 import {InternalServerErrorException} from '@nestjs/common';
 
 import {PropertiesService} from './properties.service';
-import {PrismaService} from '../../../../../prisma/services/prisma.service';
+import {PrismaService} from '../../../../../lib/prisma/services/prisma.service';
 import {UsersService} from '../../../../users/services/users.service';
 
 describe('PropertiesService', () => {

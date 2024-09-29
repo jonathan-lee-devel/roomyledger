@@ -1,6 +1,6 @@
 import {Injectable} from '@nestjs/common';
 
-import {PrismaService} from '../../../prisma/services/prisma.service';
+import {PrismaService} from '../../../lib/prisma/services/prisma.service';
 import {CreateApplicationMessageDto} from '../dto/create-application-message.dto';
 import {UpdateApplicationMessageDto} from '../dto/update-application-message.dto';
 
