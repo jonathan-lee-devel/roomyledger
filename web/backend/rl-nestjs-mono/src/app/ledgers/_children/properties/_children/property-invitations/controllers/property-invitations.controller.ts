@@ -2,8 +2,8 @@ import {Body, Controller, Param, Patch, Post} from '@nestjs/common';
 import {ApiTags} from '@nestjs/swagger';
 import {AuthUser} from '@supabase/supabase-js';
 
-import {IdParamDto} from '../../../../../../../validation/id.param.dto';
-import {CurrentUser} from '../../../../../../auth/supabase/decorators/current-user.decorator';
+import {CurrentUser} from '../../../../../../../lib/auth/supabase/decorators/current-user.decorator';
+import {IdParamDto} from '../../../../../../../lib/validation/id.param.dto';
 import {InviteTenantToPropertyDto} from '../dto/invite-tenant-to-property.dto';
 import {PropertyInvitationsService} from '../services/property-invitations.service';
 

@@ -38,7 +38,7 @@
         pRipple
       />
     </div>
-    <div class="animate__animated animate__delay-1s animate__tada">
+    <div class="animate__animated animate__delay-1s animate__tada" *ngIf="featureFlagsStore.isSignInWithEmailEnabled()">
       <app-email-login-overlay-panel [isNewCustomer]="isNewCustomer()" />
     </div>
     <div class="flex justify-center items-center text-center my-5">

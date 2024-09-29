@@ -7,7 +7,7 @@ import {
   MinLength,
 } from 'class-validator';
 
-import {Match} from '../../../validation/match.validator';
+import {Match} from '../../../lib/validation/match.validator';
 import {PasswordConstants} from '../constants/password.constants';
 
 export class RegisterDto {

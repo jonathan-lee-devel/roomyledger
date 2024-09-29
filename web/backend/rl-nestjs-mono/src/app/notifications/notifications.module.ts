@@ -4,7 +4,7 @@ import {JwtService} from '@nestjs/jwt';
 
 import {NotificationsController} from './controllers/notifications.controller';
 import {NotificationsService} from './services/notifications.service';
-import {PrismaService} from '../../prisma/services/prisma.service';
+import {PrismaService} from '../../lib/prisma/services/prisma.service';
 import {UsersService} from '../users/services/users.service';
 
 @Module({

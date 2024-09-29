@@ -11,9 +11,9 @@ import {
 import {ApiTags} from '@nestjs/swagger';
 import {AuthUser} from '@supabase/supabase-js';
 
-import {RequestHeaders} from '../../../../../validation/request.headers';
-import {CurrentUser} from '../../../../auth/supabase/decorators/current-user.decorator';
-import {Public} from '../../../../auth/supabase/decorators/is-public.decorator';
+import {CurrentUser} from '../../../../../lib/auth/supabase/decorators/current-user.decorator';
+import {Public} from '../../../../../lib/auth/supabase/decorators/is-public.decorator';
+import {RequestHeaders} from '../../../../../lib/validation/request.headers';
 import {StripeService} from '../services/stripe.service';
 
 @ApiTags('Payments')

@@ -3,7 +3,7 @@ import {faker} from '@faker-js/faker';
 import {BadRequestException, Logger, NotFoundException} from '@nestjs/common';
 
 import {ExpenseDiscussionsService} from './expense-discussions.service';
-import {PrismaService} from '../../../../../../../prisma/services/prisma.service';
+import {PrismaService} from '../../../../../../../lib/prisma/services/prisma.service';
 import {UsersService} from '../../../../../../users/services/users.service';
 import {PropertiesService} from '../../../../properties/services/properties.service';
 import {ExpensesService} from '../../../services/expenses.service';

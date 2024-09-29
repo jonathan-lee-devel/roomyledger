@@ -6,16 +6,16 @@ import {ThrottlerGuard, ThrottlerModule} from '@nestjs/throttler';
 
 import {routes} from './app.routing';
 import {ApplicationMessagesModule} from './application-messages/application-messages.module';
-import {AuthModule} from './auth/auth.module';
-import {SupabaseAuthGuard} from './auth/supabase/guards/supabase-auth/supabase-auth.guard';
 import {ExpensesModule} from './ledgers/_children/expenses/expenses.module';
 import {PropertiesModule} from './ledgers/_children/properties/properties.module';
 import {NotificationsModule} from './notifications/notifications.module';
 import {PaymentsModule} from './payments/payments.module';
-import {SupabaseDbModule} from './supabase-db/supabase-db.module';
 import {UsersModule} from './users/users.module';
-import {UtilModule} from './util/util.module';
-import {PrismaModule} from '../prisma/prisma.module';
+import {AuthModule} from '../lib/auth/auth.module';
+import {SupabaseAuthGuard} from '../lib/auth/supabase/guards/supabase-auth/supabase-auth.guard';
+import {PrismaModule} from '../lib/prisma/prisma.module';
+import {SupabaseStorageModule} from '../lib/supabase-storage/supabase-storage.module';
+import {UtilModule} from '../lib/util/util.module';
 
 @Module({
   imports: [
@@ -37,7 +37,7 @@ import {PrismaModule} from '../prisma/prisma.module';
     NotificationsModule,
     UtilModule,
     AuthModule,
-    SupabaseDbModule,
+    SupabaseStorageModule,
   ],
   controllers: [],
   providers: [

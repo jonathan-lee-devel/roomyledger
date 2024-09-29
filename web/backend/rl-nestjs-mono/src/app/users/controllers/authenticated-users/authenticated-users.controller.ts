@@ -2,7 +2,7 @@ import {Body, Controller, Post} from '@nestjs/common';
 import {ApiTags} from '@nestjs/swagger';
 import {AuthUser} from '@supabase/supabase-js';
 
-import {CurrentUser} from '../../../auth/supabase/decorators/current-user.decorator';
+import {CurrentUser} from '../../../../lib/auth/supabase/decorators/current-user.decorator';
 import {CheckInDto} from '../../dto/CheckIn.dto';
 import {UsersService} from '../../services/users.service';
 

@@ -1,7 +1,7 @@
 import {Injectable, Logger} from '@nestjs/common';
 import {ConfigService} from '@nestjs/config';
 
-import {EnvironmentVariables} from '../../../../config/environment';
+import {EnvironmentVariables} from '../../../../lib/config/environment';
 
 @Injectable()
 export class MailService {
