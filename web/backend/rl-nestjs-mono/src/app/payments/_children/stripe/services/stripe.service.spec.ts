@@ -4,7 +4,7 @@ import {ConfigService} from '@nestjs/config';
 import Stripe from 'stripe';
 
 import {StripeService} from './stripe.service';
-import {EnvironmentVariables} from '../../../../../config/environment';
+import {EnvironmentVariables} from '../../../../../lib/config/environment';
 
 describe('StripeService', () => {
   let service: StripeService;

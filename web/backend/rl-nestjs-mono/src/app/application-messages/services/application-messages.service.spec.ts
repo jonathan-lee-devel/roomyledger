@@ -1,7 +1,7 @@
 import {TestBed} from '@automock/jest';
 
 import {ApplicationMessagesService} from './application-messages.service';
-import {PrismaService} from '../../../prisma/services/prisma.service';
+import {PrismaService} from '../../../lib/prisma/services/prisma.service';
 
 describe('ApplicationMessagesService', () => {
   let service: ApplicationMessagesService;
