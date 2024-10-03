@@ -33,7 +33,7 @@ describe('StripeService', () => {
     const stripe = new Stripe(
       mockConfigService.getOrThrow<string>('STRIPE_API_KEY'),
       {
-        apiVersion: '2024-06-20',
+        apiVersion: '2024-09-30.acacia',
       },
     );
     const header = stripe.webhooks.generateTestHeaderString({
