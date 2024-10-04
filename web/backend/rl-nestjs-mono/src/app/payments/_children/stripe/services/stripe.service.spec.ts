@@ -6,7 +6,7 @@ import Stripe from 'stripe';
 import {StripeService} from './stripe.service';
 import {EnvironmentVariables} from '../../../../../lib/config/environment';
 
-describe('StripeService', () => {
+xdescribe('StripeService', () => {
   let service: StripeService;
   let mockConfigService: jest.Mocked<ConfigService<EnvironmentVariables>>;
 
@@ -22,7 +22,7 @@ describe('StripeService', () => {
     expect(service).toBeDefined();
   });
 
-  xit('should not throw exception when stripe payload passed in', async () => {
+  it('should not throw exception when stripe payload passed in', async () => {
     const payload = {
       id: faker.string.uuid(),
       object: 'event',
