@@ -48,6 +48,7 @@ export class SupabaseJwtStrategy extends PassportStrategy(
     try {
       payload = await this.jwtService.verifyAsync(accessToken);
     } catch (error) {
+      this.logger.error(error);
       this.fail(UNAUTHORIZED, 401);
       return;
     }
