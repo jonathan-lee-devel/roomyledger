@@ -27,7 +27,6 @@
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss",
-              "node_modules/shepherd.js/dist/css/shepherd.css",
               {
                 "input": "src/theme-dark.css",
                 "bundleName": "theme-dark",
