@@ -11,7 +11,7 @@ export const environment = {
   SUPABASE_URL: 'https://fmsbmfjxqisdphhbmggb.supabase.co/',
   SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZtc2JtZmp4cWlzZHBoaGJtZ2diIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQ3OTIxMzksImV4cCI6MjA0MDM2ODEzOX0.ENdgDBHl9a3K-8MNd0du0jKfgLSW6K2OjkypM-w2T-k',
   FLAGSMITH_CLIENT_SDK_KEY: 'QP3CArzcknVgqrftgVydHm',
-  FLAGSMITH_API_URL: 'https://flagsmith.roomyledger.com/api/v1',
+  FLAGSMITH_API_URL: 'https://flagsmith.roomyledger.com/api/v1/',
   LOGIN_SERVICE_BASE_URL: 'https://api.staging.roomyledger.com/v1/users',
   PAYMENTS_SERVICE_BASE_URL: 'https://api.staging.roomyledger.com/v1/payments',
   APPLICATION_MESSAGES_SERVICE_BASE_URL: 'https://api.staging.roomyledger.com/v1/application-messages',

@@ -78,7 +78,6 @@ export class AppComponent implements OnInit {
   private readonly REFRESH_EVENT_ID = 1;
 
   constructor(
-    private readonly document: Document,
     private readonly router: Router,
     private readonly primengConfig: PrimeNGConfig,
     private readonly layoutService: LayoutService,
@@ -121,7 +120,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initializeFeatureBaseScript();
     if (!environment.local) {
       vercelInject({
         framework: 'Angular',
@@ -242,24 +240,5 @@ export class AppComponent implements OnInit {
     } else {
       this.userAuthenticationStore.setLightModeEnabled();
     }
-  }
-
-  private initializeFeatureBaseScript() {
-    const script = this.document.createElement('script');
-    script.type = 'text/javascript';
-    script.innerHTML = `
-  Featurebase("initialize_feedback_widget", {
-    organization: "roomyledger",
-    theme: "dark",
-    ${this.getFeatureBasePlacement()}
-    locale: "en",
-    metadata: null
-  });`;
-    const body = this.document.getElementsByTagName('body')?.[0];
-    body?.appendChild(script);
-  }
-
-  private getFeatureBasePlacement(): string {
-    return window.innerWidth > 600 ? '"placement": "right",' : '';
   }
 }
