@@ -39,7 +39,7 @@
         <p-inputGroup class="my-4">
           <p-inputGroupAddon>
             <i
-              [classList]="currencyCode === 'EUR' ? 'pi pi-euro' : 'pi pi-dollar'"
+              [classList]="'pi ' + getCurrencySymbolClass(currencyCode)"
             ></i>
           </p-inputGroupAddon>
           <input
@@ -69,7 +69,7 @@
         <div class="flex justify-center items-center text-center my-3">
           <p-button
             (click)=doCreateExpense()
-            [icon]="currencyCode === 'EUR' ? 'pi pi-euro' : 'pi pi-dollar'"
+            [icon]="'pi ' + getCurrencySymbolClass(currencyCode)"
             [loading]="expensesStore.isLoading()"
             class="w-full"
             data-testid="create-expense-button"
