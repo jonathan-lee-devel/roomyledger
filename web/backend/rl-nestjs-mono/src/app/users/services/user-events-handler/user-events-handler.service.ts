@@ -16,10 +16,12 @@ export class UserEventsHandlerService {
   @OnEvent(UserCheckInEvent.eventIdentifier, {async: true})
   async handleCheckInEvent(event: UserCheckInEvent) {
     this.logger.log(`On -> user check-in event with e-mail: <${event.email}>`);
-    const user = await this.usersService.findByEmail(event.email);
+    const user = await this.usersService.findByEmail(
+      event.email?.toLowerCase(),
+    );
     if (!user) {
       await this.registrationService.createPreVerifiedUser(
-        event.email,
+        event.email?.toLowerCase(),
         event.displayName ?? '',
       );
     } else if (!user?.isEmailVerified) {

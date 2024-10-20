@@ -34,7 +34,10 @@ export class PropertiesController {
     this.logger.log(
       `Request from: ${currentUser.email} to create property with name: ${createPropertyDto.name}`,
     );
-    return this.propertiesService.create(currentUser.email, createPropertyDto);
+    return this.propertiesService.create(
+      currentUser.email?.toLowerCase(),
+      createPropertyDto,
+    );
   }
 
   @Get('where-involved')
@@ -45,7 +48,9 @@ export class PropertiesController {
     this.logger.log(
       `Request from: ${currentUser.email} to get all properties where involved`,
     );
-    return this.propertiesService.findAllWhereInvolved(currentUser.email);
+    return this.propertiesService.findAllWhereInvolved(
+      currentUser.email?.toLowerCase(),
+    );
   }
 
   @Get(':id')
@@ -57,7 +62,7 @@ export class PropertiesController {
     this.logger.log(
       `Request from: ${currentUser.email} to get property with ID ${id}`,
     );
-    return this.propertiesService.findOne(currentUser.email, id);
+    return this.propertiesService.findOne(currentUser.email?.toLowerCase(), id);
   }
 
   @Delete(':id')
@@ -69,7 +74,7 @@ export class PropertiesController {
     this.logger.log(
       `Request from: ${currentUser.email} to delete property with ID ${id}`,
     );
-    return this.propertiesService.remove(currentUser.email, id);
+    return this.propertiesService.remove(currentUser.email?.toLowerCase(), id);
   }
 
   @Patch(':id/toggle-property-admin')
@@ -83,9 +88,9 @@ export class PropertiesController {
       `Request from ${currentUser.email} to toggle admin ${email} on property with ID ${id}`,
     );
     return this.propertiesService.togglePropertyAdmin(
-      currentUser.email,
+      currentUser.email?.toLowerCase(),
       id,
-      email,
+      email?.toLowerCase(),
     );
   }
 
@@ -100,9 +105,9 @@ export class PropertiesController {
       `Request from ${currentUser.email} to toggle tenant ${email} on property with ID ${id}`,
     );
     return this.propertiesService.togglePropertyTenant(
-      currentUser.email,
+      currentUser.email?.toLowerCase(),
       id,
-      email,
+      email?.toLowerCase(),
     );
   }
 }

@@ -35,7 +35,7 @@ describe('PropertiesController', () => {
     );
 
     expect(mockPropertiesService.create).toHaveBeenCalledWith(
-      requestingUserEmail,
+      requestingUserEmail.toLowerCase(),
       createPropertyDto,
     );
   });

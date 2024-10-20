@@ -26,7 +26,7 @@ export class MailService {
       },
       body: JSON.stringify({
         from: `${this.getFromName()} <${this.configService.getOrThrow<string>('EMAIL_USER')}>`,
-        to: [addressTo],
+        to: [addressTo?.toLowerCase()],
         subject,
         html,
       }),
