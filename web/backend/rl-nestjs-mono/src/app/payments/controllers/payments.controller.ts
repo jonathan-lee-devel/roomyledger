@@ -12,6 +12,8 @@ export class PaymentsController {
 
   @Get('customer-status')
   async getCustomerPaymentStatus(@CurrentUser() currentUser: AuthUser) {
-    return this.paymentsService.getCustomerPaymentStatus(currentUser.email);
+    return this.paymentsService.getCustomerPaymentStatus(
+      currentUser.email?.toLowerCase(),
+    );
   }
 }

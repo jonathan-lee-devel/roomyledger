@@ -13,17 +13,23 @@ export class NotificationsController {
 
   @Get('for-user')
   async findAllForUser(@CurrentUser() currentUser: AuthUser) {
-    return this.notificationsService.findAllForUser(currentUser.email);
+    return this.notificationsService.findAllForUser(
+      currentUser.email?.toLowerCase(),
+    );
   }
 
   @Patch('for-user')
   async acknowledgeAllForUser(@CurrentUser() currentUser: AuthUser) {
-    return this.notificationsService.acknowledgeAllForUser(currentUser.email);
+    return this.notificationsService.acknowledgeAllForUser(
+      currentUser.email?.toLowerCase(),
+    );
   }
 
   @Delete('for-user')
   async deleteAllForUser(@CurrentUser() currentUser: AuthUser) {
-    return this.notificationsService.deleteAllForUser(currentUser.email);
+    return this.notificationsService.deleteAllForUser(
+      currentUser.email?.toLowerCase(),
+    );
   }
 
   @Get(':id')
@@ -31,7 +37,10 @@ export class NotificationsController {
     @CurrentUser() currentUser: AuthUser,
     @Param() {id}: IdParamDto,
   ) {
-    return this.notificationsService.findOne(currentUser.email, id);
+    return this.notificationsService.findOne(
+      currentUser.email?.toLowerCase(),
+      id,
+    );
   }
 
   @Patch(':id')
@@ -39,11 +48,17 @@ export class NotificationsController {
     @CurrentUser() currentUser: AuthUser,
     @Param() {id}: IdParamDto,
   ) {
-    return this.notificationsService.acknowledgeOne(currentUser.email, id);
+    return this.notificationsService.acknowledgeOne(
+      currentUser.email?.toLowerCase(),
+      id,
+    );
   }
 
   @Delete(':id')
   remove(@CurrentUser() currentUser: AuthUser, @Param() {id}: IdParamDto) {
-    return this.notificationsService.remove(currentUser.email, id);
+    return this.notificationsService.remove(
+      currentUser.email?.toLowerCase(),
+      id,
+    );
   }
 }

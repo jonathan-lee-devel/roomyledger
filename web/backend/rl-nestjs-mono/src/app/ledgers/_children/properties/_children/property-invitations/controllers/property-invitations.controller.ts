@@ -22,10 +22,10 @@ export class PropertyInvitationsController {
     @Body() {email}: InviteTenantToPropertyDto,
   ) {
     return this.propertyInvitationsService.inviteTenantToProperty(
-      currentUser.email,
+      currentUser.email?.toLowerCase(),
       currentUser.user_metadata['name'],
       id,
-      email,
+      email?.toLowerCase(),
     );
   }
 
@@ -36,7 +36,7 @@ export class PropertyInvitationsController {
     @Body() {tokenValue}: any,
   ) {
     return this.propertyInvitationsService.acceptInvitationToProperty(
-      currentUser.email,
+      currentUser.email?.toLowerCase(),
       id,
       tokenValue,
     );

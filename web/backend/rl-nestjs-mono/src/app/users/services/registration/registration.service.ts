@@ -13,7 +13,7 @@ export class RegistrationService {
     this.logger.log(`Creating pre-verified user with e-mail: ${email}`);
     await this.prismaService.user.create({
       data: {
-        email,
+        email: email?.toLowerCase(),
         isEmailVerified: true,
         profile: {
           create: {
