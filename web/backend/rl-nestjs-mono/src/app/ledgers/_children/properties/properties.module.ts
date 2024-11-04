@@ -13,6 +13,7 @@ import {RegistrationService} from '../../../users/services/registration/registra
 import {UsersService} from '../../../users/services/users.service';
 
 @Module({
+  imports: [PropertyInvitationsModule],
   controllers: [PropertiesController],
   providers: [
     {
@@ -29,6 +30,6 @@ import {UsersService} from '../../../users/services/users.service';
     PaymentsService,
     StripeService,
   ],
-  imports: [PropertyInvitationsModule],
+  exports: [PropertiesService],
 })
 export class PropertiesModule {}

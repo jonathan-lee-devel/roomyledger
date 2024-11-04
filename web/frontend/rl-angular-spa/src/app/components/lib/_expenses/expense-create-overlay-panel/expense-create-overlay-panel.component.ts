@@ -48,7 +48,7 @@ export class ExpenseCreateOverlayPanelComponent {
   protected name: string = '';
   protected description: string = '';
   protected amount: number = 0.00;
-  protected currencyCode: Currency = 'EUR';
+  protected currencyCode: Currency = 'USD';
   protected expenseProofImages: File[] = [];
 
 
@@ -58,6 +58,18 @@ export class ExpenseCreateOverlayPanelComponent {
   }))];
 
   private uploadedFile?: File;
+
+  getCurrencySymbolClass(currencyCode: Currency) {
+    if (currencyCode === 'USD') {
+      return 'pi-dollar';
+    } else if (currencyCode === 'EUR') {
+      return 'pi-euro';
+    } else if (currencyCode === 'GBP') {
+      return 'pi-pound';
+    } else {
+      return 'pi-dollar';
+    }
+  }
 
   doCreateExpense() {
     this.expensesStore.addExpense({
