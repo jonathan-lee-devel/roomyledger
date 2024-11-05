@@ -23,7 +23,7 @@ export class StripeService {
     this.stripe = new Stripe(
       this.configService.getOrThrow<string>('STRIPE_API_KEY'),
       {
-        apiVersion: '2024-09-30.acacia',
+        apiVersion: '2024-10-28.acacia',
       },
     );
   }
