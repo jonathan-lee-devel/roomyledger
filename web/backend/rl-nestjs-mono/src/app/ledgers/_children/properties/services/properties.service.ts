@@ -20,7 +20,7 @@ export class PropertiesService {
     private readonly paymentsService: PaymentsService,
   ) {}
 
-  async create(
+  async createProperty(
     requestingUserEmail: string,
     createPropertyDto: CreatePropertyDto,
   ) {
