@@ -75,7 +75,7 @@ describe('PropertiesService Integration Tests', () => {
       name: faker.internet.displayName(),
     };
 
-    const result = await service.create(requestingUserEmail, property);
+    const result = await service.createProperty(requestingUserEmail, property);
 
     const returnedProperty = await service.getPropertyForViewing(
       requestingUserEmail,
