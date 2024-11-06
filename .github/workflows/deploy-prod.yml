@@ -71,6 +71,8 @@ jobs:
       - name: Test (v${{ matrix.node-version }})
         working-directory: ./web/backend/rl-nestjs-mono
         run: yarn run test
+        env:
+          STRIPE_API_KEY: ${{ secrets.STRIPE_API_KEY }}
 
   sonarcloud-analysis-backend:
     name: SonarCloud Backend (v${{ matrix.node-version }})
@@ -93,6 +95,8 @@ jobs:
       - name: Run Tests
         working-directory: ./web/backend/rl-nestjs-mono
         run: yarn run test:cov
+        env:
+          STRIPE_API_KEY: ${{ secrets.STRIPE_API_KEY }}
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
