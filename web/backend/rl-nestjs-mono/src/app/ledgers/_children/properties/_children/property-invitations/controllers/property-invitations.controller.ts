@@ -15,7 +15,7 @@ export class PropertyInvitationsController {
   ) {}
 
   @Post('to-property/:id')
-  create(
+  createPropertyInvitation(
     @CurrentUser()
     currentUser: AuthUser,
     @Param() {id}: IdParamDto,
@@ -33,7 +33,7 @@ export class PropertyInvitationsController {
   acceptInvitation(
     @CurrentUser() currentUser: AuthUser,
     @Param() {id}: IdParamDto,
-    @Body() {tokenValue}: any,
+    @Body() {tokenValue}: {tokenValue: string},
   ) {
     return this.propertyInvitationsService.acceptInvitationToProperty(
       currentUser.email?.toLowerCase(),
