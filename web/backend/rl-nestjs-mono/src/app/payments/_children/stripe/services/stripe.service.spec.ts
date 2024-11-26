@@ -29,7 +29,7 @@ xdescribe('StripeService', () => {
     };
     const payloadString = JSON.stringify(payload, null, 2);
     const stripe = new Stripe(faker.string.sample(), {
-      apiVersion: '2024-10-28.acacia',
+      apiVersion: '2024-11-20.acacia',
     });
     const header = stripe.webhooks.generateTestHeaderString({
       payload: payloadString,
