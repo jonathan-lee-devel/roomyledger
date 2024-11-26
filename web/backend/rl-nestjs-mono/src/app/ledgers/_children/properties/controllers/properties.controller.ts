@@ -34,7 +34,7 @@ export class PropertiesController {
     this.logger.log(
       `Request from: ${currentUser.email} to create property with name: ${createPropertyDto.name}`,
     );
-    return this.propertiesService.create(
+    return this.propertiesService.createProperty(
       currentUser.email?.toLowerCase(),
       createPropertyDto,
     );

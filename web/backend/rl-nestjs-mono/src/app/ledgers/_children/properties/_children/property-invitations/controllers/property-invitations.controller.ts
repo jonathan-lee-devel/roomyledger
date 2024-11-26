@@ -15,7 +15,7 @@ export class PropertyInvitationsController {
   ) {}
 
   @Post('to-property/:id')
-  create(
+  createPropertyInvitation(
     @CurrentUser()
     currentUser: AuthUser,
     @Param() {id}: IdParamDto,
