@@ -1,4 +1,4 @@
-import { Config } from 'jest';
+import {Config} from 'jest';
 
 const config: Config = {
   projects: [
@@ -32,7 +32,7 @@ const config: Config = {
     },
   ],
   moduleFileExtensions: ['js', 'json', 'ts'],
-  coverageDirectory: '../coverage',
+  coverageDirectory: './coverage',
   testEnvironment: 'node',
 };
 
