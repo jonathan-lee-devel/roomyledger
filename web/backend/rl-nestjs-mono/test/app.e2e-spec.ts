@@ -47,7 +47,7 @@ describe('AppController (e2e)', () => {
     initApp(app);
 
     await app.init();
-    await app.listen(3000);
+    await app.listen(3001);
 
     accessToken = app.get<JwtService>(JwtService).sign(
       createMockAuthUser({
