@@ -82,7 +82,7 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-mocks": "^14.13.1",
     "prettier": "3.4.0",
-    "typescript": "~5.7.2"
+    "typescript": "~5.6.3"
   },
   "resolutions": {
     "@supabase/auth-js": "2.61.0"
