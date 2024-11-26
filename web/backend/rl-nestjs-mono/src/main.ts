@@ -1,17 +1,18 @@
-import {Logger, ValidationPipe, VersioningType} from '@nestjs/common';
+import {Logger} from '@nestjs/common';
 import {ConfigService} from '@nestjs/config';
 import {NestFactory} from '@nestjs/core';
-import {DocumentBuilder, SwaggerModule} from '@nestjs/swagger';
-import helmet from 'helmet';
 
 import {AppModule} from './app/app.module';
 import {EnvironmentVariables, NodeEnvironment} from './lib/config/environment';
+import {initApp, runPrismaMigrations} from './lib/helpers/init-app.helpers';
 
 async function bootstrap() {
   const logger = new Logger('Main');
   const app = await NestFactory.create(AppModule, {logger, rawBody: true});
   const configService =
     app.get<ConfigService<EnvironmentVariables>>(ConfigService);
+
+  await runPrismaMigrations(configService.getOrThrow<string>('DATABASE_URL'));
 
   app.enableCors({
     origin: configService.getOrThrow<string>('FRONT_END_URL').split(','),
@@ -20,33 +21,7 @@ async function bootstrap() {
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   });
 
-  app.use(helmet());
-
-  app.enableVersioning({
-    type: VersioningType.URI,
-    defaultVersion: '1',
-    prefix: 'v',
-  });
-  if (configService.getOrThrow<NodeEnvironment>('NODE_ENV') === 'development') {
-    const swaggerConfig = new DocumentBuilder()
-      .setTitle('RoomyLedger')
-      .setDescription('RoomyLedger API')
-      .setVersion('0.0.1')
-      .build();
-    const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
-    SwaggerModule.setup('docs', app, swaggerDocument, {
-      customCssUrl:
-        'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui.min.css',
-      customJs: [
-        'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-bundle.js',
-        'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-standalone-preset.js',
-      ],
-    });
-  }
-
-  app.useGlobalPipes(
-    new ValidationPipe({transform: true, validateCustomDecorators: true}),
-  );
+  initApp(app);
 
   logger.log(
     `Running in NODE_ENV: ${configService.getOrThrow<NodeEnvironment>('NODE_ENV')}`,
