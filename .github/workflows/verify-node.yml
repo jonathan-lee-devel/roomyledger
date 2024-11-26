@@ -73,6 +73,15 @@ jobs:
         run: yarn run test
         env:
           STRIPE_API_KEY: ${{ secrets.STRIPE_API_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          FRONT_END_URL: ${{ secrets.FRONT_END_URL }}
+          NODE_ENV: ${{ secrets.NODE_ENV }}
+          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          SUPABASE_JWT_SECRET: ${{ secrets.SUPABASE_JWT_SECRET }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+
 
   sonarcloud-analysis-backend:
     name: SonarCloud Backend (v${{ matrix.node-version }})
@@ -97,12 +106,21 @@ jobs:
         run: yarn run test:cov
         env:
           STRIPE_API_KEY: ${{ secrets.STRIPE_API_KEY }}
+
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           STRIPE_API_KEY: ${{ secrets.STRIPE_API_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          FRONT_END_URL: ${{ secrets.FRONT_END_URL }}
+          NODE_ENV: ${{ secrets.NODE_ENV }}
+          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          SUPABASE_JWT_SECRET: ${{ secrets.SUPABASE_JWT_SECRET }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
         with:
           projectBaseDir: web/backend/rl-nestjs-mono
           args: -Dsonar.projectKey=jonathan-lee-devel_roomyledger-rl-nestjs-mono
