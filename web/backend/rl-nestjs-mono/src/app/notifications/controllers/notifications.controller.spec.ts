@@ -1,4 +1,4 @@
-import {TestBed} from '@automock/jest';
+import {TestBed} from '@suites/unit';
 
 import {NotificationsController} from './notifications.controller';
 
@@ -6,7 +6,7 @@ describe('NotificationsController', () => {
   let controller: NotificationsController;
 
   beforeEach(async () => {
-    const {unit} = TestBed.create(NotificationsController).compile();
+    const {unit} = await TestBed.solitary(NotificationsController).compile();
     controller = unit;
   });
 

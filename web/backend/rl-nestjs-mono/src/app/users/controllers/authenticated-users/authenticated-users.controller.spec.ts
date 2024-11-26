@@ -1,4 +1,4 @@
-import {TestBed} from '@automock/jest';
+import {TestBed} from '@suites/unit';
 
 import {AuthenticatedUsersController} from './authenticated-users.controller';
 
@@ -6,7 +6,9 @@ describe('AuthenticatedUsersController', () => {
   let controller: AuthenticatedUsersController;
 
   beforeEach(async () => {
-    const {unit} = TestBed.create(AuthenticatedUsersController).compile();
+    const {unit} = await TestBed.solitary(
+      AuthenticatedUsersController,
+    ).compile();
     controller = unit;
   });
 

@@ -1,4 +1,4 @@
-import {TestBed} from '@automock/jest';
+import {TestBed} from '@suites/unit';
 
 import {StripeWebhookEventsHandlerService} from './stripe-webhook-events-handler.service';
 
@@ -6,7 +6,9 @@ describe('StripeWebhookEventsHandlerService', () => {
   let service: StripeWebhookEventsHandlerService;
 
   beforeEach(async () => {
-    const {unit} = TestBed.create(StripeWebhookEventsHandlerService).compile();
+    const {unit} = await TestBed.solitary(
+      StripeWebhookEventsHandlerService,
+    ).compile();
     service = unit;
   });
 

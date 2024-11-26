@@ -1,6 +1,7 @@
-import {TestBed} from '@automock/jest';
 import {faker} from '@faker-js/faker';
 import {ConfigService} from '@nestjs/config';
+import {Mocked} from '@suites/doubles.jest';
+import {TestBed} from '@suites/unit';
 import Stripe from 'stripe';
 
 import {StripeService} from './stripe.service';
@@ -8,10 +9,10 @@ import {EnvironmentVariables} from '../../../../../lib/config/environment';
 
 xdescribe('StripeService', () => {
   let service: StripeService;
-  let mockConfigService: jest.Mocked<ConfigService<EnvironmentVariables>>;
+  let mockConfigService: Mocked<ConfigService<EnvironmentVariables>>;
 
   beforeEach(async () => {
-    const {unit, unitRef} = TestBed.create(StripeService).compile();
+    const {unit, unitRef} = await TestBed.solitary(StripeService).compile();
     service = unit;
 
     mockConfigService =

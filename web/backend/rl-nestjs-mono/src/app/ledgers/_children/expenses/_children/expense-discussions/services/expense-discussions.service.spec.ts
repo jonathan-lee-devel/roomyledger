@@ -1,6 +1,7 @@
-import {TestBed} from '@automock/jest';
 import {faker} from '@faker-js/faker';
 import {BadRequestException, Logger, NotFoundException} from '@nestjs/common';
+import {Mocked} from '@suites/doubles.jest';
+import {TestBed} from '@suites/unit';
 
 import {ExpenseDiscussionsService} from './expense-discussions.service';
 import {PrismaService} from '../../../../../../../lib/prisma/services/prisma.service';
@@ -10,14 +11,16 @@ import {ExpensesService} from '../../../services/expenses.service';
 
 describe('ExpenseDiscussionsService', () => {
   let service: ExpenseDiscussionsService;
-  let mockLogger: jest.Mocked<Logger>;
-  let mockPrismaService: jest.Mocked<PrismaService>;
-  let mockExpensesService: jest.Mocked<ExpensesService>;
-  let mockPropertiesService: jest.Mocked<PropertiesService>;
-  let mockUsersService: jest.Mocked<UsersService>;
+  let mockLogger: Mocked<Logger>;
+  let mockPrismaService: Mocked<PrismaService>;
+  let mockExpensesService: Mocked<ExpensesService>;
+  let mockPropertiesService: Mocked<PropertiesService>;
+  let mockUsersService: Mocked<UsersService>;
 
   beforeEach(async () => {
-    const {unit, unitRef} = TestBed.create(ExpenseDiscussionsService).compile();
+    const {unit, unitRef} = await TestBed.solitary(
+      ExpenseDiscussionsService,
+    ).compile();
     service = unit;
 
     mockLogger = unitRef.get<Logger>(Logger);

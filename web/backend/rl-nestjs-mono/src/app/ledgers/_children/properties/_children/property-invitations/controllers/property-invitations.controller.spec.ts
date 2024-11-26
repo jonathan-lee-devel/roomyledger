@@ -1,5 +1,6 @@
-import {TestBed} from '@automock/jest';
 import {faker} from '@faker-js/faker';
+import {Mocked} from '@suites/doubles.jest';
+import {TestBed} from '@suites/unit';
 import {AuthUser} from '@supabase/supabase-js';
 
 import {PropertyInvitationsController} from './property-invitations.controller';
@@ -7,10 +8,10 @@ import {PropertyInvitationsService} from '../services/property-invitations.servi
 
 describe('PropertyInvitationsController', () => {
   let controller: PropertyInvitationsController;
-  let mockPropertyInvitationsService: jest.Mocked<PropertyInvitationsService>;
+  let mockPropertyInvitationsService: Mocked<PropertyInvitationsService>;
 
   beforeEach(async () => {
-    const {unit, unitRef} = TestBed.create(
+    const {unit, unitRef} = await TestBed.solitary(
       PropertyInvitationsController,
     ).compile();
     controller = unit;

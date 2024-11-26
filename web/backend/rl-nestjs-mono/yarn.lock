@@ -68,44 +68,6 @@
     ora "5.4.1"
     rxjs "7.8.1"
 
-"@automock/adapters.nestjs@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@automock/adapters.nestjs/-/adapters.nestjs-2.1.0.tgz#5f3e24b3111b9d7d8d40792702d35f9b3645ea76"
-  integrity sha512-cwolpTMF+frIm6idLC/zD0obgG/Wf5wP6I8FKJBcRy+Cuc9Pyy/E7200zafYlOVzUlZUP16VqchgGWpUyb1U3Q==
-  dependencies:
-    "@automock/common" "^3.1.0"
-    "@automock/types" "^2.0.1"
-    reflect-metadata "^0.1.13"
-
-"@automock/common@^3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@automock/common/-/common-3.1.0.tgz#61048c994b8b58954bd033c501ac5a1460196303"
-  integrity sha512-Y7N4YnSZRuSIfGV4/PdG2JyURa9PK1maqGZBYUG2/sIW+H/Mlhc/3NpegnlUyQFRBexEJtgmUsvfzzI1/lm0JA==
-  dependencies:
-    "@automock/types" "^2.0.1"
-
-"@automock/core@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@automock/core/-/core-2.1.0.tgz#2e959e5f3d9522c93139f4e99c10e726b745441c"
-  integrity sha512-VIaY2woE7nWXhXKlNzk4+xzCuaVBXfGYwowrzdI+MmJBKqi2z0lUjNVix74hZRWhJpkOW+PR3UThFvThgyqIqQ==
-  dependencies:
-    "@automock/common" "^3.1.0"
-    "@automock/types" "^2.0.1"
-    lodash.isequal "^4.5.0"
-
-"@automock/jest@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@automock/jest/-/jest-2.1.0.tgz#8a1d4ad7fcfa505207df60e9965aeb23527af418"
-  integrity sha512-kJuTu/a5bbG8SICIfITgESpIrVbBfbMykDdICmPvJkeI51Ldq+tqiLS2Ded16vLWS9WeFKeTw/+2b/DO8QyV0Q==
-  dependencies:
-    "@automock/core" "^2.1.0"
-    "@automock/types" "^2.0.1"
-
-"@automock/types@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@automock/types/-/types-2.0.1.tgz#b06023d6e303544e64f952f5c836fdd9d5c1e502"
-  integrity sha512-ue35e4im3n7l+Eqq3kCA2nNs8jzJbjYLni+vlPdgJ+9KfsEykJjA1OpnNN/PG1tDaM0iyR2p/uZg27MOC/qiTg==
-
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.16.7", "@babel/code-frame@^7.24.7":
   version "7.24.7"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.24.7.tgz#882fd9e09e8ee324e496bd040401c6f046ef4465"
@@ -1016,6 +978,59 @@
   integrity sha512-V4BG07kuYSUkTCSBHG8G8TNhM+F19jXFWnQtzj+we8DrkpSBCee9Z3Ms8yiGer/dlmhe35/Xdgyo3/0rQKg7YA==
   dependencies:
     "@sinonjs/commons" "^3.0.0"
+
+"@suites/core.unit@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@suites/core.unit/-/core.unit-3.0.0.tgz#e2325d62d78c929991fd990b5bd56067b1ec83db"
+  integrity sha512-L7l+uMW9ohawTHqZXMwP9/NsxTgMoViV45Z8VkQRoh2Vc/4sDBvjpQkQswJzwtNleohDnWVlVtAmjPqM7BJFdQ==
+  dependencies:
+    "@suites/types.common" "^3.0.0"
+    "@suites/types.di" "^3.0.0"
+    lodash.isequal "^4.5.0"
+
+"@suites/di.nestjs@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@suites/di.nestjs/-/di.nestjs-3.0.0.tgz#677f09a319e4e00ca60ecbcc10c76e357035f953"
+  integrity sha512-8vXL9tU7W3V9x4RLJQEEnNrG6ZId86EBFr7vD9ocEHS2hslUistyYua5VljfKnZx1YzQ7QDrX0VO7tNvyqwqTw==
+  dependencies:
+    "@suites/types.common" "^3.0.0"
+    "@suites/types.di" "^3.0.0"
+
+"@suites/doubles.jest@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@suites/doubles.jest/-/doubles.jest-3.0.0.tgz#99e72ae8b213df4c1385be99ef36d9118a6e10d4"
+  integrity sha512-jcKXCTInFRnjU+ovB2kQt7J7JT7pIuZXnFzp/yogs19QHyj4DtKqTL3gpeV31sWfGYo2TLmck3vQ4VPeTxz1fw==
+  dependencies:
+    "@suites/core.unit" "^3.0.0"
+    "@suites/types.common" "^3.0.0"
+    "@suites/types.doubles" "^3.0.0"
+
+"@suites/types.common@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@suites/types.common/-/types.common-3.0.0.tgz#9780b0f3dd821d3106386d7dbf8ff48cf8600e4d"
+  integrity sha512-+kCWmVAyEI01P4d/t3LbrOCq1xXQlh3SsPstn1uBuC/MDMW/pENHkU5xVC9G8VOW/pkXh53KXwbHIxpJImp4Zw==
+
+"@suites/types.di@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@suites/types.di/-/types.di-3.0.0.tgz#024c0e84030a7b5d0ad825f7685f5ad3e9eb9d2a"
+  integrity sha512-RzvgfTsjg3KrJ3SRbo9J84g5mRfkMZMzinLTjAQO+yCBBz+YMhbwaUXDBX70RcFGiAHjTNPg0jWjis3FHPH8Dg==
+  dependencies:
+    "@suites/types.common" "^3.0.0"
+
+"@suites/types.doubles@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@suites/types.doubles/-/types.doubles-3.0.0.tgz#c06b5968a373aa93138c22a0bcbb8fe9e1a1e444"
+  integrity sha512-B5sHH98qU7Fq+ozA42J3LLv846xRJn2ndx1xfLr0oaKxEG6Xud/vmdJpH65F/2P7DNMJkxWo/VDIqXrN4UDcvg==
+
+"@suites/unit@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@suites/unit/-/unit-3.0.0.tgz#d91d06b44af58147c94d039bfdf880e0aec6fc64"
+  integrity sha512-Nuz3Oq9rI+IaIZ4Rq6ZNrwadTh4OMtIJa80R9afj5+RtVgfWjrhgjSPXTLWhmBa87VUKac513w0wQ+Qnjj51xg==
+  dependencies:
+    "@suites/core.unit" "^3.0.0"
+    "@suites/types.common" "^3.0.0"
+    "@suites/types.di" "^3.0.0"
+    "@suites/types.doubles" "^3.0.0"
 
 "@supabase/auth-js@2.65.1":
   version "2.65.1"
@@ -5703,11 +5718,6 @@ readdirp@~3.6.0:
   integrity sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==
   dependencies:
     picomatch "^2.2.1"
-
-reflect-metadata@^0.1.13:
-  version "0.1.14"
-  resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.14.tgz#24cf721fe60677146bb77eeb0e1f9dece3d65859"
-  integrity sha512-ZhYeb6nRaXCfhnndflDK8qI6ZQ/YcWZCISRAWICW9XYqMUwjZM9Z0DveWX/ABN01oxSHwVxKQmxeYZSsm0jh5A==
 
 reflect-metadata@^0.2.2:
   version "0.2.2"

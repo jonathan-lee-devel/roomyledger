@@ -1,5 +1,6 @@
-import {TestBed} from '@automock/jest';
 import {faker} from '@faker-js/faker';
+import {Mocked} from '@suites/doubles.jest';
+import {TestBed} from '@suites/unit';
 import {AuthUser} from '@supabase/supabase-js';
 
 import {PaymentsController} from './payments.controller';
@@ -8,10 +9,11 @@ import {PaymentStatus} from '../types/PaymentStatus.type';
 
 describe('PaymentsController', () => {
   let controller: PaymentsController;
-  let mockPaymentsService: jest.Mocked<PaymentsService>;
+  let mockPaymentsService: Mocked<PaymentsService>;
 
   beforeEach(async () => {
-    const {unit, unitRef} = TestBed.create(PaymentsController).compile();
+    const {unit, unitRef} =
+      await TestBed.solitary(PaymentsController).compile();
     controller = unit;
 
     mockPaymentsService = unitRef.get<PaymentsService>(PaymentsService);
