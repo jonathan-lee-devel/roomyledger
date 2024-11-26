@@ -1,6 +1,7 @@
 export type NodeEnvironment = 'production' | 'staging' | 'development';
 
 export type EnvironmentVariables = {
+  DATABASE_URL: string;
   FRONT_END_URL: string;
   NODE_ENV: string;
   JWT_SECRET: string;
