@@ -22,14 +22,14 @@ export class PropertiesService {
 
   async createProperty(
     requestingUserEmail: string,
-    createPropertyDto: CreatePropertyDto,
+    {name, addSelfAsTenant}: CreatePropertyDto,
   ) {
     const user = await this.usersService.findByEmail(requestingUserEmail);
     const propertyRulesId = await this.randomService.generateUUID();
     return this.prismaService.property.create({
       data: {
         createdByUserId: user.id,
-        name: createPropertyDto.name,
+        name,
         expenses: {
           create: [],
         },
@@ -41,7 +41,7 @@ export class PropertiesService {
           ],
         },
         tenants: {
-          create: createPropertyDto.addSelfAsTenant
+          create: addSelfAsTenant
             ? [
                 {
                   userId: user.id,

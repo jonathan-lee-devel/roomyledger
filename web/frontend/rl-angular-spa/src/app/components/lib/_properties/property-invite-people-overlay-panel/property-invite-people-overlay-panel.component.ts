@@ -1,5 +1,5 @@
 import {Clipboard} from '@angular/cdk/clipboard';
-import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
+import {NgOptimizedImage} from '@angular/common';
 import {Component, inject} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {Button} from 'primeng/button';
@@ -8,7 +8,6 @@ import {InputGroupModule} from 'primeng/inputgroup';
 import {InputGroupAddonModule} from 'primeng/inputgroupaddon';
 import {InputTextModule} from 'primeng/inputtext';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
-import {Ripple} from 'primeng/ripple';
 
 import {UserAuthenticationStore} from '../../../../+state/auth/user-auth.store';
 import {PropertiesStore} from '../../../../+state/ledger/properties/properties.store';
@@ -24,12 +23,8 @@ import {PropertyDto} from '../../../../dtos/properties/Property.dto';
     InputGroupAddonModule,
     InputGroupModule,
     InputTextModule,
-    NgForOf,
     OverlayPanelModule,
     FormsModule,
-    Ripple,
-    NgIf,
-    AsyncPipe,
     NgOptimizedImage,
   ],
   templateUrl: './property-invite-people-overlay-panel.component.html',
