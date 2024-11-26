@@ -1,5 +1,6 @@
-import {TestBed} from '@automock/jest';
 import {faker} from '@faker-js/faker';
+import {Mocked} from '@suites/doubles.jest';
+import {TestBed} from '@suites/unit';
 import {User} from '@supabase/supabase-js';
 
 import {PropertiesController} from './properties.controller';
@@ -8,10 +9,11 @@ import {PropertiesService} from '../services/properties.service';
 
 describe('PropertiesController', () => {
   let controller: PropertiesController;
-  let mockPropertiesService: jest.Mocked<PropertiesService>;
+  let mockPropertiesService: Mocked<PropertiesService>;
 
   beforeEach(async () => {
-    const {unit, unitRef} = TestBed.create(PropertiesController).compile();
+    const {unit, unitRef} =
+      await TestBed.solitary(PropertiesController).compile();
     controller = unit;
 
     mockPropertiesService = unitRef.get<PropertiesService>(PropertiesService);

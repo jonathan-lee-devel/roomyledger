@@ -1,5 +1,6 @@
-import {TestBed} from '@automock/jest';
 import {faker} from '@faker-js/faker';
+import {Mocked} from '@suites/doubles.jest';
+import {TestBed} from '@suites/unit';
 import {AuthUser} from '@supabase/supabase-js';
 
 import {ExpenseDiscussionsController} from './expense-discussions.controller';
@@ -7,10 +8,10 @@ import {ExpenseDiscussionsService} from '../services/expense-discussions.service
 
 describe('ExpenseDiscussionsController', () => {
   let controller: ExpenseDiscussionsController;
-  let mockExpenseDiscussionService: jest.Mocked<ExpenseDiscussionsService>;
+  let mockExpenseDiscussionService: Mocked<ExpenseDiscussionsService>;
 
   beforeEach(async () => {
-    const {unit, unitRef} = TestBed.create(
+    const {unit, unitRef} = await TestBed.solitary(
       ExpenseDiscussionsController,
     ).compile();
     controller = unit;

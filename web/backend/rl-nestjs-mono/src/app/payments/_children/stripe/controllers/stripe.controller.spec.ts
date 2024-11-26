@@ -1,4 +1,4 @@
-import {TestBed} from '@automock/jest';
+import {TestBed} from '@suites/unit';
 
 import {StripeController} from './stripe.controller';
 
@@ -6,7 +6,7 @@ describe('StripeController', () => {
   let controller: StripeController;
 
   beforeEach(async () => {
-    const {unit} = TestBed.create(StripeController).compile();
+    const {unit} = await TestBed.solitary(StripeController).compile();
     controller = unit;
   });
 

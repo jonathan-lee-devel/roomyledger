@@ -1,6 +1,7 @@
-import {TestBed} from '@automock/jest';
 import {faker} from '@faker-js/faker';
 import {InternalServerErrorException} from '@nestjs/common';
+import {Mocked} from '@suites/doubles.jest';
+import {TestBed} from '@suites/unit';
 
 import {PropertiesService} from './properties.service';
 import {PrismaService} from '../../../../../lib/prisma/services/prisma.service';
@@ -8,11 +9,11 @@ import {UsersService} from '../../../../users/services/users.service';
 
 describe('PropertiesService', () => {
   let service: PropertiesService;
-  let mockUsersService: jest.Mocked<UsersService>;
-  let mockPrismaService: jest.Mocked<PrismaService>;
+  let mockUsersService: Mocked<UsersService>;
+  let mockPrismaService: Mocked<PrismaService>;
 
-  beforeEach(() => {
-    const {unit, unitRef} = TestBed.create(PropertiesService).compile();
+  beforeEach(async () => {
+    const {unit, unitRef} = await TestBed.solitary(PropertiesService).compile();
     service = unit;
 
     mockUsersService = unitRef.get<UsersService>(UsersService);

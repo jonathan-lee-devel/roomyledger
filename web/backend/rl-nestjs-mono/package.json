@@ -50,11 +50,12 @@
     "uuid": "^11.0.3"
   },
   "devDependencies": {
-    "@automock/adapters.nestjs": "^2.1.0",
-    "@automock/jest": "^2.1.0",
     "@nestjs/cli": "^10.4.8",
     "@nestjs/schematics": "^10.2.3",
     "@nestjs/testing": "^10.4.9",
+    "@suites/di.nestjs": "^3.0.0",
+    "@suites/doubles.jest": "^3.0.0",
+    "@suites/unit": "^3.0.0",
     "@testcontainers/postgresql": "^10.15.0",
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^5.0.0",

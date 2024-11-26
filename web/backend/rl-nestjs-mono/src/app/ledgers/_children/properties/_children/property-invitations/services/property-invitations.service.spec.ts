@@ -1,4 +1,4 @@
-import {TestBed} from '@automock/jest';
+import {TestBed} from '@suites/unit';
 
 import {PropertyInvitationsService} from './property-invitations.service';
 
@@ -6,7 +6,7 @@ describe('PropertyInvitationsService', () => {
   let service: PropertyInvitationsService;
 
   beforeEach(async () => {
-    const {unit} = TestBed.create(PropertyInvitationsService).compile();
+    const {unit} = await TestBed.solitary(PropertyInvitationsService).compile();
     service = unit;
   });
 

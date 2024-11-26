@@ -1,4 +1,4 @@
-import {TestBed} from '@automock/jest';
+import {TestBed} from '@suites/unit';
 
 import {ApplicationMessagesController} from './application-messages.controller';
 
@@ -6,7 +6,9 @@ describe('ApplicationMessagesController', () => {
   let controller: ApplicationMessagesController;
 
   beforeEach(async () => {
-    const {unit} = TestBed.create(ApplicationMessagesController).compile();
+    const {unit} = await TestBed.solitary(
+      ApplicationMessagesController,
+    ).compile();
     controller = unit;
   });
 
