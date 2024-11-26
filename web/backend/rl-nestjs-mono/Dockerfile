@@ -40,4 +40,4 @@ COPY --chown=node:node --from=build /usr/src/app/dist ./dist
 
 EXPOSE 3000
 
-CMD [ "sh", "-c", "npm run start:prod" ]
+CMD [ "sh", "-c", "yarn run start:prod" ]
