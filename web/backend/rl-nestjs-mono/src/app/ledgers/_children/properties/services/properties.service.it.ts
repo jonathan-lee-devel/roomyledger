@@ -1,19 +1,16 @@
 import {faker} from '@faker-js/faker';
 import {EventEmitterModule} from '@nestjs/event-emitter';
 import {Test, TestingModule} from '@nestjs/testing';
-import {
-  PostgreSqlContainer,
-  StartedPostgreSqlContainer,
-} from '@testcontainers/postgresql';
+import {StartedPostgreSqlContainer} from '@testcontainers/postgresql';
 import {Client} from 'pg';
 
 import {PropertiesService} from './properties.service';
 import {jestIntegrationTestsTimeout} from '../../../../../lib/constants/test-containers.constants';
-import {PrismaModule} from '../../../../../lib/prisma/prisma.module';
 import {
-  delayedAction,
-  runPrismaMigrations,
-} from '../../../../../lib/test-helpers/test-containers.helpers';
+  initializePostgresTestContainer,
+  tearDownPostgresTestContainer,
+} from '../../../../../lib/helpers/test.helpers';
+import {PrismaModule} from '../../../../../lib/prisma/prisma.module';
 import {UtilModule} from '../../../../../lib/util/util.module';
 import {PaymentsModule} from '../../../../payments/payments.module';
 import {UsersService} from '../../../../users/services/users.service';
@@ -29,19 +26,14 @@ describe('PropertiesService Integration Tests', () => {
   let postgresClient: Client;
 
   beforeAll(async () => {
-    postgresContainer = await new PostgreSqlContainer().start();
-    postgresClient = new Client({
-      connectionString: postgresContainer.getConnectionUri(),
-    });
-    await postgresClient.connect();
-    await runPrismaMigrations(postgresContainer.getConnectionUri());
+    const {initializedPostgresContainer, initializedPostgresClient} =
+      await initializePostgresTestContainer();
+    postgresContainer = initializedPostgresContainer;
+    postgresClient = initializedPostgresClient;
   });
 
   afterAll(async () => {
-    await postgresClient.end();
-    await delayedAction(async () => {
-      await postgresContainer.stop();
-    });
+    await tearDownPostgresTestContainer(postgresContainer, postgresClient);
   });
 
   beforeEach(async () => {

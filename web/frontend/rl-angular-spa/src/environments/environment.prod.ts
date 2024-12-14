@@ -9,7 +9,7 @@ export const environment = {
   FRONT_END_URL: 'https://www.roomyledger.com',
   MAIN_API_URL: 'https://api.roomyledger.com/v1',
   SUPABASE_URL: 'https://auth.roomyledger.com/',
-  SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdrZWV6amlnaGF0Y3NobWl6d3NnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQ3Mzg3ODMsImV4cCI6MjA0MDMxNDc4M30.yL_6_gqWNbKrtnRNR1p55PBWiXhelhBuqHLj-nKNieU',
+  SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ewogICJyb2xlIjogImFub24iLAogICJpc3MiOiAic3VwYWJhc2UiLAogICJpYXQiOiAxNzM0MTM0NDAwLAogICJleHAiOiAxODkxOTAwODAwCn0.CllMzmo9fPYcH4GGFvtCLLl3kTLcjWC9vXLrTjsf7l0',
   FLAGSMITH_CLIENT_SDK_KEY: 'cphidq7nSp23dUzTRudS6H',
   FLAGSMITH_API_URL: 'https://flagsmith.roomyledger.com/api/v1/',
   LOGIN_SERVICE_BASE_URL: 'https://api.roomyledger.com/v1/users',
