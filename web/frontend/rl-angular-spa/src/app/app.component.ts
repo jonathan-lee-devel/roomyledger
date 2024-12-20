@@ -1,6 +1,5 @@
 import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {Component, inject, OnInit, ViewChild} from '@angular/core';
-import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {NavigationEnd, Router, RouterLink, RouterOutlet} from '@angular/router';
 import {inject as vercelInject} from '@vercel/analytics';
 import flagsmith from 'flagsmith';
@@ -25,7 +24,6 @@ import {
   ApplicationMessageComponent,
 } from './components/lib/messages/application-message/application-message.component';
 import {FreeTrialMessageComponent} from './components/lib/messages/free-trial-message/free-trial-message.component';
-import {PreAlphaMessageComponent} from './components/lib/messages/pre-alpha-message/pre-alpha-message.component';
 import {
   UpdateOrMaintenanceInProgressMessageComponent,
 } from './components/lib/messages/update-or-maintenance-in-progress-message/update-or-maintenance-in-progress-message.component';
@@ -47,12 +45,10 @@ import {SupabaseService} from './services/supabase/supabase.service';
     ToastModule,
     AvatarModule,
     ButtonModule,
-    MatProgressSpinner,
     MessagesModule,
     ConfirmDialogModule,
     FooterComponent,
     FreeTrialMessageComponent,
-    PreAlphaMessageComponent,
     ApplicationMessageComponent,
     UpdateOrMaintenanceInProgressMessageComponent,
     RouterLink,
