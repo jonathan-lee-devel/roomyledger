@@ -1,4 +1,4 @@
-import {NgClass, NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
+import {NgIf} from '@angular/common';
 import {Component, inject, input} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {AvatarModule} from 'primeng/avatar';
