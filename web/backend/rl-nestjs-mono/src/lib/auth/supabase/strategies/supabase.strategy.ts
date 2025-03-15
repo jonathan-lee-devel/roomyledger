@@ -23,7 +23,7 @@ export class SupabaseStrategy extends PassportStrategy(
         'SUPABASE_JWT_SECRET',
       ),
       extractor: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    });
+    } as any);
   }
 
   async validate(payload: any): Promise<any> {
