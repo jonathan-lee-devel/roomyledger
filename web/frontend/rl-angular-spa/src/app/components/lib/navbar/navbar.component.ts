@@ -1,4 +1,4 @@
-import {CommonModule, NgOptimizedImage} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {Component, EventEmitter, inject, OnInit, Output} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatBadgeModule} from '@angular/material/badge';
@@ -29,7 +29,6 @@ import {SpanDarkModeComponent} from '../_dark-mode/span-dark-mode/span-dark-mode
   standalone: true,
   imports: [
     CommonModule,
-    NgOptimizedImage,
     MatSlideToggleModule,
     RouterLink,
     RouterLink,

@@ -1,22 +1,11 @@
-import {AsyncPipe, DatePipe, NgIf} from '@angular/common';
+import {NgIf} from '@angular/common';
 import {Component, EventEmitter, inject, input, Output} from '@angular/core';
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatButton} from '@angular/material/button';
-import {
-  MatDatepicker,
-  MatDatepickerInput,
-  MatDatepickerModule,
-  MatDatepickerToggle,
-} from '@angular/material/datepicker';
-import {
-  MatFormField,
-  MatFormFieldModule,
-  MatHint,
-  MatLabel,
-} from '@angular/material/form-field';
-import {MatInput, MatInputModule} from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
-import {MatOption, MatSelect} from '@angular/material/select';
+import {MatOption} from '@angular/material/select';
 import {SharedModule} from 'primeng/api';
 import {CalendarModule} from 'primeng/calendar';
 import {DialogService} from 'primeng/dynamicdialog';
@@ -27,7 +16,6 @@ import {ExpensesStore} from '../../../../+state/ledger/expenses/expenses.store';
 import {PropertiesStore} from '../../../../+state/ledger/properties/properties.store';
 import {ExpenseStateEnum} from '../../../../dtos/expenses/ExpenseDto';
 import {UtilService} from '../../../../services/util/util.service';
-import {ExpenseActionMenuComponent} from '../../_expenses/expense-action-menu/expense-action-menu.component';
 import {
   YourExpensesBreakdownDialogComponent,
   YourExpensesBreakdownDialogData,
@@ -40,19 +28,8 @@ export type ExpenseStateString = 'Approved' | 'Pending' | 'Disputed';
   standalone: true,
   imports: [
     NgIf,
-    AsyncPipe,
-    DatePipe,
-    ExpenseActionMenuComponent,
     SharedModule,
     TableModule,
-    MatButton,
-    MatFormField,
-    MatDatepickerToggle,
-    MatDatepicker,
-    MatHint,
-    MatInput,
-    MatDatepickerInput,
-    MatLabel,
     MatDatepickerModule,
     MatInputModule,
     MatFormFieldModule,
@@ -60,7 +37,6 @@ export type ExpenseStateString = 'Approved' | 'Pending' | 'Disputed';
     MatProgressSpinner,
     MultiSelectModule,
     FormsModule,
-    MatSelect,
     MatOption,
     CalendarModule,
   ],

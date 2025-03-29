@@ -1,9 +1,7 @@
-import {CommonModule, NgOptimizedImage} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatOption} from '@angular/material/autocomplete';
-import {MatFormField, MatLabel} from '@angular/material/form-field';
-import {MatSelect} from '@angular/material/select';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {ButtonModule} from 'primeng/button';
 import {CheckboxModule} from 'primeng/checkbox';
@@ -32,15 +30,11 @@ import {ProfileSettingsComponent} from '../../../lib/_account/profile-settings/p
     RouterLink,
     ButtonModule,
     FormsModule,
-    NgOptimizedImage,
     ReactiveFormsModule,
     InputGroupAddonModule,
     InputGroupModule,
     InputTextModule,
-    MatFormField,
-    MatLabel,
     MatOption,
-    MatSelect,
     Ripple,
     DividerModule,
     FloatLabelModule,

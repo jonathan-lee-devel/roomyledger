@@ -1,8 +1,6 @@
-import {CommonModule, NgOptimizedImage} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {Component, inject, OnInit} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatIcon} from '@angular/material/icon';
-import {RouterLink} from '@angular/router';
 import {MenuItem} from 'primeng/api';
 import {AvatarModule} from 'primeng/avatar';
 import {ButtonModule} from 'primeng/button';
@@ -23,14 +21,7 @@ import {ToggleButtonModule} from 'primeng/togglebutton';
 
 import {UserAuthenticationStore} from '../../../+state/auth/user-auth.store';
 import {rebaseRoutePath, RoutePath} from '../../../app.routes';
-import {
-  ComponentsAndFeaturesSectionComponent,
-} from '../../lib/landing-page/components-and-features-section/components-and-features-section.component';
-import {
-  PricingPlansSectionComponent,
-} from '../../lib/landing-page/pricing-plans-section/pricing-plans-section.component';
-import {StatsSectionComponent} from '../../lib/landing-page/stats-section/stats-section.component';
-import {PreAlphaMessageComponent} from '../../lib/messages/pre-alpha-message/pre-alpha-message.component';
+import {ComponentsAndFeaturesSectionComponent} from '../../lib/landing-page/components-and-features-section/components-and-features-section.component';
 import {SplashBannerComponent} from '../../lib/splash-banner/splash-banner.component';
 
 @Component({
@@ -39,15 +30,12 @@ import {SplashBannerComponent} from '../../lib/splash-banner/splash-banner.compo
   imports: [
     CommonModule,
     FormsModule,
-    NgOptimizedImage,
     ReactiveFormsModule,
-    RouterLink,
     ButtonModule,
     CardModule,
     InputGroupAddonModule,
     InputGroupModule,
     InputTextModule,
-    MatIcon,
     StepperModule,
     IconFieldModule,
     InputIconModule,
@@ -55,13 +43,10 @@ import {SplashBannerComponent} from '../../lib/splash-banner/splash-banner.compo
     ToggleButtonModule,
     TabMenuModule,
     MessagesModule,
-    PreAlphaMessageComponent,
     InputTextareaModule,
     InputSwitchModule,
     AvatarModule,
     StyleClassModule,
-    StatsSectionComponent,
-    PricingPlansSectionComponent,
     SplashBannerComponent,
     ComponentsAndFeaturesSectionComponent,
   ],

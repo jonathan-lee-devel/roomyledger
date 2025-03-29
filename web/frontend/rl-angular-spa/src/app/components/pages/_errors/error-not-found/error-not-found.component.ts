@@ -1,4 +1,4 @@
-import {AsyncPipe, NgIf} from '@angular/common';
+import {NgIf} from '@angular/common';
 import {Component, inject} from '@angular/core';
 import {RouterLink} from '@angular/router';
 
@@ -8,11 +8,7 @@ import {rebaseRoutePath, RoutePath} from '../../../../app.routes';
 @Component({
   selector: 'app-error-class-not-found',
   standalone: true,
-  imports: [
-    NgIf,
-    AsyncPipe,
-    RouterLink,
-  ],
+  imports: [NgIf, RouterLink],
   templateUrl: './error-not-found.component.html',
   styleUrl: './error-not-found.component.scss',
 })

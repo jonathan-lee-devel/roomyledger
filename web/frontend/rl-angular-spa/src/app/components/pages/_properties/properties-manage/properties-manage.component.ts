@@ -1,7 +1,6 @@
 import {CommonModule} from '@angular/common';
 import {Component, inject, OnInit} from '@angular/core';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {RouterLink} from '@angular/router';
 
 import {UserAuthenticationStore} from '../../../../+state/auth/user-auth.store';
 import {PropertiesStore} from '../../../../+state/ledger/properties/properties.store';
@@ -18,12 +17,7 @@ import {CardWithLinkComponent} from '../../../lib/card-with-link/card-with-link.
 @Component({
   selector: 'app-properties-manage',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink,
-    CardWithLinkComponent,
-    MatProgressSpinnerModule,
-  ],
+  imports: [CommonModule, CardWithLinkComponent, MatProgressSpinnerModule],
   templateUrl: './properties-manage.component.html',
   styleUrl: './properties-manage.component.scss',
 })

@@ -1,4 +1,3 @@
-import {NgForOf, NgOptimizedImage} from '@angular/common';
 import {Component, inject, input} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {Button} from 'primeng/button';
@@ -21,8 +20,6 @@ import {FeatureFlagsStore} from '../../../../+state/feature-flags/feature-flags.
     InputGroupAddonModule,
     InputGroupModule,
     InputTextModule,
-    NgForOf,
-    NgOptimizedImage,
     OverlayPanelModule,
     FormsModule,
     Ripple,
@@ -41,17 +38,19 @@ export class EmailLoginOverlayPanelComponent {
 
   doEmailLoginOrSignUp() {
     if (this.isNewCustomer()) {
-      this.userAuthenticationStore.attemptSupabaseSignUpWithEmail(this.email, this.password)
+      this.userAuthenticationStore
+          .attemptSupabaseSignUpWithEmail(this.email, this.password)
           .catch((reason) => console.error(reason));
     } else {
-      this.userAuthenticationStore.attemptSupabaseLoginWithEmail(this.email, this.password)
+      this.userAuthenticationStore
+          .attemptSupabaseLoginWithEmail(this.email, this.password)
           .catch((reason) => console.error(reason));
     }
     this.resetForm();
   }
 
   getVerb(isNewCustomer: boolean) {
-    return (isNewCustomer) ? 'Up' : 'In';
+    return isNewCustomer ? 'Up' : 'In';
   }
 
   private resetForm() {

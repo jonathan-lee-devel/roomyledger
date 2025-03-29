@@ -1,12 +1,6 @@
-import {AsyncPipe, DatePipe, NgIf, NgOptimizedImage} from '@angular/common';
+import {DatePipe} from '@angular/common';
 import {Component, inject} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
-import {
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogTitle,
-} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {ButtonModule} from 'primeng/button';
@@ -31,12 +25,7 @@ export interface ExpenseConversationDialogComponentData {
   selector: 'app-expense-conversation-dialog',
   standalone: true,
   imports: [
-    MatDialogActions,
     MatButtonModule,
-    MatDialogClose,
-    MatDialogContent,
-    MatDialogTitle,
-    NgOptimizedImage,
     MatListModule,
     MatIconModule,
     DatePipe,
@@ -45,8 +34,6 @@ export interface ExpenseConversationDialogComponentData {
     InputTextModule,
     PaginatorModule,
     ButtonModule,
-    AsyncPipe,
-    NgIf,
     DialogModule,
     TableModule,
     DividerModule,

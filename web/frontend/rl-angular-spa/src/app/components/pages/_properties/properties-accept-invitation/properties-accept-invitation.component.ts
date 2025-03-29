@@ -1,4 +1,4 @@
-import {AsyncPipe, NgIf, NgOptimizedImage} from '@angular/common';
+import {NgOptimizedImage} from '@angular/common';
 import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -18,12 +18,10 @@ import {PropertiesStore} from '../../../../+state/ledger/properties/properties.s
     FormsModule,
     NgOptimizedImage,
     ReactiveFormsModule,
-    AsyncPipe,
     ButtonModule,
     InputGroupAddonModule,
     InputGroupModule,
     InputTextModule,
-    NgIf,
     ProgressSpinnerModule,
   ],
   templateUrl: './properties-accept-invitation.component.html',

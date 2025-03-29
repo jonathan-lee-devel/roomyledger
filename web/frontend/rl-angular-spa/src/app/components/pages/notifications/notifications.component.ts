@@ -1,11 +1,4 @@
-import {
-  AsyncPipe,
-  DatePipe,
-  formatDate,
-  NgIf,
-  NgOptimizedImage,
-  NgStyle,
-} from '@angular/common';
+import {formatDate, NgOptimizedImage} from '@angular/common';
 import {Component, inject, OnInit} from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
@@ -19,21 +12,11 @@ import {
   routePathParameters,
 } from '../../../app.routes';
 import {NotificationDto} from '../../../dtos/notifications/Notification.dto';
-import {CardWithLinkComponent} from '../../lib/card-with-link/card-with-link.component';
 
 @Component({
   selector: 'app-notifications',
   standalone: true,
-  imports: [
-    AsyncPipe,
-    CardWithLinkComponent,
-    NgIf,
-    ButtonModule,
-    DatePipe,
-    NgOptimizedImage,
-    MenuModule,
-    NgStyle,
-  ],
+  imports: [ButtonModule, NgOptimizedImage, MenuModule],
   templateUrl: './notifications.component.html',
   styleUrl: './notifications.component.scss',
 })

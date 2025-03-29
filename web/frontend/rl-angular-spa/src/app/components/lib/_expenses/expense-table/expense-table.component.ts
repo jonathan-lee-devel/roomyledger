@@ -1,14 +1,16 @@
 import {CurrencyPipe, NgIf} from '@angular/common';
 import {Component, inject, input} from '@angular/core';
 import {PrimeTemplate} from 'primeng/api';
-import {Button} from 'primeng/button';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {TableModule} from 'primeng/table';
 import {TagModule} from 'primeng/tag';
 
 import {ExpensesStore} from '../../../../+state/ledger/expenses/expenses.store';
 import {PropertiesStore} from '../../../../+state/ledger/properties/properties.store';
-import {ExpenseDto, ExpenseStateEnum} from '../../../../dtos/expenses/ExpenseDto';
+import {
+  ExpenseDto,
+  ExpenseStateEnum,
+} from '../../../../dtos/expenses/ExpenseDto';
 import {ExpenseActionMenuComponent} from '../expense-action-menu/expense-action-menu.component';
 
 @Component({
@@ -19,7 +21,6 @@ import {ExpenseActionMenuComponent} from '../expense-action-menu/expense-action-
     PrimeTemplate,
     TableModule,
     TagModule,
-    Button,
     ExpenseActionMenuComponent,
     NgIf,
     ProgressSpinnerModule,

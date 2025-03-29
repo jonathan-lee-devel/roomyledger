@@ -1,8 +1,7 @@
-import {AsyncPipe, NgIf, NgOptimizedImage} from '@angular/common';
+import {NgOptimizedImage} from '@angular/common';
 import {Component, inject} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {RouterLink} from '@angular/router';
 import {ButtonModule} from 'primeng/button';
 import {CheckboxModule} from 'primeng/checkbox';
 import {InputGroupModule} from 'primeng/inputgroup';
@@ -16,12 +15,9 @@ import {rebaseRoutePath, RoutePath} from '../../../../app.routes';
   selector: 'app-properties-create',
   standalone: true,
   imports: [
-    RouterLink,
     FormsModule,
     NgOptimizedImage,
     MatProgressSpinnerModule,
-    NgIf,
-    AsyncPipe,
     ButtonModule,
     InputGroupAddonModule,
     InputGroupModule,
@@ -40,8 +36,7 @@ export class PropertiesCreateComponent {
 
   protected readonly propertiesStore = inject(PropertiesStore);
 
-  constructor() {
-  }
+  constructor() {}
 
   doCreateProperty() {
     this.propertiesStore.createProperty({

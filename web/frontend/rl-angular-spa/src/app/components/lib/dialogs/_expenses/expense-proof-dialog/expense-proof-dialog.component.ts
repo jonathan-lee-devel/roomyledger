@@ -1,7 +1,6 @@
 import {NgIf, NgOptimizedImage} from '@angular/common';
 import {Component, inject, OnInit} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
-import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from '@angular/material/dialog';
 import {DialogModule} from 'primeng/dialog';
 import {DynamicDialogConfig} from 'primeng/dynamicdialog';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
@@ -18,11 +17,7 @@ export interface ExpenseProofDialogData {
   selector: 'app-expense-proof-dialog',
   standalone: true,
   imports: [
-    MatDialogActions,
     MatButtonModule,
-    MatDialogClose,
-    MatDialogContent,
-    MatDialogTitle,
     NgOptimizedImage,
     DialogModule,
     NgIf,
@@ -38,7 +33,7 @@ export class ExpenseProofDialogComponent implements OnInit {
   private readonly expenseId: string;
 
   constructor(readonly config: DynamicDialogConfig) {
-    const data = (config.data as ExpenseProofDialogData);
+    const data = config.data as ExpenseProofDialogData;
     this.expenseDescription = data.expenseDescription;
     this.submitterDisplayName = data.submitterDisplayName;
     this.expenseId = data.expenseId;

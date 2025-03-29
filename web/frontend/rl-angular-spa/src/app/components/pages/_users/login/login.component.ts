@@ -1,8 +1,8 @@
-import {CommonModule, NgOptimizedImage} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {Component, inject, OnInit} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {ButtonModule} from 'primeng/button';
 import {CardModule} from 'primeng/card';
 import {CheckboxModule} from 'primeng/checkbox';
@@ -14,7 +14,6 @@ import {RippleModule} from 'primeng/ripple';
 import {take, tap} from 'rxjs';
 
 import {UserAuthenticationStore} from '../../../../+state/auth/user-auth.store';
-import {PreAlphaMessageComponent} from '../../../lib/messages/pre-alpha-message/pre-alpha-message.component';
 import {SplashBannerComponent} from '../../../lib/splash-banner/splash-banner.component';
 
 @Component({
@@ -25,12 +24,7 @@ import {SplashBannerComponent} from '../../../lib/splash-banner/splash-banner.co
     CommonModule,
     FormsModule,
     InputTextModule,
-    NgOptimizedImage,
-    RouterLink,
     FormsModule,
-    RouterLink,
-    NgOptimizedImage,
-    NgOptimizedImage,
     MatProgressSpinnerModule,
     InputGroupAddonModule,
     InputGroupModule,
@@ -39,7 +33,6 @@ import {SplashBannerComponent} from '../../../lib/splash-banner/splash-banner.co
     CheckboxModule,
     RippleModule,
     MessagesModule,
-    PreAlphaMessageComponent,
     SplashBannerComponent,
   ],
   templateUrl: './login.component.html',
@@ -57,7 +50,9 @@ export class LoginComponent implements OnInit {
             take(1),
             tap((queryParams) => {
               if (queryParams[LoginComponent.nextParam]) {
-                this.userAuthenticationStore.onLoginPageVisitedWithNext(queryParams[LoginComponent.nextParam]);
+                this.userAuthenticationStore.onLoginPageVisitedWithNext(
+                    queryParams[LoginComponent.nextParam],
+                );
               }
             }),
         )

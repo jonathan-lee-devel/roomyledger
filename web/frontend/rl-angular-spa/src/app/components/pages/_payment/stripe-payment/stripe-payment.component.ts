@@ -1,20 +1,18 @@
-import {AsyncPipe, NgIf} from '@angular/common';
 import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {delay, take, tap} from 'rxjs';
 
-import {LoggedInState, UserAuthenticationStore} from '../../../../+state/auth/user-auth.store';
+import {
+  LoggedInState,
+  UserAuthenticationStore,
+} from '../../../../+state/auth/user-auth.store';
 import {PaymentStore} from '../../../../+state/payment/payment.store';
 
 @Component({
   selector: 'app-stripe-payment',
   standalone: true,
-  imports: [
-    ProgressSpinnerModule,
-    NgIf,
-    AsyncPipe,
-  ],
+  imports: [ProgressSpinnerModule],
   templateUrl: './stripe-payment.component.html',
   styleUrl: './stripe-payment.component.scss',
 })
@@ -32,7 +30,9 @@ export class StripePaymentComponent implements OnInit {
               take(1),
               delay(1500),
               tap((queryParams) => {
-                this.paymentStore.verifyStripeCheckoutSession(queryParams[this.stipeCheckoutSessionIdQueryParam]);
+                this.paymentStore.verifyStripeCheckoutSession(
+                    queryParams[this.stipeCheckoutSessionIdQueryParam],
+                );
               }),
           )
           .subscribe();
@@ -40,6 +40,6 @@ export class StripePaymentComponent implements OnInit {
   }
 
   getRedirectText(loggedInState: LoggedInState) {
-    return (loggedInState === 'LOGGED_IN') ? 'Dashboard' : 'Login Page';
+    return loggedInState === 'LOGGED_IN' ? 'Dashboard' : 'Login Page';
   }
 }

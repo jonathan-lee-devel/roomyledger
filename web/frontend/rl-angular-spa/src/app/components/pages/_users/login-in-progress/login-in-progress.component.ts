@@ -6,12 +6,11 @@ import {delay, Subscription, tap} from 'rxjs';
 import {UserAuthenticationStore} from '../../../../+state/auth/user-auth.store';
 import {rebaseRoutePath, RoutePath} from '../../../../app.routes';
 import {RouterUtils} from '../../../../util/router/Router.utils';
-import {SuccessCheckmarkComponent} from '../../../lib/success-checkmark/success-checkmark.component';
 
 @Component({
   selector: 'app-login-in-progress',
   standalone: true,
-  imports: [SuccessCheckmarkComponent, ProgressSpinnerModule],
+  imports: [ProgressSpinnerModule],
   templateUrl: './login-in-progress.component.html',
   styleUrl: './login-in-progress.component.scss',
 })
