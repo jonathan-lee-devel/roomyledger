@@ -1,0 +1,52 @@
+// Expense table styles for consistent column alignment
+:host {
+  .expense-tables-container {
+    width: 100%;
+  }
+
+  .expense-tables-grid {
+    display: grid;
+    grid-gap: 1.5rem;
+    width: 100%;
+  }
+
+  // Target all p-table components within our expense tables
+  ::ng-deep .consistent-table {
+    // Force all tables to use the same column widths
+    .p-datatable-wrapper table {
+      table-layout: fixed;
+    }
+
+    // Set specific widths for each column type to keep them consistent
+    .p-datatable-thead > tr > th,
+    .p-datatable-tbody > tr > td {
+      &:nth-child(1) { width: 40px; } // Checkbox column
+      &:nth-child(2) { width: 120px; } // Date column
+      &:nth-child(3) { width: 25%; } // Description column
+      &:nth-child(4) { width: 15%; } // Amount column
+      &:nth-child(5) { width: 15%; } // Category column
+      &:nth-child(6) { width: 100px; } // Status column
+      &:nth-child(7) { width: 120px; } // Actions column
+
+      // Make sure content doesn't overflow
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    // Responsive adjustments
+    @media screen and (max-width: 768px) {
+      .p-datatable-thead > tr > th,
+      .p-datatable-tbody > tr > td {
+        &:nth-child(3) { width: 30%; } // Adjust description column
+        &:nth-child(4) { width: 20%; } // Adjust amount column
+        &:nth-child(5) { width: 20%; } // Adjust category column
+      }
+    }
+
+    // Empty state consistent height
+    .p-datatable-emptymessage td {
+      height: 100px; // Ensures empty tables take up some space
+    }
+  }
+}
