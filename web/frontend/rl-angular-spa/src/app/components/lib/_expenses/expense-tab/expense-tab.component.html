@@ -1,18 +1,48 @@
-<ng-container *ngIf="expensesStore.isLoading()">
-  <div
-    class="flex-none flex align-items-center justify-content-center mt-1"
-  >
-    <p-progressSpinner />
+<!-- Expense Tables Container with Consistent Column Widths -->
+<div class="expense-tables-container">
+  <!-- Loading Spinner -->
+  <ng-container *ngIf="expensesStore.isLoading()">
+    <div class="flex align-items-center justify-content-center py-4">
+      <p-progressSpinner />
+    </div>
+  </ng-container>
+
+  <!-- Add Expense Button -->
+  <div class="flex align-items-center justify-content-center my-3">
+    <app-expense-create-overlay-panel />
   </div>
-</ng-container>
-<div class="flex-none flex align-items-center justify-content-center my-3">
-  <app-expense-create-overlay-panel />
+
+  <!-- Tables with Consistent Layout -->
+  <div class="expense-tables-grid">
+    <!-- Approved Expenses Table -->
+    <app-expense-table
+      [expenses]="expensesStore.approvedExpenses()"
+      [statusSeverity]="'success'"
+      [state]="'APPROVED'"
+      [label]="'Approved Expenses'"
+      pStyleClass="consistent-table"/>
+
+    <!-- Pending Expenses Table -->
+    <app-expense-table
+      [expenses]="expensesStore.pendingExpenses()"
+      [statusSeverity]="'warning'"
+      [state]="'PENDING'"
+      [label]="'Pending Expenses'"
+      pStyleClass="consistent-table"/>
+
+    <!-- Disputed Expenses Table -->
+    <app-expense-table
+      [expenses]="expensesStore.disputedExpenses()"
+      [statusSeverity]="'danger'"
+      [state]="'DISPUTED'"
+      [label]="'Disputed Expenses'"
+      pStyleClass="consistent-table"/>
+  </div>
+
+  <!-- No Distributions Message -->
+  <ng-container *ngIf="expensesStore.expenseDistributionsForPropertyById().length === 0">
+    <div class="flex align-items-center justify-content-center my-4">
+      <p-message severity="info" text="No Expense Distributions" styleClass="w-full md:w-8 lg:w-6 p-4"></p-message>
+    </div>
+  </ng-container>
 </div>
-<app-expense-table [expenses]="expensesStore.approvedExpenses()" [statusSeverity]="'success'" [state]="'APPROVED'" [label]="'Approved Expenses'" />
-<app-expense-table [expenses]="expensesStore.pendingExpenses()" [statusSeverity]="'warning'" [state]="'PENDING'" [label]="'Pending Expenses'" />
-<app-expense-table [expenses]="expensesStore.disputedExpenses()" [statusSeverity]="'danger'" [state]="'DISPUTED'" [label]="'Disputed Expenses'" />
-<ng-container *ngIf="expensesStore.expenseDistributionsForPropertyById().length === 0">
-  <div class="flex-none flex align-items-center justify-content-center my-4">
-    <p>No Expense Distributions</p>
-  </div>
-</ng-container>

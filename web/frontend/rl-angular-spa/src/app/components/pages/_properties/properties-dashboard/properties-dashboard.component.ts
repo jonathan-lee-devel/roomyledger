@@ -1,5 +1,11 @@
-import {AsyncPipe, NgClass, NgIf, NgOptimizedImage} from '@angular/common';
-import {ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit} from '@angular/core';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -9,11 +15,9 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTabsModule} from '@angular/material/tabs';
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MenuItem} from 'primeng/api';
-import {Button} from 'primeng/button';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
-import {Ripple} from 'primeng/ripple';
 import {SplitButtonModule} from 'primeng/splitbutton';
 import {TabMenuModule} from 'primeng/tabmenu';
 import {TabViewModule} from 'primeng/tabview';
@@ -23,17 +27,16 @@ import {BehaviorSubject, filter, Subscription, take, tap} from 'rxjs';
 import {UserAuthenticationStore} from '../../../../+state/auth/user-auth.store';
 import {ExpensesStore} from '../../../../+state/ledger/expenses/expenses.store';
 import {PropertiesStore} from '../../../../+state/ledger/properties/properties.store';
-import {rebaseRoutePath, rebaseRoutePathAsString, RoutePath} from '../../../../app.routes';
+import {
+  rebaseRoutePath,
+  rebaseRoutePathAsString,
+  RoutePath,
+} from '../../../../app.routes';
 import {UtilService} from '../../../../services/util/util.service';
 import {RouterUtils} from '../../../../util/router/Router.utils';
-import {H1DarkModeComponent} from '../../../lib/_dark-mode/h1-dark-mode/h1-dark-mode.component';
-import {PDarkModeComponent} from '../../../lib/_dark-mode/p-dark-mode/p-dark-mode.component';
 import {CustomSplitsTabComponent} from '../../../lib/_expenses/custom-splits-tab/custom-splits-tab.component';
-import {ExpenseActionMenuComponent} from '../../../lib/_expenses/expense-action-menu/expense-action-menu.component';
 import {ExpenseTabComponent} from '../../../lib/_expenses/expense-tab/expense-tab.component';
-import {
-  PropertyDashboardPeopleTabComponent,
-} from '../../../lib/_properties/property-dashboard-people-tab/property-dashboard-people-tab.component';
+import {PropertyDashboardPeopleTabComponent} from '../../../lib/_properties/property-dashboard-people-tab/property-dashboard-people-tab.component';
 import {ReportsTabComponent} from '../../../lib/_properties/reports-tab/reports-tab.component';
 
 @Component({
@@ -42,10 +45,7 @@ import {ReportsTabComponent} from '../../../lib/_properties/reports-tab/reports-
   imports: [
     MatProgressSpinnerModule,
     FormsModule,
-    NgOptimizedImage,
     ReactiveFormsModule,
-    RouterLink,
-    AsyncPipe,
     NgIf,
     MatProgressBarModule,
     MatExpansionModule,
@@ -54,22 +54,18 @@ import {ReportsTabComponent} from '../../../lib/_properties/reports-tab/reports-
     MatListModule,
     MatMenuModule,
     MatButtonModule,
-    ExpenseActionMenuComponent,
     ExpenseTabComponent,
     ExpenseTabComponent,
     TabViewModule,
     ReportsTabComponent,
     ToolbarModule,
-    Button,
     SplitButtonModule,
     PropertyDashboardPeopleTabComponent,
     NgClass,
     TabMenuModule,
-    Ripple,
-    PDarkModeComponent,
-    H1DarkModeComponent,
     ProgressSpinnerModule,
     CustomSplitsTabComponent,
+    NgForOf,
   ],
   templateUrl: './properties-dashboard.component.html',
   styleUrl: './properties-dashboard.component.scss',
@@ -97,12 +93,25 @@ export class PropertiesDashboardComponent implements OnInit, OnDestroy {
   private readonly isInitialLoad = new BehaviorSubject<boolean>(true);
   private routeParamsSubscription?: Subscription;
   private routeQueryParamsSubscription?: Subscription;
+  isMobileView: boolean = false;
 
   constructor() {
     this.items = [
-      {label: 'Expenses', icon: 'pi pi-dollar', styleClass: 'tab-class-expenses'},
-      {label: 'Custom Splits', icon: 'pi pi-percentage', styleClass: 'tab-class-custom-splits'},
-      {label: 'Reports', icon: 'pi pi-chart-line', styleClass: 'tab-class-reports'},
+      {
+        label: 'Expenses',
+        icon: 'pi pi-dollar',
+        styleClass: 'tab-class-expenses',
+      },
+      {
+        label: 'Custom Splits',
+        icon: 'pi pi-percentage',
+        styleClass: 'tab-class-custom-splits',
+      },
+      {
+        label: 'Reports',
+        icon: 'pi pi-chart-line',
+        styleClass: 'tab-class-reports',
+      },
       {label: 'People', icon: 'pi pi-users', styleClass: 'tab-class-people'},
     ];
     this.activeItem = this.items[this.EXPENSE_TAB_INDEX];
@@ -173,13 +182,9 @@ export class PropertiesDashboardComponent implements OnInit, OnDestroy {
       $event.label === this.items?.[this.CUSTOM_SPLITS_TAB_INDEX]?.label
     ) {
       tabQueryParam = 'custom-splits';
-    } else if (
-      $event.label === this.items?.[this.REPORTS_TAB_INDEX]?.label
-    ) {
+    } else if ($event.label === this.items?.[this.REPORTS_TAB_INDEX]?.label) {
       tabQueryParam = 'reports';
-    } else if (
-      $event.label === this.items?.[this.PEOPLE_TAB_INDEX]?.label
-    ) {
+    } else if ($event.label === this.items?.[this.PEOPLE_TAB_INDEX]?.label) {
       tabQueryParam = 'people';
     }
     this.router

@@ -1,5 +1,5 @@
 <div class="card my-2">
-  <p-table [value]="expenses()" styleClass="p-datatable-striped">
+  <p-table [value]="expenses()" styleClass="p-datatable-striped consistent-table" responsiveLayout="stack" [breakpoint]="'767px'">
     <ng-template pTemplate="caption">
       <div class="flex align-items-center justify-content-between">
         {{ label() }}
@@ -7,24 +7,42 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th>Name</th>
-        <th>Amount</th>
-        <th>Description</th>
-        <th>Status</th>
-        <th>Menu</th>
+        <th class="w-3 lg:w-3">Name</th>
+        <th class="w-3 lg:w-3">Amount</th>
+        <th class="hidden lg:table-cell">Description</th>
+        <th class="w-3 lg:w-2">Status</th>
+        <th style="width: 4rem">Menu</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-expense>
       <tr>
-        <td>{{expense.name}}</td>
-        <td>{{expense.amount | currency:expense.currency}}</td>
-        <td>{{expense.description}}</td>
-        <td><p-tag [value]="expense.state" [severity]="statusSeverity()" /></td>
+        <td class="w-5 lg:w-4">
+          <span class="p-column-title">Name</span>
+          <span class="line-height-3 white-space-normal">{{expense.name}}</span>
+        </td>
+        <td class="w-4 lg:w-2">
+          <span class="p-column-title">Amount</span>
+          {{expense.amount | currency:expense.currency}}
+        </td>
+        <td class="hidden lg:table-cell">
+          <span class="p-column-title">Description</span>
+          {{expense.description}}
+        </td>
+        <td class="w-3 lg:w-2 overflow-visible white-space-nowrap">
+          <span class="p-column-title">Status</span>
+          <p-tag [value]="expense.state" [severity]="statusSeverity()" />
+        </td>
         <ng-container *ngIf="propertiesStore.isLoading() || expensesStore.isLoading()">
-          <td><p-progressSpinner styleClass="w-3rem h-3rem" /></td>
+          <td style="width: 4rem">
+            <span class="p-column-title">Menu</span>
+            <p-progressSpinner styleClass="w-3rem h-3rem" />
+          </td>
         </ng-container>
         <ng-container *ngIf="!propertiesStore.isLoading() && !expensesStore.isLoading()">
-          <td><app-expense-action-menu [propertyId]="expense.propertyId" [expenseId]="expense.id" /></td>
+          <td style="width: 4rem">
+            <span class="p-column-title">Menu</span>
+            <app-expense-action-menu [propertyId]="expense.propertyId" [expenseId]="expense.id" />
+          </td>
         </ng-container>
       </tr>
     </ng-template>

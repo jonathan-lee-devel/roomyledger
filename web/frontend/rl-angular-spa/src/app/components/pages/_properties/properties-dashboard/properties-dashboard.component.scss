@@ -1,0 +1,123 @@
+// Custom Modern Tab Menu Styles with reduced contrast
+:host {
+  .custom-tab-container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .custom-tabs-wrapper {
+    background: var(--surface-card);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .custom-tabs-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+
+    @media screen and (max-width: 768px) {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
+  .custom-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.25rem;
+    cursor: pointer;
+    position: relative;
+    flex: 1;
+    text-align: center;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    color: var(--text-color-secondary);
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.03);
+    }
+
+    @media screen and (max-width: 768px) {
+      min-width: 120px;
+      margin: 0.25rem;
+      padding: 0.5rem 0.75rem;
+      flex: 0 0 auto;
+    }
+
+    @media screen and (max-width: 480px) {
+      min-width: 100px;
+      margin: 0.25rem;
+      padding: 0.5rem;
+    }
+  }
+
+  .active-tab {
+    color: var(--primary-color);
+    font-weight: 500;
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+
+  .tab-icon-wrapper {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+
+    @media screen and (max-width: 480px) {
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
+  }
+
+  .tab-label {
+    font-size: 0.95rem;
+    white-space: nowrap;
+
+    @media screen and (max-width: 480px) {
+      font-size: 0.85rem;
+    }
+  }
+
+  .tab-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 3px;
+    width: 60%;
+    background: var(--primary-color);
+    border-radius: 3px;
+  }
+
+  // Mobile view styles
+  .mobile-view {
+    .custom-tabs-list {
+      justify-content: flex-start;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+
+      &::-webkit-scrollbar {
+        height: 3px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 3px;
+      }
+    }
+
+    .custom-tab {
+      min-width: auto;
+      flex: 0 0 auto;
+    }
+  }
+}
