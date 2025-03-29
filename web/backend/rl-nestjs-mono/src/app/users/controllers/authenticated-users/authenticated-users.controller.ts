@@ -18,7 +18,7 @@ export class AuthenticatedUsersController {
     @Body() {displayName}: CheckInDto,
   ) {
     return this.usersService.checkIn(
-      currentUser.email?.toLowerCase(),
+      currentUser.email,
       displayName ?? currentUser.user_metadata['name'],
     );
   }

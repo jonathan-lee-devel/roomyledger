@@ -35,10 +35,7 @@ export class ExpensesController {
     this.logger.log(
       `Request from <${currentUser.email}> to get expense by ID: ${id}`,
     );
-    return this.expensesService.getExpenseById(
-      currentUser.email?.toLowerCase(),
-      id,
-    );
+    return this.expensesService.getExpenseById(currentUser.email, id);
   }
 
   @Post()
@@ -47,10 +44,7 @@ export class ExpensesController {
     currentUser: AuthUser,
     @Body() createExpenseDto: CreateExpenseDto,
   ) {
-    return this.expensesService.create(
-      currentUser.email?.toLowerCase(),
-      createExpenseDto,
-    );
+    return this.expensesService.create(currentUser.email, createExpenseDto);
   }
 
   @Get('for-property/:id')
@@ -62,7 +56,7 @@ export class ExpensesController {
     @Query() {endDate}: EndDateDto,
   ) {
     return this.expensesService.findAllForPropertyById(
-      currentUser.email?.toLowerCase(),
+      currentUser.email,
       id,
       new DateRangeDto(startDate, endDate),
     );
@@ -74,9 +68,6 @@ export class ExpensesController {
     currentUser: AuthUser,
     @Param() {id}: IdParamDto,
   ) {
-    return this.expensesService.deleteExpenseById(
-      currentUser.email?.toLowerCase(),
-      id,
-    );
+    return this.expensesService.deleteExpenseById(currentUser.email, id);
   }
 }

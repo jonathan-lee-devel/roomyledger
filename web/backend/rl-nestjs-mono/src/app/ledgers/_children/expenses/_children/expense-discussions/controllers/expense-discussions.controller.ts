@@ -20,10 +20,7 @@ export class ExpenseDiscussionsController {
     currentUser: AuthUser,
     @Param() {id}: IdParamDto,
   ) {
-    return this.expenseDiscussionsService.approveExpense(
-      currentUser.email?.toLowerCase(),
-      id,
-    );
+    return this.expenseDiscussionsService.approveExpense(currentUser.email, id);
   }
 
   @Post('disputes/for-expense/:id')
@@ -32,10 +29,7 @@ export class ExpenseDiscussionsController {
     currentUser: AuthUser,
     @Param() {id}: IdParamDto,
   ) {
-    return this.expenseDiscussionsService.disputeExpense(
-      currentUser.email?.toLowerCase(),
-      id,
-    );
+    return this.expenseDiscussionsService.disputeExpense(currentUser.email, id);
   }
 
   @Post('comments/for-expense/:id')
@@ -46,7 +40,7 @@ export class ExpenseDiscussionsController {
     @Body() {text}: CreateCommentDto,
   ) {
     return this.expenseDiscussionsService.commentOnExpense(
-      currentUser.email?.toLowerCase(),
+      currentUser.email,
       id,
       text,
     );

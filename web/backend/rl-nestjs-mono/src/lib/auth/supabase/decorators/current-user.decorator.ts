@@ -2,6 +2,10 @@ import {createParamDecorator, ExecutionContext} from '@nestjs/common';
 
 export const CurrentUser = createParamDecorator(
   (_data: unknown, context: ExecutionContext) => {
-    return context.switchToHttp().getRequest().user;
+    const currentUser = context.switchToHttp().getRequest().user;
+    if (!currentUser) {
+      return null;
+    }
+    return {...currentUser, email: currentUser.email?.toLowerCase()};
   },
 );
