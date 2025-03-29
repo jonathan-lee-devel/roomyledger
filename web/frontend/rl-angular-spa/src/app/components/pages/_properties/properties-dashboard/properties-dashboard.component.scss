@@ -62,13 +62,9 @@
   }
 
   .active-tab {
-    // Removed the bright background color
-    background-color: transparent;
     color: var(--primary-color);
     font-weight: 500;
-
-    // Optional: add a very subtle background if desired
-    // background-color: rgba(0, 0, 0, 0.02);
+    background-color: rgba(0, 0, 0, 0.02);
   }
 
   .tab-icon-wrapper {
