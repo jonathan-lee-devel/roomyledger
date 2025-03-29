@@ -51,10 +51,6 @@
     <mat-spinner color="accent" diameter="28"/>
   </ng-container>
   <mat-menu #menu="matMenu">
-    <button data-featurebase-feedback mat-menu-item>
-      Feedback
-      <mat-icon>feedback</mat-icon>
-    </button>
     <ng-container *ngIf="paymentStore.paymentStatus() !== 'PAID'">
       <a [routerLink]="rebaseRoutePath(RoutePath.GO_PREMIUM)" mat-menu-item>
         Go Premium
