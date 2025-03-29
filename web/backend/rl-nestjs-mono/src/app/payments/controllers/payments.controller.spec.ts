@@ -41,7 +41,7 @@ describe('PaymentsController', () => {
       status: paymentStatus,
     });
     expect(mockPaymentsService.getCustomerPaymentStatus).toHaveBeenCalledWith(
-      customerEmail.toLowerCase(),
+      customerEmail,
     );
   });
 });

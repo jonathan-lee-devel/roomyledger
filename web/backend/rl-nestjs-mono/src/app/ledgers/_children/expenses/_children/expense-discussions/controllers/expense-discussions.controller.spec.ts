@@ -40,7 +40,7 @@ describe('ExpenseDiscussionsController', () => {
     });
 
     expect(mockExpenseDiscussionService.approveExpense).toHaveBeenCalledWith(
-      currentUser.email(),
+      currentUser.email,
       id,
     );
     expect(result).toStrictEqual(serviceResult);
@@ -60,7 +60,7 @@ describe('ExpenseDiscussionsController', () => {
     });
 
     expect(mockExpenseDiscussionService.disputeExpense).toHaveBeenCalledWith(
-      currentUser.email(),
+      currentUser.email,
       id,
     );
     expect(result).toStrictEqual(serviceResult);
@@ -83,7 +83,7 @@ describe('ExpenseDiscussionsController', () => {
     );
 
     expect(mockExpenseDiscussionService.commentOnExpense).toHaveBeenCalledWith(
-      currentUser.email(),
+      currentUser.email,
       id,
       text,
     );
