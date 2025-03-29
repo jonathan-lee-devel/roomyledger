@@ -1,9 +1,5 @@
-import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
 import {Component, inject} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {MatOption} from '@angular/material/autocomplete';
-import {MatFormField, MatLabel} from '@angular/material/form-field';
-import {MatSelect} from '@angular/material/select';
 import {Button} from 'primeng/button';
 import {ChipsModule} from 'primeng/chips';
 import {DropdownModule} from 'primeng/dropdown';
@@ -22,18 +18,11 @@ import {Currency, CURRENCY_CODES} from '../../../../types';
   standalone: true,
   imports: [
     Button,
-    NgIf,
-    AsyncPipe,
     OverlayPanelModule,
     InputGroupModule,
     InputGroupAddonModule,
     ChipsModule,
-    NgForOf,
     FormsModule,
-    MatFormField,
-    MatLabel,
-    MatOption,
-    MatSelect,
     Ripple,
     DropdownModule,
     FileUploadModule,
@@ -47,15 +36,16 @@ export class ExpenseCreateOverlayPanelComponent {
 
   protected name: string = '';
   protected description: string = '';
-  protected amount: number = 0.00;
+  protected amount: number = 0.0;
   protected currencyCode: Currency = 'USD';
   protected expenseProofImages: File[] = [];
 
-
-  protected readonly validCurrencies = [...CURRENCY_CODES.map((currencyCode) => ({
-    code: currencyCode,
-    name: currencyCode,
-  }))];
+  protected readonly validCurrencies = [
+    ...CURRENCY_CODES.map((currencyCode) => ({
+      code: currencyCode,
+      name: currencyCode,
+    })),
+  ];
 
   private uploadedFile?: File;
 
@@ -72,18 +62,21 @@ export class ExpenseCreateOverlayPanelComponent {
   }
 
   doCreateExpense() {
-    this.expensesStore.addExpense({
-      amount: this.amount,
-      name: this.name,
-      description: this.description,
-      currencyCode: this.currencyCode,
-      propertyId: this.propertiesStore.propertyId(),
-      uploadedFile: this.uploadedFile,
-    }, this);
+    this.expensesStore.addExpense(
+        {
+          amount: this.amount,
+          name: this.name,
+          description: this.description,
+          currencyCode: this.currencyCode,
+          propertyId: this.propertiesStore.propertyId(),
+          uploadedFile: this.uploadedFile,
+        },
+        this,
+    );
   }
 
   clearForm() {
-    this.amount = 0.00;
+    this.amount = 0.0;
     this.name = '';
     this.description = '';
     this.expenseProofImages = [];

@@ -1,7 +1,7 @@
-import {NgIf, NgOptimizedImage} from '@angular/common';
+import {NgIf} from '@angular/common';
 import {Component, inject, OnInit} from '@angular/core';
 import {ConfirmationService} from 'primeng/api';
-import {Button, ButtonDirective} from 'primeng/button';
+import {Button} from 'primeng/button';
 import {CheckboxModule} from 'primeng/checkbox';
 import {DividerModule} from 'primeng/divider';
 import {InputGroupModule} from 'primeng/inputgroup';
@@ -18,13 +18,11 @@ import {PaymentStore} from '../../../../+state/payment/payment.store';
   standalone: true,
   imports: [
     Button,
-    ButtonDirective,
     CheckboxModule,
     DividerModule,
     InputGroupAddonModule,
     InputGroupModule,
     InputTextModule,
-    NgOptimizedImage,
     Ripple,
     NgIf,
     ProgressSpinnerModule,

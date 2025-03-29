@@ -1,4 +1,4 @@
-import {AsyncPipe, NgIf} from '@angular/common';
+import {NgIf} from '@angular/common';
 import {Component, inject, input} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
@@ -8,16 +8,16 @@ import {FileUploadModule} from 'primeng/fileupload';
 
 import {UserAuthenticationStore} from '../../../../+state/auth/user-auth.store';
 import {ExpensesStore} from '../../../../+state/ledger/expenses/expenses.store';
-import {ExpenseDto, initialExpenseDto} from '../../../../dtos/expenses/ExpenseDto';
+import {
+  ExpenseDto,
+  initialExpenseDto,
+} from '../../../../dtos/expenses/ExpenseDto';
 import {PropertyDto} from '../../../../dtos/properties/Property.dto';
-import {SupabaseService} from '../../../../services/supabase/supabase.service';
 import {
   ExpenseConversationDialogComponent,
   ExpenseConversationDialogComponentData,
 } from '../../dialogs/_expenses/expense-conversation-dialog/expense-conversation-dialog.component';
-import {
-  ExpenseConversationDialogFooterComponent,
-} from '../../dialogs/_expenses/expense-conversation-dialog-footer/expense-conversation-dialog-footer.component';
+import {ExpenseConversationDialogFooterComponent} from '../../dialogs/_expenses/expense-conversation-dialog-footer/expense-conversation-dialog-footer.component';
 import {
   ExpenseProofDialogComponent,
   ExpenseProofDialogData,
@@ -26,7 +26,13 @@ import {
 @Component({
   selector: 'app-expense-action-menu',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, MatMenuModule, NgIf, AsyncPipe, FileUploadModule],
+  imports: [
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    NgIf,
+    FileUploadModule,
+  ],
   templateUrl: './expense-action-menu.component.html',
   styleUrl: './expense-action-menu.component.scss',
 })
@@ -41,8 +47,6 @@ export class ExpenseActionMenuComponent {
   protected readonly initialExpenseDto = initialExpenseDto;
 
   protected property?: PropertyDto;
-
-  private readonly supabaseService = inject(SupabaseService);
 
   doDeleteExpense() {
     this.expensesStore.promptDeleteExpenseById(this.expenseId());

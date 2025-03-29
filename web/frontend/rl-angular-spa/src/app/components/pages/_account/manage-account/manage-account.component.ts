@@ -1,7 +1,6 @@
 import {CommonModule} from '@angular/common';
 import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatOption} from '@angular/material/autocomplete';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {ButtonModule} from 'primeng/button';
 import {CheckboxModule} from 'primeng/checkbox';
@@ -34,7 +33,6 @@ import {ProfileSettingsComponent} from '../../../lib/_account/profile-settings/p
     InputGroupAddonModule,
     InputGroupModule,
     InputTextModule,
-    MatOption,
     Ripple,
     DividerModule,
     FloatLabelModule,

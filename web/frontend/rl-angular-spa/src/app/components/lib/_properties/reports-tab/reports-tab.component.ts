@@ -5,7 +5,6 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
-import {MatOption} from '@angular/material/select';
 import {SharedModule} from 'primeng/api';
 import {CalendarModule} from 'primeng/calendar';
 import {DialogService} from 'primeng/dynamicdialog';
@@ -37,7 +36,6 @@ export type ExpenseStateString = 'Approved' | 'Pending' | 'Disputed';
     MatProgressSpinner,
     MultiSelectModule,
     FormsModule,
-    MatOption,
     CalendarModule,
   ],
   templateUrl: './reports-tab.component.html',
