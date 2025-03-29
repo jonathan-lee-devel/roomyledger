@@ -8,6 +8,7 @@ import {
   withMethods,
   withState,
 } from '@ngrx/signals';
+import flagsmith from 'flagsmith';
 import {HTMLLinkElement} from 'happy-dom';
 import {take} from 'rxjs';
 
@@ -29,7 +30,7 @@ type UserAuthenticationState = {
   tokens: TokensDto;
   userInfo: UserProfile;
   isDarkMode: boolean;
-}
+};
 
 const initialState: UserAuthenticationState = {
   loggedInState: 'INIT',
@@ -53,20 +54,28 @@ export const UserAuthenticationStore = signalStore(
       const supabaseService = inject(SupabaseService);
       return {
         setDarkModeEnabled: () => {
-          const linkElement = document.getElementById('app-theme') as unknown as HTMLLinkElement;
+          const linkElement = document.getElementById(
+              'app-theme',
+          ) as unknown as HTMLLinkElement;
           linkElement.href = 'theme-dark.css';
           authService.setDarkModeSettingInLocalStorage(true);
           patchState(store, {isDarkMode: true});
         },
         setLightModeEnabled: () => {
-          const linkElement = document.getElementById('app-theme') as unknown as HTMLLinkElement;
+          const linkElement = document.getElementById(
+              'app-theme',
+          ) as unknown as HTMLLinkElement;
           linkElement.href = 'theme-light.css';
           authService.setDarkModeSettingInLocalStorage(false);
           patchState(store, {isDarkMode: false});
         },
-        onLoginComplete: async (tokens: {accessToken: string; refreshToken: string}, userInfo: UserProfile) => {
+        onLoginComplete: async (
+            tokens: {accessToken: string; refreshToken: string},
+            userInfo: UserProfile,
+        ) => {
           authService.setTokensInLocalStorage(tokens);
           authService.setUserInfoInLocalStorage(userInfo);
+          await flagsmith.identify(userInfo.email);
           const next = authService.getNextParamFromLocalStorageAndNoReset();
           if (next) {
             router
@@ -76,12 +85,17 @@ export const UserAuthenticationStore = signalStore(
           patchState(store, {loggedInState: 'LOGGED_IN', tokens, userInfo});
         },
         userCheckIn: () => {
-          authService.checkIn({email: supabaseService.session?.user?.email ?? '', displayName: supabaseService.session?.user?.user_metadata['name']}).pipe(
-              take(1),
-          ).subscribe();
+          authService
+              .checkIn({
+                email: supabaseService.session?.user?.email ?? '',
+                displayName: supabaseService.session?.user?.user_metadata['name'],
+              })
+              .pipe(take(1))
+              .subscribe();
         },
         logout: async () => {
-          router.navigate([rebaseRoutePath(RoutePath.LOGOUT_IN_PROGRESS)])
+          router
+              .navigate([rebaseRoutePath(RoutePath.LOGOUT_IN_PROGRESS)])
               .catch(RouterUtils.navigateCatchErrorCallback);
           patchState(store, {loggedInState: 'LOADING'});
           await supabaseService.signOut();
@@ -101,8 +115,7 @@ export const UserAuthenticationStore = signalStore(
       return {
         onLoginError: (error: Error) => {
           console.error(error);
-          store.logout()
-              .catch((reason) => console.error(reason));
+          store.logout().catch((reason) => console.error(reason));
         },
       };
     }),
@@ -112,17 +125,30 @@ export const UserAuthenticationStore = signalStore(
       const supabaseService = inject(SupabaseService);
       const router = inject(Router);
       return {
-        attemptSupabaseSignUpWithEmail: async (email: string, password: string) => {
+        attemptSupabaseSignUpWithEmail: async (
+            email: string,
+            password: string,
+        ) => {
           patchState(store, {loggedInState: 'LOADING'});
           const {error} = await supabaseService.signUpWithEmail(email, password);
           if (error) {
             store.onLoginError(error);
           } else {
             patchState(store, {loggedInState: 'NOT_LOGGED_IN'});
-            toastWrapperService.showConfirmMessage('Login', 'Check your e-mail for further instructions', true, true, 'info', environment.TOAST_DURATION_MS);
+            toastWrapperService.showConfirmMessage(
+                'Login',
+                'Check your e-mail for further instructions',
+                true,
+                true,
+                'info',
+                environment.TOAST_DURATION_MS,
+            );
           }
         },
-        attemptSupabaseLoginWithEmail: async (email: string, password: string) => {
+        attemptSupabaseLoginWithEmail: async (
+            email: string,
+            password: string,
+        ) => {
           patchState(store, {loggedInState: 'LOADING'});
           const {error} = await supabaseService.signInWithEmail(email, password);
           if (error) {
@@ -135,7 +161,8 @@ export const UserAuthenticationStore = signalStore(
             );
             store.onLoginError(error);
           } else {
-            router.navigate([rebaseRoutePath(RoutePath.LOGIN_IN_PROGRESS)])
+            router
+                .navigate([rebaseRoutePath(RoutePath.LOGIN_IN_PROGRESS)])
                 .catch(RouterUtils.navigateCatchErrorCallback);
           }
         },
@@ -145,7 +172,8 @@ export const UserAuthenticationStore = signalStore(
           if (error) {
             store.onLoginError(error);
           } else {
-            router.navigate([rebaseRoutePath(RoutePath.LOGIN_IN_PROGRESS)])
+            router
+                .navigate([rebaseRoutePath(RoutePath.LOGIN_IN_PROGRESS)])
                 .catch(RouterUtils.navigateCatchErrorCallback);
           }
         },
@@ -155,15 +183,18 @@ export const UserAuthenticationStore = signalStore(
           if (error) {
             store.onLoginError(error);
           } else {
-            router.navigate([rebaseRoutePath(RoutePath.LOGIN_IN_PROGRESS)])
+            router
+                .navigate([rebaseRoutePath(RoutePath.LOGIN_IN_PROGRESS)])
                 .catch(RouterUtils.navigateCatchErrorCallback);
           }
         },
         checkLoginOnRefresh: () => {
-          const {accessToken, refreshToken} = authService.getTokensFromLocalStorage();
+          const {accessToken, refreshToken} =
+          authService.getTokensFromLocalStorage();
           const userInfo = authService.getUserInfoFromLocalStorage();
           if (accessToken !== '' && refreshToken !== '' && userInfo) {
-            store.onLoginComplete({accessToken: accessToken, refreshToken}, userInfo)
+            store
+                .onLoginComplete({accessToken: accessToken, refreshToken}, userInfo)
                 .catch((reason) => console.error(reason));
           }
         },
@@ -189,9 +220,14 @@ export const UserAuthenticationStore = signalStore(
     }),
     withHooks({
       onInit: (store) => {
-        if (!localStorage.getItem(AuthService.darkModeKey) && window?.matchMedia('(prefers-color-scheme: dark)')?.matches) {
+        if (
+          !localStorage.getItem(AuthService.darkModeKey) &&
+        window?.matchMedia('(prefers-color-scheme: dark)')?.matches
+        ) {
           store.setDarkModeEnabled();
-        } else if (JSON.parse(localStorage.getItem(AuthService.darkModeKey) ?? 'false')) {
+        } else if (
+          JSON.parse(localStorage.getItem(AuthService.darkModeKey) ?? 'false')
+        ) {
           store.setDarkModeEnabled();
         } else {
           store.setLightModeEnabled();
