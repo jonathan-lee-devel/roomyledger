@@ -10,7 +10,7 @@ export const environment = {
   MAIN_API_URL: 'http://localhost:4200/api',
   SUPABASE_URL: 'https://gkuqhbshrqxeiitfapbq.supabase.co/',
   SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdrdXFoYnNocnF4ZWlpdGZhcGJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjQ3NjcxNjksImV4cCI6MjA0MDM0MzE2OX0.wBP27701Kh3gvjMpsOCDWS7NW1023hnqZwAah_TS8Ew',
-  FLAGSMITH_CLIENT_SDK_KEY: 'QP3CArzcknVgqrftgVydHm',
+  FLAGSMITH_CLIENT_SDK_KEY: '3Wiaxv5tfsbLEkarBYHf7o',
   FLAGSMITH_API_URL: 'https://flagsmith.roomyledger.com/api/v1/',
   PAYMENTS_SERVICE_BASE_URL: 'http://localhost:3000/v1/payments',
   APPLICATION_MESSAGES_SERVICE_BASE_URL: 'http://localhost:3000/v1/application-messages',
