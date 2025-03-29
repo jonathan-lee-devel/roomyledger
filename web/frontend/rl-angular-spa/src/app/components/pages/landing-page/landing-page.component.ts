@@ -1,6 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {Component, inject, OnInit} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {DateTime} from 'luxon';
 import {MenuItem} from 'primeng/api';
 import {AvatarModule} from 'primeng/avatar';
 import {ButtonModule} from 'primeng/button';
@@ -81,7 +82,11 @@ export class LandingPageComponent implements OnInit {
     this.activeTabLabel = this.tabMenuItems[0].label;
   }
 
-  onActiveItemChange($event: MenuItem) {
-    this.activeTabLabel = $event.label;
+  getCurrentMonth() {
+    return DateTime.now().monthLong;
+  }
+
+  getCurrentYear() {
+    return DateTime.now().year;
   }
 }
