@@ -1,44 +1,81 @@
-<div *ngIf="!propertiesStore.isLoading() else topSpinner"
-     class="flex-none flex align-items-center justify-content-center mt-8">
-  <app-p-dark-mode [innerText]="getPropertyTier()" class="text-2xl"/>
-</div>
-<ng-template #topSpinner>
-  <div class="flex-none flex align-items-center justify-content-center mt-8">
-    <p-progressSpinner styleClass="w-2rem h-2rem"/>
+<div class="container mx-auto px-2 md:px-4 py-2 md:py-4">
+  <!-- Dashboard Header -->
+  <div class="surface-card p-3 md:p-4 shadow-2 border-round mb-3 md:mb-4">
+    <div class="grid">
+      <div class="col-12">
+        <!-- Loading state for header -->
+        <div *ngIf="!propertiesStore.isLoading() else topSpinner"
+             class="flex flex-column md:flex-row align-items-center md:justify-content-between border-bottom-1 surface-border pb-3">
+          <div class="mb-2 md:mb-0 text-center md:text-left">
+            <h3 class="text-lg md:text-xl font-medium m-0">Manage Property Ledger</h3>
+            <p class="text-sm md:text-base text-500 mt-1 mb-0">{{ getPropertyTier() }}</p>
+          </div>
+          <div class="text-2xl md:text-3xl font-bold text-primary text-center md:text-right">
+            {{ propertiesStore.propertyById().name }}
+          </div>
+        </div>
+        <ng-template #topSpinner>
+          <div class="flex align-items-center justify-content-center p-2 md:p-3">
+            <p-progressSpinner styleClass="w-2rem h-2rem"/>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <!-- Loading spinner for property data -->
+    <ng-container *ngIf="propertiesStore.isLoading()">
+      <div class="flex align-items-center justify-content-center p-2 md:p-3">
+        <p-progressSpinner/>
+      </div>
+    </ng-container>
   </div>
-</ng-template>
-<div class="flex-none flex align-items-center justify-content-center mt-2">
-  <app-h1-dark-mode [innerText]="'Manage Property Ledger'" class="text-3xl underline"/>
-</div>
-<ng-container *ngIf="propertiesStore.isLoading()">
-  <div
-    class="flex-none flex align-items-center justify-content-center mt-1"
-  >
-    <p-progressSpinner/>
+
+  <!-- Custom Modern Tab Navigation -->
+  <div class="custom-tab-container mb-3 md:mb-4 animate__animated animate__bounceInUp">
+    <div class="flex justify-content-center w-full">
+      <div class="custom-tabs-wrapper w-full" [ngClass]="{'mobile-view': isMobileView}">
+        <ul class="custom-tabs-list">
+          <li *ngFor="let item of items; let i = index"
+              class="custom-tab"
+              [ngClass]="{'active-tab': activeItem?.label === item.label}"
+              (click)="onActiveItemChange(item)">
+            <div class="tab-icon-wrapper">
+              <i [class]="item.icon"></i>
+            </div>
+            <span class="tab-label">{{ item.label }}</span>
+            <div class="tab-indicator" *ngIf="activeItem?.label === item.label"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
-</ng-container>
-<div class="flex-none flex align-items-center justify-content-center mt-1">
-  <app-p-dark-mode [innerText]="propertiesStore.propertyById().name" class="text-3xl"/>
-</div>
-<div class="flex-none flex align-items-center justify-content-center mt-3 animate__animated animate__bounceInUp">
-  <p-tabMenu
-    (activeItemChange)="onActiveItemChange($event)"
-    [activeItem]="activeItem"
-    [model]="items"/>
-</div>
-<div *ngIf="activeItem?.label === items?.[EXPENSE_TAB_INDEX]?.label"
-     class="flex-none flex align-items-center justify-content-center mt-3 animate__animated animate__bounceInUp">
-  <app-expense-tab/>
-</div>
-<div *ngIf="activeItem?.label === items?.[CUSTOM_SPLITS_TAB_INDEX]?.label"
-     class="flex-none flex align-items-center justify-content-center mt-3 animate__animated animate__bounceInUp">
-  <app-custom-splits-tab />
-</div>
-<div *ngIf="activeItem?.label === items?.[REPORTS_TAB_INDEX]?.label"
-     class="flex-none flex align-items-center justify-content-center mt-3 animate__animated animate__bounceInUp">
-  <app-reports-tab (monthAndYearSelected)="loadExpensesForSelectedMonthAndYear($event)" [date]="date"/>
-</div>
-<div *ngIf="activeItem?.label === items?.[PEOPLE_TAB_INDEX]?.label"
-     class="flex-none flex align-items-center justify-content-center mt-3 animate__animated animate__bounceInUp">
-  <app-property-dashboard-people-tab/>
+
+  <!-- Tab Content Container -->
+  <div class="surface-card p-2 md:p-4 shadow-2 border-round animate__animated animate__bounceInUp">
+    <!-- Expenses Tab -->
+    <div *ngIf="activeItem?.label === items?.[EXPENSE_TAB_INDEX]?.label"
+         class="animate__animated animate__fadeIn">
+      <app-expense-tab/>
+    </div>
+
+    <!-- Custom Splits Tab -->
+    <div *ngIf="activeItem?.label === items?.[CUSTOM_SPLITS_TAB_INDEX]?.label"
+         class="animate__animated animate__fadeIn">
+      <app-custom-splits-tab />
+    </div>
+
+    <!-- Reports Tab -->
+    <div *ngIf="activeItem?.label === items?.[REPORTS_TAB_INDEX]?.label"
+         class="animate__animated animate__fadeIn">
+      <app-reports-tab
+        (monthAndYearSelected)="loadExpensesForSelectedMonthAndYear($event)"
+        [date]="date"/>
+    </div>
+
+    <!-- People Tab -->
+    <div *ngIf="activeItem?.label === items?.[PEOPLE_TAB_INDEX]?.label"
+         class="animate__animated animate__fadeIn">
+      <app-property-dashboard-people-tab/>
+    </div>
+  </div>
 </div>
