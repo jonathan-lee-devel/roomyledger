@@ -1,7 +1,7 @@
 import {Component, inject, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
-import {delay, Subscription, tap} from 'rxjs';
+import {interval, Subscription, take, tap} from 'rxjs';
 
 import {UserAuthenticationStore} from '../../../../+state/auth/user-auth.store';
 import {rebaseRoutePath, RoutePath} from '../../../../app.routes';
@@ -15,15 +15,14 @@ import {RouterUtils} from '../../../../util/router/Router.utils';
   styleUrl: './login-in-progress.component.scss',
 })
 export class LoginInProgressComponent implements OnInit, OnDestroy {
-  private readonly activatedRoute = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly userAuthenticationStore = inject(UserAuthenticationStore);
-  private activatedRouteUrlSubscription?: Subscription;
+  private intervalSubscription?: Subscription;
 
   ngOnInit() {
-    this.activatedRouteUrlSubscription = this.activatedRoute.url
+    this.intervalSubscription = interval(500)
         .pipe(
-            delay(1000),
+            take(20),
             tap(() => {
               if (this.userAuthenticationStore.loggedInState() === 'LOGGED_IN') {
                 this.router
@@ -36,6 +35,6 @@ export class LoginInProgressComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.activatedRouteUrlSubscription?.unsubscribe();
+    this.intervalSubscription?.unsubscribe();
   }
 }
