@@ -5,163 +5,22 @@
     <div class="grid">
       <div class="col-12 text-center mb-5">
         <h2 class="text-4xl font-bold mb-3 text-primary">See Your Shared Finances at a Glance</h2>
-        <p class="text-xl line-height-3">Experience how RoomyLedger simplifies tracking and settling expenses</p>
       </div>
-    </div>
-
-    <div class="grid">
-      <div class="col-12 lg:col-8 mx-auto">
-        <div class="surface-card p-4 shadow-2 border-round">
-          <!-- Mock Dashboard Header -->
-          <div class="flex justify-content-between align-items-center mb-5 border-bottom-1 surface-border pb-3">
-            <div>
-              <h3 class="text-xl font-medium m-0">{{ getCurrentMonth() }} {{ getCurrentYear() }} Expenses</h3>
-              <span class="text-500">Apartment #304</span>
-            </div>
-            <div>
-              <p-button label="Add Expense" icon="pi pi-plus" styleClass="p-button-sm mr-2"></p-button>
-              <p-button label="Settle Up" icon="pi pi-wallet" styleClass="p-button-sm p-button-outlined"></p-button>
-            </div>
-          </div>
-
-          <!-- Summary Cards Row -->
-          <div class="grid mb-4">
-            <div class="col-12 md:col-4">
-              <div class="p-3 border-round surface-100 h-full">
-                <div class="text-500 mb-2">Total Expenses</div>
-                <div class="text-3xl font-medium">$842.50</div>
-                <div class="mt-3 flex align-items-center">
-                  <i class="pi pi-chart-line text-primary mr-2"></i>
-                  <span class="text-sm">14 transactions this month</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 md:col-4">
-              <div class="p-3 border-round surface-100 h-full">
-                <div class="text-500 mb-2">Your Share</div>
-                <div class="text-3xl font-medium">$281.25</div>
-                <div class="mt-3 flex align-items-center">
-                  <i class="pi pi-percentage text-primary mr-2"></i>
-                  <span class="text-sm">33.3% of total expenses</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 md:col-4">
-              <div class="p-3 border-round surface-100 h-full">
-                <div class="text-500 mb-2">Balance</div>
-                <div class="text-3xl font-medium text-green-500">+$45.75</div>
-                <div class="mt-3 flex align-items-center">
-                  <i class="pi pi-arrow-right text-primary mr-2"></i>
-                  <span class="text-sm">Jamie owes you</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Recent Transactions Table -->
-          <div class="border-round surface-0 p-3">
-            <h4 class="mb-3">Recent Transactions</h4>
-            <div class="surface-100 p-3 border-round mb-2">
-              <div class="flex justify-content-between align-items-center">
-                <div>
-                  <span class="block font-medium mb-1">Groceries - Trader Joe's</span>
-                  <span class="text-sm text-500">Oct 24, 2023 • Paid by You</span>
-                </div>
-                <div class="text-right">
-                  <span class="block font-medium mb-1">$84.50</span>
-                  <span class="text-sm text-green-500">+$56.33 from others</span>
-                </div>
-              </div>
-            </div>
-            <div class="surface-100 p-3 border-round mb-2">
-              <div class="flex justify-content-between align-items-center">
-                <div>
-                  <span class="block font-medium mb-1">Internet Bill</span>
-                  <span class="text-sm text-500">Oct 18, 2023 • Paid by Jamie</span>
-                </div>
-                <div class="text-right">
-                  <span class="block font-medium mb-1">$65.00</span>
-                  <span class="text-sm text-red-500">You owe $21.67</span>
-                </div>
-              </div>
-            </div>
-            <div class="surface-100 p-3 border-round">
-              <div class="flex justify-content-between align-items-center">
-                <div>
-                  <span class="block font-medium mb-1">Electric Bill</span>
-                  <span class="text-sm text-500">Oct 15, 2023 • Paid by Taylor</span>
-                </div>
-                <div class="text-right">
-                  <span class="block font-medium mb-1">$103.25</span>
-                  <span class="text-sm text-red-500">You owe $34.42</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Roommate Balances -->
-          <div class="mt-4 p-3">
-            <h4 class="mb-3">Roommate Balances</h4>
-            <div class="grid">
-              <div class="col-12 md:col-6">
-                <div class="flex align-items-center border-round p-3 surface-100 mb-2 md:mb-0">
-                  <div style="width: 40px; height: 40px" class="border-circle bg-primary flex align-items-center justify-content-center mr-3">
-                    <span class="text-white font-bold">J</span>
-                  </div>
-                  <div class="flex-1">
-                    <span class="font-medium block">Jamie</span>
-                    <span class="text-sm text-red-500">Owes you $45.75</span>
-                  </div>
-                  <p-button icon="pi pi-user" styleClass="p-button-rounded p-button-text"></p-button>
-                </div>
-              </div>
-              <div class="col-12 md:col-6">
-                <div class="flex align-items-center border-round p-3 surface-100">
-                  <div style="width: 40px; height: 40px" class="border-circle bg-orange-500 flex align-items-center justify-content-center mr-3">
-                    <span class="text-white font-bold">T</span>
-                  </div>
-                  <div class="flex-1">
-                    <span class="font-medium block">Taylor</span>
-                    <span class="text-sm text-green-500">You owe $12.35</span>
-                  </div>
-                  <p-button icon="pi pi-user" styleClass="p-button-rounded p-button-text"></p-button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- Purpose Explanation Section -->
-<section class="purpose-section pb-8 surface-ground">
-  <div class="container mx-auto px-4">
-    <div class="grid justify-content-center">
-      <div class="col-12 md:col-8 lg:col-6">
-        <div class="p-4 text-center">
-          <h2 class="text-4xl font-bold mb-4 text-primary">Simplify Shared Living Expenses</h2>
-          <p class="text-xl line-height-3 mb-4">
-            RoomyLedger makes tracking shared expenses with roommates effortless and stress-free.
-          </p>
-          <ul class="list-none p-0 m-0 flex flex-column align-items-center">
-            <li class="flex align-items-center mb-3">
-              <i class="pi pi-check-circle text-primary mr-2"></i>
-              <span>Collaborate on shared expenses in real-time</span>
-            </li>
-            <li class="flex align-items-center mb-3">
-              <i class="pi pi-check-circle text-primary mr-2"></i>
-              <span>Automatically calculate what everyone owes</span>
-            </li>
-            <li class="flex align-items-center mb-3">
-              <i class="pi pi-check-circle text-primary mr-2"></i>
-              <span>End-of-month reports for transparent settlements</span>
-            </li>
-          </ul>
-          <div class="flex justify-content-center mt-4">
-            <p-button label="Get Started" icon="pi pi-arrow-right" iconPos="right"></p-button>
-          </div>
-        </div>
+      <div class="flex justify-content-center w-full">
+        <ul class="list-none p-0 m-0 flex flex-column">
+          <li class="flex align-items-center mb-3">
+            <i class="pi pi-check-circle text-primary mr-2 flex align-items-center justify-content-center"></i>
+            <span>Collaborate on shared expenses in real-time</span>
+          </li>
+          <li class="flex align-items-center mb-3">
+            <i class="pi pi-check-circle text-primary mr-2 flex align-items-center justify-content-center"></i>
+            <span>Automatically calculate what everyone owes</span>
+          </li>
+          <li class="flex align-items-center mb-3">
+            <i class="pi pi-check-circle text-primary mr-2 flex align-items-center justify-content-center"></i>
+            <span>End-of-month reports for transparent settlements</span>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
