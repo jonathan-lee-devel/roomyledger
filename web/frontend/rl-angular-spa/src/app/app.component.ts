@@ -144,6 +144,21 @@ export class AppComponent implements OnInit {
     ) {
       this.userAuthenticationStore.setLightModeEnabled();
     }
+    this.featureFlagsStore.onFeatureFlagsInit();
+    flagsmith
+        .init({
+          environmentID: environment.FLAGSMITH_CLIENT_SDK_KEY,
+          api: environment.FLAGSMITH_API_URL,
+          onChange: () => {
+            this.featureFlagsStore.onFeatureFlagsLoaded([
+              ...Object.values(FeatureFlagEnum).map((featureFlag) => ({
+                featureName: featureFlag,
+                isActive: flagsmith.hasFeature(featureFlag),
+              })),
+            ]);
+          },
+        })
+        .catch((reason) => console.error(reason));
     this.router.events
         .pipe(
             tap(() => {
@@ -187,73 +202,6 @@ export class AppComponent implements OnInit {
             }),
         )
         .subscribe();
-    this.featureFlagsStore.onFeatureFlagsInit();
-    flagsmith
-        .init({
-          environmentID: environment.FLAGSMITH_CLIENT_SDK_KEY,
-          api: environment.FLAGSMITH_API_URL,
-          onChange: () => {
-            this.featureFlagsStore.onFeatureFlagsLoaded([
-              {
-                featureName: FeatureFlagEnum.IS_UPDATE_OR_MAINTENANCE_IN_PROGRESS,
-                isActive: flagsmith.hasFeature(
-                    FeatureFlagEnum.IS_UPDATE_OR_MAINTENANCE_IN_PROGRESS,
-                ),
-              },
-              {
-                featureName: FeatureFlagEnum.SIGN_IN_WITH_GOOGLE,
-                isActive: flagsmith.hasFeature(
-                    FeatureFlagEnum.SIGN_IN_WITH_GOOGLE,
-                ),
-              },
-              {
-                featureName: FeatureFlagEnum.SIGN_IN_WITH_APPLE,
-                isActive: flagsmith.hasFeature(
-                    FeatureFlagEnum.SIGN_IN_WITH_APPLE,
-                ),
-              },
-              {
-                featureName: FeatureFlagEnum.SIGN_IN_WITH_GITHUB,
-                isActive: flagsmith.hasFeature(
-                    FeatureFlagEnum.SIGN_IN_WITH_GITHUB,
-                ),
-              },
-              {
-                featureName: FeatureFlagEnum.SIGN_IN_WITH_EMAIL,
-                isActive: flagsmith.hasFeature(
-                    FeatureFlagEnum.SIGN_IN_WITH_EMAIL,
-                ),
-              },
-            ]);
-          },
-        })
-        .then(() =>
-          this.featureFlagsStore.onFeatureFlagsLoaded([
-            {
-              featureName: FeatureFlagEnum.IS_UPDATE_OR_MAINTENANCE_IN_PROGRESS,
-              isActive: flagsmith.hasFeature(
-                  FeatureFlagEnum.IS_UPDATE_OR_MAINTENANCE_IN_PROGRESS,
-              ),
-            },
-            {
-              featureName: FeatureFlagEnum.SIGN_IN_WITH_GOOGLE,
-              isActive: flagsmith.hasFeature(FeatureFlagEnum.SIGN_IN_WITH_GOOGLE),
-            },
-            {
-              featureName: FeatureFlagEnum.SIGN_IN_WITH_APPLE,
-              isActive: flagsmith.hasFeature(FeatureFlagEnum.SIGN_IN_WITH_APPLE),
-            },
-            {
-              featureName: FeatureFlagEnum.SIGN_IN_WITH_GITHUB,
-              isActive: flagsmith.hasFeature(FeatureFlagEnum.SIGN_IN_WITH_GITHUB),
-            },
-            {
-              featureName: FeatureFlagEnum.SIGN_IN_WITH_EMAIL,
-              isActive: flagsmith.hasFeature(FeatureFlagEnum.SIGN_IN_WITH_EMAIL),
-            },
-          ]),
-        )
-        .catch((reason) => console.error(reason));
   }
 
   handleDarkModeToggleEvent($event: InputSwitchChangeEvent) {
