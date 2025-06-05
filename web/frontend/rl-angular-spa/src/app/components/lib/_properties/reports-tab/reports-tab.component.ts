@@ -35,8 +35,8 @@ export type ExpenseStateString = 'Approved' | 'Pending' | 'Disputed';
     MatProgressSpinner,
     MultiSelectModule,
     FormsModule,
-    CalendarModule
-],
+    CalendarModule,
+  ],
   templateUrl: './reports-tab.component.html',
   styleUrl: './reports-tab.component.scss',
 })

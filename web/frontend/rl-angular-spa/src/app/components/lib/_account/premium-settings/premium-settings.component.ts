@@ -24,8 +24,8 @@ import {PaymentStore} from '../../../../+state/payment/payment.store';
     InputGroupModule,
     InputTextModule,
     Ripple,
-    ProgressSpinnerModule
-],
+    ProgressSpinnerModule,
+  ],
   templateUrl: './premium-settings.component.html',
   styleUrl: './premium-settings.component.scss',
 })

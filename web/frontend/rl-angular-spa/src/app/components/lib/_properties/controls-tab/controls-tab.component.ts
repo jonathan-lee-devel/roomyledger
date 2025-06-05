@@ -28,8 +28,8 @@ import {rebaseRoutePathAsString, RoutePath} from '../../../../app.routes';
     OverlayPanelModule,
     InputGroupModule,
     InputGroupAddonModule,
-    ChipsModule
-],
+    ChipsModule,
+  ],
   templateUrl: './controls-tab.component.html',
   styleUrl: './controls-tab.component.scss',
 })

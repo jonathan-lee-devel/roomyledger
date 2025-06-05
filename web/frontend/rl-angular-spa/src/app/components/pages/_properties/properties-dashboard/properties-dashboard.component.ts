@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+import {NgClass} from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -63,8 +63,8 @@ import {ReportsTabComponent} from '../../../lib/_properties/reports-tab/reports-
     NgClass,
     TabMenuModule,
     ProgressSpinnerModule,
-    CustomSplitsTabComponent
-],
+    CustomSplitsTabComponent,
+  ],
   templateUrl: './properties-dashboard.component.html',
   styleUrl: './properties-dashboard.component.scss',
   changeDetection: ChangeDetectionStrategy.Default,

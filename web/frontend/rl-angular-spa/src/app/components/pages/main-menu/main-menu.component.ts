@@ -13,8 +13,8 @@ import {CardWithLinkComponent} from '../../lib/card-with-link/card-with-link.com
   imports: [
     CardWithLinkComponent,
     PDarkModeComponent,
-    H1DarkModeComponent
-],
+    H1DarkModeComponent,
+  ],
   templateUrl: './main-menu.component.html',
   styleUrl: './main-menu.component.scss',
 })

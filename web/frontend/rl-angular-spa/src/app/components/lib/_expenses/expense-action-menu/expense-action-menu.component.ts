@@ -30,8 +30,8 @@ import {
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
-    FileUploadModule
-],
+    FileUploadModule,
+  ],
   templateUrl: './expense-action-menu.component.html',
   styleUrl: './expense-action-menu.component.scss',
 })

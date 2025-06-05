@@ -1,4 +1,4 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {Component, inject, OnInit, ViewChild} from '@angular/core';
 import {NavigationEnd, Router, RouterLink, RouterOutlet} from '@angular/router';
 import {inject as vercelInject} from '@vercel/analytics';

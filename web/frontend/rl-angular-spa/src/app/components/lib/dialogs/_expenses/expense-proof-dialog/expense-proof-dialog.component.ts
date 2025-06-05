@@ -1,4 +1,4 @@
-import { NgOptimizedImage } from '@angular/common';
+import {NgOptimizedImage} from '@angular/common';
 import {Component, inject, OnInit} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {DialogModule} from 'primeng/dialog';
@@ -20,8 +20,8 @@ export interface ExpenseProofDialogData {
     MatButtonModule,
     NgOptimizedImage,
     DialogModule,
-    ProgressSpinnerModule
-],
+    ProgressSpinnerModule,
+  ],
   templateUrl: './expense-proof-dialog.component.html',
   styleUrl: './expense-proof-dialog.component.scss',
 })

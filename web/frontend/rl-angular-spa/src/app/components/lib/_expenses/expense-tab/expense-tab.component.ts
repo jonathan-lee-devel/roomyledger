@@ -36,8 +36,8 @@ import {ExpenseTableComponent} from '../expense-table/expense-table.component';
     ExpenseTableComponent,
     ProgressSpinnerModule,
     StyleClassModule,
-    MessageModule
-],
+    MessageModule,
+  ],
   templateUrl: './expense-tab.component.html',
   styleUrl: './expense-tab.component.scss',
 })

@@ -48,8 +48,8 @@ import {SplashBannerComponent} from '../../lib/splash-banner/splash-banner.compo
     AvatarModule,
     StyleClassModule,
     SplashBannerComponent,
-    ComponentsAndFeaturesSectionComponent
-],
+    ComponentsAndFeaturesSectionComponent,
+  ],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss',
 })

@@ -32,8 +32,8 @@ import {SplashBannerComponent} from '../../../lib/splash-banner/splash-banner.co
     CheckboxModule,
     RippleModule,
     MessagesModule,
-    SplashBannerComponent
-],
+    SplashBannerComponent,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })

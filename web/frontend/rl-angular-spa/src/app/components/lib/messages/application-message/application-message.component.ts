@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+import {NgClass} from '@angular/common';
 import {Component, input} from '@angular/core';
 import {RouterLink} from '@angular/router';
 
@@ -10,8 +10,8 @@ import {ApplicationMessageSeverity} from '../../../../dtos/application-messages/
   standalone: true,
   imports: [
     RouterLink,
-    NgClass
-],
+    NgClass,
+  ],
   templateUrl: './application-message.component.html',
   styleUrl: './application-message.component.scss',
 })

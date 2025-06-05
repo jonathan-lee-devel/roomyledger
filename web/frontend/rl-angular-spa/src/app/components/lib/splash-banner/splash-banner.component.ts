@@ -33,8 +33,8 @@ import {
     InputGroupAddonModule,
     ChipsModule,
     EmailLoginOverlayPanelComponent,
-    SpanDarkModeComponent
-],
+    SpanDarkModeComponent,
+  ],
   templateUrl: './splash-banner.component.html',
   styleUrl: './splash-banner.component.scss',
 })
