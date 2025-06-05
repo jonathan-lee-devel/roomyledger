@@ -172,14 +172,13 @@
   optionalDependencies:
     lmdb "3.3.0"
 
-"@angular/cdk@^19.2.3":
-  version "19.2.3"
-  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-19.2.3.tgz#9881449edab344330a078d6a4c9d01f3b0db7002"
-  integrity sha512-hTyYjdx9T572TblqlLDv54U7ro1/HXr3/2a++A+t8ZkcKLyI+/0Yfu6OsrWTpl2OsRYFZ0QwvbyI8ZLUIZPkqQ==
+"@angular/cdk@^20.0.2":
+  version "20.0.2"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-20.0.2.tgz#0a42fe52380885b1a9ae7a80c7631a54c87a9ba7"
+  integrity sha512-gRQcpTNhnwBxXSmpnrljODUHQmB2Hnxc6L2Ad6mSMV+c3opd9KIFxL5eG2WOOPHGAaPrV4gNFw+t1i01U4grTg==
   dependencies:
-    tslib "^2.3.0"
-  optionalDependencies:
     parse5 "^7.1.2"
+    tslib "^2.3.0"
 
 "@angular/cli@^20.0.1":
   version "20.0.1"
@@ -245,17 +244,17 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/material-moment-adapter@^19.2.3":
-  version "19.2.3"
-  resolved "https://registry.yarnpkg.com/@angular/material-moment-adapter/-/material-moment-adapter-19.2.3.tgz#7798f7dbbdab5d019103d3db3d779922020ff153"
-  integrity sha512-dZEJWiai2YIdwVBb2RKHdSbuar44/EySGhvZWxjWYkGcRTLXe9mGgNqyNZnVHjZjILw+E3Al0Em1B6iVmOdMLg==
+"@angular/material-moment-adapter@^20.0.2":
+  version "20.0.2"
+  resolved "https://registry.yarnpkg.com/@angular/material-moment-adapter/-/material-moment-adapter-20.0.2.tgz#f2834c57564c13126bb231344d5cdef07f8de702"
+  integrity sha512-EwpvAjoS18qV+31eNq3VffKOiLjo3X/OaoST+caf1opGxXLzgLol1OYZcBUo/lkPMPjmCriVzdT4rt5CiKJfMA==
   dependencies:
     tslib "^2.3.0"
 
-"@angular/material@^19.2.3":
-  version "19.2.3"
-  resolved "https://registry.yarnpkg.com/@angular/material/-/material-19.2.3.tgz#2911b5b4cf8494e57691fe4be223d5657edcb7a0"
-  integrity sha512-yGe8oLT4b0Krvit6lq9SEShHoiSvC1dpMpI6dKSFk9JkVitemyex6bPzIow/0cNR3TDcXMFtpl/kc1L/EVaUuA==
+"@angular/material@^20.0.2":
+  version "20.0.2"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-20.0.2.tgz#addd40681ec02e0b0d33ced3ae4fd0af98d394d9"
+  integrity sha512-yIXvF+LjFdHjJWyvn1SxbWB9LdNxYnqEKbKzminW4WPXlPJMOAeyhEDFeQv9W92Zv+/ibS4tI3/SD759ejb45g==
   dependencies:
     tslib "^2.3.0"
 
