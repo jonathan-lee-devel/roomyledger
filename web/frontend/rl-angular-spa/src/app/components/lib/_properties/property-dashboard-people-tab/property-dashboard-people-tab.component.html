@@ -12,68 +12,78 @@
           <span class="font-medium white-space-normal p-badge p-badge-primary text-white">
             {{ isEmailAdmin(propertiesStore.propertyById(), combinedEmailAndUser.email) ? 'Admin' : '' }}
             {{
-              isEmailAdmin(propertiesStore.propertyById(), combinedEmailAndUser.email) &&
-              isEmailTenant(propertiesStore.propertyById(), combinedEmailAndUser.email) ? ' and ' : ''
+            isEmailAdmin(propertiesStore.propertyById(), combinedEmailAndUser.email) &&
+            isEmailTenant(propertiesStore.propertyById(), combinedEmailAndUser.email) ? ' and ' : ''
             }}
             {{ isEmailTenant(propertiesStore.propertyById(), combinedEmailAndUser.email) ? 'Tenant' : '' }}
           </span>
         </div>
       </ng-template>
-      <div class="my-2"
-           *ngIf="!isIBANAvailableForEmail(combinedEmailAndUser.email) && !isRevTagAvailableForEmail(combinedEmailAndUser.email)">
-        <p>No user profile data provided</p>
-      </div>
-      <div class="my-2" *ngIf="isIBANAvailableForEmail(combinedEmailAndUser.email)">
-        <p-button
-          (click)="copyIBAN(combinedEmailAndUser.email)"
+      @if (!isIBANAvailableForEmail(combinedEmailAndUser.email) && !isRevTagAvailableForEmail(combinedEmailAndUser.email)) {
+        <div class="my-2"
+          >
+          <p>No user profile data provided</p>
+        </div>
+      }
+      @if (isIBANAvailableForEmail(combinedEmailAndUser.email)) {
+        <div class="my-2">
+          <p-button
+            (click)="copyIBAN(combinedEmailAndUser.email)"
           [icon]="
             (isIBANCopied$ | async) === true ? 'pi pi-check' : 'pi pi-copy'
           "
-          iconPos="right"
-          label="Copy IBAN"
-          [text]="true"
-          [raised]="true"
-        />
-      </div>
-      <div class="my-2" *ngIf="isRevTagAvailableForEmail(combinedEmailAndUser.email)">
-        <p-button
-          (click)="copyRevTag(combinedEmailAndUser.email)"
+            iconPos="right"
+            label="Copy IBAN"
+            [text]="true"
+            [raised]="true"
+            />
+        </div>
+      }
+      @if (isRevTagAvailableForEmail(combinedEmailAndUser.email)) {
+        <div class="my-2">
+          <p-button
+            (click)="copyRevTag(combinedEmailAndUser.email)"
           [icon]="
             (isRevTagCopied$ | async) === true ? 'pi pi-check' : 'pi pi-copy'
           "
-          iconPos="right"
-          label="Copy RevTag"
-          [text]="true"
-          [raised]="true"
-        />
-      </div>
-      <ng-container *ngIf="isEmailAdmin(propertiesStore.propertyById(), userAuthenticationStore.currentUserEmail())">
+            iconPos="right"
+            label="Copy RevTag"
+            [text]="true"
+            [raised]="true"
+            />
+        </div>
+      }
+      @if (isEmailAdmin(propertiesStore.propertyById(), userAuthenticationStore.currentUserEmail())) {
         <p-divider/>
-        <p class="my-2"
-           *ngIf="isEmailTenant(propertiesStore.propertyById(), combinedEmailAndUser.email) || isEmailAdmin(propertiesStore.propertyById(), combinedEmailAndUser.email)">
-          <p-button
-            (click)="toggleAdministrator(propertiesStore.propertyById(), combinedEmailAndUser.email)"
-            severity="danger"
-            [label]="isEmailAdmin(propertiesStore.propertyById(), combinedEmailAndUser.email) ? 'Remove Administrative Privileges' : 'Grant Administrative Privileges'"
-            [icon]="isEmailAdmin(propertiesStore.propertyById(), combinedEmailAndUser.email) ? 'pi pi-user-minus' : 'pi pi-user-plus'"
-            iconPos="right"
-            [text]="true"
-            [raised]="true"
-          />
-        </p>
-        <p class="my-2"
-           *ngIf="isEmailTenant(propertiesStore.propertyById(), combinedEmailAndUser.email) || isEmailAdmin(propertiesStore.propertyById(), combinedEmailAndUser.email)">
-          <p-button
-            (click)="toggleTenant(propertiesStore.propertyById(), combinedEmailAndUser.email)"
-            severity="warning"
-            [label]="isEmailTenant(propertiesStore.propertyById(), combinedEmailAndUser.email) ? 'Remove as Tenant' : 'Add as Tenant'"
-            [icon]="isEmailTenant(propertiesStore.propertyById(), combinedEmailAndUser.email) ? 'pi pi-user-minus' : 'pi pi-user-plus'"
-            iconPos="right"
-            [text]="true"
-            [raised]="true"
-          />
-        </p>
-      </ng-container>
+        @if (isEmailTenant(propertiesStore.propertyById(), combinedEmailAndUser.email) || isEmailAdmin(propertiesStore.propertyById(), combinedEmailAndUser.email)) {
+          <p class="my-2"
+            >
+            <p-button
+              (click)="toggleAdministrator(propertiesStore.propertyById(), combinedEmailAndUser.email)"
+              severity="danger"
+              [label]="isEmailAdmin(propertiesStore.propertyById(), combinedEmailAndUser.email) ? 'Remove Administrative Privileges' : 'Grant Administrative Privileges'"
+              [icon]="isEmailAdmin(propertiesStore.propertyById(), combinedEmailAndUser.email) ? 'pi pi-user-minus' : 'pi pi-user-plus'"
+              iconPos="right"
+              [text]="true"
+              [raised]="true"
+              />
+          </p>
+        }
+        @if (isEmailTenant(propertiesStore.propertyById(), combinedEmailAndUser.email) || isEmailAdmin(propertiesStore.propertyById(), combinedEmailAndUser.email)) {
+          <p class="my-2"
+            >
+            <p-button
+              (click)="toggleTenant(propertiesStore.propertyById(), combinedEmailAndUser.email)"
+              severity="warning"
+              [label]="isEmailTenant(propertiesStore.propertyById(), combinedEmailAndUser.email) ? 'Remove as Tenant' : 'Add as Tenant'"
+              [icon]="isEmailTenant(propertiesStore.propertyById(), combinedEmailAndUser.email) ? 'pi pi-user-minus' : 'pi pi-user-plus'"
+              iconPos="right"
+              [text]="true"
+              [raised]="true"
+              />
+          </p>
+        }
+      }
     </p-accordionTab>
   }
 </p-accordion>

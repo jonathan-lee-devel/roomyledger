@@ -1,4 +1,4 @@
-import {CommonModule} from '@angular/common';
+
 import {Component, inject} from '@angular/core';
 
 import {UserAuthenticationStore} from '../../../+state/auth/user-auth.store';
@@ -11,11 +11,10 @@ import {CardWithLinkComponent} from '../../lib/card-with-link/card-with-link.com
   selector: 'app-main-menu',
   standalone: true,
   imports: [
-    CommonModule,
     CardWithLinkComponent,
     PDarkModeComponent,
-    H1DarkModeComponent,
-  ],
+    H1DarkModeComponent
+],
   templateUrl: './main-menu.component.html',
   styleUrl: './main-menu.component.scss',
 })

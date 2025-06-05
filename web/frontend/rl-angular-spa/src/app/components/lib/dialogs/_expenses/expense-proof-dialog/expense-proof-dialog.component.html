@@ -1,20 +1,19 @@
 <div>
   <p><span class="underline">Description:</span>
-    {{ expenseDescription }}
-  </p>
-  <p>
-    <span class="underline">Submitted By:</span>
-    {{ submitterDisplayName }}
-  </p>
-  <ng-container *ngIf="!expensesStore.isLoading() else loadingSpinner">
-    <img
-      [ngSrc]="expensesStore.expenseById().imageUrl ?? 'assets/favicon.ico'"
-      alt="Proof"
-      height="600"
-      width="600"
+  {{ expenseDescription }}
+</p>
+<p>
+  <span class="underline">Submitted By:</span>
+  {{ submitterDisplayName }}
+</p>
+@if (!expensesStore.isLoading()) {
+  <img
+    [ngSrc]="expensesStore.expenseById().imageUrl ?? 'assets/favicon.ico'"
+    alt="Proof"
+    height="600"
+    width="600"
     />
-  </ng-container>
-  <ng-template #loadingSpinner>
-    <p-progressSpinner styleClass="w-10rem h-10rem" />
-  </ng-template>
+} @else {
+  <p-progressSpinner styleClass="w-10rem h-10rem" />
+}
 </div>

@@ -1,10 +1,10 @@
-import {CommonModule} from '@angular/common';
+
 import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-success-checkmark',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './success-checkmark.component.html',
   styleUrl: './success-checkmark.component.scss',
 })

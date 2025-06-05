@@ -1,4 +1,4 @@
-import {CommonModule} from '@angular/common';
+
 import {Component, inject, OnInit} from '@angular/core';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
@@ -17,7 +17,7 @@ import {CardWithLinkComponent} from '../../../lib/card-with-link/card-with-link.
 @Component({
   selector: 'app-properties-manage',
   standalone: true,
-  imports: [CommonModule, CardWithLinkComponent, MatProgressSpinnerModule],
+  imports: [CardWithLinkComponent, MatProgressSpinnerModule],
   templateUrl: './properties-manage.component.html',
   styleUrl: './properties-manage.component.scss',
 })

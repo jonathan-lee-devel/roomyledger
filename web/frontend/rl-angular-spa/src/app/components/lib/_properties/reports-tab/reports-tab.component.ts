@@ -1,4 +1,4 @@
-import {NgIf} from '@angular/common';
+
 import {Component, EventEmitter, inject, input, Output} from '@angular/core';
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -26,7 +26,6 @@ export type ExpenseStateString = 'Approved' | 'Pending' | 'Disputed';
   selector: 'app-reports-tab',
   standalone: true,
   imports: [
-    NgIf,
     SharedModule,
     TableModule,
     MatDatepickerModule,
@@ -36,8 +35,8 @@ export type ExpenseStateString = 'Approved' | 'Pending' | 'Disputed';
     MatProgressSpinner,
     MultiSelectModule,
     FormsModule,
-    CalendarModule,
-  ],
+    CalendarModule
+],
   templateUrl: './reports-tab.component.html',
   styleUrl: './reports-tab.component.scss',
 })

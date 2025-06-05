@@ -1,4 +1,4 @@
-import {NgIf} from '@angular/common';
+
 import {Component, inject, input} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {AvatarModule} from 'primeng/avatar';
@@ -27,15 +27,14 @@ import {
     Button,
     AvatarModule,
     DialogModule,
-    NgIf,
     Ripple,
     OverlayPanelModule,
     InputGroupModule,
     InputGroupAddonModule,
     ChipsModule,
     EmailLoginOverlayPanelComponent,
-    SpanDarkModeComponent,
-  ],
+    SpanDarkModeComponent
+],
   templateUrl: './splash-banner.component.html',
   styleUrl: './splash-banner.component.scss',
 })

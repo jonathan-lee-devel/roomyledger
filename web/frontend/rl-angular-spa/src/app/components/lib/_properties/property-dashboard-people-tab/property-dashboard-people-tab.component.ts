@@ -1,5 +1,5 @@
 import {Clipboard} from '@angular/cdk/clipboard';
-import {AsyncPipe, NgIf} from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {Component, inject} from '@angular/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
@@ -24,7 +24,6 @@ import {
   imports: [
     MatExpansionModule,
     MatIconModule,
-    NgIf,
     MatTreeModule,
     AsyncPipe,
     AccordionModule,
@@ -32,8 +31,8 @@ import {
     BadgeModule,
     ButtonModule,
     DividerModule,
-    PropertyInvitePeopleOverlayPanelComponent,
-  ],
+    PropertyInvitePeopleOverlayPanelComponent
+],
   templateUrl: './property-dashboard-people-tab.component.html',
   styleUrl: './property-dashboard-people-tab.component.scss',
 })

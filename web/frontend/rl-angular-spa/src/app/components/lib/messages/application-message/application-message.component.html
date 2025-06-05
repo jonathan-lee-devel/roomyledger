@@ -6,8 +6,10 @@
       <p class="m-0 p-0 text-blue-700 line-height-3">{{message()}}</p>
     </div>
   </div>
-  <a *ngIf="routerLink()" [routerLink]="getRouterRebasedRouterLink(routerLink())" pRipple data-testid="banner-sign-in-button" class="flex align-items-center ml-auto no-underline text-blue-900 font-medium mt-3 lg:mt-0 cursor-pointer">
-    <span>{{ routerLinkText() }}</span>
-    <i class="pi pi-arrow-right text-blue-900 ml-2"></i>
-  </a>
+  @if (routerLink()) {
+    <a [routerLink]="getRouterRebasedRouterLink(routerLink())" pRipple data-testid="banner-sign-in-button" class="flex align-items-center ml-auto no-underline text-blue-900 font-medium mt-3 lg:mt-0 cursor-pointer">
+      <span>{{ routerLinkText() }}</span>
+      <i class="pi pi-arrow-right text-blue-900 ml-2"></i>
+    </a>
+  }
 </div>

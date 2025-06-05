@@ -3,28 +3,30 @@
   aria-hidden="false"
   aria-label="Example icon-button with a menu"
   mat-icon-button
->
+  >
   <mat-icon>more_vert</mat-icon>
 </button>
 <mat-menu #menu="matMenu">
-  <ng-container *ngIf="expensesStore.getExpenseById(this.expenseId())?.createdBy?.email !== this.userAuthenticationStore.userInfo().email">
-    <button
-      (click)="approveExpense(expensesStore.getExpenseById(this.expenseId()) ?? initialExpenseDto)"
-      *ngIf="expensesStore.getUserExpenseVoteStateById(expenseId(), this.userAuthenticationStore.userInfo().email) !== 'APPROVED'"
-      mat-menu-item
-    >
-      Approve
-      <mat-icon>approval</mat-icon>
-    </button>
-    <button
-      (click)="disputeExpense(expensesStore.getExpenseById(this.expenseId()) ?? initialExpenseDto)"
-      *ngIf="expensesStore.getUserExpenseVoteStateById(expenseId(), this.userAuthenticationStore.userInfo().email) !== 'DISPUTED'"
-      mat-menu-item
-    >
-      Dispute
-      <mat-icon>announcement</mat-icon>
-    </button>
-  </ng-container>
+  @if (expensesStore.getExpenseById(this.expenseId())?.createdBy?.email !== this.userAuthenticationStore.userInfo().email) {
+    @if (expensesStore.getUserExpenseVoteStateById(expenseId(), this.userAuthenticationStore.userInfo().email) !== 'APPROVED') {
+      <button
+        (click)="approveExpense(expensesStore.getExpenseById(this.expenseId()) ?? initialExpenseDto)"
+        mat-menu-item
+        >
+        Approve
+        <mat-icon>approval</mat-icon>
+      </button>
+    }
+    @if (expensesStore.getUserExpenseVoteStateById(expenseId(), this.userAuthenticationStore.userInfo().email) !== 'DISPUTED') {
+      <button
+        (click)="disputeExpense(expensesStore.getExpenseById(this.expenseId()) ?? initialExpenseDto)"
+        mat-menu-item
+        >
+        Dispute
+        <mat-icon>announcement</mat-icon>
+      </button>
+    }
+  }
   <button (click)="openConversationDialog(expensesStore.getExpenseById(this.expenseId()) ?? initialExpenseDto)" mat-menu-item>
     Conversation
     <mat-icon>question_answer</mat-icon>
@@ -33,7 +35,7 @@
     View Proof
     <mat-icon>receipt</mat-icon>
   </button>
-  <ng-container *ngIf="expensesStore.getExpenseById(this.expenseId())?.createdBy?.email === this.userAuthenticationStore.userInfo().email">
+  @if (expensesStore.getExpenseById(this.expenseId())?.createdBy?.email === this.userAuthenticationStore.userInfo().email) {
     <button mat-menu-item>
       Edit
       <mat-icon>edit</mat-icon>
@@ -42,5 +44,5 @@
       Delete
       <mat-icon>delete</mat-icon>
     </button>
-  </ng-container>
+  }
 </mat-menu>

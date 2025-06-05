@@ -1,11 +1,11 @@
 <!-- Expense Tables Container with Consistent Column Widths -->
 <div class="expense-tables-container">
   <!-- Loading Spinner -->
-  <ng-container *ngIf="expensesStore.isLoading()">
+  @if (expensesStore.isLoading()) {
     <div class="flex align-items-center justify-content-center py-4">
       <p-progressSpinner />
     </div>
-  </ng-container>
+  }
 
   <!-- Add Expense Button -->
   <div class="flex align-items-center justify-content-center my-3">

@@ -1,4 +1,4 @@
-import {CommonModule} from '@angular/common';
+
 import {Component, inject, OnInit} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DateTime} from 'luxon';
@@ -29,7 +29,6 @@ import {SplashBannerComponent} from '../../lib/splash-banner/splash-banner.compo
   selector: 'app-landing-page',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     ButtonModule,
@@ -49,8 +48,8 @@ import {SplashBannerComponent} from '../../lib/splash-banner/splash-banner.compo
     AvatarModule,
     StyleClassModule,
     SplashBannerComponent,
-    ComponentsAndFeaturesSectionComponent,
-  ],
+    ComponentsAndFeaturesSectionComponent
+],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss',
 })

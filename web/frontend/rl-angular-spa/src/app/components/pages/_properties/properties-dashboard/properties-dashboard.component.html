@@ -4,30 +4,31 @@
     <div class="grid">
       <div class="col-12">
         <!-- Loading state for header -->
-        <div *ngIf="!propertiesStore.isLoading() else topSpinner"
-             class="flex flex-column md:flex-row align-items-center md:justify-content-between border-bottom-1 surface-border pb-3">
-          <div class="mb-2 md:mb-0 text-center md:text-left">
-            <h3 class="text-lg md:text-xl font-medium m-0">Manage Property Ledger</h3>
-            <p class="text-sm md:text-base text-500 mt-1 mb-0">{{ getPropertyTier() }}</p>
+        @if (!propertiesStore.isLoading()) {
+          <div
+            class="flex flex-column md:flex-row align-items-center md:justify-content-between border-bottom-1 surface-border pb-3">
+            <div class="mb-2 md:mb-0 text-center md:text-left">
+              <h3 class="text-lg md:text-xl font-medium m-0">Manage Property Ledger</h3>
+              <p class="text-sm md:text-base text-500 mt-1 mb-0">{{ getPropertyTier() }}</p>
+            </div>
+            <div class="text-2xl md:text-3xl font-bold text-primary text-center md:text-right">
+              {{ propertiesStore.propertyById().name }}
+            </div>
           </div>
-          <div class="text-2xl md:text-3xl font-bold text-primary text-center md:text-right">
-            {{ propertiesStore.propertyById().name }}
-          </div>
-        </div>
-        <ng-template #topSpinner>
+        } @else {
           <div class="flex align-items-center justify-content-center p-2 md:p-3">
             <p-progressSpinner styleClass="w-2rem h-2rem"/>
           </div>
-        </ng-template>
+        }
       </div>
     </div>
 
     <!-- Loading spinner for property data -->
-    <ng-container *ngIf="propertiesStore.isLoading()">
+    @if (propertiesStore.isLoading()) {
       <div class="flex align-items-center justify-content-center p-2 md:p-3">
         <p-progressSpinner/>
       </div>
-    </ng-container>
+    }
   </div>
 
   <!-- Custom Modern Tab Navigation -->
@@ -35,16 +36,20 @@
     <div class="flex justify-content-center w-full">
       <div class="custom-tabs-wrapper w-full" [ngClass]="{'mobile-view': isMobileView}">
         <ul class="custom-tabs-list">
-          <li *ngFor="let item of items; let i = index"
+          @for (item of items; track item; let i = $index) {
+            <li
               class="custom-tab"
               [ngClass]="{'active-tab': activeItem?.label === item.label}"
               (click)="onActiveItemChange(item)">
-            <div class="tab-icon-wrapper">
-              <i [class]="item.icon"></i>
-            </div>
-            <span class="tab-label">{{ item.label }}</span>
-            <div class="tab-indicator" *ngIf="activeItem?.label === item.label"></div>
-          </li>
+              <div class="tab-icon-wrapper">
+                <i [class]="item.icon"></i>
+              </div>
+              <span class="tab-label">{{ item.label }}</span>
+              @if (activeItem?.label === item.label) {
+                <div class="tab-indicator"></div>
+              }
+            </li>
+          }
         </ul>
       </div>
     </div>
@@ -53,29 +58,37 @@
   <!-- Tab Content Container -->
   <div class="surface-card p-2 md:p-4 shadow-2 border-round animate__animated animate__bounceInUp">
     <!-- Expenses Tab -->
-    <div *ngIf="activeItem?.label === items?.[EXPENSE_TAB_INDEX]?.label"
-         class="animate__animated animate__fadeIn">
-      <app-expense-tab/>
-    </div>
+    @if (activeItem?.label === items?.[EXPENSE_TAB_INDEX]?.label) {
+      <div
+        class="animate__animated animate__fadeIn">
+        <app-expense-tab/>
+      </div>
+    }
 
     <!-- Custom Splits Tab -->
-    <div *ngIf="activeItem?.label === items?.[CUSTOM_SPLITS_TAB_INDEX]?.label"
-         class="animate__animated animate__fadeIn">
-      <app-custom-splits-tab />
-    </div>
+    @if (activeItem?.label === items?.[CUSTOM_SPLITS_TAB_INDEX]?.label) {
+      <div
+        class="animate__animated animate__fadeIn">
+        <app-custom-splits-tab />
+      </div>
+    }
 
     <!-- Reports Tab -->
-    <div *ngIf="activeItem?.label === items?.[REPORTS_TAB_INDEX]?.label"
-         class="animate__animated animate__fadeIn">
-      <app-reports-tab
-        (monthAndYearSelected)="loadExpensesForSelectedMonthAndYear($event)"
-        [date]="date"/>
-    </div>
+    @if (activeItem?.label === items?.[REPORTS_TAB_INDEX]?.label) {
+      <div
+        class="animate__animated animate__fadeIn">
+        <app-reports-tab
+          (monthAndYearSelected)="loadExpensesForSelectedMonthAndYear($event)"
+          [date]="date"/>
+      </div>
+    }
 
     <!-- People Tab -->
-    <div *ngIf="activeItem?.label === items?.[PEOPLE_TAB_INDEX]?.label"
-         class="animate__animated animate__fadeIn">
-      <app-property-dashboard-people-tab/>
-    </div>
+    @if (activeItem?.label === items?.[PEOPLE_TAB_INDEX]?.label) {
+      <div
+        class="animate__animated animate__fadeIn">
+        <app-property-dashboard-people-tab/>
+      </div>
+    }
   </div>
 </div>

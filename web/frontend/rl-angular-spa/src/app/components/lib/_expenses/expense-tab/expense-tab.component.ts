@@ -1,4 +1,4 @@
-import {NgIf} from '@angular/common';
+
 import {Component, inject, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
@@ -25,7 +25,6 @@ import {ExpenseTableComponent} from '../expense-table/expense-table.component';
   standalone: true,
   imports: [
     MatProgressBarModule,
-    NgIf,
     MatIconModule,
     TableModule,
     ExpenseCreateOverlayPanelComponent,
@@ -37,8 +36,8 @@ import {ExpenseTableComponent} from '../expense-table/expense-table.component';
     ExpenseTableComponent,
     ProgressSpinnerModule,
     StyleClassModule,
-    MessageModule,
-  ],
+    MessageModule
+],
   templateUrl: './expense-tab.component.html',
   styleUrl: './expense-tab.component.scss',
 })

@@ -1,4 +1,4 @@
-import {NgIf} from '@angular/common';
+
 import {Component, inject, OnInit} from '@angular/core';
 import {ConfirmationService} from 'primeng/api';
 import {Button} from 'primeng/button';
@@ -24,9 +24,8 @@ import {PaymentStore} from '../../../../+state/payment/payment.store';
     InputGroupModule,
     InputTextModule,
     Ripple,
-    NgIf,
-    ProgressSpinnerModule,
-  ],
+    ProgressSpinnerModule
+],
   templateUrl: './premium-settings.component.html',
   styleUrl: './premium-settings.component.scss',
 })

@@ -32,18 +32,18 @@
           <span class="p-column-title">Status</span>
           <p-tag [value]="expense.state" [severity]="statusSeverity()" />
         </td>
-        <ng-container *ngIf="propertiesStore.isLoading() || expensesStore.isLoading()">
+        @if (propertiesStore.isLoading() || expensesStore.isLoading()) {
           <td style="width: 4rem">
             <span class="p-column-title">Menu</span>
             <p-progressSpinner styleClass="w-3rem h-3rem" />
           </td>
-        </ng-container>
-        <ng-container *ngIf="!propertiesStore.isLoading() && !expensesStore.isLoading()">
+        }
+        @if (!propertiesStore.isLoading() && !expensesStore.isLoading()) {
           <td style="width: 4rem">
             <span class="p-column-title">Menu</span>
             <app-expense-action-menu [propertyId]="expense.propertyId" [expenseId]="expense.id" />
           </td>
-        </ng-container>
+        }
       </tr>
     </ng-template>
   </p-table>

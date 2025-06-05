@@ -1,4 +1,4 @@
-import {NgIf} from '@angular/common';
+
 import {Component, inject, input} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
@@ -30,9 +30,8 @@ import {
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
-    NgIf,
-    FileUploadModule,
-  ],
+    FileUploadModule
+],
   templateUrl: './expense-action-menu.component.html',
   styleUrl: './expense-action-menu.component.scss',
 })

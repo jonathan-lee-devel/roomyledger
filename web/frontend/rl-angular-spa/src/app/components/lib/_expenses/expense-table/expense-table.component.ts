@@ -1,4 +1,4 @@
-import {CurrencyPipe, NgIf} from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
 import {Component, inject, input} from '@angular/core';
 import {PrimeTemplate} from 'primeng/api';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
@@ -22,9 +22,8 @@ import {ExpenseActionMenuComponent} from '../expense-action-menu/expense-action-
     TableModule,
     TagModule,
     ExpenseActionMenuComponent,
-    NgIf,
-    ProgressSpinnerModule,
-  ],
+    ProgressSpinnerModule
+],
   templateUrl: './expense-table.component.html',
   styleUrl: './expense-table.component.scss',
 })

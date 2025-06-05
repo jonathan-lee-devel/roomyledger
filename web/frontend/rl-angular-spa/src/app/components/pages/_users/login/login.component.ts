@@ -1,4 +1,4 @@
-import {CommonModule} from '@angular/common';
+
 import {Component, inject, OnInit} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -21,7 +21,6 @@ import {SplashBannerComponent} from '../../../lib/splash-banner/splash-banner.co
   standalone: true,
   imports: [
     ButtonModule,
-    CommonModule,
     FormsModule,
     InputTextModule,
     FormsModule,
@@ -33,8 +32,8 @@ import {SplashBannerComponent} from '../../../lib/splash-banner/splash-banner.co
     CheckboxModule,
     RippleModule,
     MessagesModule,
-    SplashBannerComponent,
-  ],
+    SplashBannerComponent
+],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })

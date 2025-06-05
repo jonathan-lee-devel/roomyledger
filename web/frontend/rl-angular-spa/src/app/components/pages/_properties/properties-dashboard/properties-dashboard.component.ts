@@ -1,4 +1,4 @@
-import {NgClass, NgForOf, NgIf} from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -46,7 +46,6 @@ import {ReportsTabComponent} from '../../../lib/_properties/reports-tab/reports-
     MatProgressSpinnerModule,
     FormsModule,
     ReactiveFormsModule,
-    NgIf,
     MatProgressBarModule,
     MatExpansionModule,
     MatTabsModule,
@@ -64,9 +63,8 @@ import {ReportsTabComponent} from '../../../lib/_properties/reports-tab/reports-
     NgClass,
     TabMenuModule,
     ProgressSpinnerModule,
-    CustomSplitsTabComponent,
-    NgForOf,
-  ],
+    CustomSplitsTabComponent
+],
   templateUrl: './properties-dashboard.component.html',
   styleUrl: './properties-dashboard.component.scss',
   changeDetection: ChangeDetectionStrategy.Default,

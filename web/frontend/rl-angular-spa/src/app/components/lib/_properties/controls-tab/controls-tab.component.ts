@@ -1,4 +1,4 @@
-import {NgForOf, NgIf} from '@angular/common';
+
 import {Component, inject, input, OnDestroy} from '@angular/core';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
@@ -25,13 +25,11 @@ import {rebaseRoutePathAsString, RoutePath} from '../../../../app.routes';
     RouterLink,
     DividerModule,
     ButtonModule,
-    NgIf,
     OverlayPanelModule,
     InputGroupModule,
     InputGroupAddonModule,
-    ChipsModule,
-    NgForOf,
-  ],
+    ChipsModule
+],
   templateUrl: './controls-tab.component.html',
   styleUrl: './controls-tab.component.scss',
 })

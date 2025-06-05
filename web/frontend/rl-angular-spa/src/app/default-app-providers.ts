@@ -1,6 +1,6 @@
-import {DOCUMENT} from '@angular/common';
+
 import {provideHttpClient, withFetch, withInterceptors} from '@angular/common/http';
-import {provideAppInitializer} from '@angular/core';
+import {provideAppInitializer, DOCUMENT} from '@angular/core';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
 import {provideMomentDateAdapter} from '@angular/material-moment-adapter';
 import {provideAnimations} from '@angular/platform-browser/animations';

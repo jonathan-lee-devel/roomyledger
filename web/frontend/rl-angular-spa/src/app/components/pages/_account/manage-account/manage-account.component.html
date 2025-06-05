@@ -14,15 +14,15 @@
           class="list-none m-0 p-0 flex flex-row lg:flex-column justify-content-between lg:justify-content-start mb-5 lg:mb-0">
           <li>
             <a [ngClass]="{'bg-primary-100': activeTabIndex === profileTabIndex}" [queryParams]="{'tab': 'profile'}"
-               [routerLink]="rebaseRoutePath(RoutePath.ACCOUNT_MANAGE)"
-               class="lg:w-15rem flex align-items-center cursor-pointer p-3 border-round hover:bg-primary-50 transition-duration-150 transition-colors"
-               pRipple>
+              [routerLink]="rebaseRoutePath(RoutePath.ACCOUNT_MANAGE)"
+              class="lg:w-15rem flex align-items-center cursor-pointer p-3 border-round hover:bg-primary-50 transition-duration-150 transition-colors"
+              pRipple>
               <i
                 [ngClass]="{'text-primary-700' : activeTabIndex === profileTabIndex, 'text-700': activeTabIndex !== profileTabIndex}"
-                class="pi pi-user md:mr-2"></i>
+              class="pi pi-user md:mr-2"></i>
               <span
                 [ngClass]="{'text-primary-900': activeTabIndex === profileTabIndex, 'text-700': activeTabIndex !== profileTabIndex}"
-                class="font-medium hidden md:block">Profile</span>
+              class="font-medium hidden md:block">Profile</span>
             </a>
           </li>
           <li>
@@ -33,61 +33,61 @@
               pRipple>
               <i
                 [ngClass]="{'text-primary-700' : activeTabIndex === accountTabIndex, 'text-700': activeTabIndex !== accountTabIndex}"
-                class="pi pi-cog md:mr-2"></i>
+              class="pi pi-cog md:mr-2"></i>
               <span
                 [ngClass]="{'text-primary-900': activeTabIndex === accountTabIndex, 'text-700': activeTabIndex !== accountTabIndex}"
-                class="font-medium hidden md:block">Account</span>
+              class="font-medium hidden md:block">Account</span>
             </a>
           </li>
           <li>
             <a [ngClass]="{'bg-primary-100': activeTabIndex === premiumTabIndex}"
-               [queryParams]="{'tab': 'premium'}"
-               [routerLink]="rebaseRoutePath(RoutePath.ACCOUNT_MANAGE)"
-               class="lg:w-15rem flex align-items-center cursor-pointer p-3 border-round hover:bg-primary-50 transition-duration-150 transition-colors"
-               pRipple>
+              [queryParams]="{'tab': 'premium'}"
+              [routerLink]="rebaseRoutePath(RoutePath.ACCOUNT_MANAGE)"
+              class="lg:w-15rem flex align-items-center cursor-pointer p-3 border-round hover:bg-primary-50 transition-duration-150 transition-colors"
+              pRipple>
               <i
                 [ngClass]="{'text-primary-700' : activeTabIndex === premiumTabIndex, 'text-700': activeTabIndex !== premiumTabIndex}"
-                class="pi pi-bolt md:mr-2"></i>
+              class="pi pi-bolt md:mr-2"></i>
               <span
                 [ngClass]="{'text-primary-900': activeTabIndex === premiumTabIndex, 'text-700': activeTabIndex !== premiumTabIndex}"
-                class="font-medium hidden md:block">Premium</span>
+              class="font-medium hidden md:block">Premium</span>
             </a>
           </li>
           <li>
             <a [ngClass]="{'bg-primary-100': activeTabIndex === notificationsTabIndex}"
-               [queryParams]="{'tab': 'notifications'}"
-               [routerLink]="rebaseRoutePath(RoutePath.ACCOUNT_MANAGE)"
-               class="lg:w-15rem flex align-items-center cursor-pointer p-3 border-round hover:bg-primary-50 transition-duration-150 transition-colors"
-               pRipple>
+              [queryParams]="{'tab': 'notifications'}"
+              [routerLink]="rebaseRoutePath(RoutePath.ACCOUNT_MANAGE)"
+              class="lg:w-15rem flex align-items-center cursor-pointer p-3 border-round hover:bg-primary-50 transition-duration-150 transition-colors"
+              pRipple>
               <i
                 [ngClass]="{'text-primary-700' : activeTabIndex === notificationsTabIndex, 'text-700': activeTabIndex !== notificationsTabIndex}"
-                class="pi pi-bell md:mr-2"></i>
+              class="pi pi-bell md:mr-2"></i>
               <span
                 [ngClass]="{'text-primary-900': activeTabIndex === notificationsTabIndex, 'text-700': activeTabIndex !== notificationsTabIndex}"
-                class="font-medium hidden md:block">Notifications</span>
+              class="font-medium hidden md:block">Notifications</span>
             </a>
           </li>
         </ul>
-        <ng-container *ngIf="activeTabIndex === profileTabIndex">
+        @if (activeTabIndex === profileTabIndex) {
           <div class="surface-card p-5 shadow-2 border-round flex-auto xl:ml-5">
             <app-profile-settings/>
           </div>
-        </ng-container>
-        <ng-container *ngIf="activeTabIndex === accountTabIndex">
+        }
+        @if (activeTabIndex === accountTabIndex) {
           <div class="surface-card p-5 shadow-2 border-round flex-auto xl:ml-5">
             <app-account-settings/>
           </div>
-        </ng-container>
-        <ng-container *ngIf="activeTabIndex === premiumTabIndex">
+        }
+        @if (activeTabIndex === premiumTabIndex) {
           <div class="surface-card p-5 shadow-2 border-round flex-auto xl:ml-5">
             <app-premium-settings/>
           </div>
-        </ng-container>
-        <ng-container *ngIf="activeTabIndex === notificationsTabIndex">
+        }
+        @if (activeTabIndex === notificationsTabIndex) {
           <div class="surface-card p-5 shadow-2 border-round flex-auto xl:ml-5">
             <app-notifications-settings/>
           </div>
-        </ng-container>
+        }
       </div>
     </div>
   </div>
