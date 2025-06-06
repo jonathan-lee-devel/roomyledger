@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 node:22.13.1-alpine3.21 AS development
+FROM --platform=linux/amd64 node:22.14.0-alpine3.21 AS development
 
 WORKDIR /usr/src/app
 
@@ -11,7 +11,7 @@ COPY --chown=node:node . .
 
 USER node
 
-FROM --platform=linux/amd64 node:22.13.1-alpine3.21 AS build
+FROM --platform=linux/amd64 node:22.14.0-alpine3.21 AS build
 
 WORKDIR /usr/src/app
 
@@ -31,7 +31,7 @@ ENV NODE_ENV production
 
 USER node
 
-FROM --platform=linux/amd64 node:22.13.1-alpine3.21 AS production
+FROM --platform=linux/amd64 node:22.14.0-alpine3.21 AS production
 
 COPY --chown=node:node --from=build /usr/src/app/package.json ./package.json
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
