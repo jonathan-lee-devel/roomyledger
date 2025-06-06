@@ -9,7 +9,9 @@ import {delayedAction, runPrismaMigrations} from './init-app.helpers';
 import {supabaseUserIdKey} from '../constants/auth.constants';
 
 export const initializePostgresTestContainer = async () => {
-  const initializedPostgresContainer = await new PostgreSqlContainer().start();
+  const initializedPostgresContainer = await new PostgreSqlContainer(
+    'postgres:16.1',
+  ).start();
   const initializedPostgresClient = new Client({
     connectionString: initializedPostgresContainer.getConnectionUri(),
   });
