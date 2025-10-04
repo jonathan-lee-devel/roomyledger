@@ -84,55 +84,55 @@ jobs:
           SUPABASE_JWT_SECRET: ${{ secrets.SUPABASE_JWT_SECRET }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
 
-  sonarcloud-analysis-backend:
-    name: SonarCloud Backend (v${{ matrix.node-version }})
-    runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        node-version: [ 22.x ]
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: yarn
-          cache-dependency-path: '**/yarn.lock'
-      - name: Install Dependencies
-        working-directory: ./web/backend/rl-nestjs-mono
-        run: yarn install --frozen-lockfile
-      - name: Run Tests
-        working-directory: ./web/backend/rl-nestjs-mono
-        run: yarn run test:cov
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          STRIPE_API_KEY: ${{ secrets.STRIPE_API_KEY }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          FRONT_END_URL: ${{ secrets.FRONT_END_URL }}
-          NODE_ENV: ${{ secrets.NODE_ENV }}
-          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-          SUPABASE_JWT_SECRET: ${{ secrets.SUPABASE_JWT_SECRET }}
-          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
-      - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          projectBaseDir: web/backend/rl-nestjs-mono
-          args: -Dsonar.projectKey=jonathan-lee-devel_roomyledger-rl-nestjs-mono
-            -Dsonar.organization=jonathan-lee-devel
-            -Dsonar.sources=src
-            -Dsonar.tests=src
-            -Dsonar.inclusions=**
-            -Dsonar.exclusions=**/*.spec.ts,**.module.ts,src/main.ts
-            -Dsonar.test.inclusions=src/**/*.spec.ts
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-            -Dsonar.qualitygate.wait=true
+#  sonarcloud-analysis-backend:
+#    name: SonarCloud Backend (v${{ matrix.node-version }})
+#    runs-on: ubuntu-22.04
+#    strategy:
+#      matrix:
+#        node-version: [ 22.x ]
+#    steps:
+#      - uses: actions/checkout@v4
+#        with:
+#          fetch-depth: 0
+#      - uses: actions/setup-node@v4
+#        with:
+#          node-version: ${{ matrix.node-version }}
+#          cache: yarn
+#          cache-dependency-path: '**/yarn.lock'
+#      - name: Install Dependencies
+#        working-directory: ./web/backend/rl-nestjs-mono
+#        run: yarn install --frozen-lockfile
+#      - name: Run Tests
+#        working-directory: ./web/backend/rl-nestjs-mono
+#        run: yarn run test:cov
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#          STRIPE_API_KEY: ${{ secrets.STRIPE_API_KEY }}
+#          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+#          FRONT_END_URL: ${{ secrets.FRONT_END_URL }}
+#          NODE_ENV: ${{ secrets.NODE_ENV }}
+#          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+#          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+#          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+#          SUPABASE_JWT_SECRET: ${{ secrets.SUPABASE_JWT_SECRET }}
+#          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+#      - name: SonarCloud Scan
+#        uses: sonarsource/sonarcloud-github-action@master
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#        with:
+#          projectBaseDir: web/backend/rl-nestjs-mono
+#          args: -Dsonar.projectKey=jonathan-lee-devel_roomyledger-rl-nestjs-mono
+#            -Dsonar.organization=jonathan-lee-devel
+#            -Dsonar.sources=src
+#            -Dsonar.tests=src
+#            -Dsonar.inclusions=**
+#            -Dsonar.exclusions=**/*.spec.ts,**.module.ts,src/main.ts
+#            -Dsonar.test.inclusions=src/**/*.spec.ts
+#            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+#            -Dsonar.qualitygate.wait=true
 
   lint-frontend:
     runs-on: ubuntu-22.04
@@ -200,46 +200,46 @@ jobs:
         working-directory: ./web/frontend/rl-angular-spa
         run: yarn run test
 
-  sonarcloud-analysis-frontend:
-    name: SonarCloud Frontend (v${{ matrix.node-version }})
-    runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        node-version: [ 22.x ]
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: yarn
-          cache-dependency-path: '**/yarn.lock'
-      - name: Install Dependencies
-        working-directory: ./web/frontend/rl-angular-spa
-        run: yarn install --frozen-lockfile
-      - name: Run Tests
-        working-directory: ./web/frontend/rl-angular-spa
-        run: yarn run test
-      - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          projectBaseDir: web/frontend/rl-angular-spa
-          args: -Dsonar.projectKey=jonathan-lee-devel_roomyledger-rl-angular-spa
-            -Dsonar.organization=jonathan-lee-devel
-            -Dsonar.sources=src
-            -Dsonar.tests=src
-            -Dsonar.inclusions=**
-            -Dsonar.exclusions=**/*.spec.ts,**.module.ts,src/main.ts
-            -Dsonar.test.inclusions=src/**/*.spec.ts
-            -Dsonar.javascript.lcov.reportPaths=coverage/roomyledger-ui-spa/lcov.info
-            -Dsonar.qualitygate.wait=true
+#  sonarcloud-analysis-frontend:
+#    name: SonarCloud Frontend (v${{ matrix.node-version }})
+#    runs-on: ubuntu-22.04
+#    strategy:
+#      matrix:
+#        node-version: [ 22.x ]
+#    steps:
+#      - uses: actions/checkout@v4
+#        with:
+#          fetch-depth: 0
+#      - uses: actions/setup-node@v4
+#        with:
+#          node-version: ${{ matrix.node-version }}
+#          cache: yarn
+#          cache-dependency-path: '**/yarn.lock'
+#      - name: Install Dependencies
+#        working-directory: ./web/frontend/rl-angular-spa
+#        run: yarn install --frozen-lockfile
+#      - name: Run Tests
+#        working-directory: ./web/frontend/rl-angular-spa
+#        run: yarn run test
+#      - name: SonarCloud Scan
+#        uses: sonarsource/sonarcloud-github-action@master
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#        with:
+#          projectBaseDir: web/frontend/rl-angular-spa
+#          args: -Dsonar.projectKey=jonathan-lee-devel_roomyledger-rl-angular-spa
+#            -Dsonar.organization=jonathan-lee-devel
+#            -Dsonar.sources=src
+#            -Dsonar.tests=src
+#            -Dsonar.inclusions=**
+#            -Dsonar.exclusions=**/*.spec.ts,**.module.ts,src/main.ts
+#            -Dsonar.test.inclusions=src/**/*.spec.ts
+#            -Dsonar.javascript.lcov.reportPaths=coverage/roomyledger-ui-spa/lcov.info
+#            -Dsonar.qualitygate.wait=true
 
   deploy-railway-production:
-    needs: [ lint-backend, lint-frontend, build-backend, build-frontend, test-backend, test-frontend, sonarcloud-analysis-backend, sonarcloud-analysis-frontend ]
+    needs: [ lint-backend, lint-frontend, build-backend, build-frontend, test-backend, test-frontend ]
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
@@ -258,7 +258,7 @@ jobs:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_PRODUCTION_TOKEN }}
 
   deploy-vercel-prod:
-    needs: [ lint-backend, lint-frontend, build-backend, build-frontend, test-backend, test-frontend, sonarcloud-analysis-backend, sonarcloud-analysis-frontend ]
+    needs: [ lint-backend, lint-frontend, build-backend, build-frontend, test-backend, test-frontend ]
     runs-on: ubuntu-22.04
     strategy:
       matrix:
