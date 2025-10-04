@@ -27,7 +27,7 @@ describe('PropertiesService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
-    expect(service.findAllWhereInvolved);
+    expect(service.findAllWhereInvolved).toBeDefined();
     expect(mockUsersService).toBeDefined();
     expect(mockPrismaService).toBeDefined();
   });

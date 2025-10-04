@@ -4091,11 +4091,6 @@ flagged-respawn@^1.0.1:
   resolved "https://registry.yarnpkg.com/flagged-respawn/-/flagged-respawn-1.0.1.tgz#e7de6f1279ddd9ca9aac8a5971d618606b3aab41"
   integrity sha512-lNaHNVymajmk0OJMBn8fVUAU1BtDeKIqKoVhk4xAALB57aALg6b4W0MfJ/cUE0g9YBXy5XhSlPIpYIJ7HaY/3Q==
 
-flagsmith@^9.0.5:
-  version "9.0.5"
-  resolved "https://registry.yarnpkg.com/flagsmith/-/flagsmith-9.0.5.tgz#8364bf971be8b391bea16f2e2d834dc0a9e88e3f"
-  integrity sha512-bmAqGX+LUvToIl136eWKFmbVcVIpZ4H9mk2gDhz8YEKvF5HoM6Sj2WgtRei7pPJy4bXTJdfT7BLebu2v9USc4w==
-
 flat-cache@^3.0.4:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/flat-cache/-/flat-cache-3.2.0.tgz#2c0c2d5040c99b1632771a9d105725c0115363ee"
@@ -8190,6 +8185,13 @@ yoctocolors-cjs@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/yoctocolors-cjs/-/yoctocolors-cjs-2.1.2.tgz#f4b905a840a37506813a7acaa28febe97767a242"
   integrity sha512-cYVsTjKl8b+FrnidjibDWskAv7UKOfcwaVZdp/it9n1s9fU3IkgDbhdIRKCW4JDsAlECJY0ytoVPT3sK6kideA==
+
+zenigo-client-sdk@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/zenigo-client-sdk/-/zenigo-client-sdk-0.0.8.tgz#7007f6a660ad6cc674368f1ee0c8f4f66eb1ea6e"
+  integrity sha512-Wa152q7yFp8flkUtT48u7fYaQzNwhOvMaaqU0DfxoBZS5f+66nKZ72l6N2z3Xuh/e8X3dpoqArBimyZRfzMv0A==
+  dependencies:
+    tslib "^2.3.0"
 
 zone.js@~0.15.0:
   version "0.15.0"

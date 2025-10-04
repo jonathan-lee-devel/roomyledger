@@ -40,7 +40,7 @@
   @if (userAuthenticationStore.loggedInState() === 'LOGGED_IN' && notificationsStore.isLoading()) {
     <mat-spinner class="ml-2" color="accent" diameter="28"/>
   }
-  @if (!featureFlagsStore.isLoading() && userAuthenticationStore.loggedInState() !== 'LOADING') {
+  @if (userAuthenticationStore.loggedInState() !== 'LOADING') {
     <button
       [matMenuTriggerFor]="menu"
       aria-label="Example icon-button with a menu"
@@ -49,7 +49,7 @@
       <mat-icon>more_vert</mat-icon>
     </button>
   }
-  @if (featureFlagsStore.isLoading() || userAuthenticationStore.loggedInState() === 'LOADING') {
+  @if (userAuthenticationStore.loggedInState() === 'LOADING') {
     <mat-spinner color="accent" diameter="28"/>
   }
   <mat-menu #menu="matMenu">

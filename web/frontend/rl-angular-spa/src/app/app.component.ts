@@ -1,8 +1,7 @@
 import {CommonModule, NgOptimizedImage} from '@angular/common';
-import {Component, inject, OnInit, ViewChild} from '@angular/core';
+import {Component, computed, inject, OnInit, ViewChild} from '@angular/core';
 import {NavigationEnd, Router, RouterLink, RouterOutlet} from '@angular/router';
 import {inject as vercelInject} from '@vercel/analytics';
-import flagsmith from 'flagsmith';
 import {PrimeNGConfig} from 'primeng/api';
 import {AvatarModule} from 'primeng/avatar';
 import {ButtonModule} from 'primeng/button';
@@ -12,9 +11,9 @@ import {MessagesModule} from 'primeng/messages';
 import {Sidebar, SidebarModule} from 'primeng/sidebar';
 import {ToastModule} from 'primeng/toast';
 import {filter, Observable, tap} from 'rxjs';
+import {FlagService} from 'zenigo-client-sdk';
 
 import {UserAuthenticationStore} from './+state/auth/user-auth.store';
-import {FeatureFlagsStore} from './+state/feature-flags/feature-flags.store';
 import {NotificationsStore} from './+state/notifications/notifications.store';
 import {PaymentStore} from './+state/payment/payment.store';
 import {rebaseRoutePath, RoutePath} from './app.routes';
@@ -25,7 +24,6 @@ import {FreeTrialMessageComponent} from './components/lib/messages/free-trial-me
 import {UpdateOrMaintenanceInProgressMessageComponent} from './components/lib/messages/update-or-maintenance-in-progress-message/update-or-maintenance-in-progress-message.component';
 import {NavbarComponent} from './components/lib/navbar/navbar.component';
 import {ApplicationMessageDto} from './dtos/application-messages/ApplicationMessageDto';
-import {FeatureFlagEnum} from './enums/FeatureFlag.enum';
 import {
   AppConfig,
   ColorScheme,
@@ -64,7 +62,6 @@ export class AppComponent implements OnInit {
   protected isSidebarVisible: boolean = false;
   protected colorScheme: ColorScheme = 'light';
   protected readonly userAuthenticationStore = inject(UserAuthenticationStore);
-  protected readonly featureFlagsStore = inject(FeatureFlagsStore);
   protected readonly notificationsStore = inject(NotificationsStore);
   protected readonly paymentStore = inject(PaymentStore);
   protected publicApplicationMessage$: Observable<ApplicationMessageDto[]>;
@@ -72,6 +69,9 @@ export class AppComponent implements OnInit {
   protected readonly RoutePath = RoutePath;
   protected readonly Router = Router;
   private readonly REFRESH_EVENT_ID = 1;
+  private readonly flagService = inject(FlagService);
+  protected readonly isSignInWithAppleEnabled = computed(() => this.flagService.flags().find((flag) => flag.key === 'SIGN_IN_WITH_APPLE')?.isEnabled ?? false);
+  protected readonly isUpdateOrMaintenanceInProgress = computed(() => this.flagService.flags().find((flag) => flag.key === 'IS_UPDATE_OR_MAINTENANCE_IN_PROGRESS')?.isEnabled ?? false);
 
   constructor(
     private readonly router: Router,
@@ -122,6 +122,9 @@ export class AppComponent implements OnInit {
         mode: environment.production ? 'production' : 'development',
       });
     }
+    this.flagService.init({host: environment.ZENIGO_HOST, apiKey: environment.ZENIGO_API_KEY});
+    this.flagService.fetchFlags();
+    this.flagService.startFlagUpdateStream();
     this.primengConfig.ripple = true;
     const config: AppConfig = {
       ripple: true,
@@ -144,21 +147,6 @@ export class AppComponent implements OnInit {
     ) {
       this.userAuthenticationStore.setLightModeEnabled();
     }
-    this.featureFlagsStore.onFeatureFlagsInit();
-    flagsmith
-        .init({
-          environmentID: environment.FLAGSMITH_CLIENT_SDK_KEY,
-          api: environment.FLAGSMITH_API_URL,
-          onChange: () => {
-            this.featureFlagsStore.onFeatureFlagsLoaded([
-              ...Object.values(FeatureFlagEnum).map((featureFlag) => ({
-                featureName: featureFlag,
-                isActive: flagsmith.hasFeature(featureFlag),
-              })),
-            ]);
-          },
-        })
-        .catch((reason) => console.error(reason));
     this.router.events
         .pipe(
             tap(() => {

@@ -1,10 +1,10 @@
 <app-navbar (darkModeToggleEvent)="handleDarkModeToggleEvent($event)" (sideNavToggleEvent)="isSidebarVisible = $event"/>
-@if (featureFlagsStore.isUpdateOrMaintenanceInProgress()) {
+@if (isUpdateOrMaintenanceInProgress()) {
   <app-update-or-maintenance-in-progress-message/>
 }
 @if (publicApplicationMessage$ | async; as publicMessages) {
   @for (publicMessage of publicMessages; track $index; ) {
-    @if (featureFlagsStore.isUpdateOrMaintenanceInProgress() === false &&
+    @if (isUpdateOrMaintenanceInProgress() === false &&
       userAuthenticationStore.loggedInState() !== 'LOGGED_IN' &&
       publicMessage.isShow) {
       <app-application-message
@@ -108,7 +108,7 @@
                   }
                 </a>
               </li>
-              @if (featureFlagsStore.isSignInWithAppleEnabled()) {
+              @if (isSignInWithAppleEnabled()) {
                 <div
                   class="p-3 flex align-items-center justify-content-between text-600 cursor-pointer p-ripple"
                   enterActiveClass="slidedown"

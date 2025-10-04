@@ -16,7 +16,6 @@ import {InputSwitchChangeEvent, InputSwitchModule} from 'primeng/inputswitch';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 import {UserAuthenticationStore} from '../../../+state/auth/user-auth.store';
-import {FeatureFlagsStore} from '../../../+state/feature-flags/feature-flags.store';
 import {NotificationsStore} from '../../../+state/notifications/notifications.store';
 import {PaymentStore} from '../../../+state/payment/payment.store';
 import {rebaseRoutePath, RoutePath} from '../../../app.routes';
@@ -59,7 +58,6 @@ export class NavbarComponent implements OnInit {
   protected readonly RoutePath = RoutePath;
 
   protected readonly userAuthenticationStore = inject(UserAuthenticationStore);
-  protected readonly featureFlagsStore = inject(FeatureFlagsStore);
   protected readonly paymentStore = inject(PaymentStore);
   protected readonly notificationsStore = inject(NotificationsStore);
   private readonly supabaseService = inject(SupabaseService);

@@ -5,10 +5,11 @@
       class="lg:text-6xl md:text-4xl sm:text-4xl lg:mt-3 font-bold mb-4 animate__animated animate__infinite animate__pulse"
       style="color: #2f89ba;">
     A Ledger for Roommates</h2>
-    @if (featureFlagsStore.isSignInWithGoogleEnabled()) {
+    @if (isSignInWithGoogleEnabled()) {
       <div class="flex justify-center items-center text-center my-5">
         <p-button
           (click)="doGoogleLogin()"
+          (keydown.enter)="doGoogleLogin()"
           [label]="'Sign ' + getVerb(isNewCustomer()) + ' With Google'"
           [loading]="userAuthenticationStore.loggedInState() === 'LOADING'"
           class="w-full animate__animated animate__delay-1s animate__tada"
@@ -18,11 +19,12 @@
           />
       </div>
     }
-    @if (featureFlagsStore.isSignInWithAppleEnabled()) {
+    @if (isSignInWithAppleEnabled()) {
       <div class="flex justify-center items-center text-center my-5">
         <p-button
           (click)="doAppleLogin()"
-          [disabled]="!featureFlagsStore.isSignInWithAppleEnabled()"
+          (keydown.enter)="doAppleLogin()"
+          [disabled]="!isSignInWithAppleEnabled()"
           [label]="'Sign ' + getVerb(isNewCustomer()) + ' With Apple'"
           [loading]="userAuthenticationStore.loggedInState() === 'LOADING'"
           class="w-full animate__animated animate__delay-1s animate__tada"
@@ -32,10 +34,12 @@
           />
       </div>
     }
-    @if (featureFlagsStore.isSignInWithGitHubEnabled()) {
+    @if (isSignInWithGithubEnabled()) {
       <div class="flex justify-center items-center text-center my-5">
         <p-button
           (click)="doGitHubLogin()"
+          (keydown.enter)="doGitHubLogin()"
+          [disabled]="!isSignInWithGithubEnabled()"
           [label]="'Sign ' + getVerb(isNewCustomer()) + ' With GitHub'"
           [loading]="userAuthenticationStore.loggedInState() === 'LOADING'"
           class="w-full animate__animated animate__delay-1s animate__tada"
@@ -45,7 +49,7 @@
           />
       </div>
     }
-    @if (featureFlagsStore.isSignInWithEmailEnabled()) {
+    @if (isSignInWithEmailEnabled()) {
       <div class="animate__animated animate__delay-1s animate__tada">
         <app-email-login-overlay-panel [isNewCustomer]="isNewCustomer()" />
       </div>

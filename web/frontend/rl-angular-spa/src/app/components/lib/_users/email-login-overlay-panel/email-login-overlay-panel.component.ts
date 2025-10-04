@@ -1,4 +1,4 @@
-import {Component, inject, input} from '@angular/core';
+import {Component, computed, inject, input} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {Button} from 'primeng/button';
 import {ChipsModule} from 'primeng/chips';
@@ -7,9 +7,9 @@ import {InputGroupAddonModule} from 'primeng/inputgroupaddon';
 import {InputTextModule} from 'primeng/inputtext';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {Ripple} from 'primeng/ripple';
+import {FlagService} from 'zenigo-client-sdk';
 
 import {UserAuthenticationStore} from '../../../../+state/auth/user-auth.store';
-import {FeatureFlagsStore} from '../../../../+state/feature-flags/feature-flags.store';
 
 @Component({
   selector: 'app-email-login-overlay-panel',
@@ -34,7 +34,8 @@ export class EmailLoginOverlayPanelComponent {
   password: string = '';
 
   protected readonly userAuthenticationStore = inject(UserAuthenticationStore);
-  protected readonly featureFlagsStore = inject(FeatureFlagsStore);
+  private readonly flagService = inject(FlagService);
+  protected readonly isSignInWithEmailEnabled = computed(() => this.flagService.flags().find((flag) => flag.key === 'SIGN_IN_WITH_EMAIL')?.isEnabled ?? false);
 
   doEmailLoginOrSignUp() {
     if (this.isNewCustomer()) {

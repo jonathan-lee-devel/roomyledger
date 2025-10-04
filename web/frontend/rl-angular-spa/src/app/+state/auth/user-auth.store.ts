@@ -8,7 +8,6 @@ import {
   withMethods,
   withState,
 } from '@ngrx/signals';
-import flagsmith from 'flagsmith';
 import {HTMLLinkElement} from 'happy-dom';
 import {take} from 'rxjs';
 
@@ -75,7 +74,6 @@ export const UserAuthenticationStore = signalStore(
         ) => {
           authService.setTokensInLocalStorage(tokens);
           authService.setUserInfoInLocalStorage(userInfo);
-          await flagsmith.identify(userInfo.email);
           const next = authService.getNextParamFromLocalStorageAndNoReset();
           if (next) {
             router
