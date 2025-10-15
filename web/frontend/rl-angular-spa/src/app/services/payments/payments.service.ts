@@ -1,5 +1,5 @@
 import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import {Observable} from 'rxjs';
 
 import {PaymentStatus} from '../../+state/payment/payment.store';
@@ -10,7 +10,8 @@ import {TrialAndSubscriptionsForUserDto} from '../../dtos/payments/TrialAndSubsc
   providedIn: 'root',
 })
 export class PaymentsService {
-  constructor(private readonly httpClient: HttpClient) {}
+  private readonly httpClient = inject(HttpClient);
+
 
   getPaymentStatusForLoggedInCustomer(): Observable<{
     status: PaymentStatus;

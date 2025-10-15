@@ -26,12 +26,16 @@ export interface ExpenseProofDialogData {
   styleUrl: './expense-proof-dialog.component.scss',
 })
 export class ExpenseProofDialogComponent implements OnInit {
+  readonly config = inject(DynamicDialogConfig);
+
   protected readonly expensesStore = inject(ExpensesStore);
   protected readonly expenseDescription: string;
   protected readonly submitterDisplayName: string;
   private readonly expenseId: string;
 
-  constructor(readonly config: DynamicDialogConfig) {
+  constructor() {
+    const config = this.config;
+
     const data = config.data as ExpenseProofDialogData;
     this.expenseDescription = data.expenseDescription;
     this.submitterDisplayName = data.submitterDisplayName;

@@ -19,11 +19,15 @@ export interface YourExpensesBreakdownDialogData {
   styleUrl: './your-expenses-breakdown-dialog.component.scss',
 })
 export class YourExpensesBreakdownDialogComponent {
+  readonly config = inject(DynamicDialogConfig);
+
   protected readonly expensesStore = inject(ExpensesStore);
   protected readonly propertiesStore = inject(PropertiesStore);
   protected convertedSelectedTotalExpenseFilters: ExpenseStateEnum[] = [];
 
-  constructor(readonly config: DynamicDialogConfig) {
+  constructor() {
+    const config = this.config;
+
     this.convertedSelectedTotalExpenseFilters = (
       config.data as YourExpensesBreakdownDialogData
     ).convertedSelectedTotalExpenseFilters;

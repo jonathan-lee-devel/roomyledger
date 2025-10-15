@@ -31,12 +31,12 @@ import {PropertyDto} from '../../../../dtos/properties/Property.dto';
   styleUrl: './property-invite-people-overlay-panel.component.scss',
 })
 export class PropertyInvitePeopleOverlayPanelComponent {
+  private readonly clipboard = inject(Clipboard);
+
   email: string = '';
   protected readonly propertiesStore = inject(PropertiesStore);
   protected readonly userAuthenticationStore = inject(UserAuthenticationStore);
   protected isCopied: boolean = false;
-
-  constructor(private readonly clipboard: Clipboard) {}
 
   getPropertyDashboardShareURL() {
     return `${environment.FRONT_END_URL}/ledgers/dashboard/${this.propertiesStore.propertyById().id}`;

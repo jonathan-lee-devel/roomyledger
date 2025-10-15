@@ -1,5 +1,5 @@
 import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 
 import {environment} from '../../../environments/environment';
 import {NotificationDto} from '../../dtos/notifications/Notification.dto';
@@ -8,7 +8,8 @@ import {NotificationDto} from '../../dtos/notifications/Notification.dto';
   providedIn: 'root',
 })
 export class NotificationService {
-  constructor(private readonly httpClient: HttpClient) {}
+  private readonly httpClient = inject(HttpClient);
+
 
   getAllNotificationsForUser() {
     return this.httpClient.get<NotificationDto[]>(

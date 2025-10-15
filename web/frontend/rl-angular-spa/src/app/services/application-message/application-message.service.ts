@@ -1,5 +1,5 @@
 import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 
 import {environment} from '../../../environments/environment';
 import {ApplicationMessageDto} from '../../dtos/application-messages/ApplicationMessageDto';
@@ -8,7 +8,8 @@ import {ApplicationMessageDto} from '../../dtos/application-messages/Application
   providedIn: 'root',
 })
 export class ApplicationMessageService {
-  constructor(private readonly httpClient: HttpClient) { }
+  private readonly httpClient = inject(HttpClient);
+
 
   getPublicApplicationMessage() {
     return this.httpClient.get<ApplicationMessageDto[]>(`${environment.APPLICATION_MESSAGES_SERVICE_BASE_URL}/public`);

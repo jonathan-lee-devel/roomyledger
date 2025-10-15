@@ -1,5 +1,5 @@
 import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import {Observable} from 'rxjs';
 
 import {environment} from '../../../environments/environment';
@@ -10,7 +10,8 @@ import {PropertyCreateRequestDto} from '../../dtos/properties/PropertyCreateRequ
   providedIn: 'root',
 })
 export class PropertyService {
-  constructor(private httpClient: HttpClient) {}
+  private httpClient = inject(HttpClient);
+
 
   public getPropertyById(propertyId: string): Observable<PropertyDto> {
     return this.httpClient.get<PropertyDto>(

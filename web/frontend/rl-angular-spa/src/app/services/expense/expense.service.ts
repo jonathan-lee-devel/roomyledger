@@ -1,5 +1,5 @@
 import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import {map, Observable} from 'rxjs';
 
 import {environment} from '../../../environments/environment';
@@ -15,7 +15,8 @@ import {ExpenseDto} from '../../dtos/expenses/ExpenseDto';
   providedIn: 'root',
 })
 export class ExpenseService {
-  constructor(private readonly httpClient: HttpClient) {}
+  private readonly httpClient = inject(HttpClient);
+
 
   public createExpense(
       createExpenseRequestDto: CreateExpenseRequestDto,

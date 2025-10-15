@@ -1,5 +1,5 @@
 import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {environment} from '../../../environments/environment';
@@ -16,16 +16,14 @@ import {RouterUtils} from '../../util/router/Router.utils';
   providedIn: 'root',
 })
 export class AuthService {
+  private httpClient = inject(HttpClient);
+  private router = inject(Router);
+
   static readonly darkModeKey = 'dark-mode';
   static readonly userDataKey = 'user-data';
   static readonly accessTokenKey = 'access-token';
   static readonly refreshTokenKey = 'refresh-token';
   static readonly nextParam = 'next';
-
-  constructor(
-    private httpClient: HttpClient,
-    private router: Router,
-  ) {}
 
   checkIn(userInfo: UserProfile) {
     return this.httpClient.post<{isAcknowledged: boolean}>(

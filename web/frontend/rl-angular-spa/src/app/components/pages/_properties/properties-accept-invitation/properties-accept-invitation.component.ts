@@ -28,16 +28,14 @@ import {PropertiesStore} from '../../../../+state/ledger/properties/properties.s
   styleUrl: './properties-accept-invitation.component.scss',
 })
 export class PropertiesAcceptInvitationComponent implements OnInit, OnDestroy {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
   propertyId: string = '';
   tokenValue: string = '';
   isAccepted: boolean = false;
   propertyByIdSubscription?: Subscription;
   protected readonly propertiesStore = inject(PropertiesStore);
-
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-  ) {}
 
   ngOnInit() {
     this.route.params.subscribe((params) => {

@@ -27,11 +27,10 @@ import {
   styleUrl: './expense-conversation-dialog-footer.component.scss',
 })
 export class ExpenseConversationDialogFooterComponent {
+  private readonly config = inject(DynamicDialogConfig);
+
   protected readonly expensesStore = inject(ExpensesStore);
   protected text: string = '';
-
-  constructor(private readonly config: DynamicDialogConfig) {
-  }
 
   doAddComment() {
     this.expensesStore.commentOnExpense((this.config.data as ExpenseConversationDialogComponentData).expenseId, this.text);

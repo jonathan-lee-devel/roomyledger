@@ -37,6 +37,8 @@ import {
   styleUrl: './property-dashboard-people-tab.component.scss',
 })
 export class PropertyDashboardPeopleTabComponent {
+  private readonly clipboard = inject(Clipboard);
+
   protected readonly userAuthenticationStore = inject(UserAuthenticationStore);
   protected readonly propertiesStore = inject(PropertiesStore);
 
@@ -45,9 +47,7 @@ export class PropertyDashboardPeopleTabComponent {
   private isRevTagCopiedSubject = new BehaviorSubject<boolean>(false);
   private isIBANCopiedSubject = new BehaviorSubject<boolean>(false);
 
-  constructor(
-    private readonly clipboard: Clipboard,
-  ) {
+  constructor() {
     this.isRevTagCopied$ = this.isRevTagCopiedSubject.asObservable();
     this.isIBANCopied$ = this.isIBANCopiedSubject.asObservable();
   }

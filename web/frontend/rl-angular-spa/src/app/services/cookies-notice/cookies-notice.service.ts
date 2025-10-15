@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import {CookieService} from 'ngx-cookie-service';
 import {DialogService} from 'primeng/dynamicdialog';
 import {take, tap} from 'rxjs';
@@ -11,14 +11,12 @@ import {
   providedIn: 'root',
 })
 export class CookiesNoticeService {
+  private cookieService = inject(CookieService);
+  private readonly dialogService = inject(DialogService);
+
   static COOKIE_NOTICE_ACCEPTED_KEY: string = 'Cookies-Notice';
   static COOKIE_NOTICE_IS_ACCEPTED_TRUE: string = 'Accepted';
   private static COOKIE_NOTICE_EXPIRY_TIME_MONTHS: number = 1;
-
-  constructor(
-    private cookieService: CookieService,
-    private readonly dialogService: DialogService,
-  ) {}
 
   public triggerIfNotAccepted(): void {
     if (

@@ -1,5 +1,5 @@
 import {A11yModule} from '@angular/cdk/a11y';
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from '@angular/material/dialog';
 import {DialogModule} from 'primeng/dialog';
@@ -22,7 +22,8 @@ import {CookiesNoticeService} from '../../../../services/cookies-notice/cookies-
   styleUrl: './cookies-notice-dialog.component.scss',
 })
 export class CookiesNoticeDialogComponent {
-  constructor(private cookiesNoticeService: CookiesNoticeService) {}
+  private cookiesNoticeService = inject(CookiesNoticeService);
+
 
   acceptCookiesNotice() {
     this.cookiesNoticeService.doAccept();

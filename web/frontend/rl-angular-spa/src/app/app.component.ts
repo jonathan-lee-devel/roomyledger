@@ -57,6 +57,13 @@ import {SupabaseService} from './services/supabase/supabase.service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
+  private readonly router = inject(Router);
+  private readonly primengConfig = inject(PrimeNGConfig);
+  private readonly layoutService = inject(LayoutService);
+  private readonly applicationMessageService = inject(ApplicationMessageService);
+  private readonly authService = inject(AuthService);
+  private readonly supabaseService = inject(SupabaseService);
+
   title = 'RoomyLedger';
   @ViewChild('sidebarRef') sidebarRef!: Sidebar;
   protected isSidebarVisible: boolean = false;
@@ -73,14 +80,7 @@ export class AppComponent implements OnInit {
   protected readonly isSignInWithAppleEnabled = computed(() => this.flagService.flags().find((flag) => flag.key === 'SIGN_IN_WITH_APPLE')?.isEnabled ?? false);
   protected readonly isUpdateOrMaintenanceInProgress = computed(() => this.flagService.flags().find((flag) => flag.key === 'IS_UPDATE_OR_MAINTENANCE_IN_PROGRESS')?.isEnabled ?? false);
 
-  constructor(
-    private readonly router: Router,
-    private readonly primengConfig: PrimeNGConfig,
-    private readonly layoutService: LayoutService,
-    private readonly applicationMessageService: ApplicationMessageService,
-    private readonly authService: AuthService,
-    private readonly supabaseService: SupabaseService,
-  ) {
+  constructor() {
     this.publicApplicationMessage$ =
       this.applicationMessageService.getPublicApplicationMessage();
     this.supabaseService.authChanges((_, session) => {
