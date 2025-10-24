@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 
 import {MenuService} from '../app.menu.service';
 import {
@@ -20,10 +20,8 @@ export class AppConfigComponent implements OnInit {
 
   scales: number[] = [12, 13, 14, 15, 16];
 
-  constructor(
-    public layoutService: LayoutService,
-    public menuService: MenuService,
-  ) {}
+  private readonly layoutService = inject(LayoutService);
+  private readonly menuService = inject(MenuService);
 
   get currentTheme(): string {
     return this.layoutService.config().theme;
