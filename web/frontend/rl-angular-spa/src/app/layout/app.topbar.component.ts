@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, inject, ViewChild} from '@angular/core';
 import {MenuItem} from 'primeng/api';
 
 import {LayoutService} from './service/app.layout.service';
@@ -16,7 +16,7 @@ export class AppTopBarComponent {
 
   searchActive: boolean = false;
 
-  constructor(public layoutService: LayoutService) {}
+  readonly layoutService = inject(LayoutService);
 
   onMenuButtonClick() {
     this.layoutService.onMenuToggle();

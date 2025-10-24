@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {ActivatedRouteSnapshot, NavigationEnd, Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
 import {filter} from 'rxjs/operators';
@@ -17,7 +17,9 @@ export class AppBreadcrumbComponent {
 
   readonly breadcrumbs$ = this._breadcrumbs$.asObservable();
 
-  constructor(private router: Router) {
+  private readonly router = inject(Router);
+
+  constructor() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     this.router.events
         .pipe(filter((event) => event instanceof NavigationEnd))

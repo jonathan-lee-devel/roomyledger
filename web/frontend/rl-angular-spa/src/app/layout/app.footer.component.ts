@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 
 import {LayoutService} from './service/app.layout.service';
 
@@ -7,7 +7,7 @@ import {LayoutService} from './service/app.layout.service';
   templateUrl: './app.footer.component.html',
 })
 export class AppFooterComponent {
-  constructor(public layoutService: LayoutService) {}
+  readonly layoutService = inject(LayoutService);
 
   get colorScheme(): string {
     return this.layoutService.config().colorScheme;

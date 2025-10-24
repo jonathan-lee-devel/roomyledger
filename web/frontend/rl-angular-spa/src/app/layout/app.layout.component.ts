@@ -1,4 +1,4 @@
-import {Component, OnDestroy, Renderer2, ViewChild} from '@angular/core';
+import {Component, inject, OnDestroy, Renderer2, ViewChild} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {filter, Subscription} from 'rxjs';
 
@@ -29,11 +29,12 @@ export class AppLayoutComponent implements OnDestroy {
 
   @ViewChild(AppTopBarComponent) appTopbar!: AppTopBarComponent;
 
+  private readonly menuService = inject(MenuService);
+  readonly layoutService = inject(LayoutService);
+  readonly renderer = inject(Renderer2);
+  readonly router = inject(Router);
+
   constructor(
-    private menuService: MenuService,
-    public layoutService: LayoutService,
-    public renderer: Renderer2,
-    public router: Router,
   ) {
     this.overlayMenuOpenSubscription =
       this.layoutService.overlayOpen$.subscribe(() => {

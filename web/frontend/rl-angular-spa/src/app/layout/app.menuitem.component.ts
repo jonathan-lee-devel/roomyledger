@@ -8,10 +8,9 @@ import {
 } from '@angular/animations';
 import {
   AfterViewChecked,
-  ChangeDetectorRef,
   Component,
   ElementRef,
-  HostBinding,
+  HostBinding, inject,
   Input,
   OnDestroy,
   OnInit,
@@ -22,7 +21,6 @@ import {Subscription} from 'rxjs';
 import {filter} from 'rxjs/operators';
 
 import {MenuService} from './app.menu.service';
-import {AppSidebarComponent} from './app.sidebar.component';
 import {LayoutService} from './service/app.layout.service';
 
 @Component({
@@ -164,12 +162,11 @@ implements OnInit, AfterViewChecked, OnDestroy {
 
   key: string = '';
 
+  readonly layoutService = inject(LayoutService);
+  readonly router = inject(Router);
+  readonly menuService = inject(MenuService);
+
   constructor(
-    public layoutService: LayoutService,
-    private cd: ChangeDetectorRef,
-    private appSidebar: AppSidebarComponent,
-    public router: Router,
-    private menuService: MenuService,
   ) {
     this.menuSourceSubscription = this.menuService.menuSource$.subscribe(
         (value) => {
