@@ -21,6 +21,7 @@ import {ToastWrapperService} from '../../services/toast-wrapper/toast-wrapper.se
 import {RouterUtils} from '../../util/router/Router.utils';
 import {PropertiesStore} from '../ledger/properties/properties.store';
 import {NotificationsStore} from '../notifications/notifications.store';
+import {FlagService} from "zenigo-client-sdk";
 
 export type LoggedInState = 'INIT' | 'NOT_LOGGED_IN' | 'LOADING' | 'LOGGED_IN';
 
@@ -51,6 +52,7 @@ export const UserAuthenticationStore = signalStore(
       const propertiesStore = inject(PropertiesStore);
       const document = inject(Document);
       const supabaseService = inject(SupabaseService);
+      const flagService = inject(FlagService);
       return {
         setDarkModeEnabled: () => {
           const linkElement = document.getElementById(
@@ -80,6 +82,7 @@ export const UserAuthenticationStore = signalStore(
                 .navigateByUrl(next)
                 .catch(RouterUtils.navigateCatchErrorCallback);
           }
+          flagService.login({userEmail: userInfo.email})
           patchState(store, {loggedInState: 'LOGGED_IN', tokens, userInfo});
         },
         userCheckIn: () => {
@@ -97,6 +100,7 @@ export const UserAuthenticationStore = signalStore(
               .catch(RouterUtils.navigateCatchErrorCallback);
           patchState(store, {loggedInState: 'LOADING'});
           await supabaseService.signOut();
+          flagService.anonymize();
           authService.setNextParamInLocalStorageIfNotAnonymous(null);
           authService.clearUserDataAndTokens();
           authService.redirectIfNotAnonymous();
