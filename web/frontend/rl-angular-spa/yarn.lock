@@ -8078,10 +8078,10 @@ yoctocolors-cjs@^2.1.2:
   resolved "https://registry.yarnpkg.com/yoctocolors-cjs/-/yoctocolors-cjs-2.1.3.tgz#7e4964ea8ec422b7a40ac917d3a344cfd2304baa"
   integrity sha512-U/PBtDf35ff0D8X8D0jfdzHYEPFxAI7jJlxZXwCSez5M3190m+QobIfh+sWDWSHMCWWJN2AWamkegn6vr6YBTw==
 
-zenigo-client-sdk@^0.0.16:
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/zenigo-client-sdk/-/zenigo-client-sdk-0.0.16.tgz#7590765407da751b09b4c4f06a96e0d3740fbe9f"
-  integrity sha512-WgjPbyIVE5oOSP5szAcuFsimPgsOvX7vR/OhXkw6hbAdlHYSwDRTFvg1OzxJ5GzaxWKdLjKTjVvSu7cGOycljQ==
+zenigo-client-sdk@^0.0.17:
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/zenigo-client-sdk/-/zenigo-client-sdk-0.0.17.tgz#8066a8b791a5a31e89c25dade597eba8f215cdf5"
+  integrity sha512-frueyvNyhokM3IvmcjEE3BwiRpRpvzwVNUf7DIVTAEhIOkelN+cAeSANTBERuoDxxRYD2lNInWHwVaaS2c9NpA==
   dependencies:
     tslib "^2.3.0"
 
